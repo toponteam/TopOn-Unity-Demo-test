@@ -1,0 +1,6 @@
+framework module AnyThinkYeahmobiBannerAdapter {
+  umbrella header "AnyThinkYeahmobiBannerAdapter.h"
+
+  export *
+  module * { export * }
+}

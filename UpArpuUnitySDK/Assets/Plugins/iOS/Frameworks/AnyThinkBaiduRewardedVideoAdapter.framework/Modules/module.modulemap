@@ -1,0 +1,6 @@
+framework module AnyThinkBaiduRewardedVideoAdapter {
+  umbrella header "AnyThinkBaiduRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

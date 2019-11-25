@@ -1,0 +1,22 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using AnyThinkAds.Api;
+
+namespace AnyThinkAds.Common
+{
+    public interface IATSDKAPIClient
+    {
+        void initSDK(string appId, string appkey);
+        void initSDK(string appId, string appkey, ATSDKInitListener listener);
+        void setGDPRLevel(int level);
+        void showGDPRAuth();
+        void addNetworkGDPRInfo(int networkType, string mapJson);
+        void setPurchaseFlag();
+        bool purchaseFlag();
+        void clearPurchaseFlag();
+        void setChannel(string channel);
+        void initCustomMap(string cutomMap);
+        void setLogDebug(bool isDebug);
+    }
+}

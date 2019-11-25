@@ -1,0 +1,71 @@
+﻿<Properties StartupConfiguration="{A1775C84-D59A-80FB-80D2-F2ED86F2C895}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/AnyThinkAds/Api/ATBannerAd.cs">
+    <Files>
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATMsgTools.cs" Line="25" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATInterstitialAdClient.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATBannerAdClient.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scenes/srcipt/NativeBannerScene.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scenes/srcipt/bannerScenes.cs" Line="68" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/ATAdsClientFactory.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATNativeAdClient.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATNativeBannerAdClient.cs" Line="17" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATRewardedVideoAdClient.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/Android/ATSDKAPIClient.cs" Line="12" Column="51" />
+      <File FileName="Assets/Scenes/srcipt/interstitialScenes.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scenes/srcipt/MainScenes.cs" Line="84" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/ATSDKAPIClient.cs" Line="19" Column="56" />
+      <File FileName="Assets/Scenes/srcipt/ATManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/Internal/Script/ATManager.cs" Line="11" Column="20" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/Internal/Script/ATUnityCBridge.cs" Line="28" Column="74" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/Internal/Script/ATAdWrapper.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Api/ATSDKAPI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Editor/IOS/XcodeProjectSettings.cs" Line="19" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/ATInterstitialAdClient.cs" Line="23" Column="64" />
+      <File FileName="Assets/AnyThinkAds/Api/ATBannerAd.cs" Line="48" Column="86" />
+      <File FileName="Assets/AnyThinkAds/Api/ATNativeAdView.cs" Line="28" Column="10" />
+      <File FileName="Assets/AnyThinkAds/Api/ATRect.cs" Line="19" Column="10" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/ATBannerAdClient.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/Internal/Script/ATBannerAdWrapper.cs" Line="38" Column="6" />
+      <File FileName="Assets/AnyThinkAds/Platform/iOS/Internal/Script/ATRewardedVideoWrapper.cs" Line="25" Column="37" />
+      <File FileName="Assets/AnyThinkAds/Api/ATSDKInitListener.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Api/ATInterstitialAdListener.cs" Line="1" Column="1" />
+      <File FileName="Assets/AnyThinkAds/Api/ATBannerAdListener.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="UpArpuUnitySDK" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="AnyThinkAds" expanded="True">
+                <Node name="Api" expanded="True">
+                  <Node name="ATBannerAd.cs" selected="True" />
+                </Node>
+                <Node name="Platform" expanded="True">
+                  <Node name="Android" expanded="True" />
+                  <Node name="iOS" expanded="True">
+                    <Node name="Internal" expanded="True">
+                      <Node name="Script" expanded="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Editor" expanded="True">
+                <Node name="IOS" expanded="True" />
+              </Node>
+              <Node name="Scenes" expanded="True">
+                <Node name="srcipt" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="24f1b913-fecb-49d0-94dc-4250cbc0a1e5" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
