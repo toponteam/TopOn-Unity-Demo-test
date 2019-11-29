@@ -1,8 +1,8 @@
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/BUAdSDK.framework/Versions/A/BUAdSDK filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/FBAudienceNetwork.framework/FBAudienceNetwork filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/GDT/libGDTMobSDK.a filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/GoogleMobileAds.framework/GoogleMobileAds filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/InMobiSDK.framework/InMobiSDK filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/MTGSDK.framework/Versions/A/MTGSDK filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/WindSDK.framework/WindSDK filter=lfs diff=lfs merge=lfs -text
-UpArpuUnitySDK/Assets/Plugins/iOS/Frameworks/AppLovinSDK.framework/AppLovinSDK filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/AppLovinSDK.framework/AppLovinSDK filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/BUAdSDK.framework/Versions/A/BUAdSDK filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/FBAudienceNetwork.framework/FBAudienceNetwork filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/GDT/libGDTMobSDK.a filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/GoogleMobileAds.framework/GoogleMobileAds filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/InMobiSDK.framework/InMobiSDK filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/MTGSDK.framework/Versions/A/MTGSDK filter=lfs diff=lfs merge=lfs -text
+AnyThinkUnitySDK/Assets/Plugins/iOS/Frameworks/WindSDK.framework/WindSDK filter=lfs diff=lfs merge=lfs -text
