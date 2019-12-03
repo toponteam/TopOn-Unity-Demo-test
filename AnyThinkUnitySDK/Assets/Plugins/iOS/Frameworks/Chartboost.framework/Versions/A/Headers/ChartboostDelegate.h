@@ -89,7 +89,11 @@ typedef NS_ENUM(NSUInteger, CBMediation) {
     /*! AerServ */
     CBMediationAerServ,
     /*! Helium */
-    CBMediationHelium
+    CBMediationHelium,
+    /*! Fairbid */
+    CBMediationFairbid,
+    /*! AppLovin MAX */
+    CBMediationMAX
 };
 
 
@@ -132,7 +136,9 @@ typedef NS_ENUM(NSUInteger, CBLoadError) {
     /*! Network is unavailable while attempting to show. */
     CBLoadErrorInternetUnavailableAtShow = 25,
     /*! Error trying to present the ad. */
-    CBLoadErrorAdPresentationFailure = 33
+    CBLoadErrorAdPresentationFailure = 33,
+    /*! Publisher disabled. */
+    CBLoadErrorPublisherDisabled = 35
 };
 
 /*!

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- SDK logging level.
+ SDK logging level. The "MPB" prefix is used instead of "MP" to avoid namespace collision.
  @remark Lower values equate to more detailed logs.
  */
 typedef NS_ENUM(NSUInteger, MPBLogLevel) {

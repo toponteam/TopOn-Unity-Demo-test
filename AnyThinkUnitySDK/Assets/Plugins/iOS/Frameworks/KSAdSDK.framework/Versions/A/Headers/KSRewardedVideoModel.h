@@ -1,8 +1,9 @@
 //
 //  KSRewardedVideoModel.h
-//  AFNetworking
+//  KSAdSDK
 //
-//  Created by xuzhijun on 2019/8/28.
+//  Created by 徐志军 on 2019/8/28.
+//  Copyright © 2019 KuaiShou. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

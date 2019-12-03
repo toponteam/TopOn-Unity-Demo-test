@@ -1,14 +1,14 @@
 //
 //  KSAdSDKError.h
-//  AFNetworking
+//  KSAdSDK
 //
-//  Created by xuzhijun on 2019/8/29.
+//  Created by 徐志军 on 2019/8/29.
+//  Copyright © 2019 KuaiShou. All rights reserved.
 //
 
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXTERN NSErrorDomain KSAdErrorDomain;
 
 typedef NS_ENUM(NSInteger, KSAdErrorCode) {
     

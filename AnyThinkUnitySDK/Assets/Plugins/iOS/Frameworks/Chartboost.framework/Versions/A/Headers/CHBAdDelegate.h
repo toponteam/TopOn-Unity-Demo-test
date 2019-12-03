@@ -63,7 +63,8 @@ typedef NS_ENUM(NSUInteger, CHBCacheErrorCode) {
     CHBCacheErrorCodeNetworkFailure = 5,
     CHBCacheErrorCodeNoAdFound = 6,
     CHBCacheErrorCodeSessionNotStarted = 7,
-    CHBCacheErrorCodeAssetDownloadFailure = 16
+    CHBCacheErrorCodeAssetDownloadFailure = 16,
+    CHBCacheErrorCodePublisherDisabled = 35
 };
 
 /*!

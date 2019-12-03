@@ -1,8 +1,9 @@
 //
 //  KSFullscreenVideoAd.h
-//  AFNetworking
+//  KSAdSDK
 //
-//  Created by xuzhijun on 2019/9/3.
+//  Created by 徐志军 on 2019/9/3.
+//  Copyright © 2019 KuaiShou. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

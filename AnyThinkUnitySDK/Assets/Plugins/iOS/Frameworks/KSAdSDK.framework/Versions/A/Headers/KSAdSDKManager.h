@@ -1,14 +1,24 @@
 //
 //  KSAdSDKManager.h
-//  AFNetworking
+//  KSAdSDK
 //
-//  Created by xuzhijun on 2019/8/28.
+//  Created by 徐志军 on 2019/8/28.
+//  Copyright © 2019 KuaiShou. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "KSAdSDKDefine.h"
 
 
+typedef NS_ENUM(NSInteger, KSAdSDKLogLevel) {
+    KSAdSDKLogLevelAll      =       0,
+    KSAdSDKLogLevelVerbose,
+    KSAdSDKLogLevelVerify,
+    KSAdSDKLogLevelDebug,
+    KSAdSDKLogLevelInfo,
+    KSAdSDKLogLevelWarn,
+    KSAdSDKLogLevelError,
+    KSAdSDKLogLevelOff,
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setLoglevel:(KSAdSDKLogLevel)level;
 
 + (NSString *)appId;
+
++ (NSString *)SDKDetailVersion;
 @end
 
 NS_ASSUME_NONNULL_END

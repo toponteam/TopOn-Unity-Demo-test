@@ -73,17 +73,29 @@ __attribute__((deprecated("Deprecated on Release build")))
 /**
  *  既定のゾーンの広告を表示します。
  */
-+ (void)show;
++ (void)show __deprecated;
 
 /**
  *  指定したゾーンの広告を表示します。
  *
  *  @param zoneId  広告を表示したいゾーンの識別子
  */
-+ (void)showAtZoneId:(NSString *)zoneId;
++ (void)showAtZoneId:(NSString *)zoneId __deprecated;
 
 
+/**
+ *  既定のゾーンの広告を表示します。
+ *
+ *  @param vc  広告を表示したいViewController
+ */
 + (void)showWithViewController:(UIViewController *)vc;
+
+/**
+ *  指定したゾーンの広告を表示します。
+ *
+ *  @param zoneId  広告を表示したいゾーンの識別子
+ *  @param vc  広告を表示したいViewController
+ */
 + (void)showAtZoneId:(NSString *)zoneEid vc:(UIViewController *)vc;
 
 + (MaioInstance *)startWithNonDefaultMediaId:(NSString *)mediaEid delegate:(id<MaioDelegate>)delegate;

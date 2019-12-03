@@ -1,8 +1,8 @@
 //
 //  KSAdUserInfo.h
-//  AFNetworking
+//  KSAdSDK
 //
-//  Created by xuzhijun on 2019/8/29.
+//  Created by 徐志军 on 2019/8/29.
 //
 
 #import <Foundation/Foundation.h>

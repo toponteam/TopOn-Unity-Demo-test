@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, MaioFailReason) {
     MaioFailReasonIncorrectMediaId,
     /// ゾーンID異常エラー
     MaioFailReasonIncorrectZoneId,
+    /// 表示するための要素を見つけられなかった
+    MaioFailReasonNotFoundViewContext,
 };
 
 

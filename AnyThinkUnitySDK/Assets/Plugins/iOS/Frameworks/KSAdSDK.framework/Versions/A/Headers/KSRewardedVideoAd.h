@@ -1,14 +1,26 @@
 //
 //  KSRewardedVideoAd.h
-//  AFNetworking
+//  KSAdSDK
 //
-//  Created by xuzhijun on 2019/8/28.
+//  Created by 徐志军 on 2019/8/28.
+//  Copyright © 2019 KuaiShou. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "KSVideoAd.h"
-#import "KSAdSDKDefine.h"
+
+
+typedef NS_ENUM(NSInteger, KSRewardedVideoAdRewardedType) {
+    // 正常的激励视频，必须是视频播放完成才显示关闭按钮
+    KSRewardedVideoAdRewardedTypeNormal                 =           1,
+    // 播放30秒，显示关闭按钮，并且有奖励，如果视频小于等于30秒，就是normal
+    KSRewardedVideoAdRewardedTypePlay30Second           =           2,
+//    // 播放5秒显示跳过，播放完成后，显示关闭按钮，点击跳过，弹出是否有奖励的选项
+//    KSRewardedVideoAdRewardedTypeCanSkip                =           3,
+//    // 播放5秒显示跳过，播放30秒，显示关闭按钮，并且有奖励，如果视频小于等于30秒，就是normal
+//    KSRewardedVideoAdRewardedTypePlay30SecondAndCanSkip =           4,
+};
 
 
 @class KSRewardedVideoModel;
@@ -21,7 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithPosId:(NSString *)posId rewardedVideoModel:(KSRewardedVideoModel *)rewardedVideoModel;
 
-- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController showScene:(NSString *)showScene type:(KSRewardedVideoAdRewardedType)type;
+- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController showScene:(nullable NSString *)showScene type:(KSRewardedVideoAdRewardedType)type;
+- (BOOL)showAdFromRootViewController:(UIViewController *)rootViewController showScene:(nullable NSString *)showScene type:(KSRewardedVideoAdRewardedType)type direction:(KSAdShowDirection)direction;
 @end
 
 @protocol KSRewardedVideoAdDelegate <NSObject>

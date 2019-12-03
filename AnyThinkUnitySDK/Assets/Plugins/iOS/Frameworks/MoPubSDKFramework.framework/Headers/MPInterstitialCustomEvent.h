@@ -28,6 +28,8 @@
 /** @name Requesting and Displaying an Interstitial Ad */
 
 /**
+ * @deprecated Use @c requestInterstitialWithCustomEventInfo:adMarkup: instead
+ *
  * Called when the MoPub SDK requires a new interstitial ad.
  *
  * When the MoPub SDK receives a response indicating it should load a custom event, it will send
@@ -39,7 +41,7 @@
  * request. This data is configurable on the MoPub website, and may be used to pass dynamic information, such as publisher IDs.
  */
 
-- (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info;
+- (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info __attribute((deprecated("Use requestInterstitialWithCustomEventInfo:adMarkup: instead.")));
 
 /**
  * Called when the MoPub SDK requires a new interstitial ad.

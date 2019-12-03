@@ -39,6 +39,8 @@
 /** @name Requesting and Displaying a Rewarded Video Ad */
 
 /**
+ * @deprecated Use @c requestRewardedVideoWithCustomEventInfo:adMarkup: instead
+ * 
  * Called when the MoPub SDK requires a new rewarded video ad.
  *
  * When the MoPub SDK receives a response indicating it should load a custom event, it will send
@@ -56,7 +58,7 @@
  * @param info A dictionary containing additional custom data associated with a given custom event
  * request. This data is configurable on the MoPub website, and may be used to pass dynamic information, such as publisher IDs.
  */
-- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info;
+- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info __attribute((deprecated("Use requestRewardedVideoWithCustomEventInfo:adMarkup: instead.")));
 
 /**
  * Called when the MoPub SDK requires a new rewarded video ad.

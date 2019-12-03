@@ -27,6 +27,8 @@
 /** @name Requesting a Banner Ad */
 
 /**
+ * @deprecated Use @c requestAdWithSize:customEventInfo:adMarkup: instead
+ *
  * Called when the MoPub SDK requires a new banner ad.
  *
  * When the MoPub SDK receives a response indicating it should load a custom event, it will send
@@ -40,7 +42,7 @@
  * @param info A dictionary containing additional custom data associated with a given custom event
  * request. This data is configurable on the MoPub website, and may be used to pass dynamic information, such as publisher IDs.
  */
-- (void)requestAdWithSize:(CGSize)size customEventInfo:(NSDictionary *)info;
+- (void)requestAdWithSize:(CGSize)size customEventInfo:(NSDictionary *)info __attribute((deprecated("Use requestAdWithSize:customEventInfo:adMarkup: instead.")));
 
 /**
  * Called when the MoPub SDK requires a new banner ad.

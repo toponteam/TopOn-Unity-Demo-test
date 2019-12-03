@@ -30,6 +30,8 @@
 /** @name Requesting a Native Ad */
 
 /**
+ * @deprecated Use @c requestAdWithCustomEventInfo:adMarkup: instead
+ *
  * Called when the MoPub SDK requires a new native ad.
  *
  * When the MoPub SDK receives a response indicating it should load a custom event, it will send
@@ -40,7 +42,7 @@
  * request. This data is configurable on the MoPub website, and may be used to pass dynamic
  * information, such as publisher IDs.
  */
-- (void)requestAdWithCustomEventInfo:(NSDictionary *)info;
+- (void)requestAdWithCustomEventInfo:(NSDictionary *)info __attribute((deprecated("Use requestAdWithCustomEventInfo:adMarkup: instead.")));
 
 /**
  * Called when the MoPub SDK requires a new native ad.
