@@ -56,6 +56,7 @@ extern NSString *const kNetworkNameMaio;
 extern NSString *const kNetworkNameSigmob;
 extern NSString *const kNetworkNameMyOffer;
 extern NSString *const kNetworkNameKS;
+extern NSString *const kNetworkNameOgury;
 
 extern NSString *const kInmobiGDPRStringKey;
 extern NSString *const kInmobiConsentStringKey;
