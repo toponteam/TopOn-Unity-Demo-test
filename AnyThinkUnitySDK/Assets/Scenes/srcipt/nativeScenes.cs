@@ -139,7 +139,7 @@ public class nativeScenes : MonoBehaviour {
 		conifg.appIconProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
 		//ad title
-		x = width + 5;y = 0;width = totalWidth - 30 - x;height = 15 + 3;textsize = 15;
+		x = width + 5;y = 0;width = totalWidth - 30 - x;height = 15 + 3;textsize = 18;
 		conifg.titleProperty  = new ATNativeItemProperty(x,y,width,height,"clearColor",textcolor,textsize, true);
 
 		//ad desc
