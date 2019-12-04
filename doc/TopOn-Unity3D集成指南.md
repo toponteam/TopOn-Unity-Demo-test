@@ -2,11 +2,13 @@
 
 [1. 概述](#1) <br>
 [2. 账号及相关ID准备](#2) <br>
-[3. SDK初始化](#3) <br>
-[4. 原生广告](#4) <br>
-[5. 激励视频广告](#5) <br>
-[6. 插屏广告](#6) <br>
-[7. Banner广告](#7) <br>
+[3. 导入SDK](#3)<br>
+[4. SDK初始化](#4) <br>
+[5. 原生广告](#5) <br>
+[6. 激励视频广告](#6) <br>
+[7. 插屏广告](#7) <br>
+[8. Banner广告](#8) <br>
+[9. 开屏广告](#9)<br>
 
 <h2 id='1'>1. 概述 </h2>
 
@@ -29,11 +31,13 @@
 
 ### 3.1 将TopOnSDK添加至您的项目
 
-TopOnSDK unity 版本 你可从TopOn商务或者运营处获取，TopOnSDK包含的文件说明：**（SDK是在2018.3.14f1版的基础上开发的）**
+**AnyThinkSDK** unity 版本 你可从TopOn商务或者运营处获取，TopOnSDK包含的文件说明：
 
 | 文件名 | 描述 | 是否必须 |
 | ---- | ---- | ---- |
-| anythinkunity3d.unitypackage | TopOn Unity3d 插件包,你可以导入此包到unity3d项目中,进行项目集成 | 是 |
+| anythinkunity3d.unitypackage | **AnyThinkSDK** Unity3d 插件包,你可以导入此包到unity3d项目中,进行项目集成 | 是 |
+
+**注: 请使用Unity3D 2018或以上版本**
 
 #### 3.1.1 Android导入说明（针对路径：/Assets/Plugins/Android 的文件说明）
 
@@ -93,7 +97,7 @@ TopOnSDK unity 版本 你可从TopOn商务或者运营处获取，TopOnSDK包含
 
 **2.mainTemplate.gradle引入和说明** <br>
 
-要先使用Unity3d来生成Android打包必须的mainTemplate.gradle文件，生成路径如下图所示：
+要先使用Unity3d来打包必须的mainTemplate.gradle文件，生成路径如下图所示：
 
 ![](img/Android_mainTemplate_pic1.png)
 
@@ -210,532 +214,534 @@ android {
 
 #### 3.1.2 iOS平台导入说明
 
-利用Unity编译出Xcode工程后，打开Xcode工程，按各第三方平台指引引入其需要的SDK并链接其依赖的系统framework及lib等，也可以看TopOn各平台接入帮助<a href="https://app.toponad.com/document/doc-zh/ios/topon_sdk_iOS_access_guide_chinese_network.html" target="_blank">TopOn各平台接入帮助</a>
+利用Unity编译出Xcode工程后，打开Xcode工程，按各第三方平台指引引入其需要的SDK并链接其依赖的系统framework及lib等，也可以看TopOn各平台接入帮助<a href="https://app.toponad.com/document/doc-zh/ios/topon_sdk_iOS_access_guide_chinese_core.html" target="_blank">TopOn各平台接入帮助</a>
 
 在Unity的sdk包里已经包含所有的第三方Framework包，可根据需要删除不需要的sdk包，详细哪些平台需要哪些包的引入请查看上面的帮助文档
 
 根据以上罗列的信息引入各第三方网络所需SDK并根据各SDK要求引入系统framework和lib之后需要在Build Settings进行以下配置：
 
-1 在Xcode 工程的Build Settings中，搜索bitcode，并将其值改为NO（当前版本Unity（2018.02）编译出来的Xcode工程中，此项设置默认为Yes），如图：
+1 在Xcode 工程的**Build Settings**中，搜索**bitcode**，并将其值改为**NO**（当前版本Unity（2018.02）编译出来的Xcode工程中，此项设置默认为Yes），如图：
 
 ![](img/iOS_Bitcode_Settings.png)
 
-2 在Xcode 工程的Build Settings中，搜索runpath search paths，并将其值改为@executable_path/Frameworks，如图：
+2 在Xcode 工程的**Build Settings**中，搜索**runpath search paths**，并将其值改为**@executable_path/Frameworks**  如图：
 
 ![](img/iOS_Runpath_Search_Paths_Settings.png)
 
-3 在Xcode 工程的Build Settings中，搜索other linker flags，在默认值基础上增加-ObjC, -fobjc-arc，如图：
+3 在Xcode 工程的**Build Settings**中，搜索**other linker flags**，在默认值基础上增加**-ObjC, -fobjc-arc**  如图：
 
 ![](img/iOS_Other_Linker_Flags_Settings.png)
 
-4 在Xcode 工程的Build Settings中，搜索C Language Dialect，将其值改为GNU99[-std=gnu99]，如图：
+4 在Xcode 工程的**Build Settings**中，搜索**C Language Dialect**，将其值改为**GNU99[-std=gnu99]**  如图：
 
 ![](img/iOS_C_Language_Dialect_Settings.png)
 
-
-
-
-### 3.2 初始化API说明
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-| setChannel| string channel| 配置SDK的渠道号信息 |
-| initCustomMap | Dictionary<string, string> customMap| 配置自定义参数，用于匹配后台下发广告请求列表|
-| setLogDebug | bool isDebug |打开debug模式，用于SDK查看更多的日志|
-| setGDPRLevel | int level |面向欧盟地区，设置GDPR隐私等级，值说明：0(完全个性化)，1(不收集设备信息,无个性化),2(禁止使用)|
-| showGDPRAuth | |展示GDPR授权页面|
-| initSDK |string appId, string appKey|初始化SDK|
-
-#### 3.2.1 SDK的GDPR说明
-欧盟发布的《通用数据保护条例》(GDPR)将于 2018 年 5 月 25 日生效。 为支持GDPR协议我们更新了TopOn Privacy Policy，请开发者从我们官网了解<a href="http://img.toponad.com/gdpr/PrivacyPolicySetting.html" target = "_blank">《TopOn Privacy Policy》</a>的相关内容。
-同时，为保障用户数据的隐私安全，我们在新版的TopOn SDK 2.0.0及以上中加入了数据保护功能，请开发者查阅以下文档并完成SDK接入。
-
-
-
-1,如需要了解TopOn SDK对GDPR的详细说明，请参考<a href="https://app.toponad.com/document/doc-zh/android/base_integration.html" target="_blank">gdpr设置</a>
-
-2,api介绍:
-
+可以使用以下方法以编程方式完成上述所有配置 C# **Editor Script**:
 
 ```java
-
-/***
-* @param level gdrp 设置隐私基本
-* 0:正常数据读取
-* 1:保持部分隐私
-* 2:完全保密,不能读取任何数据,sdk功能不能正常运行
-*/
-public static void setGDPRLevel(int level)
-
-/***
-* 显示gdpr 授权页面
-*/
-public static void showGDPRAuth()
-
-
-/**
-* 为单独平台设置gdpr设置
-* @param networkType 平台类型
-* @param dictionary 数据操作
-*/
-public static void addNetworkGDPRInfo(int networkType, Dictionary<string, string> dictionary)
-
-```
-
-调用示例:
-
-android:
-
-```java
-
-//gdpr
-Dictionary<string, object> dictionary ;
-
-
-//admob
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.ADMOB_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADMOB,dictionary);
-
-//inmobi
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.INMOBI_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.INMOBI_KEY_ISGDPRSCOPE, "1");//是否gdpr地区 1:是
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_INMOBI,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-//iba string
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.FLURRY_KEY_GDPR_IABSTR, "");//iba串 符合iba协议的
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.FLURRY_KEY_ISGDPRSCOPE, "true");//是否在gdpr地区
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_FLURRY,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.APPLOVIN_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_APPLOVIN,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.MINTEGRAL_KEY_ALLOW_GDPR, "1");//是否同意gdpr 1同意
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MINTEGRAL,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.MOPUB_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MOPUB,dictionary);
-
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.CHARTBOOST_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_CHARTBOOST,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.TAPJOY_KEY_ALLOW_GDPR, "1");//是否同意gdpr 
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.TAPJOY_KEY_ISGDPRSCOPE, "true");//是否在gdpr地区
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_TAPJOY,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.IRONSOURCE_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_IRONSOURCE,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.UNITYADS_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_UNITYADS,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.VUNGLE_KEY_ALLOW_GDPR, "true");//是否同意gdpr 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_VUNGLE,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.ADCOLONY_KEY_ALLOW_GDPR, "1");//是否同意gdpr 1同意
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.ADCOLONY_KEY_ISGDPRSCOPE, "true");//是否在gdpr地区
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADCOLONY,dictionary);
-
-
-```
-
-以下是各平台GDPR(iOS)配置示例代码，关于各平台具体设置请查阅其官网。
-
-```java
-
-//Admob
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADMOB, new Dictionary<string, object>{"consent_status":"2", "under_age":"0"});
-
-//Inmobi
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_INMOBI, new Dictionary<string, object>{"gdpr":"0", "consent_string":"true"});
-
-//Flurry
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_FLURRY, new Dictionary<string, object>{"scope_flag":"0", "consent_string":""});
-
-//Applovin
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_APPLOVIN, new Dictionary<string, object>{"under_age":"0", "consent_status":"0"});
-
-//Mintegral
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MINTEGRAL, new Dictionary<string, object>{"0":"1"});
-
-//Mopub
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MOPUB, new Dictionary<string, object>{"value":"1"});
-
-//Chartboost
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_CHARTBOOST, new Dictionary<string, object>{"value":true});
-
-//Tapjoy
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_TAPJOY, new Dictionary<string, object>{"consent_value":"1", "gdpr_subjection":false});
-
-//Ironsource
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_IRONSOURCE, new Dictionary<string, object>{"value":true});
-
-//UnityAds
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_UNITYADS, new Dictionary<string, object>{"value":true});
-
-//Vungle
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_VUNGLE, new Dictionary<string, object>{"value":1});
-
-//AdColony
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADCOLONY, new Dictionary<string, object>{"gdpr_consideration_flag":1, "consent_string":""});
-
-```
-
-
-<h2 id='4'>4. 原生广告</h2>
-
-### 4.1 接入前提说明
-
-**(1)请确保已将SDK必要的包集成到工程中，并且完成AndroidManifest.xml相关权限与组件配置、混淆配置、ATSDKAPI.initSDK初始化调用。
-(2)需要从TopOn后台创建指定appid的native广告位ID**
-
-### 4.2 原生广告api说明说明
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-| loadNativeAd| string unitId, Dictionary<String,String> pairs|用于加载native广告，unitId为广告位id；pairs为空即可|
-| setLocalExtra | Dictionary<String,String> pairs | 可用于设置第三方平台的本地配置 |
-|renderAdToScene|string unitId, ATNativeAdView ATNativeAdView|展示指定广告位的Native广告，ATNativeAdView为指定native广告展示的位置信息|
-|cleanAdView|string unitId, ATNativeAdView ATNativeAdView|移除原生广告|
-|hasAdReady|string unitId|判断指定广告位的广告是否加载完成|
-|setListener|ATNativeAdListener listener|设置回调对象|
-
-**ATNativeAdListener接口说明**
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-|onAdLoaded| string unitId |广告加载完成|
-|onAdLoadFail|string unitId, string code, string message |广告加载失败|
-|onAdClicked|string unitId|广告产生点击|
-|onAdImpressed|string unitId|广告展示|
-|onAdVideoStart|string unitId |原生视频播放开始，不同network可能支持不一样|
-|onAdVideoEnd|string unitId |原生视频播放结束，不同network可能支持不一样|
-|onAdVideoProgress|string unitId |原生视频播放进度，不同network可能支持不一样|
-
-
-调用示例:
-
-```java
-//初始化请求
-ATNativeAd.Instance.setListener(new ATNativeCallbackListener());
-
-//一些平台个性化设置 如果有需求设置的话 这个例子是集成了广点通的示例
-Dictionary<string,string> gdtlocal = new Dictionary<string,string>();
-gdtlocal.Add ("gdtad_width","-1");
-gdtlocal.Add ("gdtad_height","-1");
-ATNativeAd.Instance.setLocalExtra (currunitid,gdtlocal);
-
-//开始请求
-ATNativeAd.Instance.loadNativeAd(currunitid, null);
-
-//显示广告 一 配置
-int rootbasex = 100, rootbasey = 100;
-//父框架
-int x = rootbasex,y = rootbasey,width = 300*3,height = 200*3,textsize = 17;
-conifg.parentProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-//adlogo 
-x = 0*3;y = 0*3;width = 30*3;height = 20*3;textsize = 17;
-conifg.adLogoProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-
-//adicon
-x = 0*3;y = 50*3-50;width = 60*3;height = 50*3;textsize = 17;
-conifg.appIconProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-//ad cta 
-x = 0*3;y = 150*3;width = 300*3;height = 50*3;textsize = 17;
-conifg.ctaButtonProperty = new ATNativeItemProperty(x,y,width,height,"#ff21bcab","#ffffff",textsize);
-
-//ad desc
-x = 60*3;y = 100*3;width = 240*3-20;height = 50*3-10;textsize = 10;
-conifg.descProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,"#777777",textsize);
-
-
-//ad image
-x = 60*3;y = 0*3+20;width = 240*3-20;height = 100*3-10;textsize = 17;
-conifg.mainImageProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-//ad title 
-x = 0*3;y = 100*3;width = 60*3;height = 50*3;textsize = 12;
-conifg.titleProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-
-//显示广告 二 显示
-ATNativeAdView ATNativeAdView = new ATNativeAdView(conifg);
-ATManager.ATNativeAdView = ATNativeAdView;
-
-
-
-Debug.Log("Developer renderAdToScene--->");
-ATNativeAd.Instance.renderAdToScene(currunitid, ATNativeAdView);
-
-//清除显示区域 
-ATNativeAd.Instance.cleanAdView(currunitid,ATManager.ATNativeAdView);
-
-
-bool isPaused;
-void OnApplicationFocus(bool hasFocus)
+#if (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+using UnityEditor.iOS.Xcode;
+#endif
+
+public static class MyBuildPostprocess
 {
+    [PostProcessBuild(999)]
+    public static void OnPostProcessBuild(BuildTarget buildTarget, string path)
+    {
+        #if (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+            if (buildTarget == BuildTarget.iOS)
+            {
+                string projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
 
-isPaused = !hasFocus;
-Debug.Log ("Developer 屏幕暂停?"+isPaused);
+                PBXProject pbxProject = new PBXProject();
+                pbxProject.ReadFromFile(projectPath);
 
-ATNativeAd.Instance.onApplicationForces (currunitid,ATManager.ATNativeAdView);
+                string target = pbxProject.TargetGuidByName("Unity-iPhone");            
+                pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
+                pbxProject.SetBuildProperty(target, "GCC_ENABLE_OBJC_EXCEPTIONS", "YES");
+                pbxProject.SetBuildProperty(target, "GCC_C_LANGUAGE_STANDARD", "gnu99");
+
+                pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
+                pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-fobjc-arc");
+                pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libxml2.tbd", "Libraries/libxml2.tbd", PBXSourceTree.Sdk));
+                pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libresolv.9.tbd", "Libraries/libresolv.9.tbd", PBXSourceTree.Sdk));
+                pbxProject.WriteToFile (projectPath);
+
+                var plistPath = Path.Combine(path, "Info.plist");
+                PlistDocument plist = new PlistDocument();
+                plist.ReadFromFile(plistPath);
+                plist.root.SetString("GADApplicationIdentifier", "ca-app-pub-9488501426181082/7319780494");
+                plist.root.SetBoolean("GADIsAdManagerApp", true);
+                plist.WriteToFile(plistPath);
+        }
+        #endif
+    }
 }
 
-void OnApplicationPause(bool pauseStatus)
+
+```
+
+**注:** 您需要将此代码写到C#文件并放到**Unity3D** IDE的**Editor** 目录下:
+![](img/editor_dir_in_unity3d.png)
+
+如果一切顺利，则应编译您的项目。
+
+<h2 id='4'> 4 SDK初始化</h2>
+
+您可以通过以下代码初始化 **AnyThinkSDK** ，详细参考[demo project](https://github.com/anythinkteam/demo_unity):
+
+```java
+ATSDKAPI.setChannel("unity3d_test_channel");
+ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } });
+ATSDKAPI.setLogDebug(true);
+ATSDKAPI.initSDK("a5c4ad280995c9", "7b4e37f819dbee652ef79c4506e14288");//Use your own app_id & app_key here
+```
+
+**注:** ATSDKAPI类中还有一个init方法，它接受一个侦听对象，您可以使用此侦听器获得SDK初始化完成事件（成功/失败）的通知：
+
+![](img/init_api.png)
+
+
+由于后续操作（加载，显示等）不依赖于此事件，因此您可以使用上面显示的代码并在初始化SDK后立即调用加载API。
+
+
+<h2 id='5'>5. 原生广告</h2>
+
+在继续之前，请确保已如上所述导入并初始化了SDK。
+
+**Android上需要注意的：** <br>
+   目前使用Unity直接打出Android的APK是不能使用原生视频广告，因为Unity打包APK默认会把游戏的Activity硬件加速关闭，所以无法展示视频。如果需要展示原生广告视频的话，必须使用export project的方式处理，处理方式如下：<br>
+
+**(1)选择Export Project的模式导出Android工程**
+![](img/Android_export_project.png)
+
+**(2)修改AndroidManifest里的属性，将图中的hardwareAccelerated的属性设置成true**
+![](img/Android_manifest_accelaerate.png)
+
+
+**完成以上步骤之后，使用当前的Android工程进行打包即可。**
+
+
+### 5.1 加载原生广告
+您可以使用以下代码加载原生广告：
+
+```java
+public void loadNative() 
 {
-isPaused = pauseStatus;
-Debug.Log ("Developer 屏幕暂停?"+isPaused);
-ATNativeAd.Instance.onApplicationPasue (currunitid,ATManager.ATNativeAdView);
+        Debug.Log ("Developer load native, unit id = " + mPlacementId_native_all);
+   
+        if(callbackListener == null) {
+        	callbackListener = new ATNativeCallbackListener();
+            ATNativeAd.Instance.setListener(callbackListener);
+        }
+
+		Dictionary<string,string> gdtlocal = new Dictionary<string,string>();
+		gdtlocal.Add ("gdtadtype","3");
+		gdtlocal.Add ("gdtad_width","-1");
+		gdtlocal.Add ("gdtad_height","-1");
+        ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
+
+		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
+		jsonmap.Add("age", "22");
+		jsonmap.Add("sex", "lady");
+		jsonmap.Add("native", "0");
+
+       ATNativeAd.Instance.loadNativeAd(mPlacementId_native_all, jsonmap);
 }
-
 ```
+**注:** 请继续阅读以了解如何在加载成功/失败事件时得到通知。
 
-<h2 id='5'>5. 激励视频广告</h2>
+###5.2 展示原生广告
+您可以使用以下代码显示原生广告：
 
-### 5.2 Video API说明
+```c#
+public void showNative()
+{
+		Debug.Log ("Developer show native....");
+		ATNativeConfig conifg = new ATNativeConfig ();
 
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-|loadVideoAd|string unitId, Dictionary<string,string> pairs|用于load激励视频广告，unitId为广告位id；pairs为空即可|
-|showAd|string unitId|展示指定广告位的激励视频广告|
-|hasAdReady|string unitId|判断指定广告位的广告是否加载完成|
-|setListener|ATRewardedVideoListener listener|设置回调对象|
-|setUserData|string unitId, string userId, string customData| 设置奖励的用户id信息|
-|addsetting|string unitId, Dictionary<string,string> pairs | 用于配置第三方平台的本地配置|
+		string bgcolor = "#ffffff";
+		string textcolor = "#000000";
+		int rootbasex = 100, rootbasey = 100;
 
+		int x = rootbasex,y = rootbasey,width = 300*3,height = 200*3,textsize = 17;
+		conifg.parentProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-接口名：ATRewardedVideoListener
+		//adlogo 
+		x = 0*3;y = 0*3;width = 30*3;height = 20*3;textsize = 17;
+		conifg.adLogoProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-|onRewardedVideoAdLoaded|string unitId|广告加载完成|
-|onRewardedVideoAdLoadFail|string unitId,string code, string message|广告加载失败|
-|onRewardedVideoAdPlayClicked|string unitId|激励视频产生点击|
-|onRewardedVideoAdPlayStart|string unitId|视频播放开始|
-|onRewardedVideoAdPlayEnd|string unitId|视频播放结束|
-|onRewardedVideoAdPlayFail|string unitId,string code, string message|视频播放失败|
-|onRewardedVideoAdPlayClosed|string unitId, bool isReward|视频关闭，isRewarded为是否产生激励|
+		//adicon
+		x = 0*3;y = 50*3-50;width = 60*3;height = 50*3;textsize = 17;
+		conifg.appIconProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-调用示例:
+		//ad cta 
+		x = 0*3;y = 150*3;width = 300*3;height = 50*3;textsize = 17;
+		conifg.ctaButtonProperty  = new ATNativeItemProperty(x,y,width,height,"#ff21bcab","#ffffff",textsize, true);
 
-```java
+		//ad desc
+		x = 60*3;y = 100*3;width = 240*3-20;height = 50*3-10;textsize = 10;
+		conifg.descProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,"#777777",textsize, true);
 
+		//ad image
+		x = 60*3;y = 0*3+20;width = 240*3-20;height = 100*3-10;textsize = 17;
+		conifg.mainImageProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-//addsetting 
-//单独适配平台属性 （以下配置可不使用）
-private Dictionary<string,object> addsetting(){
-Dictionary<string,object> appsettinglist = new Dictionary<string,object> ();
+		//ad title 
+		x = 0*3;y = 100*3;width = 60*3;height = 50*3;textsize = 12;
+		conifg.titleProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-//AdmobATRewardedVideoSetting
-Dictionary<string,object> admobATRewardedVideoSetting = new Dictionary<string,object> ();
-appsettinglist.Add(ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_ADMOB+"", Json.Serialize(admobATRewardedVideoSetting));
-
-//mintegralATMediationSetting
-Dictionary<string,object> mintegralATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_MINTEGRAL+"", Json.Serialize(mintegralATMediationSetting));
-
-//_applovinATMediationSetting
-Dictionary<string,object> _applovinATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_APPLOVIN+"", Json.Serialize(_applovinATMediationSetting));
-
-
-
-//_flurryATMediationSetting
-Dictionary<string,object> flurryATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_FLURRY+"", Json.Serialize(flurryATMediationSetting));
-
-
-//_inmobiATMediationSetting
-Dictionary<string,object> _inmobiATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_INMOBI+"", Json.Serialize(_inmobiATMediationSetting));
-
-
-//_mopubATMediationSetting
-Dictionary<string,object> _mopubATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_MOPUB+"", Json.Serialize(_mopubATMediationSetting));
-
-//_chartboostATMediationSetting
-Dictionary<string,object> _chartboostATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_CHARTBOOST+"", Json.Serialize(_chartboostATMediationSetting));
-
-//_tapjoyATMediationSetting
-Dictionary<string,object> _tapjoyATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_TAPJOY+"", Json.Serialize(_tapjoyATMediationSetting));
-
-//_ironsourceATMediationSetting
-Dictionary<string,object> _ironsourceATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_IRONSOURCE+"", Json.Serialize(_ironsourceATMediationSetting));
-
-//_unityAdATMediationSetting
-Dictionary<string,object> _unityAdATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_UNITYADS+"", Json.Serialize(_unityAdATMediationSetting));
-
-//vungleRewardVideoSetting
-Dictionary<string,object> vungleRewardVideoSetting = new Dictionary<string,object> ();
-
-vungleRewardVideoSetting.Add("orientation",1);//1:2 1: 表示根据设备方向自动旋转 2:视频广告以最佳方向播放
-vungleRewardVideoSetting.Add("isSoundEnable",true);//true:false
-vungleRewardVideoSetting.Add("isBackButtonImmediatelyEnable",false);//true:false 如果为 true，用户可以立即使用返回按钮退出广告。如果为 false，在屏幕上的关闭按钮显示之前用户不可以使用返回按钮退出广告
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_VUNGLE+"", Json.Serialize(vungleRewardVideoSetting));
-
-
-//adColonyATRewardVideoSetting
-Dictionary<string,object> adColonyATRewardVideoSetting = new Dictionary<string,object> ();
-
-adColonyATRewardVideoSetting.Add("enableConfirmationDialog",false);//true:false
-adColonyATRewardVideoSetting.Add("enableResultsDialog",false);//true:false
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_ADCOLONY+"", Json.Serialize(adColonyATRewardVideoSetting));
-return appsettinglist;
+		ATNativeAdView anyThinkNativeAdView = new ATNativeAdView(conifg);
+		AnyThinkAds.Demo.ATManager.anyThinkNativeAdView = anyThinkNativeAdView;
+		Debug.Log("Developer renderAdToScene--->");
+		ATNativeAd.Instance.renderAdToScene(mPlacementId_native_all, anyThinkNativeAdView);
 }
-
-//ttATRewardedVideoSetting
-Dictionary<string,object> ttATRewardedVideoSetting = new Dictionary<string,object> ();
-ttATRewardedVideoSetting.Add("requirePermission",true);//是否申请权限
-ttATRewardedVideoSetting.Add("orientation",1);//可选参数 设置期望视频播放的方向
-ttATRewardedVideoSetting.Add("supportDeepLink",true);//可选参数 设置是否支持deeplink
-ttATRewardedVideoSetting.Add("rewardName","金币");//可选参数 励视频奖励的名称，针对激励视频参数
-ttATRewardedVideoSetting.Add("rewardCount",1);//可选参数 激励视频奖励个数
-
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_TOUTIAO+"", Json.Serialize(ttATRewardedVideoSetting));
-
-
-
-//初始化
-ATRewardedVideo.Instance.setListener(new ATCallbackListener());
-ATRewardedVideo.Instance.addsetting (currunitid,addsetting());
-
-
-
-
-//请求广告 
-ATRewardedVideo.Instance.loadVideoAd(currunitid,null);
-
-
-//展示展示广告
-ATRewardedVideo.Instance.showAd(currunitid);
-
-
-```
-
-<h2 id='6'>6. 插屏广告</h2>
-
-
-### Interstitial初始化说明
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-| loadInterstitialAd|string unitId, Dictionary<string,string> pairs|用于load插屏广告，unitId为广告位id；pairs为空即可|
-|showInterstitialAd| string unitId |展示指定广告位的插屏广告|
-|hasInterstitialAdReady| string unitId |判断指定广告位的广告是否加载完成|
-|setListener|ATInterstitialAdListener listener|设置回调对象|
-
-
-**ATInterstitialAdListener说明**
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-|onInterstitialAdLoad|string unitId|广告加载完成|
-|onInterstitialAdLoadFail|string unitId, string code, string message|广告加载失败|
-|onInterstitialAdClick|string unitId|广告产生点击|
-|onInterstitialAdShow|string unitId|广告展示|
-|onInterstitialAdClose|string unitId|广告关闭|
-|onInterstitialAdStartPlayingVideo|string unitId|视频播放开始，不同的network不一定存在该回调|
-|onInterstitialAdEndPlayingVideo|string unitId|视频播放完成，不同的network不一定存在该回调|
-|onInterstitialAdFailedToPlayVideo|string unitId, string code, string message|视频播放失败|
-
-调用示例:
-
-```java
-
-//初始化
-ATInterstitialAd.Instance.setListener(new ATInterstitialAdListener());
-
-
-
-
-//请求广告 
-ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, null);
-
-
-//展示展示广告
-ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all);
-
-
-```
-
-<h2 id='7'>7. Banner广告</h2>
-
-### Banner初始化说明
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-| loadBannerAd|string unitId, Dictionary<string,string> pairs|用于加载banner广告，placementId为广告位id；pairs为空即可|
-|showBannerAd|string unitId, ATRect rect|展示指定广告位的banner广告，parameters为指定banner展示的x坐标、y坐标、w宽、h高|
-|showBannerAd|string unitId|恢复展示banner|
-|cleanBannerAd|string unitId|移除banner广告|
-hideBannerAd|string unitId|隐藏banner广告|
-|setListener|ATBannerAdListener listener|设置回调对象|
-
-**ATBannerAdListener说明**
-
-| API | 参数说明 | 功能说明|
-| --- | --- |---|
-|onAdLoad|string unitId|广告加载完成|
-|onAdLoadFail|string unitId, string code, string message|广告加载失败|
-|onAdClick|string unitId|广告产生点击|
-|onAdImpress|string unitId|广告展示|
-|onAdClose|string unitId|广告关闭|
-|onAdAutoRefresh|string unitId|广告自动刷新|
-|onAdAutoRefreshFail|string unitId, string code, string message|广告自动刷新失败|
-
-
-调用示例:
-
-```java
-
-//初始化
-ATBannerAd.Instance.setListener(new ATBannerAdListener());
-
-
-
-//请求广告 
-ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, null);
-
-
-//展示广告
-ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
-
-
 ```
 
 
+传递给ATNativeItemProperty类的构造函数的尾部参数表示是否使用像素。 例如，在iPhone 6上，如果分别为x，y，宽度和高度分别传递30、120、300、450，则在iPhone 7上传递给Objective-C代码的实际值将为15、60、150、225 这些值将是10、40、100、150； 也就是说，最终值决定于目标设备的屏幕比例。
 
 
+正如您在上面看到的，我们为您定义了一个ATNativeConfig类，用于配置本机资产的各种属性（bgColor，textColor，textSize，position等），例如CTA按钮，应用程序图标，标题文本，说明文本，封面图片 等等。 请随时修改config对象中的属性，并查看根据您的修改会发生什么。
 
 
+如果要从屏幕上删除原生广告，请使用以下代码：
 
+```C#
+public void cleanView()
+{
+	Debug.Log ("Developer cleanView native....");      
+	ATNativeAd.Instance.cleanAdView(mPlacementId_native_all,AnyThinkAds.Demo.ATManager.anyThinkNativeAdView);
+}
+```
+
+### 5.3 实现原生广告的Listener
+
+要获得有关各种原生广告事件（加载成功/失败，展示和点击等）的通知，您可以定义一个 ** ATNativeAdListener** 的实现类，下面是一个示例：
+
+
+```c#
+class ATNativeCallbackListener : ATNativeAdListener
+{
+    public void onAdLoaded(string unitId)
+    {
+        Debug.Log("Developer onAdLoaded------:" + unitId);
+    }
+    public void onAdLoadFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer onAdLoadFail------:" + unitId + "--code:" + code + "--msg:" + message);
+    }
+    public void onAdImpressed(string unitId)
+    {
+        Debug.Log("Developer onAdImpressed------:" + unitId);
+    }
+    public void onAdClicked(string unitId)
+    {
+        Debug.Log("Developer onAdClicked------:" + unitId);
+    }
+    public void onAdVideoStart(string unitId)
+    {
+        Debug.Log("Developer onAdVideoStart------:" + unitId);
+    }
+    public void onAdVideoEnd(string unitId)
+    {
+        Debug.Log("Developer onAdVideoEnd------:" + unitId);
+    }
+    public void onAdVideoProgress(string unitId, int progress)
+    {
+        Debug.Log("Developer onAdVideoProgress------:" + unitId);
+    }
+}
+```
+
+**注:**您在本节中看到的代码段来源于我们Demo的**nativeScene.cs** [demo project](https://github.com/anythinkteam/demo_unity).
+
+
+<h2 id='6'>6. 激励视频广告</h2>
+
+
+### 6.1 加载激励视频
+使用以下代码加载激励视频广告: <p id='loading_rv'></p>
+
+```C#
+public void loadVideo()
+{
+    if(callbackListener == null) {
+        callbackListener = new ATCallbackListener();
+        Debug.Log("Developer init video....unitid:" + mPlacementId_rewardvideo_all);
+        ATRewardedVideo.Instance.setListener(callbackListener);
+        ATRewardedVideo.Instance.addsetting(mPlacementId_rewardvideo_all, addsetting());
+    }
+   
+	Dictionary<string,string> jsonmap = new Dictionary<string,string>();
+	jsonmap.Add("age", "22");
+	jsonmap.Add("sex", "lady");
+	jsonmap.Add("rv", "1");
+	
+	ATRewardedVideo.Instance.loadVideoAd(mPlacementId_rewardvideo_all,jsonmap);
+}
+```
+
+**注:** 请参阅下文，了解如何获得有关激励视频广告事件的通知（加载成功/失败，展示，点击，视频开始/结束和激励）。
+
+###6.2 展示激励视频
+与展示原生广告相比，展示激励视频要简单得多，只要调用展示api并传递展示广告位ID作为参数：
+
+```C#
+public void showVideo()
+{		
+	Debug.Log ("Developer show video....");
+	ATRewardedVideo.Instance.showAd(mPlacementId_rewardvideo_all);
+}
+```
+
+###6.3 实现激励视频的监听器
+您可以实现**ATRewardedVideo Listener**接口的类，来获得有关激励视频广告事件的通知：
+
+```C#
+class ATCallbackListener : ATRewardedVideoListener {
+    public void onRewardedVideoAdLoaded(string unitId){
+        Debug.Log("Developer onRewardedVideoAdLoaded------");
+    }
+
+    public void onRewardedVideoAdLoadFail(string unitId, string code, string message){
+        Debug.Log("Developer onRewardedVideoAdLoadFail------:code" + code + "--message:" + message);
+    }
+
+    public void onRewardedVideoAdPlayStart(string unitId){
+        Debug.Log("Developer onRewardedVideoAdPlayStart------");
+    }
+
+    public void onRewardedVideoAdPlayEnd(string unitId){
+        Debug.Log("Developer onRewardedVideoAdPlayEnd------");
+    }
+
+    public void onRewardedVideoAdPlayFail(string unitId, string code, string message){
+        Debug.Log("Developer onRewardedVideoAdPlayFail------code:" + code + "---message:" + message);
+    }
+
+    public void onRewardedVideoAdPlayClosed(string unitId, bool isReward){
+        Debug.Log("Developer onRewardedVideoAdPlayClosed------isReward:" + isReward);
+    }
+
+    public void onRewardedVideoAdPlayClicked(string unitId){
+        Debug.Log("Developer onRewardVideoAdPlayClicked------");
+    }
+
+    public void onReward(string unitId){
+        Debug.Log("Developer onReward------");
+    }
+    }
+```
+
+创建此类的一个实例，并将其传递给加载api中的listener参数，如图所示[here](#loading_rv).
+
+**注意：** 本节中的代码段摘自我们Demo的**videoScenes.cs** [demo project](https://github.com/anythinkteam/demo_unity).
+
+
+<h2 id='7'>7. 插屏广告</h2>
+
+###7.1 加载插屏广告
+使用以下代码加载插屏广告
+
+```C#
+public void loadInterstitialAd() 
+{
+    if(callback == null) {
+        callback = new InterstitalCallback();
+        ATInterstitialAd.Instance.setListener(callback);
+    }
+
+    Dictionary<string,string> jsonmap = new Dictionary<string,string>();
+    jsonmap.Add("age", "22");
+    jsonmap.Add("sex", "lady");
+    jsonmap.Add("interstitial", "3");
+
+    ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
+}
+```
+
+**注:** 请参阅下文，了解如何获得有关插屏广告事件的通知（加载成功/失败，展示，点击，视频开始/结束）。
+
+###7.2 展示插屏广告
+与激励视频相同，插屏广告只要调用展示api并传递展示广告位ID作为参数：
+
+```C#
+public void showInterstitialAd() 
+{
+	ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all);
+}
+```
+
+###7.3 实现插屏的监听器
+您可以实现**ATInterstitialAdListener**接口的类，来获得有关插屏广告事件的通知：
+
+```C#
+class InterstitalCallback : ATInterstitialAdListener
+{
+    public void onInterstitialAdClick(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdClick :" + unitId);
+    }
+
+    public void onInterstitialAdClose(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdClose :" + unitId);
+    }
+
+    public void onInterstitialAdEndPlayingVideo(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdEndPlayingVideo :" + unitId);
+    }
+
+    public void onInterstitialAdFailedToPlayVideo(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onInterstitialAdFailedToPlayVideo :" + unitId + "--code:" + code + "--msg:" + message);
+    }
+
+    public void onInterstitialAdLoad(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdLoad :" + unitId);
+    }
+
+    public void onInterstitialAdLoadFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onInterstitialAdLoadFail :" + unitId + "--code:" + code + "--msg:" + message);
+    }
+
+    public void onInterstitialAdShow(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdShow :" + unitId);
+    }
+
+    public void onInterstitialAdStartPlayingVideo(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdStartPlayingVideo :" + unitId);
+    }
+
+    public void onInterstitialAdFailedToShow(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdFailedToShow :" + unitId);
+    }
+}
+```
+**注:** 您在本节中看到的代码段摘自我们Demo的**interstitialScenes.cs** [demo project](https://github.com/anythinkteam/demo_unity).
+
+
+<h2 id='8'>8. Banner广告</h2>
+
+### 8.1 加载Banner广告
+使用以下代码加载Banner广告
+
+```C#
+public void loadBannerAd()
+{
+    if(bannerCallback == null) {
+        bannerCallback = new BannerCallback();
+        ATBannerAd.Instance.setListener(bannerCallback);
+    }
+
+    Dictionary<string, object> jsonmap = new Dictionary<string,object>();
+    jsonmap.Add("age", "22");
+    jsonmap.Add("sex", "lady");
+    jsonmap.Add("banner", "2");
+    ATSize bannerSize = new ATSize(this.screenWidth, 100, true);
+    jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
+    ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, jsonmap);
+}
+```
+
+请继续阅读以了解如何获得有关Banner广告事件的通知，例如加载成功/失败，展示和点击。
+
+###8.2 展示Banner广告
+您可以使用以下代码显示Banner广告：
+
+```C#
+public void showBannerAd() 
+{
+    ATRect arpuRect = new ATRect(0,70, screenWidth, 100, true);
+    ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
+}
+```
+
+传递给ATRect类的构造函数的末尾参数表示是否使用像素。 例如，在iPhone 6上，如果分别为x，y，宽度和高度分别传递30、120、300、450，则在iPhone 7上传递给Objective-C代码的实际值将为15、60、150、225 这些值将是10、40、100、150； 也就是说，最终值将决定于目标设备的屏幕比例。
+
+如果需要，请使用以下代码从屏幕上**移除**Banner：
+
+```C#
+public void removeBannerAd() 
+{
+	ATBannerAd.Instance.cleanBannerAd(mPlacementId_native_all);
+}
+```
+
+如果您只想**暂时隐藏** Banner（而不是**从屏幕上移除**），请在此处使用代码：
+
+```C#
+public void hideBannerAd() 
+{
+	ATBannerAd.Instance.hideBannerAd(mPlacementId_native_all);
+}
+```
+
+隐藏Banner后，可以使用以下代码重新显示它：
+
+```C#
+public void reshowBannerAd()
+{
+	ATBannerAd.Instance.showBannerAd(mPlacementId_native_all);
+}
+```
+
+**注意:** 请注意，此处的showBannerAd方法不接受rect参数，这与您首次显示Banner广告时不同。
+
+移除Banner广告和隐藏Banner广告的区别在于，从屏幕上移除Banner广告时也会破坏它（这意味着在再次显示之前，必须先加载Banner广告），而隐藏Banner只需调用showBannerAd方法即可重新显示以前隐藏的Banner广告**不传递ATRect参数**
+
+##8.3 实现Banner的监听器
+要获得有关各种Banner广告事件（加载成功/失败，展示和点击）的通知，只需定义一个** ATBannerAdListener**接口的实现类：
+
+```C#
+class BannerCallback : ATBannerAdListener
+{
+    public void onAdAutoRefresh(string unitId)
+    {
+        Debug.Log("Developer callback onAdAutoRefresh :" +  unitId);
+    }
+
+    public void onAdAutoRefreshFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onAdAutoRefreshFail : "+ unitId + "--code:" + code + "--msg:" + message);
+    }
+
+    public void onAdClick(string unitId)
+    {
+        Debug.Log("Developer callback onAdClick :" + unitId);
+    }
+
+    public void onAdClose(string unitId)
+    {
+        Debug.Log("Developer callback onAdClose :" + unitId);
+    }
+
+    public void onAdImpress(string unitId)
+    {
+        Debug.Log("Developer callback onAdImpress :" + unitId);
+    }
+
+    public void onAdLoad(string unitId)
+    {
+        Debug.Log("Developer callback onAdLoad :" + unitId);
+    }
+
+    public void onAdLoadFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onAdLoadFail : : " + unitId + "--code:" + code + "--msg:" + message);
+    }
+}
+```
+
+**注:** 您在本节中看到的代码段摘自我们Demo的**bannerScene.cs** [demo project](https://github.com/anythinkteam/demo_unity).
+
+<h2 id='9'>9. 开屏广告</h2>
+
+强烈建议使用Xcode/Android Studio中的原生API（Objective-C / Java）而不是Unity3D中的C＃脚本来直接。 这样做的原因是，应用程序启动完成后可以立即加载并显示开屏广告。 如果您使用C＃将开屏广告集成到Unity3D中，则在启动Unity游戏引擎之前，它无法加载并显示开屏广告(这种情况发生在应用程序启动完成之后，并且需要花费更多时间)。 有关如何使用Objective-C / Java集成开屏广告的更多信息，请参考[iOS集成说明](https://github.com/anythinkteam/demo_ios/blob/master/iOS_Doc_EN/iOS_Integration_Guide.md) & [Android集成说明](https://github.com/anythinkteam/demo_android/blob/master/en/Android_Integration_Document_For_TopOn_SDK.md).

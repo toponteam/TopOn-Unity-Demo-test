@@ -2,13 +2,15 @@
 
 [1. Introduction](#1) <br>
 [2. Request account and app id](#2)<br>
-[3. SDK Initialization](#3)<br>
-[4. Native ads integration](#4)<br>
-[5. Video ads integration](#5)<br>
-[6. Interstitial ads integration](#6)<br>
-[7. Banner ads integration](#7)<br>
+[3. Import the SDK](#3)<br>
+[4. Initialize the SDK](#4)<br>
+[5. Integrate Native Ad](#5)<br>
+[6. Integrate Rewarded Video Ad](#6)<br>
+[7. Integrate Interstitial Ad](#7)<br>
+[8. Integrate Banner Ad](#8)<br>
+[9. On Splash Ad](#9)<br>
 
-## 1. Introduction
+<h2 id='1'> 1. Introduction </h2>
 
 This document describes how to integrate the TopOn unity3d SDK from the account application to SDK integration. Following the workflow, you can integrate the TopOn SDK successfully. TopOn supports ad forms as follows in Unity 3D platform:
 
@@ -25,17 +27,17 @@ You can choose the appropriate Ads forms of advertising according to your App's 
 
 Refer to <a href="https://app.toponad.com/document/doc-en/getstarted/get_started.html" target="_blank">Get Started</a> for Account Registration and Login Instructions
 
-##3. SDK Initialization</h2>
+<h2 id='3'> 3. Import  the SDK</h2>
 
-### 3.1 Add TopOnSDK to your project
+### 3.1 SDK Package Contents
 
-You can get TopOnSDK for unity3d from TopOn business, and the file description of TopOnSDK is:
-
-**(SDK is developed on the basis of the 2018 version)**
+**AnyThinkSDK**'s package contains the following contents:
 
 | File Name | Description | Necessary |
 | ---- | ---- | ---- |
-| anythinkunity3d.unitypackage | TopOn Unity3d Plugin package, you can import this package into the unity3d project for integration | Yes |
+| anythinkunity3d.unitypackage | **AnyThink** Unity3d Plugin package, you can import this package into the unity3d project for integration | Yes |
+
+**Note: Use Unity3D 2018 or newer for compatibility.**
 
 #### 3.1.1 Android import introduction（Introduction for Path：/Assets/Plugins/Android ）
 
@@ -216,7 +218,7 @@ android:usesCleartextTraffic="true"
 
 #### 3.1.2 iOS import introduction
 
-After compiling the Xcode project with Unity, open the Xcode project, import the required SDK according to the guidelines of each third-party platform and link the system framework and lib that it depends on. You can also see the help of each platform of Topon <a href="https://app.toponad.com/document/doc-zh/ios/topon_sdk_iOS_access_guide_chinese_network.html" target="_blank">Networks SDK Access Help for Topon</a>
+After compiling the Xcode project with Unity, open the Xcode project, import the required SDK according to the guidelines of each third-party platform and link the system framework and lib that it depends on. You can also see the help of each platform of Topon <a href="https://app.toponad.com/document/doc-en/ios/topon_sdk_iOS_access_guide_english_core.html" target="_blank">Networks SDK Access Help for Topon</a>
 
 All third-party Framework packages are included in Unity's sdk package. Unneeded sdk packages can be deleted as needed. For details on which platforms need to be introduced, please see the help documentation above.
 
@@ -237,504 +239,512 @@ According to the information listed above, the SDK required for each third-party
 
 ![](img/iOS_C_Language_Dialect_Settings.png)
 
-### 3.2 Initialize API description
-
-| API | Parameter | Description|
-| --- | --- |---|
-| setChannel| string channel| Configure the channel information of the SDK. |
-| initCustomMap | Dictionary<string, string> customMap| Configure custom parameters to match **customs target rules **configured in the developer portal|
-| setLogDebug | bool isDebug |Open debug mode for SDK to view more logs|
-| setGDPRLevel | int level |Set the GDPR privacy level for the EU. Value description: 0 (completely personalized), 1 (no device information collected, no personalization), 2 (forbidden use)|
-| showGDPRAuth | None |Show the GDPR Authorization page|
-| isEUTraffic | None |Determine whether the EU countries|
-| initSDK |string appId, string appKey|Initialize SDK|
-
-#### 3.2.1 SDK GDPR Description
-Beginning on May 25th, 2018, the European Union’s General Data Protection Regulation (GDPR) will go into effect. To protect our developers and your users benefit and privacy, we have updated our <a href="https://www.toponad.com/privacy-policy" target = "_blank">《Topon Privacy Policy》</a>. At the same time, we have added privacy permission settings in the SDK version V2.0.0 or later. Please check the following documents and complete the SDK integration.
-
-
-
-1,For more information about TopOn SDK's detailed of GDPR, please refer to <a href="https://app.toponad.com/document/doc-en/android/base_integration.html" target="_blank">GDPR Introduction</a>
-
-2,Api Introduction:
-
+All the configurations described above can be programmatically made using the following C# **Editor Script**:
 
 ```java
-
-/***
-* @param level gdrp Set privacy permissions
-* 0:Normal data reading
-* 1:Protect some private data
-* 2:Fully confidential, can't read any data, sdk function can't run normally
-*/
-public static void setGDPRLevel(int level)
-
-/***
-* Display gdpr authorization page
-*/
-public static void showGDPRAuth()
-
-
-/**
-* Set gdpr settings for individual platforms
-* @param networkType Platform type
-* @param dictionary Data configuration
-*/
-public static void addNetworkGDPRInfo(int networkType, Dictionary<string,string> dictionary)
-
-
-```
-
-Call example:
-
-android:
-
-```java
-
-//gdpr
-Dictionary<string, object> dictionary ;
-
-
-//admob
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.ADMOB_KEY_ALLOW_GDPR, "true");//agree gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADMOB,dictionary);
-
-//inmobi
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.INMOBI_KEY_ALLOW_GDPR, "true");// agree gdpr
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.INMOBI_KEY_ISGDPRSCOPE, "1");//Whether gdpr area 1:yes
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_INMOBI,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-//iba string
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.FLURRY_KEY_GDPR_IABSTR, "");//Iba string conforms to the iba protocol
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.FLURRY_KEY_ISGDPRSCOPE, "true");//Whether gdpr area
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_FLURRY,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.APPLOVIN_KEY_ALLOW_GDPR, "true");//agree gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_APPLOVIN,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.MINTEGRAL_KEY_ALLOW_GDPR, "1"); //agree gdpr 1yes
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MINTEGRAL,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.MOPUB_KEY_ALLOW_GDPR, "true");
-//agree gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MOPUB,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.CHARTBOOST_KEY_ALLOW_GDPR, "true");//agree gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_CHARTBOOST,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.TAPJOY_KEY_ALLOW_GDPR, "1");
-//agree gdpr
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.TAPJOY_KEY_ISGDPRSCOPE, "true");
-//Whether gdpr area 
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_TAPJOY,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.IRONSOURCE_KEY_ALLOW_GDPR, "true");
-//agree gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_IRONSOURCE,dictionary);
-
-
-dictionary = new Dictionary<string, object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.UNITYADS_KEY_ALLOW_GDPR, "true");//agree gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_UNITYADS,dictionary);
-
-
-dictionary = new Dictionary<string,object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.VUNGLE_KEY_ALLOW_GDPR, "true");//argee gdpr
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_VUNGLE,dictionary);
-
-
-dictionary = new Dictionary<string,object> ();
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.ADCOLONY_KEY_ALLOW_GDPR, "1");//argee gdpr 1yes
-dictionary.Add (ATConst.NEWWORK_GDPR_KEY.ADCOLONY_KEY_ISGDPRSCOPE, "true");//Whether gdpr area
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADCOLONY,dictionary);
-
-```
-
-The following is a sample code of the GDPR (IOS) configuration of each platform. Please refer to the official website for the specific settings of each platform.
-
-```java
-
-//Admob
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADMOB, new Dictionary<string, object>{"consent_status":"2", "under_age":"0"});
-
-//Inmobi
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_INMOBI, new Dictionary<string, object>{"gdpr":"0", "consent_string":"true"});
-
-//Flurry
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_FLURRY, new Dictionary<string, object>{"scope_flag":"0", "consent_string":""});
-
-//Applovin
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_APPLOVIN, new Dictionary<string, object>{"under_age":"0", "consent_status":"0"});
-
-//Mintegral
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MINTEGRAL, new Dictionary<string, object>{"0":"1"});
-
-//Mopub
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_MOPUB, new Dictionary<string, object>{"value":"1"});
-
-//Chartboost
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_CHARTBOOST, new Dictionary<string, object>{"value":true});
-
-//Tapjoy
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_TAPJOY, new Dictionary<string, object>{"consent_value":"1", "gdpr_subjection":false});
-
-//Ironsource
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_IRONSOURCE, new Dictionary<string, object>{"value":true});
-
-//UnityAds
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_UNITYADS, new Dictionary<string, object>{"value":true});
-
-//Vungle
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_VUNGLE, new Dictionary<string, object>{"value":1});
-
-//AdColony
-ATSDKAPI.addNetworkGDPRInfo (ATConst.NETWORK_TYPE.NETWORK_ADCOLONY, new Dictionary<string, object>{"gdpr_consideration_flag":1, "consent_string":""});
-
-```
-
-<h2 id='4'>4. Native ads integration</h2>
-
-### 4.1 Integration prerequisites
-
-(1)Make sure you have got AppID and Native Ad Placement ID via our official website.
-(2)Make sure you have added the necessary files to your project
-(3)Configure the AndroidManifest.xml for the user-permission、service、receiver, and obfuscate code.
-(4)Complete the SDK initialization use **ATSDKAPI.initSDK** method
-
-### 4.2 Native Ads API describe
-
-| API | Parameter | Describe|
-| --- | --- |---|
-| loadNativeAd| string unitId, Dictionary<String,String> pairs|Used to load native ads, unitId is the placement id; pairs are empty|
-| setLocalExtra | Dictionary<String,String> pairs | Can be used to set up local configuration of third-party platforms |
-|renderAdToScene|string unitId, ATNativeAdView ATNativeAdView|Show ads for a given placementid. ATNativeAdView is the location information for the specified native ad.|
-|cleanAdView|string unitId, ATNativeAdView ATNativeAdView|Remove native ads|
-|hasAdReady|string unitId|Determine if the specified placementid is loaded|
-|setListener|ATNativeAdListener listener|Set callback object|
-
-**ATNativeAdListener Description**
-
-| API | Parameter | Description|
-| --- | --- |---|
-|onAdLoaded| string unitId |ad load success|
-|onAdLoadFail|string unitId, string code, string message |ad load failed|
-|onAdClicked|string unitId|ad click|
-|onAdImpressed|string unitId|ad show|
-|onAdVideoStart|string unitId |Video play start，Different networks may support different|
-|onAdVideoEnd|string unitId |Video play end，Different networks may support different|
-|onAdVideoProgress|string unitId |video playing progress，Different networks may support different|
-
-#### Example code:
-
-```java
-//sdk initialization
-ATNativeAd.Instance.setListener(new ATNativeCallbackListener());
-
-//Some platform personalization settings, if needed. This is an example of integrating Tencent GDT
-Dictionary<string,string> gdtlocal = new Dictionary<string,string>();
-gdtlocal.Add ("gdtad_width","-1");
-gdtlocal.Add ("gdtad_height","-1");
-ATNativeAd.Instance.setLocalExtra (currunitid,gdtlocal);
-
-//Request Ads
-ATNativeAd.Instance.loadNativeAd(currunitid, null);
-
-//show as(setup)
-int rootbasex = 100, rootbasey = 100;
-
-//Parent frame
-int x = rootbasex,y = rootbasey,width = 300*3,height = 200*3,textsize = 17;
-conifg.parentProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-//adlogo 
-x = 0*3;y = 0*3;width = 30*3;height = 20*3;textsize = 17;
-conifg.adLogoProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-
-//adicon
-x = 0*3;y = 50*3-50;width = 60*3;height = 50*3;textsize = 17;
-conifg.appIconProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-//ad cta 
-x = 0*3;y = 150*3;width = 300*3;height = 50*3;textsize = 17;
-conifg.ctaButtonProperty = new ATNativeItemProperty(x,y,width,height,"#ff21bcab","#ffffff",textsize);
-
-//ad desc
-x = 60*3;y = 100*3;width = 240*3-20;height = 50*3-10;textsize = 10;
-conifg.descProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,"#777777",textsize);
-
-
-//ad image
-x = 60*3;y = 0*3+20;width = 240*3-20;height = 100*3-10;textsize = 17;
-conifg.mainImageProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-//ad title 
-x = 0*3;y = 100*3;width = 60*3;height = 50*3;textsize = 12;
-conifg.titleProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize);
-
-
-//show ads
-ATNativeAdView ATNativeAdView = new ATNativeAdView(conifg);
-ATManager.ATNativeAdView = ATNativeAdView;
-
-
-
-Debug.Log("Developer renderAdToScene--->");
-ATNativeAd.Instance.renderAdToScene(currunitid, ATNativeAdView);
-
-//Clear display area
-ATNativeAd.Instance.cleanAdView(currunitid,ATManager.ATNativeAdView);
-
-
-bool isPaused;
-void OnApplicationFocus(bool hasFocus)
+#if (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+using UnityEditor.iOS.Xcode;
+#endif
+
+public static class MyBuildPostprocess
 {
+    [PostProcessBuild(999)]
+    public static void OnPostProcessBuild(BuildTarget buildTarget, string path)
+    {
+        #if (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+            if (buildTarget == BuildTarget.iOS)
+            {
+                string projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
 
-isPaused = !hasFocus;
-Debug.Log ("Developer Screen pause?"+isPaused);
+                PBXProject pbxProject = new PBXProject();
+                pbxProject.ReadFromFile(projectPath);
 
-ATNativeAd.Instance.onApplicationForces (currunitid,ATManager.ATNativeAdView);
+                string target = pbxProject.TargetGuidByName("Unity-iPhone");            
+                pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
+                pbxProject.SetBuildProperty(target, "GCC_ENABLE_OBJC_EXCEPTIONS", "YES");
+                pbxProject.SetBuildProperty(target, "GCC_C_LANGUAGE_STANDARD", "gnu99");
+
+                pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
+                pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-fobjc-arc");
+                pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libxml2.tbd", "Libraries/libxml2.tbd", PBXSourceTree.Sdk));
+                pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libresolv.9.tbd", "Libraries/libresolv.9.tbd", PBXSourceTree.Sdk));
+                pbxProject.WriteToFile (projectPath);
+
+                var plistPath = Path.Combine(path, "Info.plist");
+                PlistDocument plist = new PlistDocument();
+                plist.ReadFromFile(plistPath);
+                plist.root.SetString("GADApplicationIdentifier", "ca-app-pub-9488501426181082/7319780494");
+                plist.root.SetBoolean("GADIsAdManagerApp", true);
+                plist.WriteToFile(plistPath);
+        }
+        #endif
+    }
 }
 
-void OnApplicationPause(bool pauseStatus)
+
+```
+
+**Note:** You have to place this segment of code into a C# file under the **Editor** directory in **Unity3D** IDE:
+![](img/editor_dir_in_unity3d.png)
+
+If everything goes well, your project should compile.
+
+<h2 id='4'> 4 Initialize the SDK</h2>
+
+You can initialize **AnyThinkSDK** with the following code segment, which is extracted from our [demo project](https://github.com/anythinkteam/demo_unity):
+
+```java
+ATSDKAPI.setChannel("unity3d_test_channel");
+ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } });
+ATSDKAPI.setLogDebug(true);
+ATSDKAPI.initSDK("a5c4ad280995c9", "7b4e37f819dbee652ef79c4506e14288");//Use your own app_id & app_key here
+```
+
+**NOTE:** There's another init method in the ATSDKAPI class that accepts an listener object that enables you to get notified on SDK initialization completion events(succeed/fail):
+
+![](img/init_api.png)
+
+However, since subsequent operations(load, show etc.) do not depend on these events, you can use the code shown above and call the loading API immediately after you've init the SDK. 
+
+<h2 id='5'>5. Integrate Native Ad</h2>
+
+Before you go on, please make sure you've imported & initialized the SDK as described above.
+
+**Note on Android：** <br>
+   At present, it is not possible to use native video ads for Android APKs that are directly exported by Unity. Because Unity packaged APKs will turn off the game ’s Activity hardware acceleration by default, so videos cannot be displayed. If you need to display native advertising videos, you must use the export project method. <br><br>
+As follows：<br>
+
+**(1)Select Export Project mode to export Android project**
+![](img/Android_export_project.png)
+
+**(2)Modify the properties in AndroidManifest and set the hardwareAccelerated property in the figure to true**
+![](img/Android_manifest_accelaerate.png)
+
+
+**After completing the above steps, use the current Android project to package it.。**
+
+### 5.1 Load Native Ad 
+
+
+You can load native ad using the code shown below:
+
+```java
+public void loadNative() 
 {
-isPaused = pauseStatus;
-Debug.Log ("Developer Screen pause?"+isPaused);
-ATNativeAd.Instance.onApplicationPasue (currunitid,ATManager.ATNativeAdView);
+        Debug.Log ("Developer load native, unit id = " + mPlacementId_native_all);
+   
+        if(callbackListener == null) {
+        	callbackListener = new ATNativeCallbackListener();
+            ATNativeAd.Instance.setListener(callbackListener);
+        }
+
+		Dictionary<string,string> gdtlocal = new Dictionary<string,string>();
+		gdtlocal.Add ("gdtadtype","3");
+		gdtlocal.Add ("gdtad_width","-1");
+		gdtlocal.Add ("gdtad_height","-1");
+        ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
+
+		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
+		jsonmap.Add("age", "22");
+		jsonmap.Add("sex", "lady");
+		jsonmap.Add("native", "0");
+
+       ATNativeAd.Instance.loadNativeAd(mPlacementId_native_all, jsonmap);
 }
-
 ```
+**NOTE:** Just read on to see how you can get notified on loading success/failure events.
 
-<h2 id='5'>5. Rewarded Video ads integration</h2>
+###5.2 Show Native Ad
+You can show native ad using the code shown below:
 
-### 5.2 Rewarded Video API describe
+```c#
+public void showNative()
+{
+		Debug.Log ("Developer show native....");
+		ATNativeConfig conifg = new ATNativeConfig ();
 
-| API | Parameter | Description|
-| --- | --- |---|
-|loadVideoAd|string unitId, Dictionary<string,string> pairs| Used to load Rewarded Video ads, unitId is the placement id; pairs are empty|
-|showAd|string unitId|Show Rewarded Video ads for a given placementid |
-|hasAdReady|string unitId|determine if the specified placementid is loaded|
-|setListener|ATRewardedVideoListener listener|Set callback object|
-|setUserData|string unitId, string userId, string customData| Set the user id of the Rewarded Video|
-|addsetting|string unitId, Dictionary<string,string> pairs |Can be used to set up local configuration of third-party platforms |
+		string bgcolor = "#ffffff";
+		string textcolor = "#000000";
+		int rootbasex = 100, rootbasey = 100;
 
+		int x = rootbasex,y = rootbasey,width = 300*3,height = 200*3,textsize = 17;
+		conifg.parentProperty = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-**ATRewardedVideoListener Description**
+		//adlogo 
+		x = 0*3;y = 0*3;width = 30*3;height = 20*3;textsize = 17;
+		conifg.adLogoProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-| API | Parameter | Description|
-| --- | --- |---|
-|onRewardedVideoAdLoaded|string unitId|ad load success|
-|onRewardedVideoAdLoadFail|string unitId,string code, string message|ad load failed|
-|onRewardedVideoAdPlayClicked|string unitId|Rewarded video Ads clicked|
-|onRewardedVideoAdPlayStart|string unitId|Rewarded video Ads play start|
-|onRewardedVideoAdPlayEnd|string unitId|Rewarded video Ads play end|
-|onRewardedVideoAdPlayFail|string unitId,string code, string message|Rewarded video Ads play failed|
-|onRewardedVideoAdPlayClosed|string unitId, bool isReward|Rewarded video Ads Closed, isReward Whether the video is finished playing|
+		//adicon
+		x = 0*3;y = 50*3-50;width = 60*3;height = 50*3;textsize = 17;
+		conifg.appIconProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-####Example:
+		//ad cta 
+		x = 0*3;y = 150*3;width = 300*3;height = 50*3;textsize = 17;
+		conifg.ctaButtonProperty  = new ATNativeItemProperty(x,y,width,height,"#ff21bcab","#ffffff",textsize, true);
 
-```java
+		//ad desc
+		x = 60*3;y = 100*3;width = 240*3-20;height = 50*3-10;textsize = 10;
+		conifg.descProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,"#777777",textsize, true);
 
+		//ad image
+		x = 60*3;y = 0*3+20;width = 240*3-20;height = 100*3-10;textsize = 17;
+		conifg.mainImageProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-//addsetting
-//Special configuration of each platform
-private Dictionary<string,object> addsetting(){
-Dictionary<string,object> appsettinglist = new Dictionary<string,object> ();
+		//ad title 
+		x = 0*3;y = 100*3;width = 60*3;height = 50*3;textsize = 12;
+		conifg.titleProperty  = new ATNativeItemProperty(x,y,width,height,bgcolor,textcolor,textsize, true);
 
-//AdmobATRewardedVideoSetting
-Dictionary<string,object> admobATRewardedVideoSetting = new Dictionary<string,object> ();
-appsettinglist.Add(ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_ADMOB+"", Json.Serialize(admobATRewardedVideoSetting));
-
-//mintegralATMediationSetting
-Dictionary<string,object> mintegralATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_MINTEGRAL+"", Json.Serialize(mintegralATMediationSetting));
-
-//_applovinATMediationSetting
-Dictionary<string,object> _applovinATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_APPLOVIN+"", Json.Serialize(_applovinATMediationSetting));
-
-
-
-//_flurryATMediationSetting
-Dictionary<string,object> flurryATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_FLURRY+"", Json.Serialize(flurryATMediationSetting));
-
-
-//_inmobiATMediationSetting
-Dictionary<string,object> _inmobiATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_INMOBI+"", Json.Serialize(_inmobiATMediationSetting));
-
-
-//_mopubATMediationSetting
-Dictionary<string,object> _mopubATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_MOPUB+"", Json.Serialize(_mopubATMediationSetting));
-
-//_chartboostATMediationSetting
-Dictionary<string,object> _chartboostATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_CHARTBOOST+"", Json.Serialize(_chartboostATMediationSetting));
-
-//_tapjoyATMediationSetting
-Dictionary<string,object> _tapjoyATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_TAPJOY+"", Json.Serialize(_tapjoyATMediationSetting));
-
-//_ironsourceATMediationSetting
-Dictionary<string,object> _ironsourceATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_IRONSOURCE+"", Json.Serialize(_ironsourceATMediationSetting));
-
-//_unityAdATMediationSetting
-Dictionary<string,object> _unityAdATMediationSetting = new Dictionary<string,object> ();
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_UNITYADS+"", Json.Serialize(_unityAdATMediationSetting));
-
-//vungleRewardVideoSetting
-Dictionary<string,object> vungleRewardVideoSetting = new Dictionary<string,object> ();
-
-vungleRewardVideoSetting.Add("orientation",1);/1:2 1: means automatic rotation according to device orientation 2: video ads play in the best direction
-vungleRewardVideoSetting.Add("isSoundEnable",true);//true:false
-vungleRewardVideoSetting.Add("isBackButtonImmediatelyEnable",false);//true:false If true, the user can immediately exit the ad using the back button. If false, the user cannot use the back button to quit the ad until the close button on the screen is displayed.
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_VUNGLE+"", Json.Serialize(vungleRewardVideoSetting));
-
-
-//adColonyATRewardVideoSetting
-Dictionary<string,object> adColonyATRewardVideoSetting = new Dictionary<string,object> ();
-
-adColonyATRewardVideoSetting.Add("enableConfirmationDialog",false);//true:false
-adColonyATRewardVideoSetting.Add("enableResultsDialog",false);//true:false
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_ADCOLONY+"", Json.Serialize(adColonyATRewardVideoSetting));
-return appsettinglist;
+		ATNativeAdView anyThinkNativeAdView = new ATNativeAdView(conifg);
+		AnyThinkAds.Demo.ATManager.anyThinkNativeAdView = anyThinkNativeAdView;
+		Debug.Log("Developer renderAdToScene--->");
+		ATNativeAd.Instance.renderAdToScene(mPlacementId_native_all, anyThinkNativeAdView);
 }
+```
+The trailing parameter you pass to the constructor of ATNativeItemProperty class denotes whether you use pixel or not; for example, on iPhone 6, if you pass 30, 120, 300, 450 for x, y, width and height respectively, the actual value pass on to Objective-C code will be 15, 60, 150, 225 while on iPhone 7 these values will be 10, 40, 100, 150; that is, the final values will be the ones you pass devide the scale of the screen of the target device.
 
-//ttATRewardedVideoSetting
-Dictionary<string,object> ttATRewardedVideoSetting = new Dictionary<string,object> ();
-ttATRewardedVideoSetting.Add("requirePermission",true);//Whether to apply for permission
-ttATRewardedVideoSetting.Add("orientation",1);//Optional parameters Set the direction in which you want the video to play.
-ttATRewardedVideoSetting.Add("supportDeepLink",true);//Optional parameters Set whether to support deeplink
-ttATRewardedVideoSetting.Add("rewardName","CION");//Optional parameters Name of the reward video reward for the excitation video parameters
-ttATRewardedVideoSetting.Add("rewardCount",1);//Optional parameters Number of incentive video rewards
-appsettinglist.Add (ATAds.Api.ATConst.NETWORK_TYPE.NETWORK_TOUTIAO+"", Json.Serialize(ttATRewardedVideoSetting));
+As you can see above, we've defined a ATNativeConfig class for you to configure the various properties(bgColor, textColor, textSize, position, etc.) for native assets like CTA button, app icon, title text, description text, cover image and so on. Please feel free to modify the properties in the config object and see what happens according to your modifications.
 
+If you want to remove a native ad from the screen, use the code below:
 
-
-//initialization
-ATRewardedVideo.Instance.setListener(new ATCallbackListener());
-ATRewardedVideo.Instance.addsetting (currunitid,addsetting());
-
-
-
-
-//ad load 
-ATRewardedVideo.Instance.loadVideoAd(currunitid,null);
-
-
-//ad show
-ATRewardedVideo.Instance.showAd(currunitid);
-
+```C#
+public void cleanView()
+{
+	Debug.Log ("Developer cleanView native....");      
+	ATNativeAd.Instance.cleanAdView(mPlacementId_native_all,AnyThinkAds.Demo.ATManager.anyThinkNativeAdView);
+}
 ```
 
-<h2 id='6'>6. Interstitial integration</h2>
+### 5.3 Implement Native Ad Listener
 
+To get notified on the various native ad event(loading success/failure, impression and click, etc.), you can define a class that implements the **ATNativeAdListener** interface, here's an example:
 
-### Interstitial API describe
-
-| API | Parameter | Description |
-| --- | --- |---|
-| loadInterstitialAd|string unitId, Dictionary<string,string> pairs|Used to load Interstitial ads, unitId is the placement id; pairs are empty|
-|showInterstitialAd| string unitId |show Interstitial ads for a given placementid|
-|hasInterstitialAdReady| string unitId |determine if the specified placementid is loaded|
-|setListener|ATInterstitialAdListener listener|Set callback object|
-
-
-**ATInterstitialAdListener Description**
-
-| API | Parameter | Description |
-| --- | --- |---|
-|onInterstitialAdLoad|string unitId|ads load success|
-|onInterstitialAdLoadFail|string unitId, string code, string message|ads load success|
-|onInterstitialAdClick|string unitId|Interstitial Ads clicked|
-|onInterstitialAdShow|string unitId|Interstitial Ads showed|
-|onInterstitialAdClose|string unitId|Interstitial Ads closed|
-|onInterstitialAdStartPlayingVideo|string unitId|video play start, Different networks may support different|
-|onInterstitialAdEndPlayingVideo|string unitId|video play ended, Different networks may support different|
-|onInterstitialAdFailedToPlayVideo|string unitId, string code, string message|video play failed|
-
-####Example:
-
-```java
-
-//sdk initialization
-ATInterstitialAd.Instance.setListener(new ATInterstitialAdListener());
-
-
-
-
-//Request Ads 
-ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, null);
-
-
-//show as
-ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all);
-
-
+```c#
+class ATNativeCallbackListener : ATNativeAdListener
+{
+    public void onAdLoaded(string unitId)
+    {
+        Debug.Log("Developer onAdLoaded------:" + unitId);
+    }
+    public void onAdLoadFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer onAdLoadFail------:" + unitId + "--code:" + code + "--msg:" + message);
+    }
+    public void onAdImpressed(string unitId)
+    {
+        Debug.Log("Developer onAdImpressed------:" + unitId);
+    }
+    public void onAdClicked(string unitId)
+    {
+        Debug.Log("Developer onAdClicked------:" + unitId);
+    }
+    public void onAdVideoStart(string unitId)
+    {
+        Debug.Log("Developer onAdVideoStart------:" + unitId);
+    }
+    public void onAdVideoEnd(string unitId)
+    {
+        Debug.Log("Developer onAdVideoEnd------:" + unitId);
+    }
+    public void onAdVideoProgress(string unitId, int progress)
+    {
+        Debug.Log("Developer onAdVideoProgress------:" + unitId);
+    }
+}
 ```
 
-
-<h2 id='7'>7. Banner integration</h2>
-
-### Banner API describe
-
-| API | Parameter | Description |
-| --- | --- |---|
-| loadBannerAd|string unitId, Dictionary<string,string> pairs|Used to load Banner ads, unitId is the placement id; pairs are empty|
-|showBannerAd|string unitId, ATRect rect|A banner ad showing the specified placementid. The parameters are the x coordinate, y coordinate, w width, and h height of the specified banner|
-|showBannerAd|string unitId|show the hided Banner|
-|cleanBannerAd|string unitId|clean ads|
-|hideBannerAd|string unitId|hide Banner|
-|setListener|ATBannerAdListener listener|Set callback object|
-
-**ATBannerAdListener Description**
-
-| API | Parameter | Description |
-| --- | --- |---|
-|onAdLoad|string unitId|ad load success|
-|onAdLoadFail|string unitId, string code, string message|ad load failed|
-|onAdClick|string unitId|ad click|
-|onAdImpress|string unitId|ad show|
-|onAdClose|string unitId|ad close|
-|onAdAutoRefresh|string unitId|Banner auto refresh|
-|onAdAutoRefreshFail|string unitId, string code, string message|Banner auto refresh failed|
+**NOTE:**The code segments you see in this section are extracted from **nativeScene.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
 
 
-#### Example code:
+<h2 id='6'>6. Integrate Rewarded Video Ad</h2>
 
-```java
+### 6.1 Load Rewarded Video Ad
+Use the code below to load rewarded video ad:<p id='loading_rv'></p>
 
-//initialization
-ATBannerAd.Instance.setListener(new ATBannerAdListener());
-
-
-
-//Request Ads 
-ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, null);
-
-
-//show as
-ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
-
-
+```C#
+public void loadVideo()
+{
+    if(callbackListener == null) {
+        callbackListener = new ATCallbackListener();
+        Debug.Log("Developer init video....unitid:" + mPlacementId_rewardvideo_all);
+        ATRewardedVideo.Instance.setListener(callbackListener);
+        ATRewardedVideo.Instance.addsetting(mPlacementId_rewardvideo_all, addsetting());
+    }
+   
+	Dictionary<string,string> jsonmap = new Dictionary<string,string>();
+	jsonmap.Add("age", "22");
+	jsonmap.Add("sex", "lady");
+	jsonmap.Add("rv", "1");
+	
+	ATRewardedVideo.Instance.loadVideoAd(mPlacementId_rewardvideo_all,jsonmap);
+}
 ```
+
+**Note:** See below on how to get notified on rewarded video ad events(loading sucess/failure, impression, click, video start/end and reward).
+
+###6.2 Show Rewarded Video Ad
+Showing rewarded video is much more simple compared to showing native ad, juse call the showing api and pass a placement id as the argument:
+
+```C#
+public void showVideo()
+{		
+	Debug.Log ("Developer show video....");
+	ATRewardedVideo.Instance.showAd(mPlacementId_rewardvideo_all);
+}
+```
+
+###6.3 Implemente Rewarded Video Ad Listener
+You can get notified on rewarded video ad events by defining a class that implemente the **ATRewardedVideoListener** interface:
+
+```C#
+class ATCallbackListener : ATRewardedVideoListener {
+    public void onRewardedVideoAdLoaded(string unitId){
+        Debug.Log("Developer onRewardedVideoAdLoaded------");
+    }
+
+    public void onRewardedVideoAdLoadFail(string unitId, string code, string message){
+        Debug.Log("Developer onRewardedVideoAdLoadFail------:code" + code + "--message:" + message);
+    }
+
+    public void onRewardedVideoAdPlayStart(string unitId){
+        Debug.Log("Developer onRewardedVideoAdPlayStart------");
+    }
+
+    public void onRewardedVideoAdPlayEnd(string unitId){
+        Debug.Log("Developer onRewardedVideoAdPlayEnd------");
+    }
+
+    public void onRewardedVideoAdPlayFail(string unitId, string code, string message){
+        Debug.Log("Developer onRewardedVideoAdPlayFail------code:" + code + "---message:" + message);
+    }
+
+    public void onRewardedVideoAdPlayClosed(string unitId, bool isReward){
+        Debug.Log("Developer onRewardedVideoAdPlayClosed------isReward:" + isReward);
+    }
+
+    public void onRewardedVideoAdPlayClicked(string unitId){
+        Debug.Log("Developer onRewardVideoAdPlayClicked------");
+    }
+
+    public void onReward(string unitId){
+        Debug.Log("Developer onReward------");
+    }
+    }
+```
+
+Create an instance of this class and pass it to the listener parameter in the loading api as shown [here](#loading_rv).
+
+**NOTE:** The code segments in this section are extracted from **videoScenes.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
+
+<h2 id='7'>7. Integrate Interstitial Ad</h2>
+
+###7.1 Load Interstitial Ad
+
+Use the code below to load interstitial ad:
+
+```C#
+public void loadInterstitialAd() 
+{
+    if(callback == null) {
+        callback = new InterstitalCallback();
+        ATInterstitialAd.Instance.setListener(callback);
+    }
+
+    Dictionary<string,string> jsonmap = new Dictionary<string,string>();
+    jsonmap.Add("age", "22");
+    jsonmap.Add("sex", "lady");
+    jsonmap.Add("interstitial", "3");
+
+    ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
+}
+```
+**Note:** See below on how to get notified on interstitial ad events(loading sucess/failure, impression, click, video start/end).
+
+###7.2 Show Interstitial Ad
+Almost the same as interstitial's showing api, the interstitial showing api accepts a placement id as its sole parameter:
+
+```C#
+public void showInterstitialAd() 
+{
+	ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all);
+}
+```
+
+###7.3 Implement Interstitial Listener
+You can get notified on interstitial ad events by defining a class that implemente the **ATInterstitialAdListener** interface:
+
+```C#
+class InterstitalCallback : ATInterstitialAdListener
+{
+    public void onInterstitialAdClick(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdClick :" + unitId);
+    }
+
+    public void onInterstitialAdClose(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdClose :" + unitId);
+    }
+
+    public void onInterstitialAdEndPlayingVideo(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdEndPlayingVideo :" + unitId);
+    }
+
+    public void onInterstitialAdFailedToPlayVideo(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onInterstitialAdFailedToPlayVideo :" + unitId + "--code:" + code + "--msg:" + message);
+    }
+
+    public void onInterstitialAdLoad(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdLoad :" + unitId);
+    }
+
+    public void onInterstitialAdLoadFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onInterstitialAdLoadFail :" + unitId + "--code:" + code + "--msg:" + message);
+    }
+
+    public void onInterstitialAdShow(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdShow :" + unitId);
+    }
+
+    public void onInterstitialAdStartPlayingVideo(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdStartPlayingVideo :" + unitId);
+    }
+
+    public void onInterstitialAdFailedToShow(string unitId)
+    {
+        Debug.Log("Developer callback onInterstitialAdFailedToShow :" + unitId);
+    }
+}
+```
+**NOTE:**The code segments you see in this section are extracted from **interstitialScenes.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
+
+<h2 id='8'>8. Integrate Banner Ad</h2>
+
+### 8.1 Load Banner Ad
+
+Use the code below to load banner ad:
+
+```C#
+public void loadBannerAd()
+{
+    if(bannerCallback == null) {
+        bannerCallback = new BannerCallback();
+        ATBannerAd.Instance.setListener(bannerCallback);
+    }
+
+    Dictionary<string, object> jsonmap = new Dictionary<string,object>();
+    jsonmap.Add("age", "22");
+    jsonmap.Add("sex", "lady");
+    jsonmap.Add("banner", "2");
+    ATSize bannerSize = new ATSize(this.screenWidth, 100, true);
+    jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
+    ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, jsonmap);
+}
+```
+Read on to see how to get notified on banner ad events like loading success/failure, impression and click.
+
+###8.2 Show Banner Ad
+You can show banner ad using the following code:
+
+```C#
+public void showBannerAd() 
+{
+    ATRect arpuRect = new ATRect(0,70, screenWidth, 100, true);
+    ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
+}
+```
+
+The trailing parameter you pass to the constructor of ATRect class denotes whether you use pixel or not; for example, on iPhone 6, if you pass 30, 120, 300, 450 for x, y, width and height respectively, the actual value pass on to Objective-C code will be 15, 60, 150, 225 while on iPhone 7 these values will be 10, 40, 100, 150; that is, the final values will be the ones you pass devide the scale of the screen of the target device.
+
+**Remove** a banner from the screen with the code below if you want to:
+
+```C#
+public void removeBannerAd() 
+{
+	ATBannerAd.Instance.cleanBannerAd(mPlacementId_native_all);
+}
+```
+
+If you only want to **temporarily hide** a banner(instead of **permanently removing** it from the screen), use the code here:
+
+```C#
+public void hideBannerAd() 
+{
+	ATBannerAd.Instance.hideBannerAd(mPlacementId_native_all);
+}
+```
+
+After you hide a banner, you can reshow it with the code below:
+
+```C#
+public void reshowBannerAd()
+{
+	ATBannerAd.Instance.showBannerAd(mPlacementId_native_all);
+}
+```
+
+**NOTE:** Please note here that the showBannerAd method here does not accept a rect parameter, which is different from when you first show a banner. 
+
+The difference between removing a banner and hiding a banner is that removing a banner from the screen also destroys it(meaning that before you show it again you have to load it first) while you can reshow a previously hidden banner by just calling showBannerAd method **without passing the ATRect parameter**.
+
+##8.3 Implement Banner Ad Listener
+To get notified on the various banner ad events(loading success/failure, impression&click), just define a class that implement the **ATBannerAdListener** interface:
+
+```C#
+class BannerCallback : ATBannerAdListener
+{
+    public void onAdAutoRefresh(string unitId)
+    {
+        Debug.Log("Developer callback onAdAutoRefresh :" +  unitId);
+    }
+
+    public void onAdAutoRefreshFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onAdAutoRefreshFail : "+ unitId + "--code:" + code + "--msg:" + message);
+    }
+
+    public void onAdClick(string unitId)
+    {
+        Debug.Log("Developer callback onAdClick :" + unitId);
+    }
+
+    public void onAdClose(string unitId)
+    {
+        Debug.Log("Developer callback onAdClose :" + unitId);
+    }
+
+    public void onAdImpress(string unitId)
+    {
+        Debug.Log("Developer callback onAdImpress :" + unitId);
+    }
+
+    public void onAdLoad(string unitId)
+    {
+        Debug.Log("Developer callback onAdLoad :" + unitId);
+    }
+
+    public void onAdLoadFail(string unitId, string code, string message)
+    {
+        Debug.Log("Developer callback onAdLoadFail : : " + unitId + "--code:" + code + "--msg:" + message);
+    }
+}
+```
+
+**NOTE:**The code segments you see in this section are extracted from **bannerScene.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
+
+<h2 id='9'>9. On Splash Ad</h2>
+
+It's highly recommended that splash ad should be integrated directly using native API(Objective-C/Java) in Xcode/Android Studio instead of C# script in Unity3D. The reason for doing this is that splash ad should be loaded&shown as soon as the app finishes launching. If you integrate splash in Unity3D using C#, it can't load&show ad until Unity game engine has been launched, which happens after the app finishes launch and takes much more time. For more infomation on how to integrate splash using Objective-C/Java, please refer to [iOS Integration Guide](https://github.com/anythinkteam/demo_ios/blob/master/iOS_Doc_EN/iOS_Integration_Guide.md) & [Android Integration Guide](https://github.com/anythinkteam/demo_android/blob/master/en/Android_Integration_Document_For_TopOn_SDK.md).
+
+
+
+
+
+
+
 
