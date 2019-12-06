@@ -452,7 +452,7 @@ class ATNativeCallbackListener : ATNativeAdListener
 }
 ```
 
-**NOTE:**The code segments you see in this section are extracted from **nativeScene.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
+**NOTE:** The code segments you see in this section are extracted from **nativeScene.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
 
 
 <h2 id='6'>6. Integrate Rewarded Video Ad</h2>
@@ -481,7 +481,7 @@ public void loadVideo()
 
 **Note:** See below on how to get notified on rewarded video ad events(loading sucess/failure, impression, click, video start/end and reward).
 
-###6.2 Show Rewarded Video Ad
+### 6.2 Show Rewarded Video Ad
 Showing rewarded video is much more simple compared to showing native ad, juse call the showing api and pass a placement id as the argument:
 
 ```C#
@@ -492,7 +492,7 @@ public void showVideo()
 }
 ```
 
-###6.3 Implemente Rewarded Video Ad Listener
+### 6.3 Implemente Rewarded Video Ad Listener
 You can get notified on rewarded video ad events by defining a class that implemente the **ATRewardedVideoListener** interface:
 
 ```C#
@@ -537,7 +537,7 @@ Create an instance of this class and pass it to the listener parameter in the lo
 
 <h2 id='7'>7. Integrate Interstitial Ad</h2>
 
-###7.1 Load Interstitial Ad
+### 7.1 Load Interstitial Ad
 
 Use the code below to load interstitial ad:
 
@@ -559,7 +559,7 @@ public void loadInterstitialAd()
 ```
 **Note:** See below on how to get notified on interstitial ad events(loading sucess/failure, impression, click, video start/end).
 
-###7.2 Show Interstitial Ad
+### 7.2 Show Interstitial Ad
 Almost the same as interstitial's showing api, the interstitial showing api accepts a placement id as its sole parameter:
 
 ```C#
@@ -569,7 +569,7 @@ public void showInterstitialAd()
 }
 ```
 
-###7.3 Implement Interstitial Listener
+### 7.3 Implement Interstitial Listener
 You can get notified on interstitial ad events by defining a class that implemente the **ATInterstitialAdListener** interface:
 
 ```C#
@@ -621,7 +621,7 @@ class InterstitalCallback : ATInterstitialAdListener
     }
 }
 ```
-**NOTE:**The code segments you see in this section are extracted from **interstitialScenes.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
+**NOTE:** The code segments you see in this section are extracted from **interstitialScenes.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
 
 <h2 id='8'>8. Integrate Banner Ad</h2>
 
@@ -648,7 +648,7 @@ public void loadBannerAd()
 ```
 Read on to see how to get notified on banner ad events like loading success/failure, impression and click.
 
-###8.2 Show Banner Ad
+### 8.2 Show Banner Ad
 You can show banner ad using the following code:
 
 ```C#
@@ -692,7 +692,7 @@ public void reshowBannerAd()
 
 The difference between removing a banner and hiding a banner is that removing a banner from the screen also destroys it(meaning that before you show it again you have to load it first) while you can reshow a previously hidden banner by just calling showBannerAd method **without passing the ATRect parameter**.
 
-##8.3 Implement Banner Ad Listener
+## 8.3 Implement Banner Ad Listener
 To get notified on the various banner ad events(loading success/failure, impression&click), just define a class that implement the **ATBannerAdListener** interface:
 
 ```C#
@@ -735,7 +735,7 @@ class BannerCallback : ATBannerAdListener
 }
 ```
 
-**NOTE:**The code segments you see in this section are extracted from **bannerScene.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
+**NOTE:** The code segments you see in this section are extracted from **bannerScene.cs** in our [demo project](https://github.com/anythinkteam/demo_unity).
 
 <h2 id='9'>9. On Splash Ad</h2>
 
