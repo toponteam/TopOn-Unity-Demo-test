@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 // image address URL
 @property (nonatomic, copy) NSString *imageURL;
 
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong, nullable) UIImage *image;
 
 // image width
 @property (nonatomic, assign) float width;

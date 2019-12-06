@@ -22,6 +22,13 @@ typedef NS_ENUM (NSInteger, WindConsentStatus) {
     WindConsentDenied,
 };
 
+typedef NS_ENUM (NSInteger, WindAgeRestrictedStatus) {
+    WindAgeRestrictedStatusUnknow = 0,
+    WindAgeRestrictedStatusYES,
+    WindAgeRestrictedStatusNO,
+};
+
+
 typedef void(^WindAdDebugCallBack)(NSString * _Nullable msg, WindLogLevel level);
 
 @interface WindAds : NSObject
@@ -29,6 +36,8 @@ typedef void(^WindAdDebugCallBack)(NSString * _Nullable msg, WindLogLevel level)
 @property (nonatomic,strong) WindAdOptions * _Nullable adOptions;
 
 + (instancetype _Nonnull )sharedAds;
+
++ (NSString * _Nonnull)sdkVersion;
 
 // Initialize Wind Ads SDK
 + (void) startWithOptions:(WindAdOptions * _Nullable)options;
@@ -53,6 +62,14 @@ typedef void(^WindAdDebugCallBack)(NSString * _Nullable msg, WindLogLevel level)
 /**************************  GDPR  *********************************/
 + (WindConsentStatus)getUserGDPRConsentStatus;
 + (void)setUserGDPRConsentStatus:(WindConsentStatus)status;
+
+#pragma mark - Age SUPPORT
+/**************************  Age *********************************/
++ (WindAgeRestrictedStatus)getAgeRestrictedStatus;
++ (void)setIsAgeRestrictedUser:(WindAgeRestrictedStatus)status;
+
++ (NSUInteger)getUserAge;
++ (void)setUserAge:(NSUInteger)age;
 
 @end
 

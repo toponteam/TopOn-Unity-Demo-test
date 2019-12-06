@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KSAd : NSObject
 
-// 单位:分
+// 单位:分，只有视频资源下载成功后，这个才可能有值
 @property (nonatomic, readonly) NSInteger ecpm;
 @end
 

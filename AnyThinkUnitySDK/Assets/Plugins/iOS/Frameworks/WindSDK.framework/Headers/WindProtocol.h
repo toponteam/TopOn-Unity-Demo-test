@@ -15,9 +15,10 @@
 
 - (NSDictionary *)parametes;
 
-- (WindAdRequest *)request;
+- (NSDictionary *)parametes:(NSString *)placementId;
 
-- (NSMutableDictionary<NSString *,NSDictionary *> *)adOptions;
+- (WindAdRequest *)request:(NSString *)placementId;
+
 
 @end
 

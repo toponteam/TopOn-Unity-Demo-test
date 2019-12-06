@@ -17,13 +17,14 @@
 
 - (instancetype)initWithWADRewardVideoAdConnector:(id<WindRewardVideoAdConnector>)connector;
 
-- (void)setup;
+- (void)setup:(NSDictionary *)options;
 
 - (BOOL)isReady:(NSString *)placementId;
 
 - (void)loadAd:(NSString *)placementId;
 
 - (void)presentRewardVideoAdWithViewController:(UIViewController *)controller placementId:(NSString *)placementId error:(NSError * __autoreleasing *)error;
+
 
 @end
 

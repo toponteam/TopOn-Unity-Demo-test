@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KSVideoAdView : UIView
 
+@property (nonatomic, assign, readwrite) BOOL videoSoundEnable;
 @end
 
 NS_ASSUME_NONNULL_END

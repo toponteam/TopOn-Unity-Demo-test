@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// ad logo icon.
 @property (nonatomic, strong, nullable) KSAdImage *sdkLogo;
+@property (nonatomic, strong, nullable) KSAdImage *appIconImage;
 
 /// 0-5
 @property (nonatomic, assign) CGFloat appScore;

@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSArray<KSNativeAd *> *data;
 /// The delegate for receiving state change messages such as requests succeeding/failing.
-/// The delegate can be set to any object which conforming to <BUNativeAdsManagerDelegate>.
 @property (nonatomic, weak, nullable) id<KSNativeAdsManagerDelegate> delegate;
 
 - (id)initWithPosId:(NSString *)posId;

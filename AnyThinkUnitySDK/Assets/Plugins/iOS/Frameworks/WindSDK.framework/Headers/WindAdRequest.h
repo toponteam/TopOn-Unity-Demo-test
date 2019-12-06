@@ -14,6 +14,8 @@
 
 @property (nonatomic,copy) NSString *placementId;
 
+@property (nonatomic,copy) NSString *loadId;
+
 @property (nonatomic,assign) BOOL needReward;
 
 //做为扩展参数使用
