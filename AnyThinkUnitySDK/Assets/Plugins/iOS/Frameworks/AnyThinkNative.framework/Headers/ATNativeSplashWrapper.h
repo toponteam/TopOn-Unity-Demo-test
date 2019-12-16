@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 extern NSString *const kATNativeSplashShowingExtraRecommendTitleKey;
 extern NSString *const kATNativeSplashShowingExtraCTAButtonBackgroundColorKey;
+extern NSString *const kATNativeSplashShowingExtraCTAButtonTitleColorKey;
 extern NSString *const kATNativeSplashShowingExtraContainerViewKey;
 extern NSString *const kATNativeSplashShowingExtraCountdownIntervalKey;
 extern NSString *const kATNatievSplashShowingExtraStyleKey;
