@@ -14,10 +14,10 @@ public class bannerScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_native_all = "b5c4ad2fa3ab6d";
+    static string mPlacementId_native_all = "b5c2c97629da0d";
 
 #elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_native_all = "b5baf502bb23e3";
+	static string mPlacementId_native_all = "b5d146f9483215";
     //static string mPlacementId_native_all = "b5bacaccb61c29";
 #endif
 
@@ -50,13 +50,17 @@ public class bannerScenes : MonoBehaviour {
         jsonmap.Add("age", "22");
         jsonmap.Add("sex", "lady");
         jsonmap.Add("banner", "2");
-        ATSize bannerSize = new ATSize(this.screenWidth, 100, true);
-        jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
+        ATSize bannerSize = new ATSize(this.screenWidth, 300, true);
+        #if UNITY_ANDROID
+            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize, "1080x300");
+        #elif UNITY_IOS || UNITY_IPHONE
+            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
+        #endif
         ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, jsonmap);
     }
 
     public void showBannerAd() {
-        ATRect arpuRect = new ATRect(0,70, screenWidth, 100, true);
+        ATRect arpuRect = new ATRect(0,50, this.screenWidth, 300, true);
         ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
     }
 

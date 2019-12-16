@@ -72,7 +72,7 @@ public class MainScenes : MonoBehaviour {
        
 
 #if UNITY_ANDROID
-       ATSDKAPI.initSDK("a5c4ad280995c9", "7b4e37f819dbee652ef79c4506e14288", new InitListener());
+       ATSDKAPI.initSDK("a5aa1f9deda26d", "4f7b9ac17decb9babec83aac078742c7", new InitListener());
 #elif UNITY_IOS || UNITY_IPHONE
         ATSDKAPI.initSDK("a5b0e8491845b3", "7eae0567827cfe2b22874061763f30c9", new InitListener());
 #endif

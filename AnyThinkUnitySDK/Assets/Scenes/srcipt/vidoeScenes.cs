@@ -9,10 +9,10 @@ using AnyThinkAds.ThirdParty.MiniJSON;
 public class vidoeScenes : MonoBehaviour {
 
 	#if UNITY_ANDROID
-    static string mPlacementId_rewardvideo_all = "b5c4ad2f0de421";
+    static string mPlacementId_rewardvideo_all = "b5b728e7a08cd4";
 
 	#elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_rewardvideo_all = "b5b44a02112383";//"b5b44a0f115321";
+	static string mPlacementId_rewardvideo_all = "b5d13341598199";//"b5b44a0f115321";
 
 	#endif
 

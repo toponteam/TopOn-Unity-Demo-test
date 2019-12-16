@@ -14,10 +14,10 @@ public class nativeScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_native_all = "b5c4ad2d34576b";
+    static string mPlacementId_native_all = "b5c2c97629da0d";
 
 #elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_native_all = "b5b0f551340ea9";
+	static string mPlacementId_native_all = "b5d1333d023691";
 
 #endif
 
@@ -58,6 +58,10 @@ public class nativeScenes : MonoBehaviour {
 		gdtlocal.Add ("gdtadtype","3");
 		gdtlocal.Add ("gdtad_width","-1");
 		gdtlocal.Add ("gdtad_height","-1");
+
+		gdtlocal.Add ("tt_image_wdith","900");
+		gdtlocal.Add ("tt_image_height","600");
+
         ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
 
 		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
