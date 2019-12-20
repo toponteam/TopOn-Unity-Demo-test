@@ -51,6 +51,13 @@ namespace AnyThinkAds.Android
             anyThinkListener = listener;
         }
 
+
+        public void showBannerAd(string unitId, string position)
+        {
+            Debug.Log("ATBannerAdClient : showBannerAd " );
+            //todo
+
+        }
        
 
 		

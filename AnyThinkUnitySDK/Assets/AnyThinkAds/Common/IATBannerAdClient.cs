@@ -20,7 +20,14 @@ namespace AnyThinkAds.Common
 		 * @param listener  
 		 */
         void setListener(ATBannerAdListener listener);
-		/***
+        /***
+         * 
+         * 展示广告,
+         * @param unitId 
+         * @param pass bottom or top for position
+         */
+        void showBannerAd(string unitId, string position);
+        /***
 		 * 
 		 * 展示广告,
 		 * @param unitId 

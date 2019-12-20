@@ -14,6 +14,8 @@ namespace AnyThinkAds.Api
         public static readonly string kATBannerAdLoadingExtraBannerAdSize = "banner_ad_size";
         public static readonly string kATBannerAdLoadingExtraBannerAdSizeStruct = "banner_ad_size_struct";
         public static readonly string kATBannerAdSizeUsesPixelFlagKey = "uses_pixel";
+        public static readonly string kATBannerAdShowingPisitionTop = "top";
+        public static readonly string kATBannerAdShowingPisitionBottom = "bottom";
     }
     public class ATBannerAd 
 	{
@@ -63,6 +65,11 @@ namespace AnyThinkAds.Api
         public void showBannerAd(string unitId, ATRect rect)
         {
             client.showBannerAd(unitId, rect);
+        }
+
+        public void showBannerAd(string unitId, string position)
+        {
+            client.showBannerAd(unitId, position);
         }
 
         public void showBannerAd(string unitId)

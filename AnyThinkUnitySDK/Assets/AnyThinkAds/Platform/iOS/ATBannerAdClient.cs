@@ -28,7 +28,13 @@ namespace AnyThinkAds.iOS {
 			ATBannerAdWrapper.showBannerAd(unitId, rect);
 	    }
 
-	    public void cleanBannerAd(string unitId) {
+        public void showBannerAd(string unitId, string position)
+        {
+            Debug.Log("Unity: ATBannerAdClient::showBannerAd()");
+            ATBannerAdWrapper.showBannerAd(unitId, position);
+        }
+
+        public void cleanBannerAd(string unitId) {
 			Debug.Log("Unity: ATBannerAdClient::cleanBannerAd()");	
 			ATBannerAdWrapper.cleanBannerAd(unitId);	
 	    }

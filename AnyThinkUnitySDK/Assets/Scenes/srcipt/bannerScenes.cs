@@ -60,8 +60,12 @@ public class bannerScenes : MonoBehaviour {
     }
 
     public void showBannerAd() {
-        ATRect arpuRect = new ATRect(0,50, this.screenWidth, 300, true);
-        ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
+        // ATRect arpuRect = new ATRect(0,50, this.screenWidth, 300, true);
+        // ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, arpuRect);
+
+        // ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, kATBannerAdShowingPisitionTop);
+
+        ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, kATBannerAdShowingPisitionBottom);
     }
 
     public void removeBannerAd() {

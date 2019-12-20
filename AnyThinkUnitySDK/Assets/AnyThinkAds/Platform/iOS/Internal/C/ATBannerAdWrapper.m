@@ -54,6 +54,10 @@ static NSString *kATBannerSizeUsesPixelFlagKey = @"uses_pixel";
     [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:extra delegate:self];
 }
 
+UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
+    return ([[UIApplication sharedApplication].keyWindow respondsToSelector:@selector(safeAreaInsets)] ? [UIApplication sharedApplication].keyWindow.safeAreaInsets : UIEdgeInsetsZero);
+}
+
 -(void) showBannerAdWithPlacementID:(NSString*)placementID rect:(NSString*)rect {
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([rect isKindOfClass:[NSString class]] && [rect dataUsingEncoding:NSUTF8StringEncoding] != nil) {
@@ -64,9 +68,23 @@ static NSString *kATBannerSizeUsesPixelFlagKey = @"uses_pixel";
             bannerView.delegate = self;
             UIButton *bannerCointainer = [UIButton buttonWithType:UIButtonTypeCustom];
             [bannerCointainer addTarget:self action:@selector(noop) forControlEvents:UIControlEventTouchUpInside];
-            bannerCointainer.frame = CGRectMake([rectDict[@"x"] doubleValue] / scale, [rectDict[@"y"] doubleValue] / scale, [rectDict[@"width"] doubleValue] / scale, [rectDict[@"height"] doubleValue] / scale);
+            
+            NSString *position = rectDict[@"position"];
+            CGSize totalSize = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds.size;
+            UIEdgeInsets safeAreaInsets = SafeAreaInsets_ATUnityBanner();
+            if ([@"top" isEqualToString:position]) {
+                bannerCointainer.frame = CGRectMake((totalSize.width - safeAreaInsets.left - safeAreaInsets.right - CGRectGetWidth(bannerView.bounds)) / 2.0f, safeAreaInsets.top , CGRectGetWidth(bannerView.bounds), CGRectGetHeight(bannerView.bounds));
+            } else if ([@"bottom" isEqualToString:position]) {
+                bannerCointainer.frame = CGRectMake((totalSize.width - safeAreaInsets.left - safeAreaInsets.right - CGRectGetWidth(bannerView.bounds)) / 2.0f, totalSize.height - safeAreaInsets.bottom - CGRectGetHeight(bannerView.bounds) , CGRectGetWidth(bannerView.bounds), CGRectGetHeight(bannerView.bounds));
+            } else {
+                bannerCointainer.frame = CGRectMake([rectDict[@"x"] doubleValue] / scale, [rectDict[@"y"] doubleValue] / scale, [rectDict[@"width"] doubleValue] / scale, [rectDict[@"height"] doubleValue] / scale);
+            }
+            
             bannerView.frame = bannerCointainer.bounds;
             [bannerCointainer addSubview:bannerView];
+            
+            bannerCointainer.layer.borderColor = [UIColor redColor].CGColor;
+            bannerCointainer.layer.borderWidth = .5f;
             [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:bannerCointainer];
             self->_bannerViewStorage[placementID] = bannerCointainer;
         }

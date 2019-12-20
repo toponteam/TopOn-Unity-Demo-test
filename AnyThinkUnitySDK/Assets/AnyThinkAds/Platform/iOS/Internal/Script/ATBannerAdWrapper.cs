@@ -47,6 +47,13 @@ public class ATBannerAdWrapper:ATAdWrapper {
         ATUnityCBridge.SendMessageToC(CMessaageReceiverClass, "showBannerAdWithPlacementID:", new object[]{placementID}, false);
     }
 
+    static public void showBannerAd(string placementID, string position)
+    {
+        Debug.Log("Unity: ATBannerAdWrapper::showBannerAd(" + placementID + "," + position + ")");
+        Dictionary<string, object> rectDict = new Dictionary<string, object> { { "position", position } };
+        ATUnityCBridge.SendMessageToC(CMessaageReceiverClass, "showBannerAdWithPlacementID:rect:", new object[] { placementID, Json.Serialize(rectDict) }, false);
+    }
+
     static public void showBannerAd(string placementID, ATRect rect) {
     	Debug.Log("Unity: ATBannerAdWrapper::showBannerAd(" + placementID + ")");
         Dictionary<string, object> rectDict = new Dictionary<string, object>{ {"x", rect.x},  {"y", rect.y}, {"width", rect.width}, {"height", rect.height}, {"uses_pixel", rect.usesPixel}};
