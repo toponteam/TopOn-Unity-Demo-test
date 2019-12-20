@@ -17,7 +17,7 @@ public class bannerScenes : MonoBehaviour {
     static string mPlacementId_native_all = "b5c2c97629da0d";
 
 #elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_native_all = "b5d146f9483215";
+	static string mPlacementId_native_all = "b5baf502bb23e3";
     //static string mPlacementId_native_all = "b5bacaccb61c29";
 #endif
 
@@ -50,7 +50,7 @@ public class bannerScenes : MonoBehaviour {
         jsonmap.Add("age", "22");
         jsonmap.Add("sex", "lady");
         jsonmap.Add("banner", "2");
-        ATSize bannerSize = new ATSize(this.screenWidth, 300, true);
+        ATSize bannerSize = new ATSize(320, 50, false);
         #if UNITY_ANDROID
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize, "1080x300");
         #elif UNITY_IOS || UNITY_IPHONE

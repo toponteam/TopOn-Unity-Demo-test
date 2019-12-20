@@ -44,7 +44,7 @@ static NSString *kATBannerSizeUsesPixelFlagKey = @"uses_pixel";
     if ([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString length] > 0) {
         NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"extraDict = %@", extraDict);
-        CGFloat scale = [extraDict[kATBannerSizeUsesPixelFlagKey] boolValue] ? [UIScreen mainScreen].scale : 1.0f;
+        CGFloat scale = [extraDict[kATBannerSizeUsesPixelFlagKey] boolValue] ? [UIScreen mainScreen].nativeScale : 1.0f;
         if ([extraDict[kATAdLoadingExtraBannerAdSizeKey] isKindOfClass:[NSString class]] && [[extraDict[kATAdLoadingExtraBannerAdSizeKey] componentsSeparatedByString:@"x"] count] == 2) {
             NSArray<NSString*>* com = [extraDict[kATAdLoadingExtraBannerAdSizeKey] componentsSeparatedByString:@"x"];
             extra = @{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:CGSizeMake([com[0] doubleValue] / scale, [com[1] doubleValue] / scale)]};
@@ -63,7 +63,7 @@ UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
         if ([rect isKindOfClass:[NSString class]] && [rect dataUsingEncoding:NSUTF8StringEncoding] != nil) {
             NSDictionary *rectDict = [NSJSONSerialization JSONObjectWithData:[rect dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
             NSLog(@"rectDict = %@", rectDict);
-            CGFloat scale = [rectDict[kATBannerSizeUsesPixelFlagKey] boolValue] ? [UIScreen mainScreen].scale : 1.0f;
+            CGFloat scale = [rectDict[kATBannerSizeUsesPixelFlagKey] boolValue] ? [UIScreen mainScreen].nativeScale : 1.0f;
             ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:placementID];
             bannerView.delegate = self;
             UIButton *bannerCointainer = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -73,9 +73,9 @@ UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
             CGSize totalSize = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds.size;
             UIEdgeInsets safeAreaInsets = SafeAreaInsets_ATUnityBanner();
             if ([@"top" isEqualToString:position]) {
-                bannerCointainer.frame = CGRectMake((totalSize.width - safeAreaInsets.left - safeAreaInsets.right - CGRectGetWidth(bannerView.bounds)) / 2.0f, safeAreaInsets.top , CGRectGetWidth(bannerView.bounds), CGRectGetHeight(bannerView.bounds));
+                bannerCointainer.frame = CGRectMake((totalSize.width - CGRectGetWidth(bannerView.bounds)) / 2.0f, safeAreaInsets.top , CGRectGetWidth(bannerView.bounds), CGRectGetHeight(bannerView.bounds));
             } else if ([@"bottom" isEqualToString:position]) {
-                bannerCointainer.frame = CGRectMake((totalSize.width - safeAreaInsets.left - safeAreaInsets.right - CGRectGetWidth(bannerView.bounds)) / 2.0f, totalSize.height - safeAreaInsets.bottom - CGRectGetHeight(bannerView.bounds) , CGRectGetWidth(bannerView.bounds), CGRectGetHeight(bannerView.bounds));
+                bannerCointainer.frame = CGRectMake((totalSize.width - CGRectGetWidth(bannerView.bounds)) / 2.0f, totalSize.height - safeAreaInsets.bottom - CGRectGetHeight(bannerView.bounds) , CGRectGetWidth(bannerView.bounds), CGRectGetHeight(bannerView.bounds));
             } else {
                 bannerCointainer.frame = CGRectMake([rectDict[@"x"] doubleValue] / scale, [rectDict[@"y"] doubleValue] / scale, [rectDict[@"width"] doubleValue] / scale, [rectDict[@"height"] doubleValue] / scale);
             }

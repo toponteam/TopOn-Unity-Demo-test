@@ -33,7 +33,7 @@ static NSString *const kNativeAssetMedia = @"media";
 
 NSDictionary* parseUnityProperties(NSDictionary *properties) {
     NSMutableDictionary *result = NSMutableDictionary.dictionary;
-    CGFloat scale = [properties[@"usesPixel"] boolValue] ? [UIScreen mainScreen].scale : 1.0f;
+    CGFloat scale = [properties[@"usesPixel"] boolValue] ? [UIScreen mainScreen].nativeScale : 1.0f;
     result[kParsedPropertiesFrameKey] = [NSString stringWithFormat:@"{{%@, %@}, {%@, %@}}", @([properties[@"x"] doubleValue] / scale), @([properties[@"y"] doubleValue] / scale), @([properties[@"width"] doubleValue] / scale), @([properties[@"height"] doubleValue] / scale)];
     result[kParsedPropertiesBackgroundColorKey] = properties[@"backgroundColor"];
     result[kParsedPropertiesTextColorKey] = properties[@"textColor"];
