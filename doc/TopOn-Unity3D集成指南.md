@@ -404,6 +404,53 @@ public void showNative()
 
 正如您在上面看到的，我们为您定义了一个ATNativeConfig类，用于配置本机资产的各种属性（bgColor，textColor，textSize，position等），例如CTA按钮，应用程序图标，标题文本，说明文本，封面图片 等等。 请随时修改config对象中的属性，并查看根据您的修改会发生什么。
 
+#### 关于ATNativeConfig&ATNativeItemProperty详细说明
+
+**ATNativeConfig**包含多个**ATNativeItemProperty**对象，用来控制Native广告的样式。**ATNativeItemProperty**控制单个Native广告元素的位置和样式；某些元素可能不支持**ATNativeItemProperty**中的一些属性，比如图片元素（icon, main image）只支持x, y, width, height, usesPixel，但不支持背景颜色、字体大小和字体颜色等，而文本元素(如title, cta, desc）则支持所有属性。在iOS游戏中，如果你想指定“透明”，则用"clearColor"，比如如果你想广告区域的背景是透明的，则把"clearColor"赋值给parentProperty的backgroundColor即可。
+**注意：**
+1）只有iOS支持clearColor，安卓系统如果需要指定透明背景，只需要使rgba中的a部分为0即可;
+
+2）iOS不支持alpha，所以颜色值应该传类似#5aef00（六位rbg值），而安卓可以支持alpha，其颜色包含8位16进制，比如5a2b3c00
+
+
+**parentProperty**
+
+parentProperty 控制的是Native的总体大小，如下图红圈区域。
+
+![](img/parent_frame.png)
+
+**appIconProperty**
+
+appIconProperty属性控制广告的图标属性，如下图红圈所示：
+![](img/native_app_icon.png)
+
+**mainImageProperty**
+
+mainImageProperty控制广告的封面图，如下图红圈所示：
+![](img/native_main_image.png)
+
+**titleProperty**
+
+titleProperty控制广告标题，如下图红圈所示：
+![](img/native_title.png)
+
+**descProperty**
+
+titleProperty控制广告描述文字，如下图红圈所示
+![](img/native_text.png)
+
+**adLogoProperty**
+
+adLogoProperty控制广告标识属性，如下图红圈所示
+![](img/native_ad_logo.png)
+
+**注意：** 有的平台的广告标识位置是内部固定，不支持开发者指定，比如Admob。
+
+**ctaButtonProperty**
+
+ctaButtonProperty控制点击按钮，如下图红圈所示
+![](img/native_cta.png)
+
 
 如果要从屏幕上删除原生广告，请使用以下代码：
 

@@ -232,7 +232,7 @@ According to the information listed above, the SDK required for each third-party
 
 ![](img/iOS_Runpath_Search_Paths_Settings.png)
 
-3.In the **Build Settings **of the Xcode project, search for **other linker flags** and add **-ObjC, -fobjc-arc** based on the default values, as shown in Figure:
+3.In the **Build Settings** of the Xcode project, search for **other linker flags** and add **-ObjC, -fobjc-arc** based on the default values, as shown in Figure:
 ![](img/iOS_Other_Linker_Flags_Settings.png)
 
 4.In the **Build Settings** of the Xcode project, search for **C Language Dialect** and change its value to** GNU99[-std=gnu99]** , as shown in Figure:
@@ -403,6 +403,55 @@ public void showNative()
 The trailing parameter you pass to the constructor of ATNativeItemProperty class denotes whether you use pixel or not; for example, on iPhone 6, if you pass 30, 120, 300, 450 for x, y, width and height respectively, the actual value pass on to Objective-C code will be 15, 60, 150, 225 while on iPhone 7 these values will be 10, 40, 100, 150; that is, the final values will be the ones you pass devide the scale of the screen of the target device.
 
 As you can see above, we've defined a ATNativeConfig class for you to configure the various properties(bgColor, textColor, textSize, position, etc.) for native assets like CTA button, app icon, title text, description text, cover image and so on. Please feel free to modify the properties in the config object and see what happens according to your modifications.
+
+#### More on ATNativeConfig&ATNativeItemProperty
+**ATNativeConfig**, by composing **ATNativeItemProperty** objects, gives you a way of controlling the appearance of a native ad.
+**ATNativeItemProperty** controls the appearance of a single asset. Not all properties in a ATNativeItemProperty object are supported by all assets. Specifically, image assets(icon, main image etc.) supported x, y, width & height and usesPixel, while text assets(title, desc, cta etc.) support all the properties. The names of the properties of a ATNativeItemProperty are self-explanatory. Pass "clearColor" for color propieties if you want to specify clear color for iOS, for example if you want the entire ad area to have a transparent background(so your user can see throught it), specify "clearColor" for the **backgroundColor** property in **parentProperty**.
+
+**NOTE:** 
+1) "clearColor" constant is supported by iOS only, if you want to specify transparent color, use a rgba value that contains a 0 alpha: 5a2b3c00
+2) colors for iOS are specified using RGB(that is, not alpha value):#5a2b3c, while for Anndroid you can pass a RGBA value like #5a2b3C00.
+
+**parentProperty**
+
+The parentProperty property controls the overall rect of the ad.
+
+![](img/parent_frame.png)
+
+**appIconProperty**
+
+The appIconProperty property controls the app icon of the ad, see below(the icon surrounded by a red border):
+![](img/native_app_icon.png)
+
+**mainImageProperty**
+
+The mainImageProperty property controls the cover image of the ad, see below(the image surrounded by a red border):
+![](img/native_main_image.png)
+
+**titleProperty**
+
+The titleProperty property controls the title of the ad, see below(the image surrounded by a red border):
+![](img/native_title.png)
+
+**descProperty**
+
+The descProperty property controls the description of the ad, see below(the image surrounded by a red border):
+![](img/native_text.png)
+
+**adLogoProperty**
+
+The adLogoProperty property controls the ad logo of the ad, see below(the image surrounded by a red border):
+![](img/native_ad_logo.png)
+
+**NOTE:** Not all platforms support customized ad logo position.
+
+**ctaButtonProperty**
+
+The ctaButtonProperty property controls the cta of the ad, see below(the image surrounded by a red border):
+![](img/native_cta.png)
+
+
+
 
 If you want to remove a native ad from the screen, use the code below:
 
