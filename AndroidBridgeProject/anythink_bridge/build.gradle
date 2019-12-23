@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation files('libs/android.jar')
+
+    implementation files('libs/anythink_sdk_release_*.jar')
+
+    implementation files('libs/unityHelper.jar')
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
