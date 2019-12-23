@@ -54,8 +54,20 @@ namespace AnyThinkAds.Android
 
         public void showBannerAd(string unitId, string position)
         {
-            Debug.Log("ATBannerAdClient : showBannerAd " );
+            Debug.Log("ATBannerAdClient : showBannerAd by position" );
             //todo
+            try
+            {
+                if (bannerHelperMap.ContainsKey(unitId))
+                {
+                    this.bannerHelperMap[unitId].Call("showBannerAd", position);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATBannerAdClient :  error." + e.Message);
+            }
 
         }
        

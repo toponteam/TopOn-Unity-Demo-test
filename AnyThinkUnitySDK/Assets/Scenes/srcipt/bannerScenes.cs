@@ -14,7 +14,7 @@ public class bannerScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_native_all = "b5c2c97629da0d";
+    static string mPlacementId_native_all = "b5baca45138428";
 
 #elif UNITY_IOS || UNITY_IPHONE
 	static string mPlacementId_native_all = "b5baf502bb23e3";
@@ -52,7 +52,8 @@ public class bannerScenes : MonoBehaviour {
         jsonmap.Add("banner", "2");
         ATSize bannerSize = new ATSize(320, 50, false);
         #if UNITY_ANDROID
-            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize, "1080x300");
+            bannerSize = new ATSize(960, 150, true);
+            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
         #elif UNITY_IOS || UNITY_IPHONE
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
         #endif
@@ -65,7 +66,7 @@ public class bannerScenes : MonoBehaviour {
 
         // ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionTop);
 
-        ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionBottom);
+        ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionTop);
     }
 
     public void removeBannerAd() {

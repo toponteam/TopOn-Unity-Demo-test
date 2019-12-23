@@ -7,20 +7,38 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/demoMainScenes.unity
-    guid: a7e56e93ec9d642529da1ceb7014fd3f
+    guid: 5a01b14e0b56744d4988ff30d15202e6
   - enabled: 1
     path: Assets/Scenes/bannerMainScenes.unity
-    guid: 460bfee0d0b2041c28f8ef5038c9b710
+    guid: e92cb12c01bac4314b2c7c3f48035839
   - enabled: 1
     path: Assets/Scenes/interstitialMainScenes.unity
-    guid: 19649a9ac6abf4d5999b163246391073
+    guid: 75d8bb27bdc33423bb420abf2e32f41e
   - enabled: 1
     path: Assets/Scenes/NativeBannerScene.unity
-    guid: 80f0336b676ac4b15a3ce364687b5d15
+    guid: 6fcb6c979aa8a4976acb2f1226f14dd5
   - enabled: 1
     path: Assets/Scenes/nativeMainScenes.unity
-    guid: a4c971c1972574b2ba6a37f9cbd39903
+    guid: ba8bdb5b9e81f4859bb1ce8c79f64755
   - enabled: 1
     path: Assets/Scenes/videoMainScenes.unity
-    guid: acd5622937cc64ad3a615b300c7b892f
+    guid: 240b685a0a20b427e81cfce99ebb7725
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
