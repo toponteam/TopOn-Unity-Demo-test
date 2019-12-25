@@ -8,8 +8,10 @@ using AnyThinkAds.ThirdParty.MiniJSON;
 public class ATUnityCBridge {
 	public delegate void CCallBack(string wrapperClass, string msg);
 	
+    #if UNITY_IOS
 	[DllImport("__Internal")]
     extern static bool message_from_unity(string msg, CCallBack callback);
+    #endif
 
     [MonoPInvokeCallback(typeof(CCallBack))]
     static public void MessageFromC(string wrapperClass, string msg) {
@@ -41,6 +43,10 @@ public class ATUnityCBridge {
     	msgDict.Add("arguments", arguments);
         CCallBack callback = null;
         if (carryCallback) callback = MessageFromC;
+        #if UNITY_IOS
         return message_from_unity(Json.Serialize(msgDict), callback);
+        #else
+        return false；
+        #endif
     }
 }
