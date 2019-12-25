@@ -160,7 +160,7 @@ public class BannerHelper {
             @Override
             public void run() {
                 if (mBannerView != null) {
-                    if(!TextUtils.isEmpty(jsonMap)) {//针对 穿山甲第一次banner尺寸不对
+                    if (!TextUtils.isEmpty(jsonMap)) {//针对 穿山甲第一次banner尺寸不对
                         try {
                             JSONObject jsonObject = new JSONObject(jsonMap);
                             if (jsonObject.has("banner_ad_size")) {
@@ -170,14 +170,14 @@ public class BannerHelper {
                                 if (mBannerView != null && !TextUtils.isEmpty(banner_ad_size)) {
                                     String[] size = banner_ad_size.split("x");
                                     MsgTools.pirntMsg("loadBannerAd, banner_ad_size" + banner_ad_size);
-                                    FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mBannerView.getLayoutParams();
-                                    if (lp == null) {
-                                        lp = new FrameLayout.LayoutParams(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+                                    if (mBannerView.getLayoutParams() == null) {
+                                        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+                                        mBannerView.setLayoutParams(lp);
                                     } else {
-                                        lp.width = Integer.parseInt(size[0]);
-                                        lp.height = Integer.parseInt(size[1]);
+                                        mBannerView.getLayoutParams().width = Integer.parseInt(size[0]);
+                                        mBannerView.getLayoutParams().height = Integer.parseInt(size[1]);
                                     }
-                                    mBannerView.setLayoutParams(lp);
+
                                 }
 
                             }
@@ -200,7 +200,7 @@ public class BannerHelper {
     }
 
     public void loadBannerAd() {
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mBannerView != null) {
@@ -226,7 +226,7 @@ public class BannerHelper {
      */
     public void showBannerAd(final int x, final int y, final int width, final int height) {
         MsgTools.pirntMsg("showBanner >>> " + this);
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mBannerView != null) {
@@ -280,7 +280,7 @@ public class BannerHelper {
 
     public void showBannerAd() {
         MsgTools.pirntMsg("showBanner without ATRect >>> " + this);
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mBannerView != null) {
@@ -295,7 +295,7 @@ public class BannerHelper {
 
     public void hideBannerAd() {
         MsgTools.pirntMsg("hideBannerAd >>> " + this);
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mBannerView != null) {
@@ -313,7 +313,7 @@ public class BannerHelper {
      */
     public void cleanBannerAd() {
         MsgTools.pirntMsg("clean >>> " + this);
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mBannerView != null && mBannerView.getParent() != null) {
