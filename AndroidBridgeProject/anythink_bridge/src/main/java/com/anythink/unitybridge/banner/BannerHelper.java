@@ -170,7 +170,13 @@ public class BannerHelper {
                                 if (mBannerView != null && !TextUtils.isEmpty(banner_ad_size)) {
                                     String[] size = banner_ad_size.split("x");
                                     MsgTools.pirntMsg("loadBannerAd, banner_ad_size" + banner_ad_size);
-                                    FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+                                    FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mBannerView.getLayoutParams();
+                                    if (lp == null) {
+                                        lp = new FrameLayout.LayoutParams(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+                                    } else {
+                                        lp.width = Integer.parseInt(size[0]);
+                                        lp.height = Integer.parseInt(size[1]);
+                                    }
                                     mBannerView.setLayoutParams(lp);
                                 }
 
