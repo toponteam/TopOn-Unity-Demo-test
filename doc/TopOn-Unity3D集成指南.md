@@ -761,7 +761,7 @@ public void reshowBannerAd()
 
 移除Banner广告和隐藏Banner广告的区别在于，从屏幕上移除Banner广告时也会破坏它（这意味着在再次显示之前，必须先加载Banner广告），而隐藏Banner只需调用showBannerAd方法即可重新显示以前隐藏的Banner广告**不传递ATRect参数**
 
-##8.3 实现Banner的监听器
+## 8.3 实现Banner的监听器
 要获得有关各种Banner广告事件（加载成功/失败，展示和点击）的通知，只需定义一个**ATBannerAdListener**接口的实现类：
 
 ```C#
