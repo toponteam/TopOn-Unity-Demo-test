@@ -698,8 +698,26 @@ public void loadBannerAd()
 Read on to see how to get notified on banner ad events like loading success/failure, impression and click.
 
 ### 8.2 Show Banner Ad
-You can show banner ad using the following code:
+There are two ways to show a banner ad, one is to use one of the predefined position constants, the other is to use an **ATRect** object.
 
+#### 8.2.1 Using Predefined Position Constants
+There are two predefined positions you can use to show a banner ad.
+
+1) Show a banner on the top of the screen:
+
+```C#
+ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionTop);
+```
+
+2) Show a banner at the bottom of the screen:
+
+```C#
+ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionBottom);
+```
+
+Insets for safe area has been taken care of by AnyThinkSDK when one of these two positions is being used.
+
+#### 8.2.2 Using an ATRect Object
 ```C#
 public void showBannerAd() 
 {
@@ -788,7 +806,7 @@ class BannerCallback : ATBannerAdListener
 
 <h2 id='9'>9. On Splash Ad</h2>
 
-It's highly recommended that splash ad should be integrated directly using native API(Objective-C/Java) in Xcode/Android Studio instead of C# script in Unity3D. The reason for doing this is that splash ad should be loaded&shown as soon as the app finishes launching. If you integrate splash in Unity3D using C#, it can't load&show ad until Unity game engine has been launched, which happens after the app finishes launch and takes much more time. For more infomation on how to integrate splash using Objective-C/Java, please refer to [iOS Integration Guide](https://github.com/anythinkteam/demo_ios/blob/master/iOS_Doc_EN/iOS_Integration_Guide.md) & [Android Integration Guide](https://github.com/anythinkteam/demo_android/blob/master/en/Android_Integration_Document_For_TopOn_SDK.md).
+It's highly recommended that splash ad should be integrated directly using native API(Objective-C/Java) in Xcode/Android Studio instead of using C# script in Unity3D. The reason for doing this is that splash ad should be loaded&shown as soon as the app finishes launching. If you integrate splash in Unity3D using C#, it can't load&show ad until Unity game engine has been launched, which happens after the app finishes launching and thus takes much more time. For more infomation on how to integrate splash using Objective-C/Java, please refer to [iOS Integration Guide](https://github.com/anythinkteam/demo_ios/blob/master/iOS_Doc_EN/iOS_Integration_Guide.md) & [Android Integration Guide](https://github.com/anythinkteam/demo_android/blob/master/en/Android_Integration_Document_For_TopOn_SDK.md).
 
 
 
