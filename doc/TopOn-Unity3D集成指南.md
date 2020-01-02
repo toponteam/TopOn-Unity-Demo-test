@@ -700,7 +700,7 @@ public void loadBannerAd()
 
 请继续阅读以了解如何获得有关Banner广告事件的通知，例如加载成功/失败，展示和点击。
 
-###8.2 展示Banner广告
+### 8.2 展示Banner广告
 目前可以用两种方法来展示banner广告。
 
 #### 8.2.1 用预定义的位置来展示banner广告
