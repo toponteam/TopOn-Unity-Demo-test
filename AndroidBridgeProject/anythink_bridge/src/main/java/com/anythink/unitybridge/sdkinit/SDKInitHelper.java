@@ -64,10 +64,10 @@ public class SDKInitHelper {
         if (SPUtil.getBoolean(mActivity, mActivity.getPackageName(), SP_KEY_FIRST_RUN, true)) {
             MsgTools.pirntMsg("initAppliction--> first run");
             //首次启动
-            if(ATSDK.isEUTraffic(mActivity)) {
+            if (ATSDK.isEUTraffic(mActivity)) {
                 MsgTools.pirntMsg("initAppliction--> EUTraffic");
                 //欧盟地区
-                if(ATSDK.NONPERSONALIZED == ATSDK.getGDPRDataLevel(mActivity)) {
+                if (ATSDK.NONPERSONALIZED == ATSDK.getGDPRDataLevel(mActivity)) {
                     MsgTools.pirntMsg("initAppliction--> showGdprAuth");
                     ATSDK.showGdprAuth(mActivity);
 
@@ -122,6 +122,15 @@ public class SDKInitHelper {
         ATSDK.initCustomMap(map);
     }
 
+    public int getGDPRLevel() {
+        MsgTools.pirntMsg("getGDPRLevel");
+        return ATSDK.getGDPRDataLevel(mActivity);
+    }
+
+    public boolean isEUTraffic() {
+        MsgTools.pirntMsg("isEUTraffic");
+        return ATSDK.isEUTraffic(mActivity);
+    }
 
     public void setGDPRLevel(int level) {
         MsgTools.pirntMsg("setGDPRLevel--> level:" + level);

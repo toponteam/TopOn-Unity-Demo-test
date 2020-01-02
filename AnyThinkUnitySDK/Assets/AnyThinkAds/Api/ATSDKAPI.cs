@@ -14,6 +14,10 @@ namespace AnyThinkAds.Api
 {
     public class ATSDKAPI
     {
+        public static readonly int PERSONALIZED = 0;
+        public static readonly int NONPERSONALIZED = 1;
+        public static readonly int UNKNOWN = 2;
+
         private static readonly IATSDKAPIClient client = GetATSDKAPIClient();
 
         public static void initSDK(string appId, string appKey)
@@ -29,6 +33,14 @@ namespace AnyThinkAds.Api
         public static void setGDPRLevel(int level)
         {
             client.setGDPRLevel(level);
+        }
+
+        public static int getGDPRLevel() {
+            return client.getGDPRLevel();
+        }
+
+        public static bool isEUTraffic() {
+            return client.isEUTraffic();
         }
 
         public static void setChannel(string channel)

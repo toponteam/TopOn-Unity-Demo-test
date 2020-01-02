@@ -18,5 +18,7 @@ namespace AnyThinkAds.Common
         void setChannel(string channel);
         void initCustomMap(string cutomMap);
         void setLogDebug(bool isDebug);
+        int getGDPRLevel();
+        bool isEUTraffic();
     }
 }

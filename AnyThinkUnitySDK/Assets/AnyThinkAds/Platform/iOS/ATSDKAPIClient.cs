@@ -71,5 +71,15 @@ namespace AnyThinkAds.iOS {
         {
             ATManager.setLogDebug(isDebug);
         }
+
+        public int getGDPRLevel()
+        {
+            return 0;
+        }
+
+        public bool isEUTraffic()
+        {
+            return false;
+        }
 	}
 }

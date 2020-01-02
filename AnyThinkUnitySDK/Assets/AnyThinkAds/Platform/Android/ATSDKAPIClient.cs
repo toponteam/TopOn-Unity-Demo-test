@@ -163,5 +163,40 @@ namespace AnyThinkAds.Android
             }
         }
 
+        public int getGDPRLevel()
+        {
+            Debug.Log("getGDPRLevel....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    return this.sdkInitHelper.Call<int>("getGDPRLevel");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+            return 2; //UNKNOW
+        }
+
+        public bool isEUTraffic()
+        {
+            Debug.Log("isEUTraffic....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    return this.sdkInitHelper.Call<bool>("isEUTraffic");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+            return false;
+        }
     }
 }
