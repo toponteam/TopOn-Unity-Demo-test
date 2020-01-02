@@ -588,7 +588,7 @@ class ATCallbackListener : ATRewardedVideoListener {
 
 <h2 id='7'>7. 插屏广告</h2>
 
-###7.1 加载插屏广告
+### 7.1 加载插屏广告
 使用以下代码加载插屏广告
 
 ```C#
@@ -610,7 +610,7 @@ public void loadInterstitialAd()
 
 **注:** 请参阅下文，了解如何获得有关插屏广告事件的通知（加载成功/失败，展示，点击，视频开始/结束）。
 
-###7.2 展示插屏广告
+### 7.2 展示插屏广告
 与激励视频相同，插屏广告只要调用展示api并传递展示广告位ID作为参数：
 
 ```C#
@@ -718,7 +718,7 @@ ATBannerAd.Instance.showBannerAd(mPlacementId_native_all, ATBannerAdLoadingExtra
 ```
 当使用预定义位置来展示banner广告的时候，AnyThinkSDK已经考虑了刘海屏等Safe Area相关空白区域了。
 
-####8.2.2 用ATRect来展示banner广告
+#### 8.2.2 用ATRect来展示banner广告
 
 ```C#
 public void showBannerAd() 
