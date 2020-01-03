@@ -130,19 +130,19 @@ UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
     [self invokeCallback:@"OnBannerAdLoadFail" placementID:placementID error:error extra:nil];
 }
 
--(void) bannerView:(ATBannerView *)bannerView didShowAdWithPlacementID:(NSString *)placementID {
+-(void) bannerView:(ATBannerView *)bannerView didShowAdWithPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnBannerAdImpress" placementID:placementID error:nil extra:nil];
 }
 
--(void) bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID {
+-(void) bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnBannerAdClick" placementID:placementID error:nil extra:nil];
 }
 
--(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID {
+-(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnBannerAdClose" placementID:placementID error:nil extra:nil];
 }
 
--(void) bannerView:(ATBannerView *)bannerView didAutoRefreshWithPlacement:(NSString *)placementID {
+-(void) bannerView:(ATBannerView *)bannerView didAutoRefreshWithPlacement:(NSString *)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnBannerAdAutoRefresh" placementID:placementID error:nil extra:nil];
 }
 

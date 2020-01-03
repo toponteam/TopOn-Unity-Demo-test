@@ -69,7 +69,7 @@ public class MainScenes : MonoBehaviour {
         ATSDKAPI.setChannel("unity3d_test_channel");
         ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } });
         ATSDKAPI.setLogDebug(true);
-
+        
         Debug.Log("---------DataConsent: " + ATSDKAPI.getGDPRLevel());
         Debug.Log("---------isEUTrafic: " + ATSDKAPI.isEUTraffic());
        

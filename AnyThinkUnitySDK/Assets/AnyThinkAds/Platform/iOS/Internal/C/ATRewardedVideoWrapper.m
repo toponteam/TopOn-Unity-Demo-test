@@ -59,26 +59,26 @@
     [self invokeCallback:@"OnRewardedVideoLoadFailure" placementID:placementID error:error extra:nil];
 }
 
--(void) rewardedVideoDidStartPlayingForPlacementID:(NSString*)placementID {
+-(void) rewardedVideoDidStartPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnRewardedVideoPlayStart" placementID:placementID error:nil extra:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kATUnityUtilitiesRewardedVideoImpressionNotification object:nil];
 }
 
--(void) rewardedVideoDidEndPlayingForPlacementID:(NSString*)placementID {
+-(void) rewardedVideoDidEndPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnRewardedVideoPlayEnd" placementID:placementID error:nil extra:nil];
 }
 
--(void) rewardedVideoDidFailToPlayForPlacementID:(NSString*)placementID error:(NSError*)error {
+-(void) rewardedVideoDidFailToPlayForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary *)extra {
     error = error != nil ? error : [NSError errorWithDomain:@"com.anythink.Unity3DPackage" code:100001 userInfo:@{NSLocalizedDescriptionKey:@"AT has failed to play video", NSLocalizedFailureReasonErrorKey:@"AT has failed to play video"}];
     [self invokeCallback:@"OnRewardedVideoPlayFailure" placementID:placementID error:error extra:nil];
 }
 
--(void) rewardedVideoDidCloseForPlacementID:(NSString*)placementID rewarded:(BOOL)rewarded {
+-(void) rewardedVideoDidCloseForPlacementID:(NSString*)placementID rewarded:(BOOL)rewarded extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnRewardedVideoClose" placementID:placementID error:nil extra:@{@"rewarded":@(rewarded)}];
     [[NSNotificationCenter defaultCenter] postNotificationName:kATUnityUtilitiesRewardedVideoCloseNotification object:nil];
 }
 
--(void) rewardedVideoDidClickForPlacementID:(NSString*)placementID {
+-(void) rewardedVideoDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnRewardedVideoClick" placementID:placementID error:nil extra:nil];
 }
 

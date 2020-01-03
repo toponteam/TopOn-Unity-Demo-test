@@ -159,22 +159,22 @@ static NSString *const kATSharedCallbackKey = @"placement_id_placement_holder";
     [self invokeCallback:@"OnNativeBannerAdLoadingFailure" placementID:placementID error:error extra:nil];
 }
 
--(void) didShowNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID {
+-(void) didShowNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didShowNativeBannerAdInView:placementID:%@", placementID);
     [self invokeCallback:@"OnNaitveBannerAdShow" placementID:placementID error:nil extra:nil];
 }
 
--(void) didClickNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID {
+-(void) didClickNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didClickNativeBannerAdInView:placementID:%@", placementID);
     [self invokeCallback:@"OnNativeBannerAdClick" placementID:placementID error:nil extra:nil];
 }
 
--(void) didClickCloseButtonInNativeBannerAdView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID {
+-(void) didClickCloseButtonInNativeBannerAdView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didClickCloseButtonInNativeBannerAdView:placementID:%@", placementID);
     [self invokeCallback:@"OnNativeBannerAdCloseButtonClicked" placementID:placementID error:nil extra:nil];
 }
 
--(void) didAutorefreshNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID {
+-(void) didAutorefreshNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didFailToAutorefreshNativeBannerAdInView:placementID:%@", placementID);
     [self invokeCallback:@"OnNativeBannerAdAutorefresh" placementID:placementID error:nil extra:nil];
     

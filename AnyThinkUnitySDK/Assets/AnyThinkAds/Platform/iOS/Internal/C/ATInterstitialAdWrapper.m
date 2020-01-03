@@ -52,34 +52,34 @@
     [self invokeCallback:@"OnInterstitialAdLoadFailure" placementID:placementID error:error extra:nil];
 }
 
--(void) interstitialDidShowForPlacementID:(NSString*)placementID {
+-(void) interstitialDidShowForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnInterstitialAdShow" placementID:placementID error:nil extra:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kATUnityUtilitiesInterstitialImpressionNotification object:nil];
 }
 
--(void) interstitialFailedToShowForPlacementID:(NSString*)placementID error:(NSError*)error {
+-(void) interstitialFailedToShowForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary *)extra {
     error = error != nil ? error : [NSError errorWithDomain:@"com.anythink.Unity3DPackage" code:100001 userInfo:@{NSLocalizedDescriptionKey:@"AT has failed to show ad", NSLocalizedFailureReasonErrorKey:@"AT has failed to show ad"}];
     [self invokeCallback:@"OnInterstitialAdFailedToShow" placementID:placementID error:error extra:nil];
 }
 
--(void) interstitialDidStartPlayingVideoForPlacementID:(NSString*)placementID {
+-(void) interstitialDidStartPlayingVideoForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnInterstitialAdVideoPlayStart" placementID:placementID error:nil extra:nil];
 }
 
--(void) interstitialDidEndPlayingVideoForPlacementID:(NSString*)placementID {
+-(void) interstitialDidEndPlayingVideoForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnInterstitialAdVideoPlayEnd" placementID:placementID error:nil extra:nil];
 }
 
--(void) interstitialDidFailToPlayVideoForPlacementID:(NSString*)placementID error:(NSError*)error {
+-(void) interstitialDidFailToPlayVideoForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnInterstitialAdVideoPlayFailure" placementID:placementID error:error extra:nil];
 }
 
--(void) interstitialDidCloseForPlacementID:(NSString*)placementID {
+-(void) interstitialDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnInterstitialAdClose" placementID:placementID error:nil extra:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kATUnityUtilitiesInterstitialCloseNotification object:nil];
 }
 
--(void) interstitialDidClickForPlacementID:(NSString*)placementID  {
+-(void) interstitialDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnInterstitialAdClick" placementID:placementID error:nil extra:nil];
 }
 @end
