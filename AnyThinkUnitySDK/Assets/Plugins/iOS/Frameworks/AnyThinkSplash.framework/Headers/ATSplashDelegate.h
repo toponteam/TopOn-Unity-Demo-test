@@ -12,10 +12,11 @@
 
 extern NSString *const kATSplashDelegateExtraNetworkIDKey;
 extern NSString *const kATSplashDelegateExtraAdSourceIDKey;
+extern NSString *const kATSplashDelegateExtraIsHeaderBidding;
+extern NSString *const kATSplashDelegateExtraPrice;
+extern NSString *const kATSplashDelegateExtraPriority;
+
 @protocol ATSplashDelegate<ATAdLoadingDelegate>
--(void)splashDidShowForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void)splashDidClickForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void)splashDidCloseForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
 
 -(void)splashDidShowForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra;
 -(void)splashDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra;

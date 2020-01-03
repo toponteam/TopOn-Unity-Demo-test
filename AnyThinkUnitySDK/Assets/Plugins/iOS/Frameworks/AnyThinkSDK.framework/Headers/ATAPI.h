@@ -83,8 +83,7 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
     //Let it default to forbidden if not set
     ATDataConsentSetUnknown = 0,
     ATDataConsentSetPersonalized = 1,
-    ATDataConsentSetNonpersonalized = 2,
-    ATDataConsentSetForbidden = 3
+    ATDataConsentSetNonpersonalized = 2
 };
 
 @interface ATAPI : NSObject
@@ -117,7 +116,7 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  * Show the data consent dialog using the specified constroller as the presenting view controller.
  * viewController might be nil, for which the root view controller of the window will be used instead.
  */
--(void) presentDataConsentDialogInViewController:(UIViewController*)viewController;
+-(void) presentDataConsentDialogInViewController:(UIViewController*)viewController dismissalCallback:(void(^)(void))dismissCallback;
 /**
  * Defaults to forbidden;
  * Thread-safe.

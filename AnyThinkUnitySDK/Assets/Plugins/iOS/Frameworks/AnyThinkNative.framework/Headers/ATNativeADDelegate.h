@@ -12,14 +12,10 @@
 @class ATNativeADView;
 extern NSString *const kATNativeDelegateExtraNetworkIDKey;
 extern NSString *const kATNativeDelegateExtraAdSourceIDKey;
+extern NSString *const kATNativeDelegateExtraIsHeaderBidding;
+extern NSString *const kATNativeDelegateExtraPrice;
+extern NSString *const kATNativeDelegateExtraPriority;
 @protocol ATNativeADDelegate<ATAdLoadingDelegate>
--(void) didShowNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) didClickNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) didEndPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) didEnterFullScreenVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) didExitFullScreenVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
-
 -(void) didShowNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) didClickNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra;

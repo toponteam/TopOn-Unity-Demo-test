@@ -12,14 +12,10 @@
 
 extern NSString *const kATInterstitialDelegateExtraNetworkIDKey;
 extern NSString *const kATInterstitialDelegateExtraAdSourceIDKey;
+extern NSString *const kATInterstitialDelegateExtraIsHeaderBidding;
+extern NSString *const kATInterstitialDelegateExtraPrice;
+extern NSString *const kATInterstitialDelegateExtraPriority;
 @protocol ATInterstitialDelegate<ATAdLoadingDelegate>
--(void) interstitialDidShowForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) interstitialFailedToShowForPlacementID:(NSString*)placementID error:(NSError*)error DEPRECATED_ATTRIBUTE;
--(void) interstitialDidStartPlayingVideoForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) interstitialDidEndPlayingVideoForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) interstitialDidFailToPlayVideoForPlacementID:(NSString*)placementID error:(NSError*)error DEPRECATED_ATTRIBUTE;
--(void) interstitialDidCloseForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) interstitialDidClickForPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
 
 -(void) interstitialDidShowForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra;
 -(void) interstitialFailedToShowForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra;

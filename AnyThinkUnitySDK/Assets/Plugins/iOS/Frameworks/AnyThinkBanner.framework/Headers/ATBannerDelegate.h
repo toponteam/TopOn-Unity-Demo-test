@@ -13,14 +13,12 @@
 
 extern NSString *const kATBannerDelegateExtraNetworkIDKey;
 extern NSString *const kATBannerDelegateExtraAdSourceIDKey;
+extern NSString *const kATBannerDelegateExtraIsHeaderBidding;
+extern NSString *const kATBannerDelegateExtraPrice;
+extern NSString *const kATBannerDelegateExtraPriority;
 
 @protocol ATBannerDelegate<ATAdLoadingDelegate>
--(void) bannerView:(ATBannerView*)bannerView didShowAdWithPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID DEPRECATED_ATTRIBUTE;
--(void) bannerView:(ATBannerView*)bannerView didAutoRefreshWithPlacement:(NSString*)placementID DEPRECATED_ATTRIBUTE;
 -(void) bannerView:(ATBannerView*)bannerView failedToAutoRefreshWithPlacementID:(NSString*)placementID error:(NSError*)error;
-
 -(void) bannerView:(ATBannerView*)bannerView didShowAdWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra;
