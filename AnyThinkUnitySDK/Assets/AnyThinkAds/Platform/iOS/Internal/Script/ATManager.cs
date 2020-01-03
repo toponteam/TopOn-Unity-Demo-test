@@ -28,8 +28,16 @@ public class ATManager {
 		return ATUnityCBridge.SendMessageToC("ATUnityManager", "clearPurchaseFlag", null);
 	}
 
+	public static bool isEUTraffic() {
+		return ATUnityCBridge.SendMessageToC("ATUnityManager", "inDataProtectionArea", null);
+	}
+
 	public static void ShowGDPRAuthDialog() {
 		ATUnityCBridge.SendMessageToC("ATUnityManager", "presentDataConsentDialog", null);
+	}
+
+	public static int GetDataConsent() {
+		return ATUnityCBridge.GetMessageFromC("ATUnityManager", "getDataConsent", null);
 	}
 
 	public static void SetDataConsent(int consent) {

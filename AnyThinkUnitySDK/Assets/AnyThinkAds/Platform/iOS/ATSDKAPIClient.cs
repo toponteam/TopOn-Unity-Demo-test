@@ -74,12 +74,12 @@ namespace AnyThinkAds.iOS {
 
         public int getGDPRLevel()
         {
-            return 0;
+            return ATManager.GetDataConsent();
         }
 
         public bool isEUTraffic()
         {
-            return false;
+            return ATManager.isEUTraffic();
         }
 	}
 }

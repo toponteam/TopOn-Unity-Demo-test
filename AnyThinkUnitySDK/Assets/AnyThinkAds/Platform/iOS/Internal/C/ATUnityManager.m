@@ -36,6 +36,23 @@ bool message_from_unity(const char *msg, void(*callback)(const char*, const char
     return ret;
 }
 
+int get_message_for_unity(const char *msg, void(*callback)(const char*, const char *)) {
+    NSString *msgStr = [NSString stringWithUTF8String:msg];
+    NSDictionary *msgDict = [NSJSONSerialization JSONObjectWithData:[msgStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+    
+    Class class = NSClassFromString(msgDict[@"class"]);
+    SEL sel = NSSelectorFromString(msgDict[@"selector"]);
+    NSArray<NSString*>* arguments = msgDict[@"arguments"];
+    
+    NSInvocation *invocation = build_invocation(class, sel, arguments, callback);
+    [invocation invoke];
+    int ret = 0;
+    
+    if (strcmp(@encode(void), invocation.methodSignature.methodReturnType)) [invocation getReturnValue:&ret]; //Handle return value
+    
+    return ret;
+}
+
 NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *arguments, void(*callback)(const char*, const char *)) {
     NSMethodSignature *signature = [class instanceMethodSignatureForSelector:sel];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -119,8 +136,16 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
     [ATAPI setLogEnabled:[flagStr boolValue]];
 }
 
+-(int) getDataConsent {
+    return [@{@(ATDataConsentSetPersonalized):@0, @(ATDataConsentSetNonpersonalized):@1, @(ATDataConsentSetUnknown):@2}[@([ATAPI sharedInstance].dataConsentSet)] intValue];
+}
+
 -(void) setDataConsent:(NSNumber*)dataConsent {
     [[ATAPI sharedInstance] setDataConsentSet:[dataConsent integerValue] consentString:nil];
+}
+
+-(BOOL) inDataProtectionArea {
+    return [[ATAPI sharedInstance] inDataProtectionArea];
 }
 
 
