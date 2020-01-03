@@ -70,8 +70,8 @@ public class MainScenes : MonoBehaviour {
         ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } });
         ATSDKAPI.setLogDebug(true);
         
-        Debug.Log("---------DataConsent: " + ATSDKAPI.getGDPRLevel());
-        Debug.Log("---------isEUTrafic: " + ATSDKAPI.isEUTraffic());
+        Debug.Log("Developer DataConsent: " + ATSDKAPI.getGDPRLevel());
+        Debug.Log("Developer isEUTrafic: " + ATSDKAPI.isEUTraffic());
        
 
 #if UNITY_ANDROID

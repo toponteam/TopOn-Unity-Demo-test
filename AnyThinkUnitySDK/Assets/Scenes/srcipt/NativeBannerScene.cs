@@ -13,7 +13,7 @@ public class NativeBannerScene : MonoBehaviour, ATNativeBannerAdListener {
 	    static string mPlacementId_native_all = "b5aa1fa2cae775";
 
 	#elif UNITY_IOS || UNITY_IPHONE
-		static string mPlacementId_native_all = "b5b0f551340ea9";
+		static string mPlacementId_native_all = "b5b0f555698607";
 
 	#endif
 
