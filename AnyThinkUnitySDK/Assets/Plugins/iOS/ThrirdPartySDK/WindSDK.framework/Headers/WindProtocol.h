@@ -7,7 +7,6 @@
 //
 
 @class WindAdRequest;
-@class WADOptions;
 
 @protocol WindAdRequestProtocol<NSObject>
 

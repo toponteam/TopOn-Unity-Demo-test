@@ -16,8 +16,6 @@
 
 @property (nonatomic,copy) NSString *loadId;
 
-@property (nonatomic,assign) BOOL needReward;
-
 //做为扩展参数使用
 @property (nonatomic,strong) NSDictionary<NSString *, NSString *> *options;
 

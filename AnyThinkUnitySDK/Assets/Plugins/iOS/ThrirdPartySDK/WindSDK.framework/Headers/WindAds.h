@@ -50,6 +50,11 @@ typedef void(^WindAdDebugCallBack)(NSString * _Nullable msg, WindLogLevel level)
 - (void)setDebugEnable:(BOOL)enable;
 
 
+/// 提供新的资源包，需要把sigmob.bundle的文件放入到新的bundle内。
+/// @param name bundle名称（前缀）
++ (void)setNewBundleName:(NSString * _Nonnull)name;
+
+
 /**
  *   自定义debug 内容回调显示
  *
