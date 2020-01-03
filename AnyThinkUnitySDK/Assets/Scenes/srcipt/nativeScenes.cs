@@ -59,7 +59,7 @@ public class nativeScenes : MonoBehaviour {
 		gdtlocal.Add ("gdtad_width","-1");
 		gdtlocal.Add ("gdtad_height","-1");
 
-		gdtlocal.Add ("tt_image_wdith","900");
+		gdtlocal.Add ("tt_image_width","900");
 		gdtlocal.Add ("tt_image_height","600");
 
         ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
