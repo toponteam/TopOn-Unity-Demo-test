@@ -143,7 +143,7 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
 }
 
 -(void) setDataConsent:(NSNumber*)dataConsent {
-    [[ATAPI sharedInstance] setDataConsentSet:[dataConsent integerValue] consentString:nil];
+    [[ATAPI sharedInstance] setDataConsentSet:[@{@0:@(ATDataConsentSetPersonalized), @1:@(ATDataConsentSetNonpersonalized), @2:@(ATDataConsentSetUnknown)}[dataConsent] integerValue] consentString:nil];
 }
 
 -(BOOL) inDataProtectionArea {
