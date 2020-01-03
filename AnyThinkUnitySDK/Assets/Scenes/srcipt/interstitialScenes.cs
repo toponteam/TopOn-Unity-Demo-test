@@ -14,7 +14,7 @@ public class interstitialScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_interstitial_all = "b5baca599c7c61";
+    static string mPlacementId_interstitial_all = "b5d7614ab30695";
 
 #elif UNITY_IOS || UNITY_IPHONE
     static string mPlacementId_interstitial_all = "b5bacad5962e84";
