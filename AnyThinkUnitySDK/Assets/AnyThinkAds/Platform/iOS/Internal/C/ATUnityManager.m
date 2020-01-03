@@ -106,7 +106,9 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
 }
 
 -(void) presentDataConsentDialog {
-    [[ATAPI sharedInstance] presentDataConsentDialogInViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
+    [[ATAPI sharedInstance] presentDataConsentDialogInViewController:[UIApplication sharedApplication].delegate.window.rootViewController dismissalCallback:^{
+        
+    }];
 }
 
 -(void) setPurchaseFlag {
