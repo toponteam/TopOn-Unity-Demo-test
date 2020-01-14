@@ -106,6 +106,11 @@ public class ATBannerAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].OnBannerAdAutoRefreshFail(placementID, code, message);
     }
 
+    static private void OnBannerAdCloseButtonTapped(string placementID) {
+        Debug.Log("Unity: ATBannerAdWrapper::onAdCloseButtonTapped()");
+        if (clients[placementID] != null) clients[placementID].onAdCloseButtonTapped(placementID);
+    }
+
     static private void OnBannerAdClose(string placementID) {
 		Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdClose()");
         if (clients[placementID] != null) clients[placementID].OnBannerAdClose(placementID);
