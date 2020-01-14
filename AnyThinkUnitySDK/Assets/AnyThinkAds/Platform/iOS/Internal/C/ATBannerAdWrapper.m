@@ -138,6 +138,10 @@ UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
     [self invokeCallback:@"OnBannerAdClick" placementID:placementID error:nil extra:nil];
 }
 
+-(void) bannerView:(ATBannerView *)bannerView didTapCloseButtonWithPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
+    [self invokeCallback:@"OnBannerAdCloseButtonTapped" placementID:placementID error:nil extra:nil];
+}
+
 -(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     [self invokeCallback:@"OnBannerAdClose" placementID:placementID error:nil extra:nil];
 }
