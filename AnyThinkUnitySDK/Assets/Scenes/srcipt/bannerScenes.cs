@@ -14,7 +14,7 @@ public class bannerScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_native_all = "b5baca43951901";
+    static string mPlacementId_native_all = "b5baca45138428";
 
 #elif UNITY_IOS || UNITY_IPHONE
 	static string mPlacementId_native_all = "b5bacacfc470c9";

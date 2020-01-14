@@ -12,7 +12,7 @@ public class vidoeScenes : MonoBehaviour {
     static string mPlacementId_rewardvideo_all = "b5b728e7a08cd4";
 
 	#elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_rewardvideo_all = "b5b44a07fc3bf6";//"b5b44a0f115321";
+	static string mPlacementId_rewardvideo_all = "b5b72b21184aa8";//"b5b44a0f115321";
 
 	#endif
 

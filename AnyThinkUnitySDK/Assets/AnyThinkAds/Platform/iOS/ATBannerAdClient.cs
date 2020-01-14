@@ -88,5 +88,10 @@ namespace AnyThinkAds.iOS {
 			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdClose()");
 	        if (anyThinkListener != null) anyThinkListener.onAdClose(unitId);
 	    }
+
+	    public void OnBannerAdCloseButtonTapped(string unitId) {
+			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdCloseButton()");
+	        if (anyThinkListener != null) anyThinkListener.onAdCloseButtonTapped(unitId);
+	    }
 	}
 }

@@ -14,10 +14,10 @@ public class nativeScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_native_all = "b5aa1fa85b86d5";
+    static string mPlacementId_native_all = "b5c355d79ef9be";
 
 #elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_native_all = "b5b0f555698607";
+	static string mPlacementId_native_all = "b5c2c6d50e7f44";
 
 #endif
 

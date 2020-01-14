@@ -29,7 +29,9 @@ public class ATBannerAdWrapper:ATAdWrapper {
     		OnBannerAdAutoRefreshFail((string)msgDict["placement_id"], (string)errorMsg["code"], (string)errorMsg["reason"]);
     	} else if (callback.Equals("OnBannerAdClose")) {
     		OnBannerAdClose((string)msgDict["placement_id"]);
-    	}
+    	} else if (callback.Equals("OnBannerAdCloseButtonTapped")) {
+            OnBannerAdCloseButtonTapped((string)msgDict["placement_id"]);
+        }
     }
 
     static public void loadBannerAd(string placementID, string customData) {
@@ -108,7 +110,7 @@ public class ATBannerAdWrapper:ATAdWrapper {
 
     static private void OnBannerAdCloseButtonTapped(string placementID) {
         Debug.Log("Unity: ATBannerAdWrapper::onAdCloseButtonTapped()");
-        if (clients[placementID] != null) clients[placementID].onAdCloseButtonTapped(placementID);
+        if (clients[placementID] != null) clients[placementID].OnBannerAdCloseButtonTapped(placementID);
     }
 
     static private void OnBannerAdClose(string placementID) {
