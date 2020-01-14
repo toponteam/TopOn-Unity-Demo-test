@@ -17,7 +17,7 @@ public class bannerScenes : MonoBehaviour {
     static string mPlacementId_native_all = "b5baca43951901";
 
 #elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_native_all = "b5dd363166a5ea";
+	static string mPlacementId_native_all = "b5bacacfc470c9";
     //static string mPlacementId_native_all = "b5bacaccb61c29";
 #endif
 
@@ -104,6 +104,11 @@ public class bannerScenes : MonoBehaviour {
         public void onAdClose(string unitId)
         {
             Debug.Log("Developer callback onAdClose :" + unitId);
+        }
+
+        public void onAdCloseButtonTapped(string unitId)
+        {
+            Debug.Log("Developer callback onAdCloseButtonTapped :" + unitId);
         }
 
         public void onAdImpress(string unitId)
