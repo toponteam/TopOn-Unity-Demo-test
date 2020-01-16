@@ -90,9 +90,9 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
 
 +(NSDictionary<NSNumber*, NSString*>*)networkNameMap;
 +(void) setLogEnabled:(BOOL)logEnabled;
-
++(void) integrationChecking;
 +(instancetype)sharedInstance;
-+(BOOL) getMPisInit ;
++(BOOL) getMPisInit;
 +(void) setMPisInit:(BOOL)MPisInit;
 /**
  * Inspect the error parameter to see what's the matter.
