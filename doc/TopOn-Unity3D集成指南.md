@@ -27,7 +27,8 @@
 
 你可以可通过<a href="https://app.toponad.com/document/doc-zh/getstarted/get_started.html" target="_blank">TopOn账号及相关ID准备</a>进行账号注册及登录的操作指引
 
-##3. SDK初始化 </h2>
+
+<h2 id='3'> 3. SDK初始化 </h2>
 
 ### 3.1 将TopOnSDK添加至您的项目
 
@@ -291,9 +292,13 @@ public static class MyBuildPostprocess
 您可以通过以下代码初始化 **AnyThinkSDK** ，详细参考[demo project](https://github.com/anythinkteam/demo_unity):
 
 ```java
-ATSDKAPI.setChannel("unity3d_test_channel");
-ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } });
+//设置渠道的信息，开发者可以通过该渠道信息在后台来区分看各个渠道的广告数据（可选配置）
+ATSDKAPI.setChannel("unity3d_test_channel"); 
+//设置自定义的Map信息，可匹配后台配置的广告商顺序的列表（可选配置）
+ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } }); 
+//设置开启Debug日志
 ATSDKAPI.setLogDebug(true);
+//SDK的初始化（必须配置）
 ATSDKAPI.initSDK("a5c4ad280995c9", "7b4e37f819dbee652ef79c4506e14288");//Use your own app_id & app_key here
 ```
 
@@ -339,12 +344,10 @@ public void loadNative()
 		gdtlocal.Add ("gdtadtype","3");
 		gdtlocal.Add ("gdtad_width","-1");
 		gdtlocal.Add ("gdtad_height","-1");
+	//配置三方平台的设置（目前主要是国内的广告商需要，海外可忽略该配置）
         ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
 
 		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
-		jsonmap.Add("age", "22");
-		jsonmap.Add("sex", "lady");
-		jsonmap.Add("native", "0");
 
        ATNativeAd.Instance.loadNativeAd(mPlacementId_native_all, jsonmap);
 }
@@ -521,9 +524,6 @@ public void loadVideo()
     }
    
 	Dictionary<string,string> jsonmap = new Dictionary<string,string>();
-	jsonmap.Add("age", "22");
-	jsonmap.Add("sex", "lady");
-	jsonmap.Add("rv", "1");
 	
 	ATRewardedVideo.Instance.loadVideoAd(mPlacementId_rewardvideo_all,jsonmap);
 }
@@ -600,9 +600,6 @@ public void loadInterstitialAd()
     }
 
     Dictionary<string,string> jsonmap = new Dictionary<string,string>();
-    jsonmap.Add("age", "22");
-    jsonmap.Add("sex", "lady");
-    jsonmap.Add("interstitial", "3");
 
     ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
 }
@@ -689,9 +686,7 @@ public void loadBannerAd()
     }
 
     Dictionary<string, object> jsonmap = new Dictionary<string,object>();
-    jsonmap.Add("age", "22");
-    jsonmap.Add("sex", "lady");
-    jsonmap.Add("banner", "2");
+    //配置Banner要展示的宽度，高度，是否使用pixel为单位
     ATSize bannerSize = new ATSize(this.screenWidth, 100, true);
     jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
     ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, jsonmap);
