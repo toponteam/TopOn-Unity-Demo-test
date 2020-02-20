@@ -57,5 +57,8 @@ namespace AnyThinkAds.Api
 
 
 		}
-	}
+
+        public const string SCENARIO = "Scenario";//value is string
+
+    }
 }

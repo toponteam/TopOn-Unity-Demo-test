@@ -47,7 +47,12 @@ namespace AnyThinkAds.Api
 
         public void showInterstitialAd(string unitId)
         {
-            client.showInterstitialAd(unitId);
+            client.showInterstitialAd(unitId, Json.Serialize(new Dictionary<string, string>()));
+        }
+
+        public void showInterstitialAd(string unitId, Dictionary<string, string> pairs)
+        {
+            client.showInterstitialAd(unitId, Json.Serialize(pairs));
         }
 
         public IATInterstitialAdClient GetATInterstitialAdClient()

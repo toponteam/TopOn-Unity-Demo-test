@@ -54,7 +54,10 @@ public class interstitialScenes : MonoBehaviour {
     }
 
     public void showInterstitialAd() {
-        ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all);
+        Dictionary<string, string> jsonmap = new Dictionary<string, string>();
+        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, "");
+
+        ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all, jsonmap);
     }
 
     class InterstitalCallback : ATInterstitialAdListener

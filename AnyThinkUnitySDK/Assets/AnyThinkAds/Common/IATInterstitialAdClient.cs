@@ -20,20 +20,15 @@ namespace AnyThinkAds.Common
 		 * @param listener  
 		 */
         void setListener(ATInterstitialAdListener listener);
-		/***
-		 * 
-		 * 展示广告,
-		 * @param unitId 
-		 * @param rect the region used to show banner ad; currently only x&y fields in rect are used(as the origin, or top left corner of the banner).
+        /**
+		 * 是否存在可以展示的广告
+		 * @param unityid
 		 */
-		 bool hasInterstitialAdReady(string unitId);
-		/***
-		 * 设置用户id
-		 * @param unitid 
-		 * @param userid 用户id
-		 * @param customData  其他数据
-		 */ 
-        void showInterstitialAd(string unitId);
+        bool hasInterstitialAdReady(string unitId);
+        /***
+		 * 显示广告
+		 */
+        void showInterstitialAd(string unitId, string mapJson);
 		/***
 		 * 清理缓存
 		 */ 

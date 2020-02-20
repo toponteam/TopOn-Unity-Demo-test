@@ -143,7 +143,10 @@ public class vidoeScenes : MonoBehaviour {
 	public void showVideo(){
 		
 		Debug.Log ("Developer show video....");
-        ATRewardedVideo.Instance.showAd(mPlacementId_rewardvideo_all);
+
+        Dictionary<string, string> jsonmap = new Dictionary<string, string>();
+        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, "");
+        ATRewardedVideo.Instance.showAd(mPlacementId_rewardvideo_all, jsonmap);
 		
 	}
 

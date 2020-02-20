@@ -12,6 +12,7 @@ import android.os.Environment;
 public class Const {
     public static final boolean DEBUG = true;
     public static final String  SPU_NAME = "imgspu";
+    public static final String  SCENARIO = "Scenario";
 
     public static class FOLDER {
         /**

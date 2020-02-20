@@ -445,15 +445,30 @@ public class VideoHelper {
         });
     }
 
-    public void showVideo() {
-        MsgTools.pirntMsg("showVideo >>> " + this);
+    public void showVideo(final String jsonMap) {
+        MsgTools.pirntMsg("showVideo >>> " + this + ", jsonMap >>> " + jsonMap);
         isReward = false;
          UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mRewardVideoAd != null) {
                     isReady = false;
-                    mRewardVideoAd.show();
+
+                    String scenario = "";
+                    if(!TextUtils.isEmpty(jsonMap)) {
+                        try {
+                            JSONObject _jsonObject = new JSONObject(jsonMap);
+                            if(_jsonObject.has(Const.SCENARIO)) {
+                                scenario = _jsonObject.optString(Const.SCENARIO);
+                            }
+                        } catch (Exception e) {
+                            if (Const.DEBUG) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    MsgTools.pirntMsg("showVideo >>> " + this + ", scenario >>> " + scenario);
+                    mRewardVideoAd.show(scenario);
                 } else {
                     MsgTools.pirntMsg("showVideo error  ..you must call initVideo first " + this);
                     if (mListener != null) {

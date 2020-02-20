@@ -34,5 +34,10 @@ namespace AnyThinkAds.Api
 		 * 视屏播放进度 如果有
 		 */ 
         void onAdVideoProgress(string unitId,int progress);
+        /***
+		 * 广告关闭按钮点击 如果有
+		 */
+        void onAdCloseButtonClicked(string unitId);
+
     }
 }

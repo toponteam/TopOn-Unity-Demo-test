@@ -61,7 +61,12 @@ namespace AnyThinkAds.Api
 
         public void showAd(string unitId)
         {
-            client.showAd(unitId);
+            client.showAd(unitId, Json.Serialize(new Dictionary<string, string>()));
+        }
+
+        public void showAd(string unitId, Dictionary<string, string> pairs)
+        {
+            client.showAd(unitId, Json.Serialize(pairs));
         }
 
         public void cleanAd(string unitId)

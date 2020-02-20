@@ -9,6 +9,7 @@ import com.anythink.core.api.ATAdInfo;
 import com.anythink.core.api.AdError;
 import com.anythink.nativead.api.ATNative;
 import com.anythink.nativead.api.ATNativeAdView;
+import com.anythink.nativead.api.ATNativeDislikeListener;
 import com.anythink.nativead.api.ATNativeEventListener;
 import com.anythink.nativead.api.ATNativeNetworkListener;
 import com.anythink.nativead.api.NativeAd;
@@ -270,6 +271,20 @@ public class NativeHelper {
                                 }
                             });
 
+                        }
+                    });
+
+                    nativeAd.setDislikeCallbackListener(new ATNativeDislikeListener() {
+                        @Override
+                        public void onAdCloseButtonClick(ATNativeAdView atNativeAdView, ATAdInfo atAdInfo) {
+                            TaskManager.getInstance().run_proxy(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (mListener != null) {
+                                        mListener.onAdCloseButtonClicked(mUnitId);
+                                    }
+                                }
+                            });
                         }
                     });
 

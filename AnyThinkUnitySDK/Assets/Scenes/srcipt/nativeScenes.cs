@@ -214,6 +214,11 @@ public class nativeScenes : MonoBehaviour {
         {
             Debug.Log("Developer onAdVideoProgress------:" + unitId);
         }
+
+        public void onAdCloseButtonClicked(string unitId)
+        {
+            Debug.Log("Developer onAdCloseButtonClicked------:" + unitId);
+        }
     }
 		
 }

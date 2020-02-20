@@ -215,6 +215,20 @@ namespace AnyThinkAds.Android
             }
         }
 
+        /**
+   * 广告视频进度回调
+   *
+   * @param view
+   */
+        public void onAdCloseButtonClicked(string unitId)
+        {
+            Debug.Log("onAdCloseButtonClicked...unity3d");
+            if (mlistener != null)
+            {
+                mlistener.onAdCloseButtonClicked(unitId);
+            }
+        }
+
 
         /**
      * 广告加载成功

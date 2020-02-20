@@ -67,15 +67,14 @@ namespace AnyThinkAds.Android
 			return isready; 
         }
 
-		
 
-        public void showInterstitialAd(string unitId)
+        public void showInterstitialAd(string unitId, string jsonmap)
         {
 			Debug.Log("ATInterstitialAdClient : showAd " );
 
 			try{
                 if (interstitialHelperMap.ContainsKey(unitId)) {
-                    this.interstitialHelperMap[unitId].Call ("showInterstitialAd");
+                    this.interstitialHelperMap[unitId].Call ("showInterstitialAd", jsonmap);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);

@@ -50,4 +50,9 @@ public interface NativeListener {
      * 广告加载失败
      */
     public void onNativeAdLoadFail(String unitId, String code, String msg);
+
+    /**
+     * 广告关闭按钮点击
+     */
+    public void onAdCloseButtonClicked(String unitId);
 }

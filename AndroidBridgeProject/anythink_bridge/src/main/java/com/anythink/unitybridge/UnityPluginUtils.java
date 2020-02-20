@@ -10,7 +10,7 @@ import com.unity3d.player.UnityPlayer;
  * @version V1.2
  */
 public class UnityPluginUtils {
-    public static final String TAG = "AT_android_untiy3d";
+    public static final String TAG = "AT_android_unity3d";
 
     public static Activity getActivity(String msg) {
         return UnityPlayer.currentActivity;

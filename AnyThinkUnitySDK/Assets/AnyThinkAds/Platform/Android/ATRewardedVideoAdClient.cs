@@ -81,13 +81,13 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void showAd(string unitId)
+        public void showAd(string unitId, string scenario)
         {
 			Debug.Log("ATRewardedVideoAdClient : showAd " );
 
 			try{
                 if (videoHelperMap.ContainsKey(unitId)) {
-                    this.videoHelperMap[unitId].Call ("showVideo");
+                    this.videoHelperMap[unitId].Call ("showVideo", scenario);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);

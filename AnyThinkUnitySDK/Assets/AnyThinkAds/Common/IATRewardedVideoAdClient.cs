@@ -34,7 +34,7 @@ namespace AnyThinkAds.Common
 		/***
 		 * 显示广告
 		 */
-        void showAd(string unitId);
+        void showAd(string unitId, string mapJson);
 		/***
 		 * 
 		 */

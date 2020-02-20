@@ -1,6 +1,7 @@
 package com.anythink.unitybridge.interstitial;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.anythink.core.api.ATAdInfo;
@@ -9,7 +10,10 @@ import com.anythink.interstitial.api.ATInterstitial;
 import com.anythink.interstitial.api.ATInterstitialListener;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
+import com.anythink.unitybridge.imgutil.Const;
 import com.anythink.unitybridge.imgutil.TaskManager;
+
+import org.json.JSONObject;
 
 
 /**
@@ -178,14 +182,29 @@ public class InterstitialHelper {
         });
     }
 
-    public void showInterstitialAd() {
-        MsgTools.pirntMsg("showInterstitial >>> " + this);
+    public void showInterstitialAd(final String jsonMap) {
+        MsgTools.pirntMsg("showInterstitial >>> " + this + ", jsonMap >>> " + jsonMap);
          UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mInterstitialAd != null) {
                     isReady = false;
-                    mInterstitialAd.show();
+
+                    String scenario = "";
+                    if(!TextUtils.isEmpty(jsonMap)) {
+                        try {
+                            JSONObject _jsonObject = new JSONObject(jsonMap);
+                            if(_jsonObject.has(Const.SCENARIO)) {
+                                scenario = _jsonObject.optString(Const.SCENARIO);
+                            }
+                        } catch (Exception e) {
+                            if (Const.DEBUG) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    MsgTools.pirntMsg("showInterstitialAd >>> " + this + ", scenario >>> " + scenario);
+                    mInterstitialAd.show(scenario);
                 } else {
                     Log.e(TAG, "showInterstitial error  ..you must call initInterstitial first " + this);
                     if (mListener != null) {
