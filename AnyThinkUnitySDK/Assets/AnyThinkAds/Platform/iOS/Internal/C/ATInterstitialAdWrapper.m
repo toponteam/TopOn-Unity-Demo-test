@@ -34,8 +34,9 @@
     return [[ATAdManager sharedManager] interstitialReadyForPlacementID:placementID];
 }
 
--(void) showInterstitialAdWithPlacementID:(NSString*)placementID {
-    [[ATAdManager sharedManager] showInterstitialWithPlacementID:placementID inViewController:[UIApplication sharedApplication].delegate.window.rootViewController delegate:self];
+-(void) showInterstitialAdWithPlacementID:(NSString*)placementID extraJsonString:(NSString*)extraJsonString {
+    NSDictionary *extraDict = ([extraJsonString isKindOfClass:[NSString class]] && [extraJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[extraJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil;
+    [[ATAdManager sharedManager] showInterstitialWithPlacementID:placementID scene:extraDict[kATUnityUtilitiesAdShowingExtraScenarioKey] inViewController:[UIApplication sharedApplication].delegate.window.rootViewController delegate:self];
 }
 
 -(void) clearCache {

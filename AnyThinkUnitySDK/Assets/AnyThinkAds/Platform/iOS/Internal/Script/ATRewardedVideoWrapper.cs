@@ -60,9 +60,9 @@ public class ATRewardedVideoWrapper:ATAdWrapper {
     	return ATUnityCBridge.SendMessageToC(CMessageReceiverClass, "rewardedVideoReadyForPlacementID:", new object[]{placementID});
     }
 
-    static public void showRewardedVideo(string placementID) {
+    static public void showRewardedVideo(string placementID, string mapJson) {
 	    Debug.Log("Unity: ATRewardedVideoWrapper::showRewardedVideo(" + placementID + ")");
-    	ATUnityCBridge.SendMessageToC(CMessageReceiverClass, "showRewardedVideoWithPlacementID:", new object[]{placementID});
+    	ATUnityCBridge.SendMessageToC(CMessageReceiverClass, "showRewardedVideoWithPlacementID:", new object[]{placementID, mapJson});
     }
 
     static public void clearCache() {

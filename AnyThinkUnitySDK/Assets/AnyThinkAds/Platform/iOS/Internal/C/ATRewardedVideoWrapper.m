@@ -30,8 +30,9 @@
     return [[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:placementID];
 }
 
--(void) showRewardedVideoWithPlacementID:(NSString*)placementID {
-    [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:placementID inViewController:[UIApplication sharedApplication].delegate.window.rootViewController delegate:self];
+-(void) showRewardedVideoWithPlacementID:(NSString*)placementID extraJsonString:(NSString*)extraJsonString {
+    NSDictionary *extraDict = ([extraJsonString isKindOfClass:[NSString class]] && [extraJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[extraJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil;
+    [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:placementID scene:extraDict[kATUnityUtilitiesAdShowingExtraScenarioKey] inViewController:[UIApplication sharedApplication].delegate.window.rootViewController delegate:self];
 }
 
 -(void) clearCache {

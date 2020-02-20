@@ -19,7 +19,7 @@ namespace AnyThinkAds.iOS {
 
 	    public void loadInterstitialAd(string unitId, string mapJson) {
 			Debug.Log("Unity: ATInterstitialAdClient::loadInterstitialAd()");
-			ATInterstitialAdWrapper.setClientForPlacementID(unitId, this);
+            ATInterstitialAdWrapper.setClientForPlacementID(unitId, this);
 			ATInterstitialAdWrapper.loadInterstitialAd(unitId, mapJson);
 		}
 
@@ -28,9 +28,9 @@ namespace AnyThinkAds.iOS {
 			return ATInterstitialAdWrapper.hasInterstitialAdReady(unitId);
 		}
 
-		public void showInterstitialAd(string unitId) {
+		public void showInterstitialAd(string unitId, string mapJson) {
 			Debug.Log("Unity: ATInterstitialAdClient::showInterstitialAd()");
-			ATInterstitialAdWrapper.showInterstitialAd(unitId);
+			ATInterstitialAdWrapper.showInterstitialAd(unitId, mapJson);
 		}
 
 		public void cleanCache(string unitId) {

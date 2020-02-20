@@ -57,9 +57,9 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
     	return ATUnityCBridge.SendMessageToC(CMessaageReceiverClass, "interstitialAdReadyForPlacementID:", new object[]{placementID});
     }
 
-    static public void showInterstitialAd(string placementID) {
+    static public void showInterstitialAd(string placementID, string mapJson) {
 	    Debug.Log("Unity: ATInterstitialAdWrapper::showInterstitialAd(" + placementID + ")");
-    	ATUnityCBridge.SendMessageToC(CMessaageReceiverClass, "showInterstitialAdWithPlacementID:", new object[]{placementID});
+    	ATUnityCBridge.SendMessageToC(CMessaageReceiverClass, "showInterstitialAdWithPlacementID:", new object[]{placementID, mapJson});
     }
 
     static public void clearCache(string placementID) {

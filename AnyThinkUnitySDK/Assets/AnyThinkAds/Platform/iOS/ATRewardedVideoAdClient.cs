@@ -32,9 +32,9 @@ namespace AnyThinkAds.iOS {
 			Debug.Log("Unity: ATRewardedVideoAdClient::setUserData()");
 	    }
 
-	    public void showAd(string unitId) {
+	    public void showAd(string unitId, string mapJson) {
 	    	Debug.Log("Unity: ATRewardedVideoAdClient::showAd()");
-	    	ATRewardedVideoWrapper.showRewardedVideo(unitId);
+	    	ATRewardedVideoWrapper.showRewardedVideo(unitId, mapJson);
 	    }
 
 	    public void cleanAd(string unitId) {
