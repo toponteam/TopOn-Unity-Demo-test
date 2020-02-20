@@ -175,6 +175,16 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
                 }];
             }
             [button addSubview:adview];
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(2.0f, 2.0f, 30.0f, 16.0f)];
+            label.font = [UIFont systemFontOfSize:15.0f];
+            label.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.4f];
+            label.textColor = [UIColor whiteColor];
+            label.text = @"AD";
+            label.textAlignment = NSTextAlignmentCenter;
+            label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+            [adview addSubview:label];
+            
             [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:button];
         }
     }
