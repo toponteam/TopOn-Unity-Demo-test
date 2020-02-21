@@ -8,17 +8,21 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anythink.nativead.api.ATNativeAdRenderer;
 import com.anythink.nativead.unitgroup.api.CustomNativeAd;
+import com.anythink.network.admob.AdmobATConst;
 import com.anythink.network.applovin.ApplovinATConst;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.imgutil.CommonBitmapUtil;
 import com.anythink.unitybridge.imgutil.CommonImageLoader;
 import com.anythink.unitybridge.imgutil.CommonImageLoaderListener;
+
+import java.security.cert.CollectionCertStoreParameters;
 
 
 /**
@@ -59,7 +63,7 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
         final ImageView logoView = new ImageView(mActivity);
 
         final View mediaView = ad.getAdMediaView(mFrameLayout, view.getWidth());
-        if(mediaView != null && ad.isNativeExpress()) { // 个性化模板View
+        if (mediaView != null && ad.isNativeExpress()) { // 个性化模板View
             if (mViewInfo.imgMainView != null && mViewInfo.rootView != null) {
                 mViewInfo.imgMainView.mX = 0;
                 mViewInfo.imgMainView.mY = 0;
@@ -239,6 +243,24 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             adFromTextView.setText(ad.getAdFrom());
 
             mFrameLayout.addView(adFromTextView, adFromParam);
+        }
+
+        if (mNetworkType == AdmobATConst.NETWORK_FIRM_ID) {
+            MsgTools.pirntMsg("start to add admob ad textview ");
+            TextView adLogoView = new TextView(mActivity);
+            adLogoView.setTextColor(Color.WHITE);
+            adLogoView.setText("AD");
+            adLogoView.setTextSize(11);
+            adLogoView.setPadding(CommonBitmapUtil.dip2px(mActivity, 3), 0, CommonBitmapUtil.dip2px(mActivity, 3), 0);
+            adLogoView.setBackgroundColor(Color.parseColor("#66000000"));
+            if (mFrameLayout != null) {
+                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.leftMargin = CommonBitmapUtil.dip2px(mActivity, 3);
+                layoutParams.topMargin = CommonBitmapUtil.dip2px(mActivity, 3);
+                mFrameLayout.addView(adLogoView, layoutParams);
+
+                MsgTools.pirntMsg("add admob ad textview 2 activity");
+            }
         }
 
     }
