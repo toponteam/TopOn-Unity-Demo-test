@@ -150,6 +150,7 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
     if ([self isNativeAdReadyForPlacementID:placementID]) {
         NSDictionary *metrics = [NSJSONSerialization JSONObjectWithData:[metricsJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
         NSDictionary *parsedMetrics = parseUnityMetrics(metrics);
+        NSLog(@"metrics = %@, parsedMetrics = %@", metrics, parsedMetrics);
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(noop) forControlEvents:UIControlEventTouchUpInside];
@@ -175,6 +176,11 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
                 }];
             }
             [button addSubview:adview];
+            
+            adview.mediaView.frame = adview.mainImageView.frame;
+            [adview bringSubviewToFront:adview.mediaView];
+            adview.mainImageView.layer.borderColor = [UIColor redColor].CGColor;
+            adview.mainImageView.layer.borderWidth = 1.0f;
             
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(2.0f, 2.0f, 30.0f, 16.0f)];
             label.font = [UIFont systemFontOfSize:15.0f];
@@ -222,6 +228,10 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
 -(void) didClickNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     //Drop ad view
     [self invokeCallback:@"OnNativeAdClick" placementID:placementID error:nil extra:nil];
+}
+
+-(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
+    [self invokeCallback:@"OnNativeAdClostButtonClick" placementID:placementID error:nil extra:nil];
 }
     
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
