@@ -63,6 +63,12 @@ namespace AnyThinkAds.iOS {
             if (mlistener != null) mlistener.onAdClicked(unitId);
         }
 
+        public void onAdCloseButtonClicked(string unitId)
+        {
+            Debug.Log("Unity:ATNativeAdClient::onAdCloseButtonClicked...unity3d.");
+            if (mlistener != null) mlistener.onAdCloseButtonClicked(unitId);
+        }
+
         public void onAdVideoStart(string unitId) {
             Debug.Log("Unity:ATNativeAdClient::onAdVideoStart...unity3d.");
             if (mlistener != null) mlistener.onAdVideoStart(unitId);
