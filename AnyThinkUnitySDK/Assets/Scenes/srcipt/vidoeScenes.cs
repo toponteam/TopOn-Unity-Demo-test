@@ -8,15 +8,16 @@ using AnyThinkAds.ThirdParty.MiniJSON;
 
 public class vidoeScenes : MonoBehaviour {
 
-	#if UNITY_ANDROID
+#if UNITY_ANDROID
     static string mPlacementId_rewardvideo_all = "b5b728e7a08cd4";
+    static string showingScenario = "";
+#elif UNITY_IOS || UNITY_IPHONE
+    static string mPlacementId_rewardvideo_all = "b5b72b21184aa8";//"b5b44a0f115321";
+    static string showingScenario = "f5e54970dc84e6";
 
-	#elif UNITY_IOS || UNITY_IPHONE
-	static string mPlacementId_rewardvideo_all = "b5b72b21184aa8";//"b5b44a0f115321";
+#endif
 
-	#endif
-
-	ATRewardedVideo rewardedVideo;
+    ATRewardedVideo rewardedVideo;
 	
  
 	// Use this for initialization
@@ -145,7 +146,7 @@ public class vidoeScenes : MonoBehaviour {
 		Debug.Log ("Developer show video....");
 
         Dictionary<string, string> jsonmap = new Dictionary<string, string>();
-        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, "");
+        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
         ATRewardedVideo.Instance.showAd(mPlacementId_rewardvideo_all, jsonmap);
 		
 	}

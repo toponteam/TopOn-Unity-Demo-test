@@ -15,15 +15,17 @@ public class interstitialScenes : MonoBehaviour {
 
 #if UNITY_ANDROID
     static string mPlacementId_interstitial_all = "b5baca599c7c61";
+    static string showingScenario = "";
 
 #elif UNITY_IOS || UNITY_IPHONE
     static string mPlacementId_interstitial_all = "b5bacad80a0fb1";
+    static string showingScenario = "f5e549727efc49";
 
 #endif
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -55,7 +57,7 @@ public class interstitialScenes : MonoBehaviour {
 
     public void showInterstitialAd() {
         Dictionary<string, string> jsonmap = new Dictionary<string, string>();
-        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, "");
+        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
 
         ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all, jsonmap);
     }
