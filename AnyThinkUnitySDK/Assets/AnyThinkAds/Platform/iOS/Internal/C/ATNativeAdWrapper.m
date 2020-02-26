@@ -231,7 +231,7 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
 }
 
 -(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnNativeAdClostButtonClick" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeAdCloseButtonClick" placementID:placementID error:nil extra:nil];
 }
     
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {

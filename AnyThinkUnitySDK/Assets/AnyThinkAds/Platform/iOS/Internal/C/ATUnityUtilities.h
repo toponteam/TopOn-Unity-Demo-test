@@ -11,6 +11,7 @@ extern NSString *const kATUnityUtilitiesInterstitialImpressionNotification;
 extern NSString *const kATUnityUtilitiesInterstitialCloseNotification;
 extern NSString *const kATUnityUtilitiesRewardedVideoImpressionNotification;
 extern NSString *const kATUnityUtilitiesRewardedVideoCloseNotification;
+extern NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey;
 @interface ATUnityUtilities : NSObject
 
 @end

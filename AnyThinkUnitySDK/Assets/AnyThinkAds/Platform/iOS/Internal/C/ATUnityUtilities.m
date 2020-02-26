@@ -11,6 +11,8 @@ NSString *const kATUnityUtilitiesInterstitialImpressionNotification = @"com.anyt
 NSString *const kATUnityUtilitiesInterstitialCloseNotification = @"kATUnityUtilitiesInterstitialCloseNotification";
 NSString *const kATUnityUtilitiesRewardedVideoImpressionNotification = @"kATUnityUtilitiesRewardedVideoImpressionNotification";
 NSString *const kATUnityUtilitiesRewardedVideoCloseNotification = @"kATUnityUtilitiesRewardedVideoCloseNotification";
+NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey = @"Scenario";
+
 @implementation ATUnityUtilities
 
 @end

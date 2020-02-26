@@ -28,9 +28,8 @@ public class ATNativeAdWrapper:ATAdWrapper {
     		OnNativeAdVideoStart((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnNativeAdVideoEnd")) {
     		OnNativeAdVideoEnd((string)msgDict["placement_id"]);
-        } else if (callback.Equals("OnNativeAdClostButtonClick"))
-        {
-            OnNativeAdVideoEnd((string)msgDict["placement_id"]);
+        } else if (callback.Equals("OnNativeAdCloseButtonClick")) {
+            OnNativeAdCloseButtonClick((string)msgDict["placement_id"]);
         }
     }
 
@@ -97,9 +96,9 @@ public class ATNativeAdWrapper:ATAdWrapper {
 		Debug.Log("Unity: ATNativeAdWrapper::OnNativeAdVideoEnd(" + placementID + ")");
 	}
 
-    static private void OnNativeAdClostButtonClick(string placementID)
+    static private void OnNativeAdCloseButtonClick(string placementID)
     {
         if (clients[placementID] != null) clients[placementID].onAdCloseButtonClicked(placementID);
-        Debug.Log("Unity: ATNativeAdWrapper::OnNativeAdClostButtonClick(" + placementID + ")");
+        Debug.Log("Unity: ATNativeAdWrapper::OnNativeAdCloseButtonClick(" + placementID + ")");
     }
 }
