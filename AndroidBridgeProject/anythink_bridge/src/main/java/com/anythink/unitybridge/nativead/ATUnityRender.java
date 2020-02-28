@@ -89,7 +89,6 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             MsgTools.pirntMsg("title---->" + ad.getTitle());
             titleView.setText(ad.getTitle());
 
-            titleView.setGravity(Gravity.CENTER);
             titleView.setSingleLine();
             titleView.setMaxEms(15);
             titleView.setEllipsize(TextUtils.TruncateAt.END);
@@ -137,7 +136,6 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             descView.setText(ad.getDescriptionText());
 
 
-            descView.setGravity(Gravity.CENTER);
             descView.setMaxLines(3);
             descView.setMaxEms(15);
             descView.setEllipsize(TextUtils.TruncateAt.END);
