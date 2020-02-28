@@ -10,9 +10,9 @@ public class vidoeScenes : MonoBehaviour {
 
 #if UNITY_ANDROID
     static string mPlacementId_rewardvideo_all = "b5b728e7a08cd4";
-    static string showingScenario = "1234567890123f";
+    static string showingScenario = "f5e5492eca9668";
 #elif UNITY_IOS || UNITY_IPHONE
-    static string mPlacementId_rewardvideo_all = "b5b72b21184aa8";//"b5b44a0f115321";
+    static string mPlacementId_rewardvideo_all = "b5b44a0f115321";//"b5b44a0f115321";
     static string showingScenario = "f5e54970dc84e6";
 
 #endif
