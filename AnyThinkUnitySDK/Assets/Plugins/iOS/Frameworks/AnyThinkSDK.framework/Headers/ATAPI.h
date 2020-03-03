@@ -26,6 +26,8 @@ extern NSInteger const ATADLoadingErrorCodeDataConsentForbidden;
 extern NSInteger const ATADLoadingErrorCodeThirdPartySDKNotImportedProperly;
 extern NSInteger const ATADLoadingErrorCodeInvalidInputEncountered;
 extern NSInteger const ATADLoadingErrorCodePlacementAdDeliverySwitchOff;
+extern NSInteger const ATADLoadingErrorCodePreviousLoadNotFinished;
+extern NSInteger const ATADLoadingErrorCodeNoUnitGroupsFoundInPlacement;
 
 extern NSString *const ATSDKInitErrorDomain;
 extern NSInteger const ATSDKInitErrorCodeDataConsentNotSet;
@@ -180,6 +182,8 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  */
 @property(nonatomic) NSString *channel;
 @property(nonatomic) NSString *subchannel;
-@property(nonatomic) NSDictionary *customData;
+@property(atomic) NSDictionary *customData;
+-(void) setCustomData:(NSDictionary *)customData forPlacementID:(NSString*)placementID;
+-(NSDictionary*) customDataForPlacementID:(NSString*)placementID;
 -(NSString*)version;
 @end
