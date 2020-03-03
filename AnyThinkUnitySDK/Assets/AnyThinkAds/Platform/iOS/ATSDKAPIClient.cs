@@ -67,6 +67,11 @@ namespace AnyThinkAds.iOS {
             ATManager.setCustomMap(jsonMap);
         }
 
+        public void setCustomDataForPlacementID(string customData, string placementID)
+        {
+            ATManager.setCustomDataForPlacementID(customData, placementID);
+        }
+
         public void setLogDebug(bool isDebug)
         {
             ATManager.setLogDebug(isDebug);

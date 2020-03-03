@@ -134,6 +134,13 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
     }
 }
 
+-(void) setCustomData:(NSString*)customDataStr forPlacementID:(NSString*)placementID {
+    if ([customDataStr isKindOfClass:[NSString class]] && [customDataStr length] > 0) {
+        NSDictionary *customData = [NSJSONSerialization JSONObjectWithData:[customDataStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        [[ATAPI sharedInstance] setCustomData:customData forPlacementID:placementID];
+    }
+}
+
 -(void) setDebugLog:(NSString*)flagStr {
     [ATAPI setLogEnabled:[flagStr boolValue]];
 }

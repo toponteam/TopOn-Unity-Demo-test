@@ -128,9 +128,8 @@ public class vidoeScenes : MonoBehaviour {
             ATRewardedVideo.Instance.setListener(callbackListener);
             ATRewardedVideo.Instance.addsetting(mPlacementId_rewardvideo_all, addsetting());
         }
-       
 
-
+        ATSDKAPI.setCustomDataForPlacementID(new Dictionary<string, string> { { "placement_custom_key", "placement_custom" } }, mPlacementId_rewardvideo_all);
 
 		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
 		jsonmap.Add("age", "22");

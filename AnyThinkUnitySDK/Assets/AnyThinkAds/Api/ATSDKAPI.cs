@@ -53,6 +53,11 @@ namespace AnyThinkAds.Api
             client.initCustomMap(Json.Serialize(customMap));
         }
 
+        public static void setCustomDataForPlacementID(Dictionary<string, string> customData, string placementID)
+        {
+            client.setCustomDataForPlacementID(Json.Serialize(customData), placementID);
+        }
+
         public static void showGDPRAuth()
         {
             client.showGDPRAuth();

@@ -101,6 +101,11 @@ namespace AnyThinkAds.Android
             }
         }
 
+        public void setCustomDataForPlacementID(string customData, string placementID)
+        {
+            //To be implemented
+        }
+
         public void setLogDebug(bool isDebug)
         {
             Debug.Log("setLogDebug....");

@@ -58,6 +58,11 @@ public class ATManager {
         ATUnityCBridge.SendMessageToC("ATUnityManager", "setCustomData:", new object[] { jsonMap });
     }
 
+    public static void setCustomDataForPlacementID(string customData, string placementID)
+    {
+        ATUnityCBridge.SendMessageToC("ATUnityManager", "setCustomData:forPlacementID:", new object[] {customData, placementID});
+    }
+
     public static void setLogDebug(bool isDebug)
     {
         ATUnityCBridge.SendMessageToC("ATUnityManager", "setDebugLog:", new object[] { isDebug ? "true" : "false" });

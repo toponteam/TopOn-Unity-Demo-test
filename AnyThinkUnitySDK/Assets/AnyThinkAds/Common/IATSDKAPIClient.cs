@@ -17,6 +17,7 @@ namespace AnyThinkAds.Common
         void clearPurchaseFlag();
         void setChannel(string channel);
         void initCustomMap(string cutomMap);
+        void setCustomDataForPlacementID(string customData, string placementID);
         void setLogDebug(bool isDebug);
         int getGDPRLevel();
         bool isEUTraffic();
