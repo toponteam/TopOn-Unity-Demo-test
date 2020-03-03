@@ -10,15 +10,15 @@
 
 typedef NS_ENUM(NSInteger, KSAdPosAdType) {
     KSAdPosAdTypeUnknown        =           0,
+    KSAdPosAdTypeFeed           =           1,
+    KSAdPosAdTypeRewardVideo    =           2,
+    KSAdPosAdTypeFullScreenVideo    =       3,
+    KSAdPosAdTypeDrawVideo          =       6,
     KSAdPosAdTypeBanner,
     KSAdPosAdTypeInterstitial,
     KSAdPosAdTypeSplash,
     KSAdPosAdTypeSplash_Cache,
-    KSAdPosAdTypeFeed,
     KSAdPosAdTypePaster,
-    KSAdPosAdTypeRewardVideo,
-    KSAdPosAdTypeFullScreenVideo,
-    KSAdPosAdTypeDrawVideo,
 };
 
 typedef NS_ENUM(NSInteger, KSAdPosPosition) {

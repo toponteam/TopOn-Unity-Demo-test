@@ -34,7 +34,7 @@
 #import <KSAdSDK/KSDrawAd.h>
 #import <KSAdSDK/KSDrawAdsManager.h>
 
-
+#import <KSAdSDK/KSAdPlayerView.h>
 
 
 #import <KSAdSDK/KSAdUserInfo.h>

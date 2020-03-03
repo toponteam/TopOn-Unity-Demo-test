@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 // optional
 + (void)setLoglevel:(KSAdSDKLogLevel)level;
 
++ (void)setAutoHideUIRemoteKeyboardWindow:(BOOL)autoHideUIRemoteKeyboardWindow;
+
 + (NSString *)appId;
 
 + (NSString *)SDKDetailVersion;
