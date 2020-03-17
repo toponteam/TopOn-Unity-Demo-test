@@ -41,6 +41,7 @@ public class bannerScenes : MonoBehaviour {
     static BannerCallback bannerCallback ;
 
     public void loadBannerAd() {
+
         if(bannerCallback == null){
             bannerCallback = new BannerCallback();
             ATBannerAd.Instance.setListener(bannerCallback);
@@ -86,9 +87,9 @@ public class bannerScenes : MonoBehaviour {
 
     class BannerCallback : ATBannerAdListener
     {
-        public void onAdAutoRefresh(string unitId)
+        public void onAdAutoRefresh(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdAutoRefresh :" +  unitId);
+            Debug.Log("Developer callback onAdAutoRefresh :" +  unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onAdAutoRefreshFail(string unitId, string code, string message)
@@ -96,9 +97,9 @@ public class bannerScenes : MonoBehaviour {
             Debug.Log("Developer callback onAdAutoRefreshFail : "+ unitId + "--code:" + code + "--msg:" + message);
         }
 
-        public void onAdClick(string unitId)
+        public void onAdClick(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdClick :" + unitId);
+            Debug.Log("Developer callback onAdClick :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onAdClose(string unitId)
@@ -111,9 +112,9 @@ public class bannerScenes : MonoBehaviour {
             Debug.Log("Developer callback onAdCloseButtonTapped :" + unitId);
         }
 
-        public void onAdImpress(string unitId)
+        public void onAdImpress(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdImpress :" + unitId);
+            Debug.Log("Developer callback onAdImpress :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onAdLoad(string unitId)

@@ -17,11 +17,11 @@ namespace AnyThinkAds.Api
 		/***
 		 * 广告展示
 		 */ 
-        void onAdImpressed(string unitId);
+        void onAdImpressed(string unitId, ATCallbackInfo callbackInfo);
 		/**
 		 * 广告点击
 		 */ 
-        void onAdClicked(string unitId);
+        void onAdClicked(string unitId, ATCallbackInfo callbackInfo);
 		/***
 		 * 视屏播放开始 如果有
 		 */ 
@@ -37,7 +37,7 @@ namespace AnyThinkAds.Api
         /***
 		 * 广告关闭按钮点击 如果有
 		 */
-        void onAdCloseButtonClicked(string unitId);
+        void onAdCloseButtonClicked(string unitId, ATCallbackInfo callbackInfo);
 
     }
 }

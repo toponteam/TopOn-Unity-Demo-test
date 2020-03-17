@@ -21,15 +21,15 @@ public class ATNativeAdWrapper:ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnNativeAdLoadingFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnNaitveAdShow")) {
-    		OnNaitveAdShow((string)msgDict["placement_id"]);
+    		OnNaitveAdShow((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnNativeAdClick")) {
-    		OnNativeAdClick((string)msgDict["placement_id"]);
+    		OnNativeAdClick((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnNativeAdVideoStart")) {
     		OnNativeAdVideoStart((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnNativeAdVideoEnd")) {
     		OnNativeAdVideoEnd((string)msgDict["placement_id"]);
         } else if (callback.Equals("OnNativeAdCloseButtonClick")) {
-            OnNativeAdCloseButtonClick((string)msgDict["placement_id"]);
+            OnNativeAdCloseButtonClick((string)msgDict["placement_id"], "");
         }
     }
 
@@ -76,13 +76,13 @@ public class ATNativeAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].onNativeAdLoadFail(placementID, (string)errorDict["code"], (string)errorDict["message"]);
 	}
 
-	static private void OnNaitveAdShow(string placementID) {
-        if (clients[placementID] != null) clients[placementID].onAdImpressed(placementID);
+    static private void OnNaitveAdShow(string placementID, string callbackJson) {
+        if (clients[placementID] != null) clients[placementID].onAdImpressed(placementID, callbackJson);
 		Debug.Log("Unity: ATNativeAdWrapper::OnNaitveAdShow(" + placementID + ")");
 	}
 
-	static private void OnNativeAdClick(string placementID) {
-        if (clients[placementID] != null) clients[placementID].onAdClicked(placementID);
+    static private void OnNativeAdClick(string placementID, string callbackJson) {
+        if (clients[placementID] != null) clients[placementID].onAdClicked(placementID, callbackJson);
 		Debug.Log("Unity: ATNativeAdWrapper::OnNativeAdClick(" + placementID + ")");
 	}
 
@@ -96,9 +96,9 @@ public class ATNativeAdWrapper:ATAdWrapper {
 		Debug.Log("Unity: ATNativeAdWrapper::OnNativeAdVideoEnd(" + placementID + ")");
 	}
 
-    static private void OnNativeAdCloseButtonClick(string placementID)
+    static private void OnNativeAdCloseButtonClick(string placementID, string callbackJson)
     {
-        if (clients[placementID] != null) clients[placementID].onAdCloseButtonClicked(placementID);
+        if (clients[placementID] != null) clients[placementID].onAdCloseButtonClicked(placementID, callbackJson);
         Debug.Log("Unity: ATNativeAdWrapper::OnNativeAdCloseButtonClick(" + placementID + ")");
     }
 }

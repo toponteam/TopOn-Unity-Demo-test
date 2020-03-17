@@ -192,28 +192,28 @@ public class vidoeScenes : MonoBehaviour {
             Debug.Log("Developer onRewardedVideoAdLoadFail------:code" + code + "--message:" + message);
         }
 
-        public void onRewardedVideoAdPlayStart(string unitId){
-            Debug.Log("Developer onRewardedVideoAdPlayStart------");
+        public void onRewardedVideoAdPlayStart(string unitId, ATCallbackInfo callbackInfo){
+            Debug.Log("Developer onRewardedVideoAdPlayStart------" + "->" + callbackInfo.toJsonString());
         }
 
-        public void onRewardedVideoAdPlayEnd(string unitId){
-            Debug.Log("Developer onRewardedVideoAdPlayEnd------");
+        public void onRewardedVideoAdPlayEnd(string unitId, ATCallbackInfo callbackInfo){
+            Debug.Log("Developer onRewardedVideoAdPlayEnd------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onRewardedVideoAdPlayFail(string unitId, string code, string message){
             Debug.Log("Developer onRewardedVideoAdPlayFail------code:" + code + "---message:" + message);
         }
 
-        public void onRewardedVideoAdPlayClosed(string unitId, bool isReward){
-            Debug.Log("Developer onRewardedVideoAdPlayClosed------isReward:" + isReward);
+        public void onRewardedVideoAdPlayClosed(string unitId, bool isReward, ATCallbackInfo callbackInfo){
+            Debug.Log("Developer onRewardedVideoAdPlayClosed------isReward:" + isReward + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onRewardedVideoAdPlayClicked(string unitId){
-            Debug.Log("Developer onRewardVideoAdPlayClicked------");
+        public void onRewardedVideoAdPlayClicked(string unitId, ATCallbackInfo callbackInfo){
+            Debug.Log("Developer onRewardVideoAdPlayClicked------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onReward(string unitId){
-            Debug.Log("Developer onReward------");
+        public void onReward(string unitId, ATCallbackInfo callbackInfo){
+            Debug.Log("Developer onReward------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
     }
 }

@@ -103,7 +103,19 @@ namespace AnyThinkAds.Android
 
         public void setCustomDataForPlacementID(string customData, string placementID)
         {
-            //To be implemented
+            Debug.Log("setCustomDataForPlacementID....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("initPlacementCustomMap", placementID, customData);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
         }
 
         public void setLogDebug(bool isDebug)

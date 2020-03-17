@@ -1,1 +1,1 @@
-include  ':demoapplication', ':anythink_bridge'
+include  ':demoapplication',':anythink_bridge_aar'

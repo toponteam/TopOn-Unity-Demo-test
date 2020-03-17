@@ -33,11 +33,11 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
     	} else if (callback.Equals("OnInterstitialAdVideoPlayEnd")) {
     		OnInterstitialAdVideoPlayEnd((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnInterstitialAdShow")) {
-    		OnInterstitialAdShow((string)msgDict["placement_id"]);
+    		OnInterstitialAdShow((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnInterstitialAdClick")) {
-    		OnInterstitialAdClick((string)msgDict["placement_id"]);
+    		OnInterstitialAdClick((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnInterstitialAdClose")) {
-    		OnInterstitialAdClose((string)msgDict["placement_id"]);
+    		OnInterstitialAdClose((string)msgDict["placement_id"], "");
     	}
     }
 
@@ -94,9 +94,9 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].OnInterstitialAdVideoPlayEnd(placementID);
     }
 
-    static private void OnInterstitialAdShow(string placementID) {
+    static private void OnInterstitialAdShow(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATInterstitialAdWrapper::OnInterstitialAdShow()");
-        if (clients[placementID] != null) clients[placementID].OnInterstitialAdShow(placementID);
+        if (clients[placementID] != null) clients[placementID].OnInterstitialAdShow(placementID, callbackJson);
     }
 
     static private void OnInterstitialAdFailedToShow(string placementID) {
@@ -104,14 +104,14 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].OnInterstitialAdFailedToShow(placementID);
     }
 
-    static private void OnInterstitialAdClick(string placementID) {
+    static private void OnInterstitialAdClick(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATInterstitialAdWrapper::OnInterstitialAdClick()");
-        if (clients[placementID] != null) clients[placementID].OnInterstitialAdClick(placementID);
+        if (clients[placementID] != null) clients[placementID].OnInterstitialAdClick(placementID, callbackJson);
     }
 
-    static private void OnInterstitialAdClose(string placementID) {
+    static private void OnInterstitialAdClose(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATInterstitialAdWrapper::OnInterstitialAdClose()");
-        if (clients[placementID] != null) clients[placementID].OnInterstitialAdClose(placementID);
+        if (clients[placementID] != null) clients[placementID].OnInterstitialAdClose(placementID, callbackJson);
     }
 }
 

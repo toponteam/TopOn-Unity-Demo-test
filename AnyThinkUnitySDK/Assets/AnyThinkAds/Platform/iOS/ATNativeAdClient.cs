@@ -53,20 +53,20 @@ namespace AnyThinkAds.iOS {
         }
 
         //Callbacks
-        public void onAdImpressed(string unitId) {
+        public void onAdImpressed(string unitId, string callbackJson) {
             Debug.Log("Unity:ATNativeAdClient::onAdImpressed...unity3d.");
-            if(mlistener != null) mlistener.onAdImpressed(unitId);
+            if(mlistener != null) mlistener.onAdImpressed(unitId, new ATCallbackInfo(callbackJson));
         }
 
-        public void onAdClicked(string unitId) {
+        public void onAdClicked(string unitId, string callbackJson) {
             Debug.Log("Unity:ATNativeAdClient::onAdClicked...unity3d.");
-            if (mlistener != null) mlistener.onAdClicked(unitId);
+            if (mlistener != null) mlistener.onAdClicked(unitId, new ATCallbackInfo(callbackJson));
         }
 
-        public void onAdCloseButtonClicked(string unitId)
+        public void onAdCloseButtonClicked(string unitId, string callbackJson)
         {
             Debug.Log("Unity:ATNativeAdClient::onAdCloseButtonClicked...unity3d.");
-            if (mlistener != null) mlistener.onAdCloseButtonClicked(unitId);
+            if (mlistener != null) mlistener.onAdCloseButtonClicked(unitId, new ATCallbackInfo(callbackJson));
         }
 
         public void onAdVideoStart(string unitId) {

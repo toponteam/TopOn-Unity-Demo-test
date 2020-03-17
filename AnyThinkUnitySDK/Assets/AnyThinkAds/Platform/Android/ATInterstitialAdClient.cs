@@ -174,29 +174,29 @@ namespace AnyThinkAds.Android
             }
         }
         //广告关闭
-        public void onInterstitialAdClose(string unitId)
+        public void onInterstitialAdClose(string unitId, string callbackJson)
         {
             Debug.Log("onInterstitialAdClosed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdClose(unitId);
+                anyThinkListener.onInterstitialAdClose(unitId, new ATCallbackInfo(callbackJson));
             }
         }
         //广告点击
-        public void onInterstitialAdClicked(string unitId)
+        public void onInterstitialAdClicked(string unitId, string callbackJson)
         {
             Debug.Log("onInterstitialAdClicked...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdClick(unitId);
+                anyThinkListener.onInterstitialAdClick(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
-        public void onInterstitialAdShow(string unitId){
+        public void onInterstitialAdShow(string unitId, string callbackJson){
             Debug.Log("onInterstitialAdShow...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdShow(unitId);
+                anyThinkListener.onInterstitialAdShow(unitId, new ATCallbackInfo(callbackJson));
             }
         }
        

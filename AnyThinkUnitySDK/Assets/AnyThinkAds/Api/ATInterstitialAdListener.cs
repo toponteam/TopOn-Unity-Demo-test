@@ -23,7 +23,7 @@ namespace AnyThinkAds.Api
 		 * 广告展示
 		 * @param unitId 广告位id
 		 */ 
-        void onInterstitialAdShow(string unitId);
+        void onInterstitialAdShow(string unitId, ATCallbackInfo callbackInfo);
 		/***
 		 * 广告展示失败
 		 * @param unitId 广告位id
@@ -33,12 +33,12 @@ namespace AnyThinkAds.Api
 		 * 广告关闭
 		 * @param unitId 广告位id
 		 */ 
-        void onInterstitialAdClose(string unitId);
+        void onInterstitialAdClose(string unitId, ATCallbackInfo callbackInfo);
 		/***
 		 * 广告点击
 		 * @param unitId 广告位id
 		 */ 
-        void onInterstitialAdClick(string unitId);
+        void onInterstitialAdClick(string unitId, ATCallbackInfo callbackInfo);
         /**
         *广告开始播放视频
         * @param unitId 广告位id

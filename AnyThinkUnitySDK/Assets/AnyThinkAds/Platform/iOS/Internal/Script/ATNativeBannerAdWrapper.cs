@@ -22,11 +22,11 @@ public class ATNativeBannerAdWrapper : ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnNativeBannerAdLoadingFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnNaitveBannerAdShow")) {
-    		OnNaitveBannerAdShow((string)msgDict["placement_id"]);
+    		OnNaitveBannerAdShow((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnNativeBannerAdClick")) {
-    		OnNativeBannerAdClick((string)msgDict["placement_id"]);
+    		OnNativeBannerAdClick((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnNativeBannerAdAutorefresh")) {
-    		OnNativeBannerAdAutorefresh((string)msgDict["placement_id"]);
+    		OnNativeBannerAdAutorefresh((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnNativeBannerAdAutorefreshFailed")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
             Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
@@ -91,19 +91,19 @@ public class ATNativeBannerAdWrapper : ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].onAdLoadFail(placementID, (string)errorDict["code"], (string)errorDict["message"]);
 	}
 
-	static private void OnNaitveBannerAdShow(string placementID) {
+	static private void OnNaitveBannerAdShow(string placementID, string callbackJson) {
 		Debug.Log("Unity: ATNativeBannerAdWrapper::OnNaitveBannerAdShow(" + placementID + ")");
-        if (clients[placementID] != null) clients[placementID].onAdImpressed(placementID);
+        if (clients[placementID] != null) clients[placementID].onAdImpressed(placementID, callbackJson);
 	}
 
-	static private void OnNativeBannerAdClick(string placementID) {
+    static private void OnNativeBannerAdClick(string placementID, string callbackJson) {
 		Debug.Log("Unity: ATNativeBannerAdWrapper::OnNativeBannerAdClick(" + placementID + ")");
-        if (clients[placementID] != null) clients[placementID].onAdClicked(placementID);
+        if (clients[placementID] != null) clients[placementID].onAdClicked(placementID, callbackJson);
 	}
 
-	static private void OnNativeBannerAdAutorefresh(string placementID) {
+    static private void OnNativeBannerAdAutorefresh(string placementID, string callbackJson) {
 		Debug.Log("Unity: ATNativeBannerAdWrapper::OnNativeBannerAdAutorefresh(" + placementID + ")");
-        if (clients[placementID] != null) clients[placementID].onAdAutoRefresh(placementID);
+        if (clients[placementID] != null) clients[placementID].onAdAutoRefresh(placementID, callbackJson);
 	}
 
 	static private void OnNativeBannerAdAutorefreshFailed(string placementID, Dictionary<string, object> errorDict) {

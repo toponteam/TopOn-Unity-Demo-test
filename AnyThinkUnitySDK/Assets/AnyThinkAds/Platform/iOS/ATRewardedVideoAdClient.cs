@@ -61,14 +61,14 @@ namespace AnyThinkAds.iOS {
 	        if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdLoadFail(unitId, code, error);
 	    }
 
-	    public void onRewardedVideoAdPlayStart(string unitId) {
+        public void onRewardedVideoAdPlayStart(string unitId, string callbackJson) {
 	        Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdPlayStart()");
-	        if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayStart(unitId);
+            if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayStart(unitId, new ATCallbackInfo(callbackJson));
 	    }
 
-	    public void onRewardedVideoAdPlayEnd(string unitId) {
+        public void onRewardedVideoAdPlayEnd(string unitId, string callbackJson) {
 	        Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdPlayEnd()");
-	        if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayEnd(unitId);
+            if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayEnd(unitId, new ATCallbackInfo(callbackJson));
 	    }
 
 	    public void onRewardedVideoAdPlayFailed(string unitId, string code, string error) {
@@ -76,19 +76,19 @@ namespace AnyThinkAds.iOS {
 	        if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayFail(unitId, code, error);
 	    }
 
-	    public void onRewardedVideoAdClosed(string unitId, bool isRewarded) {
+        public void onRewardedVideoAdClosed(string unitId, bool isRewarded, string callbackJson) {
 	        Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdClosed()");
-	        if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayClosed(unitId, isRewarded);
+            if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayClosed(unitId, isRewarded, new ATCallbackInfo(callbackJson));
 	    }
 
-	    public void onRewardedVideoAdPlayClicked(string unitId) {
+        public void onRewardedVideoAdPlayClicked(string unitId, string callbackJson) {
 	        Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdPlayClicked()");
-	        if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayClicked(unitId);
+            if (anyThinkListener != null) anyThinkListener.onRewardedVideoAdPlayClicked(unitId, new ATCallbackInfo(callbackJson));
 	    }
 
-        public void onRewardedVideoReward(string unitId) {
+        public void onRewardedVideoReward(string unitId, string callbackJson) {
             Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoReward()");
-            if (anyThinkListener != null) anyThinkListener.onReward(unitId);
+            if (anyThinkListener != null) anyThinkListener.onReward(unitId, new ATCallbackInfo(callbackJson));
         }
 	}
 }

@@ -17,15 +17,15 @@ namespace AnyThinkAds.Api
 		/***
 		 * 广告展示
 		 */ 
-        void onAdImpressed(string unitId);
+        void onAdImpressed(string unitId, ATCallbackInfo callbackInfo);
 		/**
 		 * 广告点击
 		 */ 
-        void onAdClicked(string unitId);
+        void onAdClicked(string unitId, ATCallbackInfo callbackInfo);
         /**
 		 * 广告自动刷新
 		 */ 
-        void onAdAutoRefresh(string unitId);
+        void onAdAutoRefresh(string unitId, ATCallbackInfo callbackInfo);
         /**
 		 * 广告自动刷新失败
 		 */ 

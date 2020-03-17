@@ -151,11 +151,11 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdImpressed(string unitId)
+        public void onAdImpressed(string unitId, string callbackJson)
         {
             Debug.Log("onAdImpressed...unity3d.");
             if(mlistener != null){
-                mlistener.onAdImpressed(unitId);
+                mlistener.onAdImpressed(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -164,12 +164,12 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdClicked(string unitId)
+        public void onAdClicked(string unitId, string callbackJson)
         {
             Debug.Log("onAdClicked...unity3d.");
             if (mlistener != null)
             {
-                mlistener.onAdClicked(unitId);
+                mlistener.onAdClicked(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -220,12 +220,12 @@ namespace AnyThinkAds.Android
    *
    * @param view
    */
-        public void onAdCloseButtonClicked(string unitId)
+        public void onAdCloseButtonClicked(string unitId, string callbackJson)
         {
             Debug.Log("onAdCloseButtonClicked...unity3d");
             if (mlistener != null)
             {
-                mlistener.onAdCloseButtonClicked(unitId);
+                mlistener.onAdCloseButtonClicked(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 

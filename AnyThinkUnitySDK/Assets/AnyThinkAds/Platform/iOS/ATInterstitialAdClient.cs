@@ -64,24 +64,24 @@ namespace AnyThinkAds.iOS {
 	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdEndPlayingVideo(placementID);
 	    }
 
-	    public void OnInterstitialAdShow(string placementID) {
+        public void OnInterstitialAdShow(string placementID, string callbackJson) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdShow()");
-	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdShow(placementID);
+            if (anyThinkListener != null) anyThinkListener.onInterstitialAdShow(placementID, new ATCallbackInfo(callbackJson));
 	    }
 
-	    public void OnInterstitialAdFailedToShow(string placementID) {
+        public void OnInterstitialAdFailedToShow(string placementID) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdFailedToShow()");
 	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdFailedToShow(placementID);
 	    }
 
-	    public void OnInterstitialAdClick(string placementID) {
+        public void OnInterstitialAdClick(string placementID, string callbackJson) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdClick()");
-	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdClick(placementID);
+            if (anyThinkListener != null) anyThinkListener.onInterstitialAdClick(placementID, new ATCallbackInfo(callbackJson));
 	    }
 
-	    public void OnInterstitialAdClose(string placementID) {
+        public void OnInterstitialAdClose(string placementID, string callbackJson) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdClose()");
-	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdClose(placementID);
+            if (anyThinkListener != null) anyThinkListener.onInterstitialAdClose(placementID, new ATCallbackInfo(callbackJson));
 	    }
 	}
 }

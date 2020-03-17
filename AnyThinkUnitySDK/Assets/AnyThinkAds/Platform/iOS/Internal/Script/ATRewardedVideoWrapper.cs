@@ -26,15 +26,15 @@ public class ATRewardedVideoWrapper:ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnRewardedVideoPlayFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnRewardedVideoPlayStart")) {
-    		OnRewardedVideoPlayStart((string)msgDict["placement_id"]);
+    		OnRewardedVideoPlayStart((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnRewardedVideoPlayEnd")) {
-    		OnRewardedVideoPlayEnd((string)msgDict["placement_id"]);
+    		OnRewardedVideoPlayEnd((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnRewardedVideoClick")) {
-    		OnRewardedVideoClick((string)msgDict["placement_id"]);
+    		OnRewardedVideoClick((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnRewardedVideoClose")) {
-    		OnRewardedVideoClose((string)msgDict["placement_id"], (bool)msgDict["rewarded"]);
+    		OnRewardedVideoClose((string)msgDict["placement_id"], (bool)msgDict["rewarded"], "");
         } else if (callback.Equals("OnRewardedVideoReward")) {
-            OnRewardedVideoReward((string)msgDict["placement_id"]);
+            OnRewardedVideoReward((string)msgDict["placement_id"], "");
         }
     }
 
@@ -88,29 +88,29 @@ public class ATRewardedVideoWrapper:ATAdWrapper {
 
     }
 
-    static public void OnRewardedVideoPlayStart(string placementID) {
+    static public void OnRewardedVideoPlayStart(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATRewardedVideoWrapper::OnRewardedVideoPlayStart()");
-        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdPlayStart(placementID);
+        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdPlayStart(placementID, callbackJson);
     }
 
-    static public void OnRewardedVideoPlayEnd(string placementID) {
+    static public void OnRewardedVideoPlayEnd(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATRewardedVideoWrapper::OnRewardedVideoPlayEnd()");
-        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdPlayEnd(placementID);
+        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdPlayEnd(placementID, callbackJson);
     }
 
-    static public void OnRewardedVideoClick(string placementID) {
+    static public void OnRewardedVideoClick(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATRewardedVideoWrapper::OnRewardedVideoClick()");
-        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdPlayClicked(placementID);
+        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdPlayClicked(placementID, callbackJson);
     }
 
-    static public void OnRewardedVideoClose(string placementID, bool rewarded) {
+    static public void OnRewardedVideoClose(string placementID, bool rewarded, string callbackJson) {
     	Debug.Log("Unity: ATRewardedVideoWrapper::OnRewardedVideoClose()");
-        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdClosed(placementID, rewarded);
+        if (clients[placementID] != null) clients[placementID].onRewardedVideoAdClosed(placementID, rewarded, callbackJson);
     }
-    static public void OnRewardedVideoReward(string placementID)
+    static public void OnRewardedVideoReward(string placementID, string callbackJson)
     {
         Debug.Log("Unity: ATRewardedVideoWrapper::OnRewardedVideoReward()");
-        if (clients[placementID] != null) clients[placementID].onRewardedVideoReward(placementID);
+        if (clients[placementID] != null) clients[placementID].onRewardedVideoReward(placementID, callbackJson);
     }
 
 }

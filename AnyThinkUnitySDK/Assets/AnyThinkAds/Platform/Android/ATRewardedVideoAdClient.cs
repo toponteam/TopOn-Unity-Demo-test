@@ -170,22 +170,22 @@ namespace AnyThinkAds.Android
         }
 
         //开始播放
-        public void onRewardedVideoAdPlayStart(string unitId)
+        public void onRewardedVideoAdPlayStart(string unitId, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdPlayStart...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayStart(unitId);
+                anyThinkListener.onRewardedVideoAdPlayStart(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //结束播放
-        public void onRewardedVideoAdPlayEnd(string unitId)
+        public void onRewardedVideoAdPlayEnd(string unitId, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdPlayEnd...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayEnd(unitId);
+                anyThinkListener.onRewardedVideoAdPlayEnd(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -199,31 +199,31 @@ namespace AnyThinkAds.Android
             }
         }
         //广告关闭
-        public void onRewardedVideoAdClosed(string unitId,bool isRewarded)
+        public void onRewardedVideoAdClosed(string unitId,bool isRewarded, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdClosed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayClosed(unitId,isRewarded);
+                anyThinkListener.onRewardedVideoAdPlayClosed(unitId,isRewarded, new ATCallbackInfo(callbackJson));
             }
         }
         //广告点击
-        public void onRewardedVideoAdPlayClicked(string unitId)
+        public void onRewardedVideoAdPlayClicked(string unitId, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdPlayClicked...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayClicked(unitId);
+                anyThinkListener.onRewardedVideoAdPlayClicked(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //广告激励下发
-        public void onReward(string unitId)
+        public void onReward(string unitId, string callbackJson)
         {
             Debug.Log("onReward...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onReward(unitId);
+                anyThinkListener.onReward(unitId, new ATCallbackInfo(callbackJson));
             }
         }
        

@@ -64,18 +64,18 @@ public class NativeBannerScene : MonoBehaviour, ATNativeBannerAdListener {
            
     } 
 	
-    public void onAdImpressed(string unitId) {
-        Debug.Log("Developer onAdImpressed------:" + unitId);
+    public void onAdImpressed(string unitId, ATCallbackInfo callbackInfo) {
+        Debug.Log("Developer onAdImpressed------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
            
     } 
 	
-    public void onAdClicked(string unitId) {
-        Debug.Log("Developer onAdClicked------:" + unitId);
+    public void onAdClicked(string unitId, ATCallbackInfo callbackInfo) {
+        Debug.Log("Developer onAdClicked------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
            
     } 
 	 
-    public void onAdAutoRefresh(string unitId) {
-        Debug.Log("Developer onAdAutoRefresh------:" + unitId);
+    public void onAdAutoRefresh(string unitId, ATCallbackInfo callbackInfo) {
+        Debug.Log("Developer onAdAutoRefresh------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
            
     } 
 	

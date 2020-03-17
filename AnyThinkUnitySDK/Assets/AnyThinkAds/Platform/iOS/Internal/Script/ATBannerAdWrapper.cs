@@ -19,11 +19,11 @@ public class ATBannerAdWrapper:ATAdWrapper {
             Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
     		OnBannerAdLoadFail((string)msgDict["placement_id"], (string)errorMsg["code"], (string)errorMsg["reason"]);
     	} else if (callback.Equals("OnBannerAdImpress")) {
-    		OnBannerAdImpress((string)msgDict["placement_id"]);
+    		OnBannerAdImpress((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnBannerAdClick")) {
-    		OnBannerAdClick((string)msgDict["placement_id"]);
+    		OnBannerAdClick((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnBannerAdAutoRefresh")) {
-    		OnBannerAdAutoRefresh((string)msgDict["placement_id"]);
+    		OnBannerAdAutoRefresh((string)msgDict["placement_id"], "");
     	} else if (callback.Equals("OnBannerAdAutoRefreshFail")) {
             Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
     		OnBannerAdAutoRefreshFail((string)msgDict["placement_id"], (string)errorMsg["code"], (string)errorMsg["reason"]);
@@ -88,19 +88,19 @@ public class ATBannerAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].OnBannerAdLoadFail(placementID, code, message);
     }
     
-    static private void OnBannerAdImpress(string placementID) {
+    static private void OnBannerAdImpress(string placementID, string callbackJson) {
 		Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdImpress()");
-        if (clients[placementID] != null) clients[placementID].OnBannerAdImpress(placementID);
+        if (clients[placementID] != null) clients[placementID].OnBannerAdImpress(placementID, callbackJson);
     }
     
-    static private void OnBannerAdClick(string placementID) {
+    static private void OnBannerAdClick(string placementID, string callbackJson) {
 		Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdClick()");
-        if (clients[placementID] != null) clients[placementID].OnBannerAdClick(placementID);
+        if (clients[placementID] != null) clients[placementID].OnBannerAdClick(placementID, callbackJson);
     }
     
-    static private void OnBannerAdAutoRefresh(string placementID) {
+    static private void OnBannerAdAutoRefresh(string placementID, string callbackJson) {
 		Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdAutoRefresh()");
-        if (clients[placementID] != null) clients[placementID].OnBannerAdAutoRefresh(placementID);
+        if (clients[placementID] != null) clients[placementID].OnBannerAdAutoRefresh(placementID, callbackJson);
     }
     
     static private void OnBannerAdAutoRefreshFail(string placementID, string code, string message) {

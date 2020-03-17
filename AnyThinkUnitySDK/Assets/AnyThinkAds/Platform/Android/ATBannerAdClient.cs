@@ -167,22 +167,22 @@ namespace AnyThinkAds.Android
         }
 
         //广告点击
-        public void onBannerClicked(string unitId)
+        public void onBannerClicked(string unitId, string callbackJson)
         {
             Debug.Log("onBannerClicked...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onAdClick(unitId);
+                anyThinkListener.onAdClick(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //广告展示
-        public void onBannerShow(string unitId)
+        public void onBannerShow(string unitId, string callbackJson)
         {
             Debug.Log("onBannerShow...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onAdImpress(unitId);
+                anyThinkListener.onAdImpress(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -196,12 +196,12 @@ namespace AnyThinkAds.Android
             }
         }
         //广告关闭
-        public void onBannerAutoRefreshed(string unitId)
+        public void onBannerAutoRefreshed(string unitId, string callbackJson)
         {
             Debug.Log("onBannerAutoRefreshed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onAdAutoRefresh(unitId);
+                anyThinkListener.onAdAutoRefresh(unitId, new ATCallbackInfo(callbackJson));
             }
         }
         //广告自动刷新失败

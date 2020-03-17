@@ -195,13 +195,13 @@ public class nativeScenes : MonoBehaviour {
         {
             Debug.Log("Developer onAdLoadFail------:" + unitId + "--code:" + code + "--msg:" + message);
         }
-        public void onAdImpressed(string unitId)
+        public void onAdImpressed(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer onAdImpressed------:" + unitId);
+            Debug.Log("Developer onAdImpressed------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
-        public void onAdClicked(string unitId)
+        public void onAdClicked(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer onAdClicked------:" + unitId);
+            Debug.Log("Developer onAdClicked------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
         public void onAdVideoStart(string unitId)
         {
@@ -216,9 +216,9 @@ public class nativeScenes : MonoBehaviour {
             Debug.Log("Developer onAdVideoProgress------:" + unitId);
         }
 
-        public void onAdCloseButtonClicked(string unitId)
+        public void onAdCloseButtonClicked(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer onAdCloseButtonClicked------:" + unitId);
+            Debug.Log("Developer onAdCloseButtonClicked------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
     }
 		

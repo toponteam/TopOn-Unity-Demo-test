@@ -25,6 +25,7 @@ namespace AnyThinkAds.Api
 		private ATBannerAd() 
 		{
             client = GetATBannerAdClient();
+            ATCallbackInfo aT = new ATCallbackInfo("");
 		}
 
 		public static ATBannerAd Instance 

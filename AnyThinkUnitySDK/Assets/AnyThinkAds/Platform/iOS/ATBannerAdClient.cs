@@ -64,19 +64,19 @@ namespace AnyThinkAds.iOS {
 	        if (anyThinkListener != null) anyThinkListener.onAdLoadFail(unitId, code, message);
 	    }
 	    
-	    public void OnBannerAdImpress(string unitId) {
+	    public void OnBannerAdImpress(string unitId, string callbackJson) {
 			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdImpress()");
-	        if (anyThinkListener != null) anyThinkListener.onAdImpress(unitId);
+            if (anyThinkListener != null) anyThinkListener.onAdImpress(unitId, new ATCallbackInfo(callbackJson));
 	    }
 	    
-	    public void OnBannerAdClick(string unitId) {
+        public void OnBannerAdClick(string unitId, string callbackJson) {
 			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdClick()");
-	        if (anyThinkListener != null) anyThinkListener.onAdClick(unitId);
+            if (anyThinkListener != null) anyThinkListener.onAdClick(unitId, new ATCallbackInfo(callbackJson));
 	    }
 	    
-	    public void OnBannerAdAutoRefresh(string unitId) {
+        public void OnBannerAdAutoRefresh(string unitId, string callbackJson) {
 			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdAutoRefresh()");
-	        if (anyThinkListener != null) anyThinkListener.onAdAutoRefresh(unitId);
+            if (anyThinkListener != null) anyThinkListener.onAdAutoRefresh(unitId, new ATCallbackInfo(callbackJson));
 	    }
 	    
 	    public void OnBannerAdAutoRefreshFail(string unitId, string code, string message) {
