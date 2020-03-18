@@ -14,7 +14,7 @@ public class nativeScenes : MonoBehaviour {
 
 
 #if UNITY_ANDROID
-    static string mPlacementId_native_all = "a5aa1f9deda26d";
+    static string mPlacementId_native_all = "b5c2c97629da0d";
 
 #elif UNITY_IOS || UNITY_IPHONE
     static string mPlacementId_native_all = "b5bacac780e03b";//gdt template
