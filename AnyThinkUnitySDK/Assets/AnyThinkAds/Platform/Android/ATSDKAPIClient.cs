@@ -84,6 +84,23 @@ namespace AnyThinkAds.Android
             }
         }
 
+        public void setSubChannel(string subchannel)
+        {
+            Debug.Log("setSubChannel....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("setSubChannel", subchannel);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
         public void initCustomMap(string jsonMap)
         {
             Debug.Log("initCustomMap....");

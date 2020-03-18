@@ -62,6 +62,11 @@ namespace AnyThinkAds.iOS {
             ATManager.setChannel(channel);
         }
 
+        public void setSubChannel(string subchannel)
+        {
+            
+        }
+
         public void initCustomMap(string jsonMap)
         {
             ATManager.setCustomMap(jsonMap);

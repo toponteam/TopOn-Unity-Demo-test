@@ -16,6 +16,7 @@ namespace AnyThinkAds.Common
         bool purchaseFlag();
         void clearPurchaseFlag();
         void setChannel(string channel);
+        void setSubChannel(string subchannel);
         void initCustomMap(string cutomMap);
         void setCustomDataForPlacementID(string customData, string placementID);
         void setLogDebug(bool isDebug);
