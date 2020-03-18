@@ -193,7 +193,7 @@ public class vidoeScenes : MonoBehaviour {
         }
 
         public void onRewardedVideoAdPlayStart(string unitId, ATCallbackInfo callbackInfo){
-            Debug.Log("Developer onRewardedVideoAdPlayStart------" + "->" + callbackInfo.toJsonString());
+            Debug.Log("Developer onRewardedVideoAdPlayStart------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onRewardedVideoAdPlayEnd(string unitId, ATCallbackInfo callbackInfo){
