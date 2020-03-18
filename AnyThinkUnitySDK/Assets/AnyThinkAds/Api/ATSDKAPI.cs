@@ -48,6 +48,11 @@ namespace AnyThinkAds.Api
             client.setChannel(channel);
         }
 
+        public static void setSubChannel(string subChannel)
+        {
+            client.setSubChannel(subChannel);
+        }
+
         public static void initCustomMap(Dictionary<string, string> customMap)
         {
             client.initCustomMap(Json.Serialize(customMap));
