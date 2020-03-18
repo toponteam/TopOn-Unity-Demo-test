@@ -94,6 +94,11 @@ public class SDKInitHelper {
         ATSDK.setChannel(channel);
     }
 
+    public void setSubChannel(final String subChannel) {
+        MsgTools.pirntMsg("setSubChannel--> :" + subChannel);
+        ATSDK.setSubChannel(subChannel);
+    }
+
     public void initCustomMap(final String jsonMap) {
         MsgTools.pirntMsg("initCustomMap--> :" + jsonMap != null ? jsonMap : "");
         Map<String, String> map = new HashMap<>();
