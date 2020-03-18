@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, KSAdPosAdType) {
     KSAdPosAdTypeRewardVideo    =           2,
     KSAdPosAdTypeFullScreenVideo    =       3,
     KSAdPosAdTypeDrawVideo          =       6,
+    KSAdPosAdTypeContentEcology     =       7,
     KSAdPosAdTypeBanner,
     KSAdPosAdTypeInterstitial,
     KSAdPosAdTypeSplash,

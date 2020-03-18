@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, KSAdErrorCode) {
     
     
     KSAdErrorCodeNotVideoAd     =           50001,      // not a video ad
-    
+    KSAdErrorCodeNoMoreData     =           100006,     // 拉取内容视频时，没有更多了
+    KSAdErrorCodeShareUrl       =           100007,     // 拉取分享接口，获取shareURL失败
 };
 
 

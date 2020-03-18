@@ -11,7 +11,8 @@
 #import <MTGSDK/MTGAdSize.h>
 #import "MTGBannerAdViewDelegate.h"
 
-#define MTGBannerSDKVersion @"5.8.7"
+#define MTGBannerSDKVersion @"6.1.1"
+
 
 @interface MTGBannerAdView : UIView
 
