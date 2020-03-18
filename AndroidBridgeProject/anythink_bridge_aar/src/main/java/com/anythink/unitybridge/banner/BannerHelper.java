@@ -108,13 +108,13 @@ public class BannerHelper {
             }
 
             @Override
-            public void onBannerClose() {
+            public void onBannerClose(final ATAdInfo adInfo) {
                 MsgTools.pirntMsg("initBanner onBannerClose>>> ");
                 TaskManager.getInstance().run_proxy(new Runnable() {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerClose(mUnitId);
+                            mListener.onBannerClose(mUnitId, adInfo.toString());
                         }
                     }
                 });

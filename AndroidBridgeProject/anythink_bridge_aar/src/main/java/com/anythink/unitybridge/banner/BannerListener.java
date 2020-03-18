@@ -10,7 +10,7 @@ public interface BannerListener {
 
     public void onBannerShow(String unitId, String callbackJson);
 
-    public void onBannerClose(String unitId);
+    public void onBannerClose(String unitId, String callbackJson);
 
     public void onBannerAutoRefreshed(String unitId, String callbackJson);
 

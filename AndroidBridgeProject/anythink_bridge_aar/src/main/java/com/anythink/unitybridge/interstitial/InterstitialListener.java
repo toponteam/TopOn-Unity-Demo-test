@@ -20,9 +20,9 @@ public interface InterstitialListener {
 
     public void onInterstitialAdClose(String unitId, String callbackJson);
 
-    public void onInterstitialAdVideoStart(String unitId);
+    public void onInterstitialAdVideoStart(String unitId, String callbackJson);
 
-    public void onInterstitialAdVideoEnd(String unitId);
+    public void onInterstitialAdVideoEnd(String unitId, String callbackJson);
 
     public void onInterstitialAdVideoError(String unitId, String code, String msg);
 }

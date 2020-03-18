@@ -115,26 +115,26 @@ public class InterstitialHelper {
             }
 
             @Override
-            public void onInterstitialAdVideoStart() {
+            public void onInterstitialAdVideoStart(final ATAdInfo adInfo) {
                 MsgTools.pirntMsg("initInterstitial onInterstitialAdVideoStart>>> ");
                 TaskManager.getInstance().run_proxy(new Runnable() {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdVideoStart(mUnitId);
+                            mListener.onInterstitialAdVideoStart(mUnitId, adInfo.toString());
                         }
                     }
                 });
             }
 
             @Override
-            public void onInterstitialAdVideoEnd() {
+            public void onInterstitialAdVideoEnd(final ATAdInfo adInfo) {
                 MsgTools.pirntMsg("initInterstitial onInterstitialAdVideoEnd>>> ");
                 TaskManager.getInstance().run_proxy(new Runnable() {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdVideoEnd(mUnitId);
+                            mListener.onInterstitialAdVideoEnd(mUnitId, adInfo.toString());
                         }
                     }
                 });
