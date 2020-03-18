@@ -67,6 +67,7 @@ public class MainScenes : MonoBehaviour {
 		Debug.Log ("Developer init sdk");
 		Debug.Log(" Developer Screen size : {" + Screen.width + ", " + Screen.height + "}");
         ATSDKAPI.setChannel("unity3d_test_channel");
+        ATSDKAPI.setSubChannel("unity3d_test_Subchannel");
         ATSDKAPI.initCustomMap(new Dictionary<string, string> { { "unity3d_data", "test_data" } });
         ATSDKAPI.setCustomDataForPlacementID(new Dictionary<string, string> { { "unity3d_data_pl", "test_data_pl" } },"b5b728e7a08cd4");
         ATSDKAPI.setLogDebug(true);
