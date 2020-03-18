@@ -187,12 +187,12 @@ namespace AnyThinkAds.Android
         }
 
         //广告关闭
-        public void onBannerClose(string unitId)
+        public void onBannerClose(string unitId, string callbackJson)
         {
             Debug.Log("onBannerClose...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onAdClose(unitId);
+                anyThinkListener.onAdCloseButtonTapped(unitId, new ATCallbackInfo(callbackJson));
             }
         }
         //广告关闭
