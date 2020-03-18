@@ -26,7 +26,7 @@ namespace AnyThinkAds.Api
         public readonly string network_placement_id;
         public readonly int ecpm_level;
 
-        public readonly string segment_id;
+        public readonly int segment_id;
         public readonly string scenario_id;
         public readonly string scenario_reward_name;
         public readonly int scenario_reward_number;
@@ -66,7 +66,7 @@ namespace AnyThinkAds.Api
 
                 network_placement_id = jsonObjects.ContainsKey("network_placement_id") ? jsonObjects["network_placement_id"] as string : "";
                 ecpm_level = System.Convert.ToInt32(jsonObjects.ContainsKey("ecpm_level") ? jsonObjects["ecpm_level"] : "0");
-                segment_id = jsonObjects.ContainsKey("segment_id") ? jsonObjects["segment_id"] as string : "";
+                segment_id = System.Convert.ToInt32(jsonObjects.ContainsKey("segment_id") ? jsonObjects["segment_id"] : "0");
                 scenario_id = jsonObjects.ContainsKey("scenario_id") ? jsonObjects["scenario_id"] as string : "";// RewardVideo & Interstitial
 
                 scenario_reward_name = jsonObjects.ContainsKey("scenario_reward_name") ? jsonObjects["scenario_reward_name"] as string : "";
