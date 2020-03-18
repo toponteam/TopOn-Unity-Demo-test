@@ -107,9 +107,9 @@ public class bannerScenes : MonoBehaviour {
             Debug.Log("Developer callback onAdClose :" + unitId);
         }
 
-        public void onAdCloseButtonTapped(string unitId)
+        public void onAdCloseButtonTapped(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdCloseButtonTapped :" + unitId);
+            Debug.Log("Developer callback onAdCloseButtonTapped :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onAdImpress(string unitId, ATCallbackInfo callbackInfo)

@@ -74,9 +74,9 @@ public class interstitialScenes : MonoBehaviour {
             Debug.Log("Developer callback onInterstitialAdClose :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onInterstitialAdEndPlayingVideo(string unitId)
+        public void onInterstitialAdEndPlayingVideo(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdEndPlayingVideo :" + unitId);
+            Debug.Log("Developer callback onInterstitialAdEndPlayingVideo :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
         public void onInterstitialAdFailedToPlayVideo(string unitId, string code, string message)
@@ -99,16 +99,16 @@ public class interstitialScenes : MonoBehaviour {
             Debug.Log("Developer callback onInterstitialAdShow :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onInterstitialAdStartPlayingVideo(string unitId)
+        public void onInterstitialAdStartPlayingVideo(string unitId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdStartPlayingVideo :" + unitId);
-            
+            Debug.Log("Developer callback onInterstitialAdStartPlayingVideo :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+
         }
 
         public void onInterstitialAdFailedToShow(string unitId)
         {
             Debug.Log("Developer callback onInterstitialAdFailedToShow :" + unitId);
-            
+
         }
     }
 
