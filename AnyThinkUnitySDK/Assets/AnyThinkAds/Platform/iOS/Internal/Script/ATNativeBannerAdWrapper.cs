@@ -13,7 +13,9 @@ public class ATNativeBannerAdWrapper : ATAdWrapper {
 
     static public void InvokeCallback(string callback, Dictionary<string, object> msgDict) {
         Debug.Log("Unity: ATNativeBannerAdWrapper::InvokeCallback()");
-    	if (callback.Equals("OnNativeBannerAdLoaded")) {
+        Dictionary<string, object> extra = new Dictionary<string, object>();
+        if (msgDict.ContainsKey("extra")) { extra = msgDict["extra"] as Dictionary<string, object>; }
+        if (callback.Equals("OnNativeBannerAdLoaded")) {
     		OnNativeBannerAdLoaded((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnNativeBannerAdLoadingFailure")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
@@ -22,11 +24,11 @@ public class ATNativeBannerAdWrapper : ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnNativeBannerAdLoadingFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnNaitveBannerAdShow")) {
-    		OnNaitveBannerAdShow((string)msgDict["placement_id"], "");
+    		OnNaitveBannerAdShow((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnNativeBannerAdClick")) {
-    		OnNativeBannerAdClick((string)msgDict["placement_id"], "");
+    		OnNativeBannerAdClick((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnNativeBannerAdAutorefresh")) {
-    		OnNativeBannerAdAutorefresh((string)msgDict["placement_id"], "");
+    		OnNativeBannerAdAutorefresh((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnNativeBannerAdAutorefreshFailed")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
             Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;

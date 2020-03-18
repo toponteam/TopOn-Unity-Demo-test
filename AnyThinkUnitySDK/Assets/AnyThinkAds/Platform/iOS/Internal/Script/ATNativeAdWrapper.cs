@@ -12,7 +12,9 @@ public class ATNativeAdWrapper:ATAdWrapper {
 
     static public void InvokeCallback(string callback, Dictionary<string, object> msgDict) {
         Debug.Log("Unity: ATNativeAdWrapper::InvokeCallback()");
-    	if (callback.Equals("OnNativeAdLoaded")) {
+        Dictionary<string, object> extra = new Dictionary<string, object>();
+        if (msgDict.ContainsKey("extra")) { extra = msgDict["extra"] as Dictionary<string, object>; }
+        if (callback.Equals("OnNativeAdLoaded")) {
     		OnNativeAdLoaded((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnNativeAdLoadingFailure")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
@@ -21,15 +23,15 @@ public class ATNativeAdWrapper:ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnNativeAdLoadingFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnNaitveAdShow")) {
-    		OnNaitveAdShow((string)msgDict["placement_id"], "");
+    		OnNaitveAdShow((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnNativeAdClick")) {
-    		OnNativeAdClick((string)msgDict["placement_id"], "");
+    		OnNativeAdClick((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnNativeAdVideoStart")) {
     		OnNativeAdVideoStart((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnNativeAdVideoEnd")) {
     		OnNativeAdVideoEnd((string)msgDict["placement_id"]);
         } else if (callback.Equals("OnNativeAdCloseButtonClick")) {
-            OnNativeAdCloseButtonClick((string)msgDict["placement_id"], "");
+            OnNativeAdCloseButtonClick((string)msgDict["placement_id"], Json.Serialize(extra));
         }
     }
 

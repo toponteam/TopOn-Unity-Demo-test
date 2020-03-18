@@ -12,7 +12,9 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
 
 	static public void InvokeCallback(string callback, Dictionary<string, object> msgDict) {
         Debug.Log("Unity: ATInterstitialAdWrapper::InvokeCallback()");
-    	if (callback.Equals("OnInterstitialAdLoaded")) {
+        Dictionary<string, object> extra = new Dictionary<string, object>();
+        if (msgDict.ContainsKey("extra")) { extra = msgDict["extra"] as Dictionary<string, object>; }
+        if (callback.Equals("OnInterstitialAdLoaded")) {
     		OnInterstitialAdLoaded((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnInterstitialAdLoadFailure")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
@@ -27,17 +29,15 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnInterstitialAdVideoPlayFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnInterstitialAdVideoPlayStart")) {
-    		OnInterstitialAdVideoPlayStart((string)msgDict["placement_id"]);
-    	} else if (callback.Equals("OnInterstitialAdVideoPlayStart")) {
-    		OnInterstitialAdVideoPlayStart((string)msgDict["placement_id"]);
+    		OnInterstitialAdVideoPlayStart((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnInterstitialAdVideoPlayEnd")) {
-    		OnInterstitialAdVideoPlayEnd((string)msgDict["placement_id"]);
+    		OnInterstitialAdVideoPlayEnd((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnInterstitialAdShow")) {
-    		OnInterstitialAdShow((string)msgDict["placement_id"], "");
+    		OnInterstitialAdShow((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnInterstitialAdClick")) {
-    		OnInterstitialAdClick((string)msgDict["placement_id"], "");
+    		OnInterstitialAdClick((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnInterstitialAdClose")) {
-    		OnInterstitialAdClose((string)msgDict["placement_id"], "");
+    		OnInterstitialAdClose((string)msgDict["placement_id"], Json.Serialize(extra));
     	}
     }
 
@@ -84,14 +84,14 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].OnInterstitialAdVideoPlayFailure(placementID, (string)errorDict["code"], (string)errorDict["message"]);
     }
 
-    static private void OnInterstitialAdVideoPlayStart(string placementID) {
+    static private void OnInterstitialAdVideoPlayStart(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATInterstitialAdWrapper::OnInterstitialAdPlayStart()");
-        if (clients[placementID] != null) clients[placementID].OnInterstitialAdVideoPlayStart(placementID);
+        if (clients[placementID] != null) clients[placementID].OnInterstitialAdVideoPlayStart(placementID, callbackJson);
     }
 
-    static private void OnInterstitialAdVideoPlayEnd(string placementID) {
+    static private void OnInterstitialAdVideoPlayEnd(string placementID, string callbackJson) {
     	Debug.Log("Unity: ATInterstitialAdWrapper::OnInterstitialAdVideoPlayEnd()");
-        if (clients[placementID] != null) clients[placementID].OnInterstitialAdVideoPlayEnd(placementID);
+        if (clients[placementID] != null) clients[placementID].OnInterstitialAdVideoPlayEnd(placementID, callbackJson);
     }
 
     static private void OnInterstitialAdShow(string placementID, string callbackJson) {

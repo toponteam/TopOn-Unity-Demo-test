@@ -43,12 +43,12 @@ namespace AnyThinkAds.Api
         *广告开始播放视频
         * @param unitId 广告位id
         */
-        void onInterstitialAdStartPlayingVideo(string unitId);
+        void onInterstitialAdStartPlayingVideo(string unitId, ATCallbackInfo callbackInfo);
         /**
         *广告视频播放结束
         * @param unitId 广告位id
         */
-        void onInterstitialAdEndPlayingVideo(string unitId);
+        void onInterstitialAdEndPlayingVideo(string unitId, ATCallbackInfo callbackInfo);
         /**
         *广告播放视频失败
         * @param unitId 广告位id

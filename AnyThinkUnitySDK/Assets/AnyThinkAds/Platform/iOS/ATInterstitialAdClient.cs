@@ -54,14 +54,14 @@ namespace AnyThinkAds.iOS {
 	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdFailedToPlayVideo(placementID, code, error);
 	    }
 
-	    public void OnInterstitialAdVideoPlayStart(string placementID) {
+	    public void OnInterstitialAdVideoPlayStart(string placementID, string callbackJson) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdPlayStart()");
-	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdStartPlayingVideo(placementID);
+	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdStartPlayingVideo(placementID, new ATCallbackInfo(callbackJson));
 	    }
 
-	    public void OnInterstitialAdVideoPlayEnd(string placementID) {
+	    public void OnInterstitialAdVideoPlayEnd(string placementID, string callbackJson) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdVideoPlayEnd()");
-	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdEndPlayingVideo(placementID);
+	        if (anyThinkListener != null) anyThinkListener.onInterstitialAdEndPlayingVideo(placementID, new ATCallbackInfo(callbackJson));
 	    }
 
         public void OnInterstitialAdShow(string placementID, string callbackJson) {

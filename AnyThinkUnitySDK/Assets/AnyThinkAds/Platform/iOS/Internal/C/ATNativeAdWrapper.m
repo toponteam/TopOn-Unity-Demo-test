@@ -222,25 +222,25 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
 }
 
 -(void) didShowNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnNaitveAdShow" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNaitveAdShow" placementID:placementID error:nil extra:extra];
 }
     
 -(void) didClickNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     //Drop ad view
-    [self invokeCallback:@"OnNativeAdClick" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeAdClick" placementID:placementID error:nil extra:extra];
 }
 
 -(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnNativeAdCloseButtonClick" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeAdCloseButtonClick" placementID:placementID error:nil extra:extra];
 }
     
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     //Drop ad view
-    [self invokeCallback:@"OnNativeAdVideoStart" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeAdVideoStart" placementID:placementID error:nil extra:extra];
 }
     
 -(void) didEndPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     //Drop ad view
-    [self invokeCallback:@"OnNativeAdVideoEnd" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeAdVideoEnd" placementID:placementID error:nil extra:extra];
 }
 @end

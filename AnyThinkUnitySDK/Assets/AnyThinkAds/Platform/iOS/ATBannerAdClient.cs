@@ -89,9 +89,9 @@ namespace AnyThinkAds.iOS {
 	        if (anyThinkListener != null) anyThinkListener.onAdClose(unitId);
 	    }
 
-	    public void OnBannerAdCloseButtonTapped(string unitId) {
+	    public void OnBannerAdCloseButtonTapped(string unitId, string callbackJson) {
 			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdCloseButton()");
-	        if (anyThinkListener != null) anyThinkListener.onAdCloseButtonTapped(unitId);
+	        if (anyThinkListener != null) anyThinkListener.onAdCloseButtonTapped(unitId, new ATCallbackInfo(callbackJson));
 	    }
 	}
 }

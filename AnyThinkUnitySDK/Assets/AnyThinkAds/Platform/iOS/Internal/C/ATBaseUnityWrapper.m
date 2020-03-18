@@ -61,7 +61,15 @@
     if ([self callbackForKey:placementID] != NULL) {
         if ([callback isKindOfClass:[NSString class]] && [callback length] > 0) {
             NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithObject:callback forKey:@"callback"];
-            NSMutableDictionary *msgDict = [NSMutableDictionary dictionaryWithDictionary:extra];
+            NSMutableDictionary *msgDict = [NSMutableDictionary dictionary];
+            if (extra != nil) {
+                if (extra[@"extra"] != nil) {
+                    msgDict[@"extra"] = extra[@"extra"];
+                    msgDict[@"rewarded"] = extra[@"rewarded"];
+                } else {
+                    msgDict[@"extra"] = extra;
+                }
+            }
             paraDict[@"msg"] = msgDict;
             if ([placementID isKindOfClass:[NSString class]] && [placementID length] > 0) msgDict[@"placement_id"] = placementID;
             if ([error isKindOfClass:[NSError class]]) {

@@ -11,6 +11,8 @@ public class ATRewardedVideoWrapper:ATAdWrapper {
 
     static public void InvokeCallback(string callback, Dictionary<string, object> msgDict) {
         Debug.Log("Unity: ATRewardedVideoWrapper::InvokeCallback(" + callback + " , " + msgDict + ")");
+        Dictionary<string, object> extra = new Dictionary<string, object>();
+        if (msgDict.ContainsKey("extra")) { extra = msgDict["extra"] as Dictionary<string, object>; }
     	if (callback.Equals("OnRewardedVideoLoaded")) {
     		OnRewardedVideoLoaded((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnRewardedVideoLoadFailure")) {
@@ -26,15 +28,15 @@ public class ATRewardedVideoWrapper:ATAdWrapper {
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnRewardedVideoPlayFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnRewardedVideoPlayStart")) {
-    		OnRewardedVideoPlayStart((string)msgDict["placement_id"], "");
+    		OnRewardedVideoPlayStart((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnRewardedVideoPlayEnd")) {
-    		OnRewardedVideoPlayEnd((string)msgDict["placement_id"], "");
+    		OnRewardedVideoPlayEnd((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnRewardedVideoClick")) {
-    		OnRewardedVideoClick((string)msgDict["placement_id"], "");
+    		OnRewardedVideoClick((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnRewardedVideoClose")) {
-    		OnRewardedVideoClose((string)msgDict["placement_id"], (bool)msgDict["rewarded"], "");
+    		OnRewardedVideoClose((string)msgDict["placement_id"], (bool)msgDict["rewarded"], Json.Serialize(extra));
         } else if (callback.Equals("OnRewardedVideoReward")) {
-            OnRewardedVideoReward((string)msgDict["placement_id"], "");
+            OnRewardedVideoReward((string)msgDict["placement_id"], Json.Serialize(extra));
         }
     }
 

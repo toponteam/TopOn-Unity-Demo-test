@@ -54,7 +54,7 @@
 }
 
 -(void) interstitialDidShowForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnInterstitialAdShow" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnInterstitialAdShow" placementID:placementID error:nil extra:extra];
     [[NSNotificationCenter defaultCenter] postNotificationName:kATUnityUtilitiesInterstitialImpressionNotification object:nil];
 }
 
@@ -64,23 +64,23 @@
 }
 
 -(void) interstitialDidStartPlayingVideoForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnInterstitialAdVideoPlayStart" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnInterstitialAdVideoPlayStart" placementID:placementID error:nil extra:extra];
 }
 
 -(void) interstitialDidEndPlayingVideoForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnInterstitialAdVideoPlayEnd" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnInterstitialAdVideoPlayEnd" placementID:placementID error:nil extra:extra];
 }
 
 -(void) interstitialDidFailToPlayVideoForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnInterstitialAdVideoPlayFailure" placementID:placementID error:error extra:nil];
+    [self invokeCallback:@"OnInterstitialAdVideoPlayFailure" placementID:placementID error:error extra:extra];
 }
 
 -(void) interstitialDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnInterstitialAdClose" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnInterstitialAdClose" placementID:placementID error:nil extra:extra];
     [[NSNotificationCenter defaultCenter] postNotificationName:kATUnityUtilitiesInterstitialCloseNotification object:nil];
 }
 
 -(void) interstitialDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    [self invokeCallback:@"OnInterstitialAdClick" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnInterstitialAdClick" placementID:placementID error:nil extra:extra];
 }
 @end

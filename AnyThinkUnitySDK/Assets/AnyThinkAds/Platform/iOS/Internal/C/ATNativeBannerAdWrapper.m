@@ -161,22 +161,22 @@ static NSString *const kATSharedCallbackKey = @"placement_id_placement_holder";
 
 -(void) didShowNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didShowNativeBannerAdInView:placementID:%@", placementID);
-    [self invokeCallback:@"OnNaitveBannerAdShow" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNaitveBannerAdShow" placementID:placementID error:nil extra:extra];
 }
 
 -(void) didClickNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didClickNativeBannerAdInView:placementID:%@", placementID);
-    [self invokeCallback:@"OnNativeBannerAdClick" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeBannerAdClick" placementID:placementID error:nil extra:extra];
 }
 
 -(void) didClickCloseButtonInNativeBannerAdView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didClickCloseButtonInNativeBannerAdView:placementID:%@", placementID);
-    [self invokeCallback:@"OnNativeBannerAdCloseButtonClicked" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeBannerAdCloseButtonClicked" placementID:placementID error:nil extra:extra];
 }
 
 -(void) didAutorefreshNativeBannerAdInView:(ATNativeBannerView*)bannerView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeBannerAdWrapper::didFailToAutorefreshNativeBannerAdInView:placementID:%@", placementID);
-    [self invokeCallback:@"OnNativeBannerAdAutorefresh" placementID:placementID error:nil extra:nil];
+    [self invokeCallback:@"OnNativeBannerAdAutorefresh" placementID:placementID error:nil extra:extra];
     
 }
 

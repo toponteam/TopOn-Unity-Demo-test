@@ -37,6 +37,6 @@ namespace AnyThinkAds.Api
         /**
         *广告关闭；某些厂商不支持
         */
-        void onAdCloseButtonTapped(string unitId);
+        void onAdCloseButtonTapped(string unitId, ATCallbackInfo callbackInfo);
     }
 }

@@ -13,24 +13,26 @@ public class ATBannerAdWrapper:ATAdWrapper {
 
 	static public void InvokeCallback(string callback, Dictionary<string, object> msgDict) {
         Debug.Log("Unity: ATBannerAdWrapper::InvokeCallback()");
-    	if (callback.Equals("OnBannerAdLoad")) {
+        Dictionary<string, object> extra = new Dictionary<string, object>();
+        if (msgDict.ContainsKey("extra")) { extra = msgDict["extra"] as Dictionary<string, object>; }
+        if (callback.Equals("OnBannerAdLoad")) {
     		OnBannerAdLoad((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnBannerAdLoadFail")) {
             Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
     		OnBannerAdLoadFail((string)msgDict["placement_id"], (string)errorMsg["code"], (string)errorMsg["reason"]);
     	} else if (callback.Equals("OnBannerAdImpress")) {
-    		OnBannerAdImpress((string)msgDict["placement_id"], "");
+    		OnBannerAdImpress((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnBannerAdClick")) {
-    		OnBannerAdClick((string)msgDict["placement_id"], "");
+    		OnBannerAdClick((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnBannerAdAutoRefresh")) {
-    		OnBannerAdAutoRefresh((string)msgDict["placement_id"], "");
+    		OnBannerAdAutoRefresh((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnBannerAdAutoRefreshFail")) {
             Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
     		OnBannerAdAutoRefreshFail((string)msgDict["placement_id"], (string)errorMsg["code"], (string)errorMsg["reason"]);
     	} else if (callback.Equals("OnBannerAdClose")) {
     		OnBannerAdClose((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnBannerAdCloseButtonTapped")) {
-            OnBannerAdCloseButtonTapped((string)msgDict["placement_id"]);
+            OnBannerAdCloseButtonTapped((string)msgDict["placement_id"], Json.Serialize(extra));
         }
     }
 
@@ -108,9 +110,9 @@ public class ATBannerAdWrapper:ATAdWrapper {
         if (clients[placementID] != null) clients[placementID].OnBannerAdAutoRefreshFail(placementID, code, message);
     }
 
-    static private void OnBannerAdCloseButtonTapped(string placementID) {
+    static private void OnBannerAdCloseButtonTapped(string placementID, string callbackJson) {
         Debug.Log("Unity: ATBannerAdWrapper::onAdCloseButtonTapped()");
-        if (clients[placementID] != null) clients[placementID].OnBannerAdCloseButtonTapped(placementID);
+        if (clients[placementID] != null) clients[placementID].OnBannerAdCloseButtonTapped(placementID, callbackJson);
     }
 
     static private void OnBannerAdClose(string placementID) {

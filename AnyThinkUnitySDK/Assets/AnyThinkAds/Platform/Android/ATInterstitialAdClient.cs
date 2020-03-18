@@ -145,22 +145,22 @@ namespace AnyThinkAds.Android
         }
 
         //开始播放
-        public void onInterstitialAdVideoStart(string unitId)
+        public void onInterstitialAdVideoStart(string unitId, string callbackJson)
         {
             Debug.Log("onInterstitialAdPlayStart...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdStartPlayingVideo(unitId);
+                anyThinkListener.onInterstitialAdStartPlayingVideo(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //结束播放
-        public void onInterstitialAdVideoEnd(string unitId)
+        public void onInterstitialAdVideoEnd(string unitId, string callbackJson)
         {
             Debug.Log("onInterstitialAdPlayEnd...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdEndPlayingVideo(unitId);
+                anyThinkListener.onInterstitialAdEndPlayingVideo(unitId, new ATCallbackInfo(callbackJson));
             }
         }
 
