@@ -9,6 +9,7 @@ using UnityEditor.iOS.Xcode;
 
 public static class MyBuildPostprocess
 {
+     
     [PostProcessBuild(999)]
     public static void OnPostProcessBuild(BuildTarget buildTarget, string path)
     {
@@ -24,6 +25,10 @@ public static class MyBuildPostprocess
                 pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
                 pbxProject.SetBuildProperty(target, "GCC_ENABLE_OBJC_EXCEPTIONS", "YES");
                 pbxProject.SetBuildProperty(target, "GCC_C_LANGUAGE_STANDARD", "gnu99");
+
+                // 添加系统框架
+                pbxProject.AddFrameworkToProject(target, "VideoToolbox.framework", false);
+                
 
                 pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
                 pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-fobjc-arc");
