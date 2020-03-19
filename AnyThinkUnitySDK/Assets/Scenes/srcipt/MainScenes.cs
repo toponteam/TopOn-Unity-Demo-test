@@ -81,6 +81,13 @@ public class MainScenes : MonoBehaviour {
 #elif UNITY_IOS || UNITY_IPHONE
         ATSDKAPI.initSDK("a5b0e8491845b3", "7eae0567827cfe2b22874061763f30c9", new InitListener());
 #endif
+
+
+        // 针对欧盟地区GDPR设置。每次启动如在欧洲且没有设置GDPR等级，都会打开授权页面
+        // 设置过GDPR等级，则不会再弹授权页面
+        if(ATSDKAPI.isEUTraffic() && ATSDKAPI.getGDPRLevel() == ATSDKAPI.UNKNOWN){
+            ATSDKAPI.showGDPRAuth();
+        }
 }
 
 	public void showGDPRAuth(){
