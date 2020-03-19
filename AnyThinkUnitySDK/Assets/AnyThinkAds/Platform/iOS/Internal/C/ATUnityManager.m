@@ -127,6 +127,10 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
     [[ATAPI sharedInstance] setChannel:channel];
 }
 
+-(void) setSubChannel:(NSString*)subChannel {
+    [[ATAPI sharedInstance] setSubchannel:subChannel];
+}
+
 -(void) setCustomData:(NSString*)customDataStr {
     if ([customDataStr isKindOfClass:[NSString class]] && [customDataStr length] > 0) {
         NSDictionary *customData = [NSJSONSerialization JSONObjectWithData:[customDataStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];

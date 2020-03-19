@@ -53,6 +53,11 @@ public class ATManager {
         ATUnityCBridge.SendMessageToC("ATUnityManager", "setChannel:", new object[] {channel});
     }
 
+    public static void setSubChannel(string subchannel)
+    {
+        ATUnityCBridge.SendMessageToC("ATUnityManager", "setSubChannel:", new object[] {subchannel});
+    }
+
     public static void setCustomMap(string jsonMap)
     {
         ATUnityCBridge.SendMessageToC("ATUnityManager", "setCustomData:", new object[] { jsonMap });
