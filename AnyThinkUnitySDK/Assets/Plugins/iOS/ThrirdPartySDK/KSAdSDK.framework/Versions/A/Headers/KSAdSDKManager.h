@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface KSAdSDKManager : NSObject
+
+/// SDK 版本号
 @property (nonatomic, readonly, class) NSString *SDKVersion;
 
 /**
@@ -49,7 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)appId;
 
-+ (NSString *)SDKDetailVersion;
 @end
 
 NS_ASSUME_NONNULL_END

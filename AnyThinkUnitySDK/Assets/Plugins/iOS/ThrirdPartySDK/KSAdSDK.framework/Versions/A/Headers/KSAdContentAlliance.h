@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) UIViewController *viewController;
 
 - (instancetype)initWithPosId:(NSString *)posId;
-- (void)playCurrentIfNecessary;
-- (void)pauseCurrentIfNecessary;
 
 @end
 

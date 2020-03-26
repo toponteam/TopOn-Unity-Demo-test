@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // default = 1.0
 @property (nonatomic, assign) CGFloat observerTimeInterval;
+// default = NO
+@property (nonatomic, assign) BOOL enableVideoCache;
 
 #pragma mark - Public
 // 设置播放URL
@@ -62,8 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeCurrentURLAsset:(AVURLAsset *)urlAsset;
 
 - (void)autoVideoGravity;
-- (void)updateVideoGravityStringWithSize:(CGSize)size;
-- (void)autoVideoGravityWithSize:(CGSize)size;
+- (void)updateVideoGravity:(AVLayerVideoGravity)videoGravity;
 
 // 设置视频是否静音
 - (void)setVideoSoundEnable:(BOOL)enable;

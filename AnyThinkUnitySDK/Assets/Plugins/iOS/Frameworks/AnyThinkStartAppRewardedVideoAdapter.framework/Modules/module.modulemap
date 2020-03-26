@@ -1,0 +1,6 @@
+framework module AnyThinkStartAppRewardedVideoAdapter {
+  umbrella header "AnyThinkStartAppRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

@@ -53,6 +53,7 @@ extern NSString *const ATSDKInitErrorDomain;
 extern NSInteger const ATSDKInitErrorCodeDataConsentNotSet;
 extern NSInteger const ATSDKInitErrorCodeDataConsentForbidden;
 
+extern NSString *const kNetworkNameStartApp;
 extern NSString *const kNetworkNameFacebook;
 extern NSString *const kNetworkNameInmobi;
 extern NSString *const kNetworkNameAdmob;
@@ -202,7 +203,7 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  */
 @property(nonatomic) NSString *channel;
 @property(nonatomic) NSString *subchannel;
-@property(atomic) NSDictionary *customData;
+@property(nonatomic) NSDictionary *customData;
 -(void) setCustomData:(NSDictionary *)customData forPlacementID:(NSString*)placementID;
 -(NSDictionary*) customDataForPlacementID:(NSString*)placementID;
 -(NSString*)version;
