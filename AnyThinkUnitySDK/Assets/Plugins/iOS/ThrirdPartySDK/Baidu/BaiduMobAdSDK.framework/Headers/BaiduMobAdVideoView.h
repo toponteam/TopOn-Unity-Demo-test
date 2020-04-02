@@ -14,7 +14,7 @@
 @optional
 
 /**
- 视频准备开始播放（首帧）
+ 视频准备开始播放
  
  @param videoView self
  */
@@ -119,6 +119,6 @@
 /**
  视频曝光事件 已废弃，无需开发者发送
  */
-- (void)trackImpression DEPRECATED_MSG_ATTRIBUTE("已废弃，无需开发者发送");
+- (void)trackImpression BaiduMobAdDEPRECATED_MSG("已废弃，无需开发者发送");
 
 @end

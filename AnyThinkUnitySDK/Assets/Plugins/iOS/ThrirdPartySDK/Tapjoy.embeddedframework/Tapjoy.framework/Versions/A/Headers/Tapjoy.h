@@ -55,10 +55,10 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
 @property (nonatomic, assign) float currencyMultiplier;
 
 @property (nonatomic, copy) NSString *appGroupID;
-
 @property (nonatomic, copy) NSString *store;
 @property (nonatomic, copy) NSString *analyticsApiKey;
 @property (nonatomic, copy) NSString *managedDeviceID;
+@property (nonatomic, copy) NSString *customParameter;
 
 @property (nonatomic, strong) TJCCurrencyManager *currencyManager;
 @property (nonatomic, strong) TJCVideoManager *videoManager;
@@ -318,6 +318,24 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  * @return n/a
  */
 + (void)setUserIDWithCompletion:(NSString*)theUserID completion:(networkCompletion)completion;
+
+/**
+ * Assigns a custom parameter associated with any following placement requests that contains an ad type.
+ * We will return this value on the currency callback. Only applicable for publishers who manage their own currency servers.
+ * This value does NOT get unset with each subsequent placement request.
+ *
+ * @param customParam The custom parameter to assign to this device
+ * @return n/a
+ */
++ (void)setCustomParameter:(NSString *)customParam;
+
+/**
+ * Returns the currently set custom parameter.
+ *
+ * @return the value of the currently set custom parameter
+ */
++ (NSString*)getCustomParameter;
+
 /**
  * Sets the currency multiplier for virtual currency to be earned. The default is 1.0.
  *

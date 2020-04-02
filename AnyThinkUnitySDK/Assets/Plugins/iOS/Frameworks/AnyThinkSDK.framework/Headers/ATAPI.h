@@ -48,6 +48,7 @@ extern NSInteger const ATADLoadingErrorCodeInvalidInputEncountered;
 extern NSInteger const ATADLoadingErrorCodePlacementAdDeliverySwitchOff;
 extern NSInteger const ATADLoadingErrorCodePreviousLoadNotFinished;
 extern NSInteger const ATADLoadingErrorCodeNoUnitGroupsFoundInPlacement;
+extern NSInteger const ATADLoadingErrorCodeUnitGroupsFilteredOut;
 
 extern NSString *const ATSDKInitErrorDomain;
 extern NSInteger const ATSDKInitErrorCodeDataConsentNotSet;
@@ -102,6 +103,21 @@ extern NSString *const kAdColonyGDPRConsentStringKey;
 extern NSString *const kYeahmobiGDPRConsentValueKey;
 extern NSString *const kYeahmobiGDPRConsentTypeKey;
 
+extern NSString *const kATCustomDataAgeKey;//Integer
+extern NSString *const kATCustomDataGenderKey;//Integer
+extern NSString *const kATCustomDataNumberOfIAPKey;//Integer
+extern NSString *const kATCustomDataIAPAmountKey;//Double
+extern NSString *const kATCustomDataIAPCurrencyKey;//string
+extern NSString *const kATCustomDataChannelKey;//string
+extern NSString *const kATCustomDataSubchannelKey;//string
+extern NSString *const kATCustomDataSegmentIDKey;//int
+
+typedef NS_ENUM(NSInteger, ATUserLocation) {
+    ATUserLocationUnknown = 0,
+    ATUserLocationInEU = 1,
+    ATUserLocationOutOfEU = 2
+};
+
 typedef NS_ENUM(NSInteger, ATDataConsentSet) {
     //Let it default to forbidden if not set
     ATDataConsentSetUnknown = 0,
@@ -132,6 +148,8 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  */
 -(BOOL)inDataProtectionArea;
 
+-(void) getUserLocationWithCallback:(void(^)(ATUserLocation location))callback;
+
 -(NSString*)psID;
     
 
@@ -140,6 +158,7 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  * viewController might be nil, for which the root view controller of the window will be used instead.
  */
 -(void) presentDataConsentDialogInViewController:(UIViewController*)viewController dismissalCallback:(void(^)(void))dismissCallback;
+-(void) presentDataConsentDialogInViewController:(UIViewController*)viewController loadingFailureCallback:(void(^)(NSError *error))loadingFailureCallback dismissalCallback:(void(^)(void))dismissCallback;
 /**
  * Defaults to forbidden;
  * Thread-safe.
