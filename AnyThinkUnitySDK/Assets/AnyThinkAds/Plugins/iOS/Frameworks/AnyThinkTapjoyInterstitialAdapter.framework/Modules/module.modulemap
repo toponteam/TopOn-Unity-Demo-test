@@ -1,0 +1,6 @@
+framework module AnyThinkTapjoyInterstitialAdapter {
+  umbrella header "AnyThinkTapjoyInterstitialAdapter.h"
+
+  export *
+  module * { export * }
+}

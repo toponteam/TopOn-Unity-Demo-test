@@ -1,0 +1,6 @@
+framework module AnyThinkInmobiNativeAdapter {
+  umbrella header "AnyThinkInmobiNativeAdapter.h"
+
+  export *
+  module * { export * }
+}

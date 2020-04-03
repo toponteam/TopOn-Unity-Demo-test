@@ -1,0 +1,6 @@
+framework module AnyThinkIronSourceRewardedVideoAdapter {
+  umbrella header "AnyThinkIronSourceRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

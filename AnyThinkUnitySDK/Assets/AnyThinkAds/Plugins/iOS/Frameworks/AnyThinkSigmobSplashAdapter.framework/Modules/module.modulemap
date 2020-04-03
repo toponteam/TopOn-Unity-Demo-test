@@ -1,0 +1,6 @@
+framework module AnyThinkSigmobSplashAdapter {
+  umbrella header "AnyThinkSigmobSplashAdapter.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AnyThinkNendBannerAdapter {
+  umbrella header "AnyThinkNendBannerAdapter.h"
+
+  export *
+  module * { export * }
+}

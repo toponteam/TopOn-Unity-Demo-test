@@ -1,0 +1,6 @@
+framework module AnyThinkIronSourceInterstitialAdapter {
+  umbrella header "AnyThinkIronSourceInterstitialAdapter.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AnyThinkGDTRewardedVideoAdapter {
+  umbrella header "AnyThinkGDTRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

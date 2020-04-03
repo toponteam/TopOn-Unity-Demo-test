@@ -1,0 +1,6 @@
+framework module TraminiSDK {
+  umbrella header "TraminiSDK.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AnyThinkGDTNativeAdapter {
+  umbrella header "AnyThinkGDTNativeAdapter.h"
+
+  export *
+  module * { export * }
+}

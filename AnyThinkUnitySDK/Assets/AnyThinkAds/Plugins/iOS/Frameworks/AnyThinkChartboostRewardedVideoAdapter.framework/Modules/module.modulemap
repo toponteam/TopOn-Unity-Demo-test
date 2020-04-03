@@ -1,0 +1,6 @@
+framework module AnyThinkChartboostRewardedVideoAdapter {
+  umbrella header "AnyThinkChartboostRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

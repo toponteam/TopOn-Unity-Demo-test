@@ -1,0 +1,6 @@
+framework module AnyThinkFlurryNativeAdapter {
+  umbrella header "AnyThinkFlurryNativeAdapter.h"
+
+  export *
+  module * { export * }
+}

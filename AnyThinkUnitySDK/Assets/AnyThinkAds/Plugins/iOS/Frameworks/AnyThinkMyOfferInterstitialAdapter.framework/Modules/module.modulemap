@@ -1,0 +1,6 @@
+framework module AnyThinkMyOfferInterstitialAdapter {
+  umbrella header "AnyThinkMyOfferInterstitialAdapter.h"
+
+  export *
+  module * { export * }
+}
