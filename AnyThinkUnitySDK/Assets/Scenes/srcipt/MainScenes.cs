@@ -82,6 +82,8 @@ public class MainScenes : MonoBehaviour {
         
         Debug.Log("Developer DataConsent: " + ATSDKAPI.getGDPRLevel());
         Debug.Log("Developer isEUTrafic: " + ATSDKAPI.isEUTraffic());
+
+        ATSDKAPI.getUserLocation(new GetLocationListener());
        
 
 #if UNITY_ANDROID

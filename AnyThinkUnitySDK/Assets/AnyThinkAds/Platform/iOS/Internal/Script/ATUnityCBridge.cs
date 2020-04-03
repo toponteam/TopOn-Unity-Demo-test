@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AOT;
 using AnyThinkAds.ThirdParty.MiniJSON;
+using System;
 
 public class ATUnityCBridge {
 	public delegate void CCallBack(string wrapperClass, string msg);
@@ -64,5 +65,21 @@ public class ATUnityCBridge {
         #else
         return false;
         #endif
+    }
+
+#if UNITY_IOS || UNITY_IPHONE
+    [DllImport("__Internal")]
+    extern static bool message_from_unity(string msg, Func<string, int> callback);
+#endif
+    static public void SendMessageToCWithCallBack(string className, string selector, object[] arguments, Func<string, int> callback)
+    {
+        Debug.Log("Unity: ATUnityCBridge::SendMessageToCWithCallBack()");
+        Dictionary<string, object> msgDict = new Dictionary<string, object>();
+        msgDict.Add("class", className);
+        msgDict.Add("selector", selector);
+        msgDict.Add("arguments", arguments);
+#if UNITY_IOS || UNITY_IPHONE
+        message_from_unity(Json.Serialize(msgDict), callback);
+#endif
     }
 }

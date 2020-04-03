@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using AnyThinkAds.Common;
 using AnyThinkAds.Api;
+using AOT;
+using System;
 
 namespace AnyThinkAds.iOS {
 	public class ATSDKAPIClient : IATSDKAPIClient {
@@ -31,10 +33,17 @@ namespace AnyThinkAds.iOS {
             }
 	    }
 
+        [MonoPInvokeCallback(typeof(Func<string>))]
+        public int DidGetUserLocation(string location)
+        {
+            if (locationListener != null) { locationListener.didGetUserLocation(Int32.Parse(location)); }
+            return 0;
+        }
+
         public void getUserLocation(ATGetUserLocationListener listener)
         {
             this.locationListener = listener;
-            //implement getting location here
+            ATManager.getUserLocation(DidGetUserLocation);
         }
 
         public void setGDPRLevel(int level) {

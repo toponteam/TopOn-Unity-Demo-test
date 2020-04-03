@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ATManager {
 	private static bool SDKStarted;
@@ -31,6 +32,11 @@ public class ATManager {
 	public static bool isEUTraffic() {
 		return ATUnityCBridge.SendMessageToC("ATUnityManager", "inDataProtectionArea", null);
 	}
+
+    public static void getUserLocation(Func<string, int> callback)
+    {
+        ATUnityCBridge.SendMessageToCWithCallBack("ATUnityManager", "getUserLocation:", new object[] { }, callback);
+    }
 
 	public static void ShowGDPRAuthDialog() {
 		ATUnityCBridge.SendMessageToC("ATUnityManager", "presentDataConsentDialog", null);

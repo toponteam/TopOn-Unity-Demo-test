@@ -111,6 +111,12 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
     }];
 }
 
+-(void) getUserLocation:(void(*)(const char*))callback {
+    [[ATAPI sharedInstance] getUserLocationWithCallback:^(ATUserLocation location) {
+        if (callback != NULL) { callback(@(location).stringValue.UTF8String); }
+    }];
+}
+
 -(void) setPurchaseFlag {
     
 }
