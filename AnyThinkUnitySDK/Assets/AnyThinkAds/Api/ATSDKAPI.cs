@@ -46,7 +46,7 @@ namespace AnyThinkAds.Api
 
         public static void getUserLocation(ATGetUserLocationListener listener)
         {
-
+            client.getUserLocation(listener);
         }
 
         public static int getGDPRLevel() {

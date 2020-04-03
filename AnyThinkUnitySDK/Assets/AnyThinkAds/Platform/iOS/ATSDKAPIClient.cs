@@ -8,7 +8,7 @@ using System;
 
 namespace AnyThinkAds.iOS {
 	public class ATSDKAPIClient : IATSDKAPIClient {
-        private ATGetUserLocationListener locationListener;
+        static private ATGetUserLocationListener locationListener;
         public ATSDKAPIClient () {
             Debug.Log("Unity:ATSDKAPIClient::ATSDKAPIClient()");
 		}
@@ -33,8 +33,8 @@ namespace AnyThinkAds.iOS {
             }
 	    }
 
-        [MonoPInvokeCallback(typeof(Func<string>))]
-        public int DidGetUserLocation(string location)
+        [MonoPInvokeCallback(typeof(Func<string, int>))]
+       static public int DidGetUserLocation(string location)
         {
             if (locationListener != null) { locationListener.didGetUserLocation(Int32.Parse(location)); }
             return 0;
@@ -42,7 +42,8 @@ namespace AnyThinkAds.iOS {
 
         public void getUserLocation(ATGetUserLocationListener listener)
         {
-            this.locationListener = listener;
+            Debug.Log("Unity:ATSDKAPIClient::getUserLocation()");
+            ATSDKAPIClient.locationListener = listener;
             ATManager.getUserLocation(DidGetUserLocation);
         }
 

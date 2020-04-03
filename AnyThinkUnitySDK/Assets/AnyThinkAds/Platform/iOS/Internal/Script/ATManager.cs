@@ -35,6 +35,7 @@ public class ATManager {
 
     public static void getUserLocation(Func<string, int> callback)
     {
+        Debug.Log("Unity:ATManager::getUserLocation()");
         ATUnityCBridge.SendMessageToCWithCallBack("ATUnityManager", "getUserLocation:", new object[] { }, callback);
     }
 
