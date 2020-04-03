@@ -61,6 +61,14 @@ public class MainScenes : MonoBehaviour {
         }
     }
 
+    private class GetLocationListener:ATGetUserLocationListener
+    {
+        public void didGetUserLocation(int location)
+        {
+            Debug.Log("Developer callback didGetUserLocation(): " + location);
+        }
+    }
+
 	public void initSDK(){
 //		DebugConsole.Log ("init sdk");
 		Debug.Log("Developer Version of the runtime: " + Application.unityVersion);
