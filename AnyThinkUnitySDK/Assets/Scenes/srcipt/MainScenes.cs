@@ -66,6 +66,10 @@ public class MainScenes : MonoBehaviour {
         public void didGetUserLocation(int location)
         {
             Debug.Log("Developer callback didGetUserLocation(): " + location);
+            if(location == ATSDKAPI.kATUserLocationInEU && ATSDKAPI.getGDPRLevel() == ATSDKAPI.UNKNOWN)
+            {
+                ATSDKAPI.showGDPRAuth();
+            }
         }
     }
 
@@ -93,11 +97,7 @@ public class MainScenes : MonoBehaviour {
 #endif
 
 
-        // 针对欧盟地区GDPR设置。每次启动如在欧洲且没有设置GDPR等级，都会打开授权页面
-        // 设置过GDPR等级，则不会再弹授权页面
-        if(ATSDKAPI.isEUTraffic() && ATSDKAPI.getGDPRLevel() == ATSDKAPI.UNKNOWN){
-            ATSDKAPI.showGDPRAuth();
-        }
+        
 }
 
 	public void showGDPRAuth(){

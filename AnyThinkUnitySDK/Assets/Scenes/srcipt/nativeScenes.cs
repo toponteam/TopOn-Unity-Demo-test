@@ -17,7 +17,7 @@ public class nativeScenes : MonoBehaviour {
     static string mPlacementId_native_all = "b5c2c97629da0d";
 
 #elif UNITY_IOS || UNITY_IPHONE
-    static string mPlacementId_native_all = "b5bacac780e03b";//gdt template
+    static string mPlacementId_native_all = "b5b0f5663c6e4a";//gdt template
     // static string mPlacementId_native_all = "b5e4613e50cbf2";
 
 #endif
