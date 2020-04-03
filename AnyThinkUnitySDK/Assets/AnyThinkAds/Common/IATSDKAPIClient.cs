@@ -9,6 +9,7 @@ namespace AnyThinkAds.Common
     {
         void initSDK(string appId, string appkey);
         void initSDK(string appId, string appkey, ATSDKInitListener listener);
+        void getUserLocation(ATGetUserLocationListener listener);
         void setGDPRLevel(int level);
         void showGDPRAuth();
         void addNetworkGDPRInfo(int networkType, string mapJson);

@@ -10,6 +10,7 @@ namespace AnyThinkAds.Android
     {
 		private AndroidJavaObject sdkInitHelper;
         private ATSDKInitListener sdkInitListener;
+        private ATGetUserLocationListener locationListener;
         public ATSDKAPIClient () : base("com.anythink.unitybridge.sdkinit.SDKInitListener")
         {
             this.sdkInitHelper = new AndroidJavaObject(
@@ -37,6 +38,12 @@ namespace AnyThinkAds.Android
                 System.Console.WriteLine("Exception caught: {0}", e);
 				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
             }
+        }
+
+        public void getUserLocation(ATGetUserLocationListener listener)
+        {
+            this.locationListener = listener;
+            //implement getting location here
         }
 
         public void setGDPRLevel(int level)
