@@ -1,6 +1,0 @@
-framework module AnyThinkSigmobRewardedVideoAdapter {
-  umbrella header "AnyThinkSigmobRewardedVideoAdapter.h"
-
-  export *
-  module * { export * }
-}

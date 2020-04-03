@@ -1,6 +1,0 @@
-framework module AnyThinkOnewayRewardedVideoAdapter {
-  umbrella header "AnyThinkOnewayRewardedVideoAdapter.h"
-
-  export *
-  module * { export * }
-}

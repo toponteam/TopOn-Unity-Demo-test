@@ -1,6 +1,0 @@
-framework module AnyThinkFacebookInterstitialAdapter {
-  umbrella header "AnyThinkFacebookInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module AnyThinkUnityAdsInterstitialAdapter {
-  umbrella header "AnyThinkUnityAdsInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

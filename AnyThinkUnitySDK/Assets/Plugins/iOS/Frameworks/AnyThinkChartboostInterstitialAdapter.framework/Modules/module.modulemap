@@ -1,6 +1,0 @@
-framework module AnyThinkChartboostInterstitialAdapter {
-  umbrella header "AnyThinkChartboostInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

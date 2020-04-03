@@ -1,6 +1,0 @@
-framework module AnyThinkKSNativeAdapter {
-  umbrella header "AnyThinkKSNativeAdapter.h"
-
-  export *
-  module * { export * }
-}

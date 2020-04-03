@@ -1,6 +1,0 @@
-framework module AnyThinkGDTBannerAdapter {
-  umbrella header "AnyThinkGDTBannerAdapter.h"
-
-  export *
-  module * { export * }
-}

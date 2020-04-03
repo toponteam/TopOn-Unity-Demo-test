@@ -1,6 +1,0 @@
-framework module AnyThinkKSInterstitialAdapter {
-  umbrella header "AnyThinkKSInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}
