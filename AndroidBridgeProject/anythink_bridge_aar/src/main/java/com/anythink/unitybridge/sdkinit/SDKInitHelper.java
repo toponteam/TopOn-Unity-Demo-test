@@ -5,9 +5,9 @@ import android.text.TextUtils;
 
 import com.anythink.core.api.ATSDK;
 import com.anythink.core.api.ATSDKInitListener;
+import com.anythink.core.api.NetTrafficeCallback;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
-import com.anythink.unitybridge.imgutil.SPUtil;
 
 import org.json.JSONObject;
 
@@ -101,7 +101,7 @@ public class SDKInitHelper {
 
     public void initCustomMap(final String jsonMap) {
         MsgTools.pirntMsg("initCustomMap--> :" + jsonMap != null ? jsonMap : "");
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         if (!TextUtils.isEmpty(jsonMap)) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonMap);
@@ -109,7 +109,7 @@ public class SDKInitHelper {
                 String key;
                 while (iterator.hasNext()) {
                     key = (String) iterator.next();
-                    map.put(key, (String) jsonObject.get(key));
+                    map.put(key, jsonObject.opt(key));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,7 +120,7 @@ public class SDKInitHelper {
 
     public void initPlacementCustomMap(String placementId, String jsonMap) {
         MsgTools.pirntMsg("initPlacementCustomMap-->" + placementId + ":" + jsonMap != null ? jsonMap : "");
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         if (!TextUtils.isEmpty(jsonMap)) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonMap);
@@ -128,7 +128,7 @@ public class SDKInitHelper {
                 String key;
                 while (iterator.hasNext()) {
                     key = (String) iterator.next();
-                    map.put(key, (String) jsonObject.get(key));
+                    map.put(key, jsonObject.opt(key));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -152,6 +152,27 @@ public class SDKInitHelper {
 
 
         ATSDK.setGDPRUploadDataLevel(mActivity, level);
+    }
+
+    public void checkIsEuTraffic(final SDKEUCallbackListener callbackListener) {
+        MsgTools.pirntMsg("checkIsEuTraffic");
+        ATSDK.checkIsEuTraffic(mActivity, new NetTrafficeCallback() {
+            @Override
+            public void onResultCallback(boolean b) {
+                MsgTools.pirntMsg("check EU:" + b);
+                if (callbackListener != null) {
+                    callbackListener.onResultCallback(b);
+                }
+            }
+
+            @Override
+            public void onErrorCallback(String s) {
+                MsgTools.pirntMsg("check EU error:" + s);
+                if (callbackListener != null) {
+                    callbackListener.onErrorCallback(s);
+                }
+            }
+        });
     }
 
     public void showGDPRAuth() {

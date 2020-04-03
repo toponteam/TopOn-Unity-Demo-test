@@ -10,7 +10,6 @@ namespace AnyThinkAds.Android
     {
 		private AndroidJavaObject sdkInitHelper;
         private ATSDKInitListener sdkInitListener;
-        private ATGetUserLocationListener locationListener;
         public ATSDKAPIClient () : base("com.anythink.unitybridge.sdkinit.SDKInitListener")
         {
             this.sdkInitHelper = new AndroidJavaObject(
@@ -42,7 +41,19 @@ namespace AnyThinkAds.Android
 
         public void getUserLocation(ATGetUserLocationListener listener)
         {
-            this.locationListener = listener;
+            ATNetTrafficListener netTrafficListener = new ATNetTrafficListener(listener);
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("checkIsEuTraffic", netTrafficListener);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
             //implement getting location here
         }
 

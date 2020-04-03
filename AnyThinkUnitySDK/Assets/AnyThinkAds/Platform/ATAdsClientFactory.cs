@@ -2,6 +2,9 @@
 using AnyThinkAds.Api;
 using AnyThinkAds.Common;
 
+using System.Collections;
+using System.Collections.Generic;
+
 namespace AnyThinkAds
 {
     public class ATAdsClientFactory
@@ -16,9 +19,9 @@ namespace AnyThinkAds
             #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return new AnyThinkAds.iOS.ATBannerAdClient();
             #else
-
+                
             #endif
-            return null;
+            return new UnityBannerClient();
         }
 
         public static IATInterstitialAdClient BuildInterstitialAdClient()
@@ -33,7 +36,7 @@ namespace AnyThinkAds
             #else
 
             #endif
-            return null;
+            return new UnityInterstitialClient();
         }
 
         public static IATNativeAdClient BuildNativeAdClient()
@@ -48,7 +51,7 @@ namespace AnyThinkAds
             #else
 
             #endif
-            return null;
+            return new UnityNativeAdClient();
         }
 
         public static IATNativeBannerAdClient BuildNativeBannerAdClient()
@@ -63,7 +66,7 @@ namespace AnyThinkAds
             #else
 
             #endif
-            return null;
+            return new UnityNativeBannerAdClient();
         }
 
         public static IATRewardedVideoAdClient BuildRewardedVideoAdClient()
@@ -79,7 +82,7 @@ namespace AnyThinkAds
             #else
                             
             #endif
-            return null;
+            return new UnityRewardedVideoAdClient();
         }
 
         public static IATSDKAPIClient BuildSDKAPIClient()
@@ -98,8 +101,156 @@ namespace AnyThinkAds
             #else
 
             #endif
-            return null;
+            return new UnitySDKAPIClient();
         }
 
+    }
+
+    class UnitySDKAPIClient:IATSDKAPIClient
+    {
+        public void initSDK(string appId, string appkey){}
+        public void initSDK(string appId, string appkey, ATSDKInitListener listener){ }
+        public void getUserLocation(ATGetUserLocationListener listener){ }
+        public void setGDPRLevel(int level){ }
+        public void showGDPRAuth(){ }
+        public void addNetworkGDPRInfo(int networkType, string mapJson){ }
+        public void setPurchaseFlag(){ }
+        public bool purchaseFlag(){ return false; }
+        public void clearPurchaseFlag(){ }
+        public void setChannel(string channel){ }
+        public void setSubChannel(string subchannel){ }
+        public void initCustomMap(string cutomMap){ }
+        public void setCustomDataForPlacementID(string customData, string placementID){ }
+        public void setLogDebug(bool isDebug){ }
+        public int getGDPRLevel(){ return ATSDKAPI.PERSONALIZED; }
+        public bool isEUTraffic() { return false; }
+    }
+
+    class UnityBannerClient:IATBannerAdClient
+    {
+       ATBannerAdListener listener;
+       public void loadBannerAd(string unitId, string mapJson){
+            if(listener != null)
+            {
+                listener.onAdLoadFail(unitId, "-1", "Must run on Android or IOS platform!");
+            }
+       }
+     
+       public void setListener(ATBannerAdListener listener)
+       {
+            this.listener = listener;
+       }
+       
+       public void showBannerAd(string unitId, string position){ }
+       
+       public void showBannerAd(string unitId, ATRect rect){ }
+    
+       public  void cleanBannerAd(string unitId){ }
+      
+       public void hideBannerAd(string unitId){ }
+    
+       public void showBannerAd(string unitId){ }
+      
+       public void cleanCache(string unitId){}
+   }
+
+    class UnityInterstitialClient : IATInterstitialAdClient
+    {
+       ATInterstitialAdListener listener;
+       public void loadInterstitialAd(string unitId, string mapJson){
+            if (listener != null)
+            {
+               listener.onInterstitialAdLoadFail(unitId, "-1", "Must run on Android or IOS platform!");
+            }
+       }
+       
+       public void setListener(ATInterstitialAdListener listener){
+            this.listener = listener;
+       }
+
+       public bool hasInterstitialAdReady(string unitId) { return false; }
+        
+       public void showInterstitialAd(string unitId, string mapJson){}
+        
+       public void cleanCache(string unitId){}
+    }
+
+    class UnityNativeAdClient : IATNativeAdClient
+    {
+        ATNativeAdListener listener;
+       public void loadNativeAd(string unitId, string mapJson){
+            if(listener != null)
+            {
+                listener.onAdLoadFail(unitId, "-1", "Must run on Android or IOS platform!");
+            }
+       }
+
+       public bool hasAdReady(string unitId) { return false; }
+        
+       public void setListener(ATNativeAdListener listener){
+            this.listener = listener;
+       }
+        
+       public void renderAdToScene(string unitId, ATNativeAdView anyThinkNativeAdView){}
+                   
+       public void cleanAdView(string unitId, ATNativeAdView anyThinkNativeAdView){}
+       
+       public void onApplicationForces(string unitId, ATNativeAdView anyThinkNativeAdView){}
+        
+       public void onApplicationPasue(string unitId, ATNativeAdView anyThinkNativeAdView){}
+        
+       public void cleanCache(string unitId){}
+        
+       public void setLocalExtra(string unitid, string mapJson){}
+    }
+
+    class UnityNativeBannerAdClient : IATNativeBannerAdClient
+    {
+        ATNativeBannerAdListener listener;
+       public void loadAd(string unitId, string mapJson){
+            if(listener != null)
+            {
+                 listener.onAdLoadFail(unitId, "-1", "Must run on Android or IOS platform!");
+            }
+       }
+
+       public bool adReady(string unitId) { return false; }
+        
+       public void setListener(ATNativeBannerAdListener listener){
+            this.listener = listener;
+       }
+       
+       public void showAd(string unitId, ATRect rect, Dictionary<string, string> pairs){}
+        
+       public void removeAd(string unitId){}
+    }
+
+    class UnityRewardedVideoAdClient : IATRewardedVideoAdClient
+    {
+        ATRewardedVideoListener listener;
+        public void loadVideoAd(string unitId, string mapJson){
+            if (listener != null)
+            {
+                listener.onRewardedVideoAdLoadFail(unitId, "-1", "Must run on Android or IOS platform!");
+            }
+       }
+
+        public void setListener(ATRewardedVideoListener listener){
+            this.listener = listener;
+       }
+
+        public bool hasAdReady(string unitId) { return false; }
+
+        public void setUserData(string unitId, string userId, string customData){}
+
+        public void showAd(string unitId, string mapJson){}
+
+        public void cleanAd(string unitId){}
+
+        public void onApplicationForces(string unitId){}
+
+        public void onApplicationPasue(string unitId){}
+
+        public void addsetting(string unitId, string json){}
     }
 }
