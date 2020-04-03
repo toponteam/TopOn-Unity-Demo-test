@@ -12,8 +12,17 @@ using AnyThinkAds.ThirdParty.MiniJSON;
 
 namespace AnyThinkAds.Api
 {
+    public interface ATGetUserLocationListener
+    {
+        void didGetUserLocation(int location);
+    }
+
     public class ATSDKAPI
     {
+        public static readonly int kATUserLocationUnknown = 0;
+        public static readonly int kATUserLocationInEU = 1;
+        public static readonly int kATUserLocationOutOfEU = 2;
+
         public static readonly int PERSONALIZED = 0;
         public static readonly int NONPERSONALIZED = 1;
         public static readonly int UNKNOWN = 2;
@@ -33,6 +42,11 @@ namespace AnyThinkAds.Api
         public static void setGDPRLevel(int level)
         {
             client.setGDPRLevel(level);
+        }
+
+        public static void getUserLocation(ATGetUserLocationListener listener)
+        {
+
         }
 
         public static int getGDPRLevel() {

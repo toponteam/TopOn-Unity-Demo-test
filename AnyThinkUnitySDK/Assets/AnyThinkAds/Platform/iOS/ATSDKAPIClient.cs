@@ -6,7 +6,8 @@ using AnyThinkAds.Api;
 
 namespace AnyThinkAds.iOS {
 	public class ATSDKAPIClient : IATSDKAPIClient {
-		public ATSDKAPIClient () {
+        private ATGetUserLocationListener locationListener;
+        public ATSDKAPIClient () {
             Debug.Log("Unity:ATSDKAPIClient::ATSDKAPIClient()");
 		}
 		public void initSDK(string appId, string appKey) {
@@ -30,7 +31,13 @@ namespace AnyThinkAds.iOS {
             }
 	    }
 
-	    public void setGDPRLevel(int level) {
+        public void getUserLocation(ATGetUserLocationListener listener)
+        {
+            this.locationListener = listener;
+            //implement getting location here
+        }
+
+        public void setGDPRLevel(int level) {
 	    	Debug.Log("Unity:ATSDKAPIClient::setGDPRLevel()");
 	    	ATManager.SetDataConsent(level);
 	    }

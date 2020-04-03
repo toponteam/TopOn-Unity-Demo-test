@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\AnyThinkAds\Api\ATBannerAd.cs" />
     <Compile Include="Assets\AnyThinkAds\Api\ATBannerAdListener.cs" />
+    <Compile Include="Assets\AnyThinkAds\Api\ATCallbackInfo.cs" />
     <Compile Include="Assets\AnyThinkAds\Api\ATConst.cs" />
     <Compile Include="Assets\AnyThinkAds\Api\ATInterstitialAd.cs" />
     <Compile Include="Assets\AnyThinkAds\Api\ATInterstitialAdListener.cs" />
