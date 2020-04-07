@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
  	xmlns:tools="http://schemas.android.com/tools"
-    package="com.superapp.filemanager"
-    android:versionCode="2"
-    android:versionName="1.1" >
+    package="com.anythink.unity.android" >
 
     <uses-sdk
         android:minSdkVersion="16"
