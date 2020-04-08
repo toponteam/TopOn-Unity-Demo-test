@@ -21,11 +21,14 @@ china_packlist = glob.glob('*.unitypackage')
 os.chdir(tagret_nonchina)
 nochina_packlist = glob.glob('*.unitypackage')
 
+# 切换路径
 os.chdir(path)
-# for x in china_packlist:
-#     runcmd('Unity -batchmode -importPackage ' + tagret_china +
-#            x + ' -projectPath AnyThinkUnityDemo -quit')
+# import china unitypackage
+for x in china_packlist:
+    runcmd('Unity -batchmode -importPackage ' + tagret_china +
+           x + ' -projectPath AnyThinkUnityDemo -quit')
 
+# import nonchina unitypackage
 for y in nochina_packlist:
     runcmd('Unity -batchmode -importPackage ' + tagret_nonchina +
            y + ' -projectPath AnyThinkUnityDemo -quit')
