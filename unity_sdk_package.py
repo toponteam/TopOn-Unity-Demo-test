@@ -424,6 +424,9 @@ def main():
     buildAndroid()
     buildiOS()
 
+    shutil.copy(ROOT_DIR + '/unity_package.sh', ROOT_DIR + "/" + Output_Dir)
+
+    
 
 
 if __name__ == '__main__':
