@@ -1,6 +1,0 @@
-framework module AnyThinkOguryInterstitialAdapter {
-  umbrella header "AnyThinkOguryInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

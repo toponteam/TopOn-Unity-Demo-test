@@ -1,6 +1,0 @@
-framework module AnyThinkVungleInterstitialAdapter {
-  umbrella header "AnyThinkVungleInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

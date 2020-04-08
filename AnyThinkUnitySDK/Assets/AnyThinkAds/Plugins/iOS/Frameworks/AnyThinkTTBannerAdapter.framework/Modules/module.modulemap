@@ -1,6 +1,0 @@
-framework module AnyThinkTTBannerAdapter {
-  umbrella header "AnyThinkTTBannerAdapter.h"
-
-  export *
-  module * { export * }
-}

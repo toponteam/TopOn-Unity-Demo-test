@@ -1,6 +1,0 @@
-framework module AnyThinkBaiduInterstitialAdapter {
-  umbrella header "AnyThinkBaiduInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module AnyThinkFlurryBannerAdapter {
-  umbrella header "AnyThinkFlurryBannerAdapter.h"
-
-  export *
-  module * { export * }
-}

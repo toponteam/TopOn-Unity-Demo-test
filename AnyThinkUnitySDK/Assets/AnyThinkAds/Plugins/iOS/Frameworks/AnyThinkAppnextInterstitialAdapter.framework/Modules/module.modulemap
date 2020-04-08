@@ -1,6 +1,0 @@
-framework module AnyThinkAppnextInterstitialAdapter {
-  umbrella header "AnyThinkAppnextInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module AnyThinkNendNativeAdapter {
-  umbrella header "AnyThinkNendNativeAdapter.h"
-
-  export *
-  module * { export * }
-}

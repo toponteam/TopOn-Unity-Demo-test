@@ -1,6 +1,0 @@
-framework module AnyThinkMyOffer {
-  umbrella header "AnyThinkMyOffer.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module AnyThinkBaiduBannerAdapter {
-  umbrella header "AnyThinkBaiduBannerAdapter.h"
-
-  export *
-  module * { export * }
-}

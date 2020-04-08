@@ -39,7 +39,7 @@ Output_Dir="unity_sdk_output/"
 Android_China_Output_Dir = Output_Dir + "Android/China/"
 Android_NonChina_Output_Dir = Output_Dir + "Android/NonChina/"
 
-iOS_Output_Dir = Output_Dir + "iOS"
+iOS_Output_Dir = Output_Dir + "iOS/"
 
 Android_iOS_China_Output_Dir = Output_Dir + "Android_iOS/China/"
 Android_iOS_NonChina_Output_Dir = Output_Dir + "Android_iOS/NonChina/"
@@ -60,7 +60,7 @@ Unity_NonChina_CrossPlatform_Core=["Api"
     ,"Plugins/Android/NonChina/google_service"
     ,"Plugins/Android/NonChina/mediation_plugin"
     ,"Plugins/Android/anythink_bridge.aar"
-    ,"Plugins/iOS/Frameworks"]
+    ,"Plugins/iOS/Core"]
 
 Unity_China_CrossPlatform_Core=["Api"
     ,"Common","Platform"
@@ -69,7 +69,7 @@ Unity_China_CrossPlatform_Core=["Api"
     ,"Plugins/Android/China/anythink_base"
     ,"Plugins/Android/China/mediation_plugin"
     ,"Plugins/Android/anythink_bridge.aar"
-    ,"Plugins/iOS/Frameworks"]
+    ,"Plugins/iOS/Core"]
 
 
 Unity_Android_NonChina_Core=["Api"
@@ -91,7 +91,7 @@ Unity_Android_China_Core=["Api"
 
 Unity_iOS_Core=["Api"
     ,"Common","Platform/ATAdsClientFactory.cs", "Platform/iOS"
-    ,"Thrid" ,"Plugins/iOS/Frameworks"]
+    ,"Thrid" ,"Plugins/iOS/Core"]
 
 
 #Oversea
