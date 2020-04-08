@@ -1,0 +1,6 @@
+framework module AnyThinkStartAppInterstitialAdapter {
+  umbrella header "AnyThinkStartAppInterstitialAdapter.h"
+
+  export *
+  module * { export * }
+}

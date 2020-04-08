@@ -1,0 +1,6 @@
+framework module AnyThinkTTNativeAdapter {
+  umbrella header "AnyThinkTTNativeAdapter.h"
+
+  export *
+  module * { export * }
+}

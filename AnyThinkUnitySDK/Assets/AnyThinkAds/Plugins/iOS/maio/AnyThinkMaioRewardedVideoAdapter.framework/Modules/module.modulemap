@@ -1,0 +1,6 @@
+framework module AnyThinkMaioRewardedVideoAdapter {
+  umbrella header "AnyThinkMaioRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

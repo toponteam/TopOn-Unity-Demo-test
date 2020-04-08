@@ -1,0 +1,6 @@
+framework module AnyThinkYeahmobiRewardedVideoAdapter {
+  umbrella header "AnyThinkYeahmobiRewardedVideoAdapter.h"
+
+  export *
+  module * { export * }
+}

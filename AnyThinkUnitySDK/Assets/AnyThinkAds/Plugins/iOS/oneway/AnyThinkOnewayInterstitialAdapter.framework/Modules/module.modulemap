@@ -1,0 +1,6 @@
+framework module AnyThinkOnewayInterstitialAdapter {
+  umbrella header "AnyThinkOnewayInterstitialAdapter.h"
+
+  export *
+  module * { export * }
+}

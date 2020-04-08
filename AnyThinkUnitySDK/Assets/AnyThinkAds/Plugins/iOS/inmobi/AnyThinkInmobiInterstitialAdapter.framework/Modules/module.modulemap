@@ -1,0 +1,6 @@
+framework module AnyThinkInmobiInterstitialAdapter {
+  umbrella header "AnyThinkInmobiInterstitialAdapter.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AnyThinkMintegralNativeAdapter {
+  umbrella header "AnyThinkMintegralNativeAdapter.h"
+
+  export *
+  module * { export * }
+}

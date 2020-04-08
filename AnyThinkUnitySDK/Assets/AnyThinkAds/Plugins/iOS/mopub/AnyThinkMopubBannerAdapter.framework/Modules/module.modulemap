@@ -1,0 +1,6 @@
+framework module AnyThinkMopubBannerAdapter {
+  umbrella header "AnyThinkMopubBannerAdapter.h"
+
+  export *
+  module * { export * }
+}
