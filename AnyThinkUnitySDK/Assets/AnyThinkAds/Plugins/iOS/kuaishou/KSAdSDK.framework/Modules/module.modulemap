@@ -1,5 +1,5 @@
 framework module KSAdSDK {
-  umbrella header "KSAdSDK.h"
+  umbrella header "KSAdSDK-umbrella.h"
 
   export *
   module * { export * }
