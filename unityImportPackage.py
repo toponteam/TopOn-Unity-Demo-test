@@ -1,5 +1,7 @@
+# coding: UTF-8
 import os
 import glob
+import shutil
 
 
 def runcmd(cmd):
@@ -21,14 +23,18 @@ china_packlist = glob.glob('*.unitypackage')
 os.chdir(tagret_nonchina)
 nochina_packlist = glob.glob('*.unitypackage')
 
-# 切换路径
+
+if os.path.exists(path + '/AnyThinkUnityDemo/Assets/AnyThinkAds'):
+    shutil.rmtree(path + '/AnyThinkUnityDemo/Assets/AnyThinkAds')
+
+print path
 os.chdir(path)
 # import china unitypackage
 for x in china_packlist:
-    runcmd('Unity -batchmode -importPackage ' + tagret_china +
-           x + ' -projectPath AnyThinkUnityDemo -quit')
+    runcmd(
+        'Unity -batchmode -importPackage ' + tagret_china + x + ' -projectPath AnyThinkUnityDemo -quit')
 
 # import nonchina unitypackage
 for y in nochina_packlist:
-    runcmd('Unity -batchmode -importPackage ' + tagret_nonchina +
-           y + ' -projectPath AnyThinkUnityDemo -quit')
+    runcmd(
+        'Unity -batchmode -importPackage ' + tagret_nonchina + y + ' -projectPath AnyThinkUnityDemo -quit')
