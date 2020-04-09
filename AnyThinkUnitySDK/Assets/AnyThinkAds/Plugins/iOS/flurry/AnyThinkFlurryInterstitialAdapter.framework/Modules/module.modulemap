@@ -1,6 +1,0 @@
-framework module AnyThinkFlurryInterstitialAdapter {
-  umbrella header "AnyThinkFlurryInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

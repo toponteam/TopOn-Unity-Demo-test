@@ -1,6 +1,0 @@
-framework module AnyThinkMopubInterstitialAdapter {
-  umbrella header "AnyThinkMopubInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}
