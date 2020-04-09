@@ -177,7 +177,8 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
             }
             [button addSubview:adview];
             
-            adview.mediaView.frame = adview.mainImageView.frame;
+//            adview.mediaView.frame = adview.mainImageView.frame;
+            adview.mediaView.frame = CGRectFromString(parsedMetrics[kNativeAssetMainImage][kParsedPropertiesFrameKey]);
             [adview bringSubviewToFront:adview.mediaView];
             adview.mainImageView.layer.borderColor = [UIColor redColor].CGColor;
             adview.mainImageView.layer.borderWidth = 1.0f;
