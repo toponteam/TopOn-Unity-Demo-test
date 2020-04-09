@@ -36,10 +36,8 @@ scenes_path = path + '/AnyThinkUnityDemo/Assets/Scenes'
 plugins_path_backup = path + '/AnyThinkUnityDemo/Plugins'
 scenes_path_backup = path + '/AnyThinkUnityDemo/Scenes'
 
-shutil.copytree(plugins_path, plugins_path_backup,
-                ignore=shutil.ignore_patterns('*.meta'))
-shutil.copytree(scenes_path, scenes_path_backup,
-                ignore=shutil.ignore_patterns('*.meta'))
+shutil.copytree(plugins_path, plugins_path_backup)
+shutil.copytree(scenes_path, scenes_path_backup)
 time.sleep(2)
 
 if os.path.exists(plugins_path):
@@ -52,20 +50,17 @@ os.chdir(path)
 
 # import china unitypackage
 for x in china_packlist:
-    runcmd('Unity -importPackage ' + tagret_china +
+    runcmd('Unity -batchmode -importPackage ' + tagret_china +
            x + ' -projectPath AnyThinkUnityDemo -quit')
 
 # import nonchina unitypackage
 for y in nochina_packlist:
-    runcmd('Unity -importPackage ' + tagret_nonchina +
+    runcmd('Unity -batchmode -importPackage ' + tagret_nonchina +
            y + ' -projectPath AnyThinkUnityDemo -quit')
 
 
-shutil.copytree(plugins_path_backup, plugins_path,
-                ignore=shutil.ignore_patterns('*.meta'))
-shutil.copytree(scenes_path_backup, scenes_path,
-                ignore=shutil.ignore_patterns('*.meta'))
-
+shutil.copytree(plugins_path_backup, plugins_path)
+shutil.copytree(scenes_path_backup, scenes_path)
 time.sleep(2)
 
 if os.path.exists(plugins_path_backup):
