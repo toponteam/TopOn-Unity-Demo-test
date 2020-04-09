@@ -155,6 +155,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.AnyThink.Demo
     Standalone: com.Company.ProductName
+    iOS: com.anythink.AnyThinkSDK
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
