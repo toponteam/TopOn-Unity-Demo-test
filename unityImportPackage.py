@@ -2,6 +2,7 @@
 import os
 import glob
 import shutil
+import time
 
 
 def runcmd(cmd):
@@ -26,15 +27,48 @@ nochina_packlist = glob.glob('*.unitypackage')
 
 if os.path.exists(path + '/AnyThinkUnityDemo/Assets/AnyThinkAds'):
     shutil.rmtree(path + '/AnyThinkUnityDemo/Assets/AnyThinkAds')
+    time.sleep(10)
 
-print path
+
+plugins_path = path + '/AnyThinkUnityDemo/Assets/Plugins'
+scenes_path = path + '/AnyThinkUnityDemo/Assets/Scenes'
+
+plugins_path_backup = path + '/AnyThinkUnityDemo/Plugins'
+scenes_path_backup = path + '/AnyThinkUnityDemo/Scenes'
+
+shutil.copytree(plugins_path, plugins_path_backup,
+                ignore=shutil.ignore_patterns('*.meta'))
+shutil.copytree(scenes_path, scenes_path_backup,
+                ignore=shutil.ignore_patterns('*.meta'))
+time.sleep(2)
+
+if os.path.exists(plugins_path):
+    shutil.rmtree(plugins_path)
+if os.path.exists(scenes_path):
+    shutil.rmtree(scenes_path)
+
+
 os.chdir(path)
+
 # import china unitypackage
 for x in china_packlist:
-    runcmd(
-        'Unity -batchmode -importPackage ' + tagret_china + x + ' -projectPath AnyThinkUnityDemo -quit')
+    runcmd('Unity -importPackage ' + tagret_china +
+           x + ' -projectPath AnyThinkUnityDemo -quit')
 
 # import nonchina unitypackage
 for y in nochina_packlist:
-    runcmd(
-        'Unity -batchmode -importPackage ' + tagret_nonchina + y + ' -projectPath AnyThinkUnityDemo -quit')
+    runcmd('Unity -importPackage ' + tagret_nonchina +
+           y + ' -projectPath AnyThinkUnityDemo -quit')
+
+
+shutil.copytree(plugins_path_backup, plugins_path,
+                ignore=shutil.ignore_patterns('*.meta'))
+shutil.copytree(scenes_path_backup, scenes_path,
+                ignore=shutil.ignore_patterns('*.meta'))
+
+time.sleep(2)
+
+if os.path.exists(plugins_path_backup):
+    shutil.rmtree(plugins_path_backup)
+if os.path.exists(scenes_path_backup):
+    shutil.rmtree(scenes_path_backup)
