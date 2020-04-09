@@ -38,7 +38,7 @@ scenes_path_backup = path + '/AnyThinkUnityDemo/Scenes'
 
 shutil.copytree(plugins_path, plugins_path_backup)
 shutil.copytree(scenes_path, scenes_path_backup)
-time.sleep(2)
+time.sleep(5)
 
 if os.path.exists(plugins_path):
     shutil.rmtree(plugins_path)
