@@ -61,7 +61,7 @@ for y in nochina_packlist:
 
 shutil.copytree(plugins_path_backup, plugins_path)
 shutil.copytree(scenes_path_backup, scenes_path)
-time.sleep(2)
+time.sleep(5)
 
 if os.path.exists(plugins_path_backup):
     shutil.rmtree(plugins_path_backup)
