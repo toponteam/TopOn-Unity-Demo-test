@@ -63,6 +63,7 @@ MediationMap=(
 ["28"]="KuaiShou"
 ["29"]="Sigmob"
 ["36"]="Ogury"
+["37"]="Fyber"
 )
 
 

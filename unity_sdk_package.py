@@ -155,6 +155,8 @@ Sigmob_And_File_List = [Android_China_Network_Base + "sigmob"]
 
 Uniplay_And_File_List = [Android_China_Network_Base + "uniplay"]
 
+Fyber_iOS_File_List = [iOS_Network_Base + "fyber"]
+Fyber_And_NonChina_File_List = [Android_NonChina_Network_Base + "fyber"]
 
 # Package_Map = \
 # {
@@ -230,7 +232,8 @@ Android_NonChina_Package_Map = \
         "SuperAwesome": SuperAwesome_And_File_List,
         "Tapjoy": Tapjoy_And_File_List,
         "UnityAds": UnityAds_And_File_List,
-        "Vungle": Vungle_And_File_List
+        "Vungle": Vungle_And_File_List,
+        "Fyber": Fyber_And_NonChina_File_List,
     }
 
 iOS_Package_Map = \
@@ -257,7 +260,8 @@ iOS_Package_Map = \
         "StartApp": StartApp_iOS_File_List,
         "Tapjoy": Tapjoy_iOS_File_List,
         "UnityAds": UnityAds_iOS_File_List,
-        "Vungle": Vungle_iOS_File_List
+        "Vungle": Vungle_iOS_File_List,
+        "Fyber" : Fyber_iOS_File_List
     }
 
 
@@ -265,7 +269,7 @@ Mediation_List = ["Baidu", "GDT", "Ksyun", "KuaiShou", "Oneway", "Sigmob",
                   "Uniplay", "Admob", "Facebook", "AdColony", "Applovin",
                   "AppNext", "Chartboost", "Flurry", "Inmobi", "Ironsource",
                   "Maio", "Mintegral", "Mopub", "Nend", "Ogury", "Pangle",
-                  "StartApp", "SuperAwesome", "Tapjoy", "UnityAds", "Vungle"]
+                  "StartApp", "SuperAwesome", "Tapjoy", "UnityAds", "Vungle", "Fyber"]
 
 
 def buildCrossChinaPlatform():
