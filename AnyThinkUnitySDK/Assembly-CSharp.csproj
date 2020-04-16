@@ -109,9 +109,12 @@
      <Compile Include="Assets\Scenes\srcipt\NativeBannerScene.cs" />
      <Compile Include="Assets\Scenes\srcipt\nativeScenes.cs" />
      <Compile Include="Assets\Scenes\srcipt\vidoeScenes.cs" />
+     <None Include="Assets\AnyThinkAds\Plugins\iOS\fyber\IASDKCore.framework\version.txt" />
      <None Include="Assets\AnyThinkAds\Plugins\iOS\tapjoy\Tapjoy.embeddedframework\Resources\TapjoyResources.bundle\revision.txt" />
      <None Include="Assets\AnyThinkAds\Plugins\iOS\tapjoy\Tapjoy.embeddedframework\Tapjoy.framework\Resources\TapjoyResources.bundle\revision.txt" />
      <None Include="Assets\AnyThinkAds\Plugins\iOS\tapjoy\Tapjoy.embeddedframework\Tapjoy.framework\Versions\Current\Resources\TapjoyResources.bundle\revision.txt" />
+     <None Include="Assets\AnyThinkAds\Plugins\iOS\fyber\IASDKMRAID.framework\version.txt" />
+     <None Include="Assets\AnyThinkAds\Plugins\iOS\fyber\IASDKVideo.framework\version.txt" />
      <None Include="Assets\AnyThinkAds\Plugins\iOS\tapjoy\Tapjoy.embeddedframework\Tapjoy.framework\Versions\A\Resources\TapjoyResources.bundle\revision.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/zhangjianming/Developer/Code/demo_unity/AnyThinkUnitySDK/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
