@@ -490,8 +490,9 @@ public class VideoHelper {
 
         try {
             if (mRewardVideoAd != null) {
-                MsgTools.pirntMsg("isAdReady >>> " + mRewardVideoAd.isAdReady());
-                return mRewardVideoAd.isAdReady();
+                boolean isAdReady = mRewardVideoAd.isAdReady();
+                MsgTools.pirntMsg("isAdReady >>> " + isAdReady);
+                return isAdReady;
             } else {
                 MsgTools.pirntMsg("isAdReady error  ..you must call initVideo first ");
 

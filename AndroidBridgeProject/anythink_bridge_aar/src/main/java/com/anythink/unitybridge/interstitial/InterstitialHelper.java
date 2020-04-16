@@ -221,8 +221,9 @@ public class InterstitialHelper {
 
         try {
             if (mInterstitialAd != null) {
-                MsgTools.pirntMsg("isAdReady >>> " + mInterstitialAd.isAdReady());
-                return mInterstitialAd.isAdReady();
+                boolean isAdReady = mInterstitialAd.isAdReady();
+                MsgTools.pirntMsg("isAdReady >>> " + isAdReady);
+                return isAdReady;
             } else {
                 Log.e(TAG, "isAdReady error  ..you must call initInterstitial first ");
 

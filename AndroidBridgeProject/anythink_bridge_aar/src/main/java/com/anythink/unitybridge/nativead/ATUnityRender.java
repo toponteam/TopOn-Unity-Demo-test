@@ -17,6 +17,7 @@ import com.anythink.nativead.api.ATNativeAdRenderer;
 import com.anythink.nativead.unitgroup.api.CustomNativeAd;
 import com.anythink.network.admob.AdmobATConst;
 import com.anythink.network.applovin.ApplovinATConst;
+import com.anythink.network.nend.NendATConst;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.imgutil.CommonBitmapUtil;
 import com.anythink.unitybridge.imgutil.CommonImageLoader;
@@ -227,10 +228,11 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
         }
 
 
-        if (!TextUtils.isEmpty(ad.getAdFrom())) {
+        if (!TextUtils.isEmpty(ad.getAdFrom()) && mNetworkType == NendATConst.NETWORK_FIRM_ID) {
             FrameLayout.LayoutParams adFromParam = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
             adFromParam.leftMargin = CommonBitmapUtil.dip2px(mActivity, 3);
-            adFromParam.topMargin = CommonBitmapUtil.dip2px(mActivity, 3);
+            adFromParam.bottomMargin = CommonBitmapUtil.dip2px(mActivity, 3);
+            adFromParam.gravity = Gravity.BOTTOM;
             TextView adFromTextView = new TextView(mActivity);
             adFromTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 6);
             adFromTextView.setPadding(CommonBitmapUtil.dip2px(mActivity, 5), CommonBitmapUtil.dip2px(mActivity, 2), CommonBitmapUtil.dip2px(mActivity, 5), CommonBitmapUtil.dip2px(mActivity, 2));
