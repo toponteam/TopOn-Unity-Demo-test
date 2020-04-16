@@ -54,6 +54,7 @@ extern NSString *const ATSDKInitErrorDomain;
 extern NSInteger const ATSDKInitErrorCodeDataConsentNotSet;
 extern NSInteger const ATSDKInitErrorCodeDataConsentForbidden;
 
+extern NSString *const kNetworkNameFyber;
 extern NSString *const kNetworkNameStartApp;
 extern NSString *const kNetworkNameFacebook;
 extern NSString *const kNetworkNameInmobi;

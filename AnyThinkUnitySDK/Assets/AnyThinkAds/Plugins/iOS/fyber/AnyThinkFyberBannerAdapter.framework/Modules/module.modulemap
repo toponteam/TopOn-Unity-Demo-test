@@ -1,0 +1,6 @@
+framework module AnyThinkFyberBannerAdapter {
+  umbrella header "AnyThinkFyberBannerAdapter.h"
+
+  export *
+  module * { export * }
+}
