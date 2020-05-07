@@ -23,23 +23,23 @@
 
 - (void)adapter:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter didFailToSetUpRewardVideoAd:(NSError *)error;
 
-- (void)adapterDidAdClick:(id<WindRewardVideoAdAdapter>)adapter placementId:(NSString *)placementId;
+- (void)adapterDidAdClick:(id<WindRewardVideoAdAdapter>)adapter placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapterDidReceiveRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId;
+- (void)adapterDidReceiveRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapterDidStartPlayingRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId;
+- (void)adapterDidStartPlayingRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapterDidCloseRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter rewardInfo:(WindRewardInfo *)info placementId:(NSString *)placementId;
+- (void)adapterDidCloseRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter rewardInfo:(WindRewardInfo *)info placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapter:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter didFailToLoadRewardVideoAdwithError:(NSError *)error placementId:(NSString *)placementId;
+- (void)adapter:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter didFailToLoadRewardVideoAdwithError:(NSError *)error placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapter:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter didPlayRewardVideoAdwithError:(NSError *)error placementId:(NSString *)placementId;
+- (void)adapter:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter didPlayRewardVideoAdwithError:(NSError *)error placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapterDidCompletePlayingRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId;
+- (void)adapterDidCompletePlayingRewardVideoAd:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapterRewardedVideoAdServerDidSucceed:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId;
+- (void)adapterRewardedVideoAdServerDidSucceed:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
-- (void)adapterRewardedVideoAdServerDidFail:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId;
+- (void)adapterRewardedVideoAdServerDidFail:(id<WindRewardVideoAdAdapter>)rewardVideoAdAdapter placementId:(NSString *)placementId strategy:(WADStrategy *)stragegy;
 
 @end
 

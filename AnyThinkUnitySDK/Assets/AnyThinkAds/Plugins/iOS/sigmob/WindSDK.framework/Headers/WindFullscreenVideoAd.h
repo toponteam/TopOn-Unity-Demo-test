@@ -16,7 +16,7 @@
 @required
 
 /**
- 激励视频广告物料加载成功（此时isReady=YES）
+ 全屏视频广告物料加载成功（此时isReady=YES）
  广告是否ready请以当前回调为准
  
  @param placementId 广告位Id
@@ -25,7 +25,7 @@
 
 
 /**
- 激励视频广告加载时发生错误
+ 全屏视频广告加载时发生错误
  
  @param error 发生错误时会有相应的code和message
  @param placementId 广告位Id
@@ -34,7 +34,7 @@
 
 
 /**
- 激励视频广告关闭
+ 全屏视频广告关闭
  
  @param placementId 广告位Id
  */
@@ -48,7 +48,7 @@
 
 
 /**
- 激励视频广告开始播放
+ 全屏视频广告开始播放
 
  @param placementId 广告位Id
  */
@@ -57,7 +57,7 @@
 
 
 /**
- 激励视频广告发生点击
+ 全屏视频广告发生点击
 
  @param placementId 广告位Id
  */
@@ -66,7 +66,7 @@
 
 
 /**
- 激励视频广告调用播放时发生错误
+ 全屏视频广告调用播放时发生错误
  
  @param error 发生错误时会有相应的code和message
  @param placementId 广告位Id
@@ -74,7 +74,7 @@
 - (void)onFullscreenVideoAdPlayError:(NSError *)error placementId:(NSString *)placementId;
 
 /**
- 激励视频广告视频播关闭
+ 全屏视频广告视频播关闭
  
  @param placementId 广告位Id
  */
@@ -82,7 +82,7 @@
 
 
 /**
- 激励视频广告AdServer返回广告(表示渠道有广告填充)
+ 全屏视频广告AdServer返回广告(表示渠道有广告填充)
 
  @param placementId 广告位Id
  */
@@ -90,7 +90,7 @@
 
 
 /**
- 激励视频广告AdServer无广告返回(表示渠道无广告填充)
+ 全屏视频广告AdServer无广告返回(表示渠道无广告填充)
  
  @param placementId 广告位Id
  */

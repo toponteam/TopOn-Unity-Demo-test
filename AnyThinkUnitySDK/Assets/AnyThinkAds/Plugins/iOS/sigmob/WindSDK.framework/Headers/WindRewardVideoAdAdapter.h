@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class WADStrategy;
+
+
 
 @protocol WindRewardVideoAdConnector;
 
@@ -19,13 +22,18 @@
 
 - (void)setup:(NSDictionary *)options;
 
-- (BOOL)isReady:(NSString *)placementId;
 
-- (void)loadAd:(NSString *)placementId;
+- (BOOL)isReadyWithStrategy:(WADStrategy *)strategy;
 
-- (void)presentRewardVideoAdWithViewController:(UIViewController *)controller placementId:(NSString *)placementId error:(NSError * __autoreleasing *)error;
+- (void)loadAd:(NSString *)placementId strategy:(WADStrategy *)strategy;
 
+- (NSString *)sdkVersion;
 
+- (void)presentRewardVideoAdWithViewController:(UIViewController *)controller
+                                   placementId:(NSString *)placementId
+                                      strategy:(WADStrategy *)strategy
+                                        options:(NSDictionary *)options
+                                         error:(NSError * __autoreleasing *)error;
 @end
 
 

@@ -47,16 +47,15 @@
 "Not loaded into resource bundle(Sigmob.bundle)" = "缺少资源包Sigmob.bundle";
 "Placement id is empty" = "广告位id为空";
 
-
 //splash Ad
 "Skip Ad" = "跳过广告";
 "Skip" = "跳过";
 "Ad" = "广告";
-"Close" = "关闭";
 
 
 // dialog
 "Close Video?" = "关闭视频?";
 "Confirm" = "确定关闭";
 "Cancel" = "继续播放";
-"With only _SEC_ seconds left, you will be rewarded!" = "还剩_SEC_秒，您就可以获得奖励了哦!";
+"You will be rewarded with only _SEC_ seconds." = "还剩_SEC_秒，您就可以获得奖励了哦!";
+"Close" = "关闭";

@@ -47,6 +47,12 @@
 
 @property (nonatomic,weak) id<WindSplashAdDelegate> delegate;
 
+
+// If nil, window will not appear on any screen.
+// changing the UIWindowScene may be an expensive operation and should not be done in performance-sensitive code
+@property(nonatomic, weak) UIWindowScene *windowScene API_AVAILABLE(ios(13.0));
+
+
 /**
  *  拉取广告超时时间，默认为3秒
  *  详解：拉取广告超时时间，开发者调用loadAd方法以后会立即展示app的启动图，然后在该超时时间内，如果广告拉
