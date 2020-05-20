@@ -21,7 +21,10 @@ public static class MyBuildPostprocess
                 PBXProject pbxProject = new PBXProject();
                 pbxProject.ReadFromFile(projectPath);
 
-                string target = pbxProject.TargetGuidByName("Unity-iPhone");            
+                //unity 2019版使用
+                // string target = pbxProject.GetUnityMainTargetGuid();
+                //unity 2018，2017版可使用
+                string target = pbxProject.TargetGuidByName("Unity-iPhone");          
                 pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
                 pbxProject.SetBuildProperty(target, "GCC_ENABLE_OBJC_EXCEPTIONS", "YES");
                 pbxProject.SetBuildProperty(target, "GCC_C_LANGUAGE_STANDARD", "gnu99");
