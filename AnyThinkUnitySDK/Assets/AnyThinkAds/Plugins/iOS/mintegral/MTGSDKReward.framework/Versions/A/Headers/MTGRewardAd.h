@@ -10,7 +10,7 @@
 #import <MTGSDK/MTGRewardAdInfo.h>
 
 
-#define MTGRewardVideoSDKVersion @"6.1.2"
+#define MTGRewardVideoSDKVersion @"6.2.0"
 
 
 /**
@@ -20,26 +20,30 @@
 @optional
 
 /**
- *  Called when the ad is loaded , but not ready to be displayed,need to wait load video
- completely
- *  @param unitId - the unitId string of the Ad that was loaded.
- */
-- (void)onAdLoadSuccess:(nullable NSString *)unitId;
+*  Called when the ad is loaded , but not ready to be displayed,need to wait load video
+completely
+ 
+*  @param placementId - the placementId string of the Ad that was loaded.
+*  @param unitId - the unitId string of the Ad that was loaded.
+*/
+- (void)onAdLoadSuccess:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
  *  Called when the ad is successfully load , and is ready to be displayed
- *
+ 
+ *  @param placementId - the placementId string of the Ad that was loaded.
  *  @param unitId - the unitId string of the Ad that was loaded.
  */
-- (void)onVideoAdLoadSuccess:(nullable NSString *)unitId;
+- (void)onVideoAdLoadSuccess:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
  *  Called when there was an error loading the ad.
- *
+ 
+ *  @param placementId - the placementId string of the Ad that was loaded.
  *  @param unitId      - the unitId string of the Ad that failed to load.
  *  @param error       - error object that describes the exact error encountered when loading the ad.
  */
-- (void)onVideoAdLoadFailed:(nullable NSString *)unitId error:(nonnull NSError *)error;
+- (void)onVideoAdLoadFailed:(nullable NSString *)placementId unitId:(nullable NSString *)unitId error:(nonnull NSError *)error;
 
 @end
 
@@ -51,53 +55,62 @@
 
 /**
  *  Called when the ad display success
- *
+ 
+ *  @param placementId - the placementId string of the Ad that display success.
  *  @param unitId - the unitId string of the Ad that display success.
  */
-- (void)onVideoAdShowSuccess:(nullable NSString *)unitId;
+- (void)onVideoAdShowSuccess:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
  *  Called when the ad failed to display for some reason
- *
+ 
+ *  @param placementId      - the placementId string of the Ad that failed to be displayed.
  *  @param unitId      - the unitId string of the Ad that failed to be displayed.
  *  @param error       - error object that describes the exact error encountered when showing the ad.
  */
-- (void)onVideoAdShowFailed:(nullable NSString *)unitId withError:(nonnull NSError *)error;
+- (void)onVideoAdShowFailed:(nullable NSString *)placementId unitId:(nullable NSString *)unitId withError:(nonnull NSError *)error;
 
 /**
  *  Called only when the ad has a video content, and called when the video play completed.
+ 
+ *  @param placementId - the placementId string of the Ad that video play completed.
  *  @param unitId - the unitId string of the Ad that video play completed.
  */
-- (void) onVideoPlayCompleted:(nullable NSString *)unitId;
+- (void) onVideoPlayCompleted:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
  *  Called only when the ad has a endcard content, and called when the endcard show.
+ 
+ *  @param placementId - the placementId string of the Ad that endcard show.
  *  @param unitId - the unitId string of the Ad that endcard show.
  */
-- (void) onVideoEndCardShowSuccess:(nullable NSString *)unitId;
+- (void) onVideoEndCardShowSuccess:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
  *  Called when the ad is clicked
  *
+ *  @param placementId - the placementId string of the Ad clicked.
  *  @param unitId - the unitId string of the Ad clicked.
  */
-- (void)onVideoAdClicked:(nullable NSString *)unitId;
+- (void)onVideoAdClicked:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
  *  Called when the ad has been dismissed from being displayed, and control will return to your app
  *
+ *  @param placementId      - the placementId string of the Ad that has been dismissed
  *  @param unitId      - the unitId string of the Ad that has been dismissed
  *  @param converted   - BOOL describing whether the ad has converted
  *  @param rewardInfo  - the rewardInfo object containing the info that should be given to your user.
  */
-- (void)onVideoAdDismissed:(nullable NSString *)unitId withConverted:(BOOL)converted withRewardInfo:(nullable MTGRewardAdInfo *)rewardInfo;
+- (void)onVideoAdDismissed:(nullable NSString *)placementId unitId:(nullable NSString *)unitId withConverted:(BOOL)converted withRewardInfo:(nullable MTGRewardAdInfo *)rewardInfo;
 
 /**
  *  Called when the ad  did closed;
  *
  *  @param unitId - the unitId string of the Ad that video play did closed.
+ *  @param placementId - the placementId string of the Ad that video play did closed.
  */
-- (void)onVideoAdDidClosed:(nullable NSString *)unitId;
+- (void)onVideoAdDidClosed:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 @end
 

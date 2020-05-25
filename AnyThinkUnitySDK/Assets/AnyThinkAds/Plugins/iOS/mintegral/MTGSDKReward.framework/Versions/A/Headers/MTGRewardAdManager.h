@@ -22,32 +22,42 @@
 + (nonnull instancetype)sharedInstance;
 
 /**
- *  Called when load the video
- *
- *  @param unitId      - the unitId string of the Ad that was loaded.
- *  @param delegate    - reference to the object that implements MTGRewardAdLoadDelegate protocol; will receive load events for the given unitId.
- */
-- (void)loadVideo:(nonnull NSString *)unitId delegate:(nullable id <MTGRewardAdLoadDelegate>)delegate;
+*  Called when load the video
+ 
+*  @param placementId   - the placementId string of the Ad that display.
+*  @param unitId      - the unitId string of the Ad that was loaded.
+*  @param delegate    - reference to the object that implements MTGRewardAdLoadDelegate protocol; will receive load events for the given unitId.
+*/
+- (void)loadVideoWithPlacementId:(nullable NSString *)placementId
+                          unitId:(nonnull NSString *)unitId
+                        delegate:(nullable id <MTGRewardAdLoadDelegate>)delegate;
 
 /**
- *  Called when show the video
- *
- *  @param unitId         - the unitId string of the Ad that display.
- *  @param rewardId       - the reward info you can set in mintegral portal
- *  @param userId       - The user's unique identifier in your system
- *  @param delegate       - reference to the object that implements MTGRewardAdShowDelegate protocol; will receive show events for the given unitId.
- *  @param viewController - UIViewController that shouold be set as the root view controller for the ad
- */
-- (void)showVideo:(nonnull NSString *)unitId withRewardId:(nullable NSString *)rewardId userId:(nullable NSString *)userId delegate:(nullable id <MTGRewardAdShowDelegate>)delegate viewController:(nonnull UIViewController*)viewController;
+*  Called when show the video
+*
+*  @param placementId         - the placementId string of the Ad that display.
+*  @param unitId         - the unitId string of the Ad that display.
+*  @param rewardId       - the reward info you can set in mintegral portal
+*  @param userId       - The user's unique identifier in your system
+*  @param delegate       - reference to the object that implements MTGRewardAdShowDelegate protocol; will receive show events for the given unitId.
+*  @param viewController - UIViewController that shouold be set as the root view controller for the ad
+*/
+- (void)showVideoWithPlacementId:(nullable NSString *)placementId
+                          unitId:(nonnull NSString *)unitId
+                    withRewardId:(nullable NSString *)rewardId
+                          userId:(nullable NSString *)userId
+                        delegate:(nullable id <MTGRewardAdShowDelegate>)delegate
+                  viewController:(nonnull UIViewController*)viewController;
 
 /**
  *  Will return whether the given unitId is loaded and ready to be shown.
  *
+ *  @param placementId - adPositionId value in Self Service
  *  @param unitId - adPositionId value in Self Service
  *
  *  @return - YES if the unitId is loaded and ready to be shown, otherwise NO.
  */
-- (BOOL)isVideoReadyToPlay:(nonnull NSString *)unitId;
+- (BOOL)isVideoReadyToPlayWithPlacementId:(nullable NSString *)placementId unitId:(nonnull NSString *)unitId;
 
 /**
  *  Clean all the video file cache from the disk.

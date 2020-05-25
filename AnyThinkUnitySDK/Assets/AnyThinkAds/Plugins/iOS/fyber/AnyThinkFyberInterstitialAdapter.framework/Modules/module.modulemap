@@ -1,6 +1,0 @@
-framework module AnyThinkFyberInterstitialAdapter {
-  umbrella header "AnyThinkFyberInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

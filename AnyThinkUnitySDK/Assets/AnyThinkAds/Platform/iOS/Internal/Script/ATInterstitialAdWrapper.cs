@@ -37,8 +37,10 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
     	} else if (callback.Equals("OnInterstitialAdClick")) {
     		OnInterstitialAdClick((string)msgDict["placement_id"], Json.Serialize(extra));
     	} else if (callback.Equals("OnInterstitialAdClose")) {
-    		OnInterstitialAdClose((string)msgDict["placement_id"], Json.Serialize(extra));
-    	}
+            OnInterstitialAdClose((string)msgDict["placement_id"], Json.Serialize(extra));
+        } else if (callback.Equals("OnInterstitialAdFailedToShow")) {
+            OnInterstitialAdFailedToShow((string)msgDict["placement_id"]);
+        }
     }
 
 	static public void setClientForPlacementID(string placementID, ATInterstitialAdClient client) {

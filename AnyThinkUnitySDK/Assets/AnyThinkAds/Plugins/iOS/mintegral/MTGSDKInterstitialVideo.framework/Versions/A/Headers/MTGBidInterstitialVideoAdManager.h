@@ -16,6 +16,7 @@
 
 @property (nonatomic, readonly)   NSString * _Nonnull currentUnitId;
 
+@property (nonatomic, readonly)   NSString * _Nullable placementId;
 
 /**
  * Play the video is mute in the beginning ,defult is NO
@@ -23,11 +24,9 @@
  */
 @property (nonatomic, assign) BOOL  playVideoMute;
 
-
-
-- (nonnull instancetype)initWithUnitID:(nonnull NSString *)unitId delegate:(nullable id<MTGBidInterstitialVideoDelegate>)delegate;
-
-
+- (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
+                                     unitId:(nonnull NSString *)unitId
+                                   delegate:(nullable id<MTGBidInterstitialVideoDelegate>)delegate;
 /**
  * Begins loading bidding ad content for the interstitialVideo.
  *
@@ -49,13 +48,15 @@
 
 
 /**
- *  Will return whether the given unitId used for bidding is loaded and ready to be shown.
- *
- *  @param unitId - adPositionId value in Self Service
- *
- *  @return - YES if the unitId is loaded and ready to be shown, otherwise NO.
- */
-- (BOOL)isVideoReadyToPlay:(nonnull NSString *)unitId;
+*  Whether the given unitId is loaded and ready to be shown.
+ 
+* @param placementId   - the placementId string of the Ad that display.
+*  @param unitId - adPositionId value in Self Service.
+*
+*  @return - YES if the unitId is loaded and ready to be shown, otherwise NO.
+*/
+- (BOOL)isVideoReadyToPlayWithPlacementId:(nullable NSString *)placementId unitId:(nonnull NSString *)unitId;
+
 
 /**
  *  Clean all the video file cache from the disk.

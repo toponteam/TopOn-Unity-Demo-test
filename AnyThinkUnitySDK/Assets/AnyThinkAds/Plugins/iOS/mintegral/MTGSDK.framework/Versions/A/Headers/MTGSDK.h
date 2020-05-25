@@ -18,7 +18,8 @@
 #import <MTGSDK/MTGMediaView.h>
 #import <MTGSDK/MTGUserInfo.h>
 
-#define MTGSDKVersion @"6.1.2"
+#define MTGSDKVersion @"6.2.0"
+
 
 @interface MTGSDK : NSObject
 
@@ -46,14 +47,16 @@
  
  @abstract The method that kicks off the preloading of native ads. It may be called again in the future to refresh the ads manually.
  
+ @param placementId The id of the ad placement. You can create your placement id from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
  @param numAdsRequested The number of ads you would like to preload. Max number is 10. If you pass any number bigger than 10, it will be reset to 10.
  */
-- (void)preloadNativeAdsWithUnitId:(nonnull NSString *)unitId
-                     fbPlacementId:(nullable NSString *)fbPlacementId
-                forNumAdsRequested:(NSUInteger)numAdsRequested;
+- (void)preloadNativeAdsWithPlacementId:(nullable NSString *)placementId
+                                 unitId:(nonnull NSString *)unitId
+                          fbPlacementId:(nullable NSString *)fbPlacementId
+                     forNumAdsRequested:(NSUInteger)numAdsRequested;
 
 /**
  *
@@ -61,6 +64,7 @@
  
  @abstract The method that kicks off the preloading of native ads. It may be called again in the future to refresh the ads manually.
  
+ @param placementId The id of the ad placement. You can create your placement id from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
@@ -69,10 +73,11 @@
  
  @param numAdsRequested The number of ads you would like to preload. Max number is 10. If you pass any number bigger than 10, it will be reset to 10.
  */
-- (void)preloadNativeAdsWithUnitId:(nonnull NSString *)unitId
-                     fbPlacementId:(nullable NSString *)fbPlacementId
-                     videoSupport:(BOOL)videoSupport
-                forNumAdsRequested:(NSUInteger)numAdsRequested;
+- (void)preloadNativeAdsWithPlacementId:(nullable NSString *)placementId
+                                 unitId:(nonnull NSString *)unitId
+                          fbPlacementId:(nullable NSString *)fbPlacementId
+                           videoSupport:(BOOL)videoSupport
+                     forNumAdsRequested:(NSUInteger)numAdsRequested;
 
 /**
  *
@@ -80,23 +85,26 @@
  
  @abstract The method that kicks off the preloading of native ads. It may be called again in the future to refresh the ads manually.
  
+ @param placementId The id of the ad placement. You can create your placement id from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
  @param templates This array contains objects of MTGTemplate. See more detail in definition of MTGTemplate.
  @param autoCacheImage If you pass YES, SDK will download the image resource automatically when you get the campaign.
  @param adCategory Decide what kind of ads you want to retrieve. Games, apps or all of them. The default is All.
  */
-- (void)preloadNativeAdsWithUnitId:(nonnull NSString *)unitId
-                     fbPlacementId:(nullable NSString *)fbPlacementId
-                supportedTemplates:(nullable NSArray *)templates
-                    autoCacheImage:(BOOL)autoCacheImage
-                        adCategory:(MTGAdCategory)adCategory;
+- (void)preloadNativeAdsWithPlacementId:(nullable NSString *)placementId
+                                 unitId:(nonnull NSString *)unitId
+                          fbPlacementId:(nullable NSString *)fbPlacementId
+                     supportedTemplates:(nullable NSArray *)templates
+                         autoCacheImage:(BOOL)autoCacheImage
+                             adCategory:(MTGAdCategory)adCategory;
 /**
  *
  @method
  
  @abstract The method that kicks off the preloading of native frames. It may be called again in the future to refresh the frames manually.
  
+ @param placementId The id of the ad placement. You can create your placement id from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
  @param templates This array contains objects of MTGTemplate. See more detail in definition of MTGTemplate.
@@ -104,12 +112,13 @@
  @param adCategory Decide what kind of ads you want to retrieve. Games, apps or all of them. The default is All.
  @param frameNum The number of frames you would like to preload. Max number is 10. If you pass any number bigger than 10, it will be reset to 10.
  */
-- (void)preloadNativeFramesWithUnitId:(nonnull NSString *)unitId
-                        fbPlacementId:(nullable NSString *)fbPlacementId
-              supportedFrameTemplates:(nullable NSArray *)templates
-                       autoCacheImage:(BOOL)autoCacheImage
-                           adCategory:(MTGAdCategory)adCategory
-                             frameNum:(NSUInteger)frameNum DEPRECATED_ATTRIBUTE;
+- (void)preloadNativeFramesWithPlacementId:(nullable NSString *)placementId
+                                    unitId:(nonnull NSString *)unitId
+                             fbPlacementId:(nullable NSString *)fbPlacementId
+                   supportedFrameTemplates:(nullable NSArray *)templates
+                            autoCacheImage:(BOOL)autoCacheImage
+                                adCategory:(MTGAdCategory)adCategory
+                                  frameNum:(NSUInteger)frameNum DEPRECATED_ATTRIBUTE;
 
 /**
  *

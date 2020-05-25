@@ -1,6 +1,0 @@
-framework module AnyThinkGDTSplashAdapter {
-  umbrella header "AnyThinkGDTSplashAdapter.h"
-
-  export *
-  module * { export * }
-}

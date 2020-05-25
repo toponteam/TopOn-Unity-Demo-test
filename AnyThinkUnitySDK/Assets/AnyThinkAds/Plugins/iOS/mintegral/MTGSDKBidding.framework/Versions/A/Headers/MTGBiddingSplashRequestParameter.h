@@ -28,9 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
  @param basePrice The optional value provided to this method should be double,the requested bid should not be lower than this price if this value provided.
  @param preload whether or not this load is a preload. If preload marked to YES, you should call `[MTGSplashAD preloadWithBidToken:]` to load ad.
  */
-- (instancetype)initWithUnitId:(nonnull NSString *) unitId
-                     basePrice:(nullable NSNumber *)basePrice
-                      preload:(BOOL)preload;
+- (instancetype)initWithPlacementId:(nullable NSString *)placementId
+                             unitId:(nonnull NSString *) unitId
+                          basePrice:(nullable NSNumber *)basePrice
+                            preload:(BOOL)preload;
 
 /**
  Initialize an MTGBiddingSplashRequestParameter object
@@ -43,7 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
  @note  1. when you showing ad on the portrait mode, the height of the customViewSize should not           greater than 25% of the device's height.
         2. when you showing ad on the landscape mode, the width of the customViewSize should not greater than 25% of the device's width.
  */
-- (instancetype)initWithUnitId:(NSString *)unitId
+- (instancetype)initWithPlacementId:(nullable NSString *)placementId
+                             unitId:(NSString *)unitId
                      basePrice:(NSNumber *)basePrice
                        preload:(BOOL)preload
                 customViewSize:(CGSize)customViewSize

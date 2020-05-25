@@ -5,7 +5,9 @@
 //  Created by CharkZhang on 2016/11/8.
 //
 
-#define MTGInterstitialSDKVersion @"6.1.2"
+
+#define MTGInterstitialSDKVersion @"6.2.0"
+
 
 #import <Foundation/Foundation.h>
 
@@ -90,16 +92,17 @@ typedef NS_ENUM(NSInteger, MTGInterstitialAdCategory) {
 
 @property (nonatomic, readonly)   NSString * _Nonnull currentUnitId;
 
+@property (nonatomic, readonly)   NSString * _Nullable placementId;
 
 /**
- *  Initialize the native ads manager.
- *
- *  @param unitId         The id of the ad unit. You can create your unit id from our Portal.
- *  @param adCategory     Decide what kind of ads you want to retrieve. Games, apps or all of them. The default is All.
- */
-- (nonnull instancetype)initWithUnitID:(nonnull NSString *)unitId
-                            adCategory:(MTGInterstitialAdCategory)adCategory;
-
+*   Initialize the interstitial ads manager.
+*  @param placementId     The id of the ad placement. You can create your placement id from our Portal.
+*  @param unitId         The id of the ad unit. You can create your unit id from our Portal.
+*  @param adCategory     Decide what kind of ads you want to retrieve. Games, apps or all of them. The default is All.
+*/
+- (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
+                                     unitId:(nonnull NSString *)unitId
+                                 adCategory:(MTGInterstitialAdCategory)adCategory;
 /**
  *  Called when load the Interstitial
  *

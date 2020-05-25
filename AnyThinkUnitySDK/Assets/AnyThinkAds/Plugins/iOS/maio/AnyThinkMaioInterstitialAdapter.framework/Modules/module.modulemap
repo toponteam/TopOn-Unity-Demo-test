@@ -1,6 +1,0 @@
-framework module AnyThinkMaioInterstitialAdapter {
-  umbrella header "AnyThinkMaioInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

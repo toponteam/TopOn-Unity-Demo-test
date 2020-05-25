@@ -39,6 +39,14 @@
 @property (nonatomic, readonly) BOOL videoSupport DEPRECATED_ATTRIBUTE;
 
 /*!
+@property
+
+@discussion ad current placementId .
+*/
+
+@property (nonatomic, readonly) NSString *_Nullable placementId;
+
+/*!
  @property
  
  @discussion ad current UnitId .
@@ -63,10 +71,11 @@
  @param viewController The UIViewController that will be used to present SKStoreProductViewController
  (iTunes Store product information) or the in-app browser. If not set, it will be the root viewController of your current UIWindow. But it may failed to present our view controller if your rootViewController is presenting other view controller. So set this property is necessary.
  */
-- (nonnull instancetype)initWithUnitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                    forNumAdsRequested:(NSUInteger)numAdsRequested
-              presentingViewController:(nullable UIViewController *)viewController;
+- (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
+                                     unitID:(nonnull NSString *)unitId
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                         forNumAdsRequested:(NSUInteger)numAdsRequested
+                   presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
  
@@ -79,11 +88,12 @@
  @param viewController The UIViewController that will be used to present SKStoreProductViewController
  (iTunes Store product information) or the in-app browser. If not set, it will be the root viewController of your current UIWindow. But it may failed to present our view controller if your rootViewController is presenting other view controller. So set this property is necessary.
  */
-- (nonnull instancetype)initWithUnitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                          videoSupport:(BOOL)videoSupport
-                    forNumAdsRequested:(NSUInteger)numAdsRequested
-              presentingViewController:(nullable UIViewController *)viewController;
+- (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
+                                     unitID:(nonnull NSString *)unitId
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                               videoSupport:(BOOL)videoSupport
+                         forNumAdsRequested:(NSUInteger)numAdsRequested
+                   presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
  
@@ -97,12 +107,13 @@
  @param viewController The UIViewController that will be used to present SKStoreProductViewController
  (iTunes Store product information) or the in-app browser. If not set, it will be the root viewController of your current UIWindow. But it may failed to present our view controller if your rootViewController is presenting other view controller. So set this property is necessary.
  */
-- (nonnull instancetype)initWithUnitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                    supportedTemplates:(nullable NSArray *)templates
-                        autoCacheImage:(BOOL)autoCacheImage
-                            adCategory:(MTGAdCategory)adCategory
-              presentingViewController:(nullable UIViewController *)viewController;
+- (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
+                                     unitID:(nonnull NSString *)unitId
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                         supportedTemplates:(nullable NSArray *)templates
+                             autoCacheImage:(BOOL)autoCacheImage
+                                 adCategory:(MTGAdCategory)adCategory
+                   presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
  
@@ -129,13 +140,14 @@
  
  @deprecated This method has been deprecated.
  */
-- (nonnull instancetype)initWithUnitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                              frameNum:(NSUInteger)frameNum
-                    supportedTemplates:(nullable NSArray *)templates
-                        autoCacheImage:(BOOL)autoCacheImage
-                            adCategory:(MTGAdCategory)adCategory
-              presentingViewController:(nullable UIViewController *)viewController DEPRECATED_ATTRIBUTE;
+- (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
+                                     unitID:(nonnull NSString *)unitId
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                                   frameNum:(NSUInteger)frameNum
+                         supportedTemplates:(nullable NSArray *)templates
+                             autoCacheImage:(BOOL)autoCacheImage
+                                 adCategory:(MTGAdCategory)adCategory
+                   presentingViewController:(nullable UIViewController *)viewController DEPRECATED_ATTRIBUTE;
 
 
 /*!

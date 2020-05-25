@@ -22,9 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
   @param basePrice The optional value provided to this method should be double,the requested bid should not be lower than this price if use this value
   @param unitSize banner unit size
  */
-- (instancetype)initWithUnitId:(nonnull NSString *) unitId
-                     basePrice:(nullable NSNumber *)basePrice
-                      unitSize:(CGSize)unitSize;
+- (instancetype)initWithPlacementId:(nullable NSString *)placementId
+                             unitId:(nonnull NSString *) unitId
+                          basePrice:(nullable NSNumber *)basePrice
+                           unitSize:(CGSize)unitSize;
 
 /**
  Initialize an MTGBiddingBannerRequestParameter object
@@ -32,9 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
  @param basePrice The optional value provided to this method should be double,the requested bid should not be lower than this price if use this value
  @param unitSize MTGBannerSizeTypeFormat
 */
-- (instancetype)initWithUnitId:(nonnull NSString *) unitId
-                     basePrice:(nullable NSNumber *)basePrice
-                bannerSizeType:(MTGBannerSizeType)bannerSizeType;
+- (instancetype)initWithPlacementId:(nullable NSString *)placementId
+                             unitId:(nonnull NSString *) unitId
+                          basePrice:(nullable NSNumber *)basePrice
+                     bannerSizeType:(MTGBannerSizeType)bannerSizeType;
 @end
 
 NS_ASSUME_NONNULL_END

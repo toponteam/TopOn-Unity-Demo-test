@@ -1,6 +1,0 @@
-framework module AnyThinkSigmobInterstitialAdapter {
-  umbrella header "AnyThinkSigmobInterstitialAdapter.h"
-
-  export *
-  module * { export * }
-}

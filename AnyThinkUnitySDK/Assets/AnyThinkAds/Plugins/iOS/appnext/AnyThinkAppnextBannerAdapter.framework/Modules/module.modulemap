@@ -1,6 +1,0 @@
-framework module AnyThinkAppnextBannerAdapter {
-  umbrella header "AnyThinkAppnextBannerAdapter.h"
-
-  export *
-  module * { export * }
-}

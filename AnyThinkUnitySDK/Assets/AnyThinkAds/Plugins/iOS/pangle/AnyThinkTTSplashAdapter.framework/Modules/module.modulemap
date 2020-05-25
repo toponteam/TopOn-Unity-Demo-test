@@ -1,6 +1,0 @@
-framework module AnyThinkTTSplashAdapter {
-  umbrella header "AnyThinkTTSplashAdapter.h"
-
-  export *
-  module * { export * }
-}

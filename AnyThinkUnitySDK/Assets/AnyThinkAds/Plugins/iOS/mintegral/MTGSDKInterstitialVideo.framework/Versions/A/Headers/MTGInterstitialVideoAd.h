@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <MTGSDK/MTGRewardAdInfo.h>
 
-#define MTGInterstitialVideoSDKVersion @"6.1.2"
+#define MTGInterstitialVideoSDKVersion @"6.2.0"
+
 
 /**
  We will call back the time when the user saw the alert message. The timing depends on the way you set MTGIVRewardMode
