@@ -3,7 +3,4 @@ framework module PersonalizedAdConsent {
 
   export *
   module * { export * }
-
-  header "PACPersonalizedAdConsent.h"
-  header "PACConsentForm.h"
 }

@@ -11,7 +11,7 @@
 #import <MTGSDK/MTGAdSize.h>
 #import "MTGBannerAdViewDelegate.h"
 
-#define MTGBannerSDKVersion @"6.2.0"
+#define MTGBannerSDKVersion @"6.3.2"
 
 
 NS_ASSUME_NONNULL_BEGIN

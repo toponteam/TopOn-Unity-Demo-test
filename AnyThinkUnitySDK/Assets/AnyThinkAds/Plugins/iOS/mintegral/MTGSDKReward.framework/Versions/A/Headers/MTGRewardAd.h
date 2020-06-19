@@ -10,7 +10,7 @@
 #import <MTGSDK/MTGRewardAdInfo.h>
 
 
-#define MTGRewardVideoSDKVersion @"6.2.0"
+#define MTGRewardVideoSDKVersion @"6.3.2"
 
 
 /**
@@ -95,7 +95,7 @@ completely
 - (void)onVideoAdClicked:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 
 /**
- *  Called when the ad has been dismissed from being displayed, and control will return to your app
+ *  Called when the ad will dismiss from being displayed, and control will return to your app
  *
  *  @param placementId      - the placementId string of the Ad that has been dismissed
  *  @param unitId      - the unitId string of the Ad that has been dismissed
@@ -105,10 +105,10 @@ completely
 - (void)onVideoAdDismissed:(nullable NSString *)placementId unitId:(nullable NSString *)unitId withConverted:(BOOL)converted withRewardInfo:(nullable MTGRewardAdInfo *)rewardInfo;
 
 /**
- *  Called when the ad  did closed;
+ *  Called when the ad did dismissed;
  *
- *  @param unitId - the unitId string of the Ad that video play did closed.
- *  @param placementId - the placementId string of the Ad that video play did closed.
+ *  @param unitId - the unitId string of the Ad that video play did dismissed.
+ *  @param placementId - the placementId string of the Ad that video play did dismissed.
  */
 - (void)onVideoAdDidClosed:(nullable NSString *)placementId unitId:(nullable NSString *)unitId;
 

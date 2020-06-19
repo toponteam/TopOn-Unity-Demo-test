@@ -18,11 +18,18 @@
 #import <MTGSDK/MTGMediaView.h>
 #import <MTGSDK/MTGUserInfo.h>
 
-#define MTGSDKVersion @"6.2.0"
+#define MTGSDKVersion @"6.3.2"
 
 
 @interface MTGSDK : NSObject
 
+
+/**
+* The version of the SDK.
+*
+* @return The current version of the SDK.
+*/
++(NSString *_Nonnull)sdkVersion;
 
 /**
  * The shared instance of the SDK.

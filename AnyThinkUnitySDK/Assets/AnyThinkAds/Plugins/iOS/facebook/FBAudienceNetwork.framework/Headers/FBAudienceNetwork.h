@@ -58,3 +58,4 @@
 // to ensure comptability with Swift apps using Cocoapods
 
 #define FB_AD_SDK_VERSION @"5.9.0"
+w

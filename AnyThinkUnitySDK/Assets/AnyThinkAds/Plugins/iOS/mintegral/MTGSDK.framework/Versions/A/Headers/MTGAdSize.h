@@ -19,8 +19,8 @@ typedef NS_ENUM(NSInteger,MTGBannerSizeType) {
     /*Represents the fixed banner ad size - 300pt by 250pt.*/
     MTGMediumRectangularBanner300x250,
     
-    /*if device height <=720,Represents the fixed banner ad size - 320pt by 50pt;
-      if device height > 720,Represents the fixed banner ad size - 728pt by 90pt*/
+    /*if device is iphone,Represents the fixed banner ad size - 320pt by 50pt;
+      if device is ipad,  Represents the fixed banner ad size - 728pt by 90pt*/
     MTGSmartBannerType
 };
 
