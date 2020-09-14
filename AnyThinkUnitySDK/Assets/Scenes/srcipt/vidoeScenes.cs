@@ -132,9 +132,8 @@ public class vidoeScenes : MonoBehaviour {
         ATSDKAPI.setCustomDataForPlacementID(new Dictionary<string, string> { { "placement_custom_key", "placement_custom" } }, mPlacementId_rewardvideo_all);
 
 		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
-		jsonmap.Add("age", "22");
-		jsonmap.Add("sex", "lady");
-		jsonmap.Add("rv", "1");
+		jsonmap.Add(ATConst.USERID_KEY, "test_user_id");
+		jsonmap.Add(ATConst.USER_EXTRA_DATA, "test_user_extra_data");
 
 
         ATRewardedVideo.Instance.loadVideoAd(mPlacementId_rewardvideo_all,jsonmap);

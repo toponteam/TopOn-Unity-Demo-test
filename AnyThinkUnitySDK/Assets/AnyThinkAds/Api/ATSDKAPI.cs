@@ -109,12 +109,7 @@ namespace AnyThinkAds.Api
 
         private static IATSDKAPIClient GetATSDKAPIClient(){
             Debug.Log("GetATSDKAPIClient");
-            Type anythinkSDKAPIClientFactory = Type.GetType(
-                "AnyThinkAds.ATAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = anythinkSDKAPIClientFactory.GetMethod(
-                "BuildSDKAPIClient",
-                BindingFlags.Static | BindingFlags.Public);
-            return (IATSDKAPIClient)method.Invoke(null, null);
+            return AnyThinkAds.ATAdsClientFactory.BuildSDKAPIClient();
         }
 
     }

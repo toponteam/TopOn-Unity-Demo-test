@@ -59,6 +59,11 @@ namespace AnyThinkAds.Api
 		}
 
         public const string SCENARIO = "Scenario";//value is string
+        public const string USERID_KEY = "UserId";//value is string
+        public const string USER_EXTRA_DATA = "UserExtraData"; //value is string
+        public const string USE_REWARDED_VIDEO_AS_INTERSTITIAL = "UseRewardedVideoAsInterstitial";//value is string
+        public const string USE_REWARDED_VIDEO_AS_INTERSTITIAL_YES = "1";
+        public const string USE_REWARDED_VIDEO_AS_INTERSTITIAL_NO = "0";
 
     }
 }

@@ -40,17 +40,22 @@ static NSString *kATBannerSizeUsesPixelFlagKey = @"uses_pixel";
 
 -(void) loadBannerAdWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char*))callback {
     [self setCallBack:callback forKey:placementID];
-    NSDictionary *extra = nil;
+    NSMutableDictionary *extra = [NSMutableDictionary dictionary];
     if ([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString length] > 0) {
         NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"extraDict = %@", extraDict);
         CGFloat scale = [extraDict[kATBannerSizeUsesPixelFlagKey] boolValue] ? [UIScreen mainScreen].nativeScale : 1.0f;
         if ([extraDict[kATAdLoadingExtraBannerAdSizeKey] isKindOfClass:[NSString class]] && [[extraDict[kATAdLoadingExtraBannerAdSizeKey] componentsSeparatedByString:@"x"] count] == 2) {
             NSArray<NSString*>* com = [extraDict[kATAdLoadingExtraBannerAdSizeKey] componentsSeparatedByString:@"x"];
-            extra = @{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:CGSizeMake([com[0] doubleValue] / scale, [com[1] doubleValue] / scale)]};
+
+            extra[kATAdLoadingExtraBannerAdSizeKey] = [NSValue valueWithCGSize:CGSizeMake([com[0] doubleValue] / scale, [com[1] doubleValue] / scale)];
         }
+        if (extraDict[kATAdLoadingExtraAdmobBannerSizeKey] != nil) { extra[kATAdLoadingExtraAdmobBannerSizeKey] = extraDict[kATAdLoadingExtraAdmobBannerSizeKey]; }
+        if (extraDict[kATAdLoadingExtraAdmobAnchoredAdaptiveKey] != nil) { extra[kATAdLoadingExtraAdmobAnchoredAdaptiveKey] = extraDict[kATAdLoadingExtraAdmobAnchoredAdaptiveKey]; }
     }
-    if (extra == nil) { extra = @{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(320.0f, 50.0f)]}; }
+    if (extra[kATAdLoadingExtraBannerAdSizeKey] == nil) {
+        extra[kATAdLoadingExtraBannerAdSizeKey] = [NSValue valueWithCGSize:CGSizeMake(320.0f, 50.0f)];
+    }
     [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:extra delegate:self];
 }
 
@@ -154,4 +159,5 @@ UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
     error = error != nil ? error : [NSError errorWithDomain:@"com.anythink.Unity3DPackage" code:100001 userInfo:@{NSLocalizedDescriptionKey:@"AT has failed to refresh ad", NSLocalizedFailureReasonErrorKey:@"AT has failed to refresh ad"}];
     [self invokeCallback:@"OnBannerAdAutoRefreshFail" placementID:placementID error:error extra:nil];
 }
+
 @end

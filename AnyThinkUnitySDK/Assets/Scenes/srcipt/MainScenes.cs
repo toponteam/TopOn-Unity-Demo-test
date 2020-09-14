@@ -94,6 +94,7 @@ public class MainScenes : MonoBehaviour {
        ATSDKAPI.initSDK("a5aa1f9deda26d", "4f7b9ac17decb9babec83aac078742c7", new InitListener());
 #elif UNITY_IOS || UNITY_IPHONE
         ATSDKAPI.initSDK("a5b0e8491845b3", "7eae0567827cfe2b22874061763f30c9", new InitListener());
+        // ATSDKAPI.initSDK("a5e81de0f9beec", "98afd4bbc12d3cae38d6a1a48b593c5d", new InitListener());
 #endif
 
 

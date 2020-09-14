@@ -2,6 +2,11 @@ package com.anythink.unitybridge.imgutil;
 
 import android.os.Environment;
 
+import org.json.JSONObject;
+
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * Copyright (C) 2018 {XX} Science and Technology Co., Ltd.
  *
@@ -11,8 +16,14 @@ import android.os.Environment;
  */
 public class Const {
     public static final boolean DEBUG = true;
-    public static final String  SPU_NAME = "imgspu";
-    public static final String  SCENARIO = "Scenario";
+    public static final String SPU_NAME = "imgspu";
+    public static final String SCENARIO = "Scenario";
+
+    public static class Interstital {
+        public static final String UseRewardedVideoAsInterstitial = "UseRewardedVideoAsInterstitial";
+        public static final String UseRewardedVideoAsInterstitialYes = "1";
+        public static final String UseRewardedVideoAsInterstitialNo = "0";
+    }
 
     public static class FOLDER {
         /**
@@ -25,5 +36,15 @@ public class Const {
         public static final String DOWNLOAD_FOLDER = ROOT_FOLDER + "download/";
 
         ;
+    }
+
+    public static void fillMapFromJsonObject(Map<String, Object> localExtra, JSONObject jsonObject) {
+        Iterator<String> keys = jsonObject.keys();
+        String key;
+        while (keys.hasNext()) {
+            key = keys.next();
+            Object value = jsonObject.opt(key);
+            localExtra.put(key, value);
+        }
     }
 }

@@ -14,6 +14,12 @@
 /* Play the video mute or not in the beginning, defult is NO */
 @property (nonatomic, assign) BOOL  playVideoMute;
 
+/**
+* this method is used to open RewardPlus for RewardVideo
+* please set this before loadVideo
+* openRewardPlus default false
+*/
+@property (nonatomic,assign) BOOL openRewardPlus;
 
 /**
  * The shared instance of the video.

@@ -9,6 +9,8 @@
 #import "ATInterstitialAdWrapper.h"
 #import "ATUnityUtilities.h"
 #import <AnyThinkInterstitial/AnyThinkInterstitial.h>
+
+NSString *const kLoadUseRVAsInterstitialKey = @"UseRewardedVideoAsInterstitial";
 @interface ATInterstitialAdWrapper()<ATInterstitialDelegate>
 @end
 @implementation ATInterstitialAdWrapper
@@ -27,7 +29,15 @@
 
 -(void) loadInterstitialAdWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char*))callback {
     [self setCallBack:callback forKey:placementID];
-    [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:nil customData:([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil delegate:self];
+    NSDictionary *extra = nil;
+    if ([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString length] > 0) {
+        NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"extraDict = %@", extra);
+        if (extraDict[kLoadUseRVAsInterstitialKey] != nil) { extra = @{kATInterstitialExtraUsesRewardedVideo:@([extraDict[kLoadUseRVAsInterstitialKey] boolValue])};
+        }
+    }
+    
+    [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:extra != nil ? extra : nil delegate:self];
 }
 
 -(BOOL) interstitialAdReadyForPlacementID:(NSString*)placementID {

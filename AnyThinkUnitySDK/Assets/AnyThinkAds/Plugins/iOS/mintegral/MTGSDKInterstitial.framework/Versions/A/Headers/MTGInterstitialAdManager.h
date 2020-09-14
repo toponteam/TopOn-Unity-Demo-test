@@ -6,7 +6,8 @@
 //
 
 
-#define MTGInterstitialSDKVersion @"6.3.2"
+
+#define MTGInterstitialSDKVersion @"6.6.0"
 
 
 #import <Foundation/Foundation.h>

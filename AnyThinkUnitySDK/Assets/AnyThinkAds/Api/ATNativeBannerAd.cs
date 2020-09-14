@@ -67,12 +67,7 @@ namespace AnyThinkAds.Api
 
 		public IATNativeBannerAdClient GetATNativeBannerAdClient()
         {
-            Type anythinkSDKAPIClientFactory = Type.GetType(
-                "AnyThinkAds.ATAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = anythinkSDKAPIClientFactory.GetMethod(
-                "BuildNativeBannerAdClient",
-                BindingFlags.Static | BindingFlags.Public);
-            return (IATNativeBannerAdClient)method.Invoke(null, null);
+            return AnyThinkAds.ATAdsClientFactory.BuildNativeBannerAdClient();
         }
     }
 }

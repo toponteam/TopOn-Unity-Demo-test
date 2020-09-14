@@ -14,11 +14,12 @@
 #import <MTGSDK/MTGCampaign.h>
 #import <MTGSDK/MTGTemplate.h>
 #import <MTGSDK/MTGFrame.h>
-#import <MTGSDK/MTGNativeScrollView.h>
 #import <MTGSDK/MTGMediaView.h>
 #import <MTGSDK/MTGUserInfo.h>
 
-#define MTGSDKVersion @"6.3.2"
+
+#define MTGSDKVersion @"6.6.0"
+
 
 
 @interface MTGSDK : NSObject
@@ -127,15 +128,6 @@
                                 adCategory:(MTGAdCategory)adCategory
                                   frameNum:(NSUInteger)frameNum DEPRECATED_ATTRIBUTE;
 
-/**
- *
- @method
- 
- @abstract The method that kicks off the preloading of app wall ads. It may be called again in the future to refresh the ads manually.
- 
- @param unitId The id of the ad unit. You can create your unit id from our Portal.
- */
-- (void)preloadAppWallAdsWithUnitId:(nonnull NSString *)unitId;
 
 
 @property (nonatomic, assign) BOOL autoSetAudioCategory;
@@ -146,7 +138,7 @@
  Set YES to indicate the user's data will be collected otherwise NO. Default to be YES.
  
 @abstract According to the GDPR, set method of this property must be called before "setAppID: ApiKey:", or by default will collect user's information.
-@Attention Do not mix the usage of `setConsentStatus:` and `setUserPrivateInfoType:agree` simultaneously in your app.
+ @Attention Do not mix the usage of `setConsentStatus:` and `setUserPrivateInfoType:agree` simultaneously in your app.
  */
 @property (nonatomic, assign) BOOL consentStatus;
 
@@ -165,15 +157,6 @@
 @property (nonatomic, assign) BOOL doNotTrackStatus;
 
 - (void)setUserInfo:(nonnull MTGUserInfo *)userInfo;
-
-/**
- Show the privacy consent authorization tips view.
- 
- @abstract This method must be called before "setAppID: ApiKey:", Or by default will collect user information.
-
- @param callback A block that accepts a Bool and an NSError as input parameters. The NSError parameter which provides information on a failed consent update request, the Bool parameter which provides the updated consent status.
- */
-- (void)showConsentInfoTips:(nullable void (^)(BOOL consentStatus, NSError *_Nullable error))callback;
 
 
 /**
@@ -195,16 +178,6 @@
  @abstract You can get all status for current 'MTGUserPrivateType' by using this method.
  */
 - (MTGUserPrivateTypeInfo *_Nonnull)userPrivateInfo DEPRECATED_MSG_ATTRIBUTE("Use `[MTGSDK sharedInstance] consentStatus` instead");
-
-/**
- *
- @method Show the privacy authorization tips view
- 
- @abstract This method must be called before "setAppID: ApiKey:", Or by default will collect user information;
- Authorization tips view is added upon the "window”, don't cover it.
- @param block result block.
- */
-- (void)showUserPrivateInfoTips:(MTGUserPrivateInfoTipsResultBlock _Nonnull )block DEPRECATED_MSG_ATTRIBUTE("Use `[MTGSDK sharedInstance] showConsentInfoTips:` instead");
 
 
 @end

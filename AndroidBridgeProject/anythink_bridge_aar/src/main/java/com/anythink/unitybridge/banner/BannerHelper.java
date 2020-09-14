@@ -14,10 +14,14 @@ import com.anythink.core.api.ATAdInfo;
 import com.anythink.core.api.AdError;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
+import com.anythink.unitybridge.imgutil.Const;
 import com.anythink.unitybridge.imgutil.TaskManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BannerHelper {
 
@@ -179,8 +183,12 @@ public class BannerHelper {
                                     }
 
                                 }
-
                             }
+
+                            Map<String, Object> localExtra = new HashMap<>();
+                            Const.fillMapFromJsonObject(localExtra, jsonObject);
+
+                            mBannerView.setLocalExtra(localExtra);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

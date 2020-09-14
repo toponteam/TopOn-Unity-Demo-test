@@ -7,9 +7,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 
 import com.anythink.nativead.api.ATNativeAdView;
+import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.imgutil.Const;
 
 import org.json.JSONException;
@@ -75,6 +77,10 @@ public class ViewInfo {
             e.printStackTrace();
         }
 
+        ViewParent oldParent = childView.getParent();
+        if (oldParent instanceof ViewGroup) {
+            ((ViewGroup) oldParent).removeView(childView);
+        }
 
         view.addView(childView, layoutParams);
 
@@ -93,6 +99,7 @@ public class ViewInfo {
     public static void addNativeAdView2Activity(final Activity pActivity, final ViewInfo pViewInfo, final ATNativeAdView mATNativeAdView) {
 
         if (pActivity == null || mATNativeAdView == null) {
+            MsgTools.pirntMsg("pActivity or native ad view is null");
             return;
         }
 
@@ -106,9 +113,7 @@ public class ViewInfo {
                         _viewGroup.removeView(mATNativeAdView);
                     }
                 } catch (Exception e) {
-                    if (Const.DEBUG) {
-                        e.printStackTrace();
-                    }
+                    e.printStackTrace();
 
                 }
 
@@ -121,7 +126,11 @@ public class ViewInfo {
                         mATNativeAdView.setBackgroundColor(Color.parseColor(pViewInfo.rootView.bgcolor));
                     }
 
+                    MsgTools.pirntMsg("Add native view to content start....");
                     pActivity.addContentView(mATNativeAdView, layoutParams);
+                    MsgTools.pirntMsg("Add native view to content end....");
+                } else {
+                    MsgTools.pirntMsg("pViewInfo.rootView is null");
                 }
 
 

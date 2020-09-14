@@ -63,6 +63,9 @@ public class nativeScenes : MonoBehaviour {
 		gdtlocal.Add ("tt_image_width","900");
 		gdtlocal.Add ("tt_image_height","600");
 
+        gdtlocal.Add ("mintegral_auto_render_native_width","900");
+        gdtlocal.Add ("mintegral_auto_render_native_height","600");
+
         ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
 
 		Dictionary<string,string> jsonmap = new Dictionary<string,string>();

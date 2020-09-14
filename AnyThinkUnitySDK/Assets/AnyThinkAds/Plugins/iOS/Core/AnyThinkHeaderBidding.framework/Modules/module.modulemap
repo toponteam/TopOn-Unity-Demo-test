@@ -1,6 +1,0 @@
-framework module AnyThinkHeaderBidding {
-  umbrella header "AnyThinkHeaderBidding.h"
-
-  export *
-  module * { export * }
-}

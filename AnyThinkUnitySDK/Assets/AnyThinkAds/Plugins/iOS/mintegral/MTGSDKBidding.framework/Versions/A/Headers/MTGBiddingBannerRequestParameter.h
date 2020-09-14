@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  Initialize an MTGBiddingBannerRequestParameter object
  @param unitId unitId
  @param basePrice The optional value provided to this method should be double,the requested bid should not be lower than this price if use this value
- @param unitSize MTGBannerSizeTypeFormat
+ @param bannerSizeType MTGBannerSizeTypeFormat
 */
 - (instancetype)initWithPlacementId:(nullable NSString *)placementId
                              unitId:(nonnull NSString *) unitId

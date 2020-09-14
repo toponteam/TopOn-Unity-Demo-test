@@ -48,9 +48,8 @@ public class interstitialScenes : MonoBehaviour {
         }
 
         Dictionary<string,string> jsonmap = new Dictionary<string,string>();
-        jsonmap.Add("age", "22");
-        jsonmap.Add("sex", "lady");
-        jsonmap.Add("interstitial", "3");
+        jsonmap.Add(AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL, AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL_NO);
+        //jsonmap.Add(AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL, AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL_YES);
 
         ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
     }

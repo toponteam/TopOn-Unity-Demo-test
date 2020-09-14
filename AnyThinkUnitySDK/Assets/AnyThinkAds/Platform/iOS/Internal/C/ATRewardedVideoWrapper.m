@@ -9,6 +9,9 @@
 #import "ATRewardedVideoWrapper.h"
 #import "ATUnityUtilities.h"
 #import <AnyThinkRewardedVideo/AnyThinkRewardedVideo.h>
+
+NSString *const kLoadExtraUserIDKey = @"UserId";
+NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
 @interface ATRewardedVideoWrapper()<ATRewardedVideoDelegate>
 @end
 @implementation ATRewardedVideoWrapper
@@ -23,7 +26,16 @@
 
 -(void) loadRewardedVideoWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char*))callback {
     [self setCallBack:callback forKey:placementID];
-    [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:nil customData:([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil delegate:self];
+    NSMutableDictionary *extra = [NSMutableDictionary dictionary];
+    if ([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString length] > 0) {
+        NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"extraDict = %@", extra);
+        
+        if (extraDict[kLoadExtraUserIDKey] != nil) { extra[kATAdLoadingExtraUserIDKey] = extraDict[kLoadExtraUserIDKey]; }
+        if (extraDict[kLoadExtraMediaExtraKey] != nil) { extra[kATAdLoadingExtraMediaExtraKey] = extraDict[kLoadExtraMediaExtraKey]; }
+    }
+    
+    [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:[extra isKindOfClass:[NSMutableDictionary class]] ? extra : nil delegate:self];
 }
 
 -(BOOL) rewardedVideoReadyForPlacementID:(NSString*)placementID {

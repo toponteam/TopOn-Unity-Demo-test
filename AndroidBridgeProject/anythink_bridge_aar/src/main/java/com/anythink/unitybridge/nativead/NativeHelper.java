@@ -300,8 +300,10 @@ public class NativeHelper {
                         adLogoLayoutParams.leftMargin = pViewInfo.adLogoView.mX;
                         adLogoLayoutParams.topMargin = pViewInfo.adLogoView.mY;
                         nativeAd.prepare(mATNativeAdView, adLogoLayoutParams);
+                        MsgTools.pirntMsg("prepare native ad with logo:" + mUnitId);
                     } else {
                         nativeAd.prepare(mATNativeAdView);
+                        MsgTools.pirntMsg("prepare native ad:" + mUnitId);
                     }
 
                     ViewInfo.addNativeAdView2Activity(mActivity, pViewInfo, mATNativeAdView);

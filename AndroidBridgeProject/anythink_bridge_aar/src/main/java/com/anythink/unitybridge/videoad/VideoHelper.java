@@ -426,18 +426,34 @@ public class VideoHelper {
     }
 
 
-    @Deprecated
     public void fillVideo(final String jsonMap) {
-        this.fillVideo();
-    }
-
-    public void fillVideo() {
+        MsgTools.pirntMsg("fillVideo start:" + jsonMap);
         UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                String userId = "";
+                String userExtraData = "";
+
+                try {
+                    if (!TextUtils.isEmpty(jsonMap)) {
+                        JSONObject jsonObject = new JSONObject(jsonMap);
+                        if (jsonObject.has("UserId")) {
+                            userId = jsonObject.optString("UserId");
+                        }
+
+                        if (jsonObject.has("UserExtraData")) {
+                            userExtraData = jsonObject.optString("UserId");
+                        }
+                    }
+                } catch (Exception e) {
+
+                }
 
                 if (mRewardVideoAd != null) {
-
+                    if (!TextUtils.isEmpty(userExtraData) || !TextUtils.isEmpty(userExtraData)) {
+                        MsgTools.pirntMsg("fillVideo userId:" + userId + "-- userExtraData:" + userExtraData + "   " + this);
+                        mRewardVideoAd.setUserData(userId, userExtraData);
+                    }
                     mRewardVideoAd.load();
                 } else {
                     MsgTools.pirntMsg("fillVideo error  ..you must call initVideo first " + this);
@@ -449,6 +465,7 @@ public class VideoHelper {
             }
         });
     }
+
 
     public void showVideo(final String jsonMap) {
         MsgTools.pirntMsg("showVideo >>> " + this + ", jsonMap >>> " + jsonMap);
@@ -473,7 +490,7 @@ public class VideoHelper {
                         }
                     }
                     MsgTools.pirntMsg("showVideo >>> " + this + ", scenario >>> " + scenario);
-                    mRewardVideoAd.show(scenario);
+                    mRewardVideoAd.show(mActivity, scenario);
                 } else {
                     MsgTools.pirntMsg("showVideo error  ..you must call initVideo first " + this);
                     if (mListener != null) {

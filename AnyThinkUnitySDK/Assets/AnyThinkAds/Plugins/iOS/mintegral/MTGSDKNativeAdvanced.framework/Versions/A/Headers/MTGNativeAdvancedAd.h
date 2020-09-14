@@ -10,7 +10,8 @@
 
 #import "MTGNativeAdvancedAdDelegate.h"
 
-#define MTGNativeAdvancedSDKVersion @"6.3.2"
+
+#define MTGNativeAdvancedSDKVersion @"6.6.0"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -54,10 +55,10 @@ typedef NS_ENUM(NSInteger, MTGNativeAdvancedAdVideoPlayType) {
 This is a method to initialize.
 
 @param adSize The nativeAdvanced ad size.
-@param placementId The id of the ad placement id. You can create your ad placement from the portal of mintegral.
-@param unitId The id of the ad unit. You can create your unit id from the portal of mintegral.
+@param placementID The id of the ad placement id. You can create your ad placement from the portal of mintegral.
+@param unitID The id of the ad unit. You can create your unit id from the portal of mintegral.
 @param rootViewController The view controller that will be used to present full screen ads.
-@return
+ 
 */
 - (nonnull instancetype)initWithPlacementID:(nullable NSString *)placementID
                                  unitID:(nonnull NSString *)unitID

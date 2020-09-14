@@ -13,7 +13,6 @@ typedef NS_ENUM(NSInteger, MTGAdSourceType) {
     MTGAD_SOURCE_FACEBOOK  = 3,
     MTGAD_SOURCE_Mintegral = 4,
     MTGAD_SOURCE_PUBNATIVE = 5,
-    MTGAD_SOURCE_ADMOB     = 6,
     MTGAD_SOURCE_MYTARGET  = 7,
     MTGAD_SOURCE_NATIVEX   = 8,
     MTGAD_SOURCE_APPLOVIN  = 9,
@@ -105,6 +104,13 @@ typedef NS_ENUM(NSInteger, MTGAdTemplateType) {
 
 /* The size info about adChoice icon */
 @property (nonatomic) CGSize adChoiceIconSize;
+
+/*!
+@property
+
+@abstract The video  duration of the campaign
+*/
+@property (nonatomic,assign) NSInteger     videoLength;
 
 /*!
  @method

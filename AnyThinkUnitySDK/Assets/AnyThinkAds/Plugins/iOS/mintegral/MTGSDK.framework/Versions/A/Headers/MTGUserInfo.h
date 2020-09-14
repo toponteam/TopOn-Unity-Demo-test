@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, MTGUserPrivateType) {
     MTGUserPrivateType_GeneralData = 1,
     MTGUserPrivateType_DeviceId    = 2,
     MTGUserPrivateType_Gps         = 3,
+    MTGUserPrivateType_Other       = 4
 };
 
 
@@ -22,6 +23,7 @@ typedef NS_ENUM(NSInteger, MTGUserPrivateType) {
 @property (nonatomic,assign)  BOOL isGeneralDataAllowed;
 @property (nonatomic,assign)  BOOL isDeviceIdAllowed;
 @property (nonatomic,assign)  BOOL isGpsAllowed;
+@property (nonatomic,assign)  BOOL isOtherAllowed;
 
 @end
 

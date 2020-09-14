@@ -15,6 +15,9 @@ import com.anythink.unitybridge.imgutil.TaskManager;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Copyright (C) 2018 {XX} Science and Technology Co., Ltd.
@@ -157,14 +160,30 @@ public class InterstitialHelper {
     }
 
 
-    @Deprecated
     public void loadInterstitialAd(final String jsonMap) {
-        this.loadInterstitialAd();
-    }
+        MsgTools.pirntMsg("loadInterstitialAd >>> " + this + ", jsonMap >>> " + jsonMap);
 
-    public void loadInterstitialAd() {
+        if (!TextUtils.isEmpty(jsonMap)) {
+            Map<String, Object> localExtra = new HashMap<>();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonMap);
+                String useRewardedVideoAsInterstitial = (String) jsonObject.get(Const.Interstital.UseRewardedVideoAsInterstitial);
 
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+                if (useRewardedVideoAsInterstitial != null && TextUtils.equals(Const.Interstital.UseRewardedVideoAsInterstitialYes, useRewardedVideoAsInterstitial)) {
+                    localExtra.put("is_use_rewarded_video_as_interstitial", true);
+                }
+
+                Const.fillMapFromJsonObject(localExtra, jsonObject);
+
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.setLocalExtra(localExtra);
+                }
+            } catch (Throwable e) {
+            }
+
+        }
+
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
@@ -184,17 +203,17 @@ public class InterstitialHelper {
 
     public void showInterstitialAd(final String jsonMap) {
         MsgTools.pirntMsg("showInterstitial >>> " + this + ", jsonMap >>> " + jsonMap);
-         UnityPluginUtils.runOnUiThread(new Runnable() {
+        UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mInterstitialAd != null) {
                     isReady = false;
 
                     String scenario = "";
-                    if(!TextUtils.isEmpty(jsonMap)) {
+                    if (!TextUtils.isEmpty(jsonMap)) {
                         try {
                             JSONObject _jsonObject = new JSONObject(jsonMap);
-                            if(_jsonObject.has(Const.SCENARIO)) {
+                            if (_jsonObject.has(Const.SCENARIO)) {
                                 scenario = _jsonObject.optString(Const.SCENARIO);
                             }
                         } catch (Exception e) {
@@ -204,7 +223,7 @@ public class InterstitialHelper {
                         }
                     }
                     MsgTools.pirntMsg("showInterstitialAd >>> " + this + ", scenario >>> " + scenario);
-                    mInterstitialAd.show(scenario);
+                    mInterstitialAd.show(mActivity, scenario);
                 } else {
                     Log.e(TAG, "showInterstitial error  ..you must call initInterstitial first " + this);
                     if (mListener != null) {

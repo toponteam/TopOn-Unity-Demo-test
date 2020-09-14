@@ -16,6 +16,13 @@ namespace AnyThinkAds.Api
         public static readonly string kATBannerAdSizeUsesPixelFlagKey = "uses_pixel";
         public static readonly string kATBannerAdShowingPisitionTop = "top";
         public static readonly string kATBannerAdShowingPisitionBottom = "bottom";
+
+        public static readonly string kATBannerAdLoadingExtraInlineAdaptiveWidth = "inline_adaptive_width";
+        public static readonly string kATBannerAdLoadingExtraInlineAdaptiveOrientation = "inline_adaptive_orientation";
+        public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationCurrent = 0;
+        public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationPortrait = 1;
+        public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationLandscape = 2;
+
     }
     public class ATBannerAd 
 	{
@@ -39,8 +46,7 @@ namespace AnyThinkAds.Api
 		API
 		*/
 		public void loadBannerAd(string unitId, Dictionary<string,object> pairs)
-		{
-            
+		{   
             if (pairs != null && pairs.ContainsKey(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize))
             {
                 client.loadBannerAd(unitId, Json.Serialize(pairs));
@@ -93,11 +99,7 @@ namespace AnyThinkAds.Api
 
         public IATBannerAdClient GetATBannerAdClient()
         {
-            Type anythinkSDKAPIClientFactory = Type.GetType("AnyThinkAds.ATAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = anythinkSDKAPIClientFactory.GetMethod(
-                "BuildBannerAdClient",
-                BindingFlags.Static | BindingFlags.Public);
-            return (IATBannerAdClient)method.Invoke(null, null);
+            return AnyThinkAds.ATAdsClientFactory.BuildBannerAdClient();
         }
 	}
 }

@@ -11,7 +11,8 @@
 #import <MTGSDK/MTGAdSize.h>
 #import "MTGBannerAdViewDelegate.h"
 
-#define MTGBannerSDKVersion @"6.3.2"
+
+#define MTGBannerSDKVersion @"6.6.0"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -58,7 +59,7 @@ placementId
  @param placementId The id of the ad placement id. You can create your ad placement from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param rootViewController The view controller that will be used to present full screen ads.
- @return
+ 
  */
 - (nonnull instancetype)initBannerAdViewWithAdSize:(CGSize)adSize
                                        placementId:(nullable NSString *)placementId
@@ -72,7 +73,7 @@ placementId
  @param placementId The id of the ad placement id. You can create your ad placement from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param rootViewController The view controller that will be used to present full screen ads.
- @return
+
  */
 - (nonnull instancetype)initBannerAdViewWithBannerSizeType:(MTGBannerSizeType)bannerSizeType
                                                placementId:(nullable NSString *)placementId

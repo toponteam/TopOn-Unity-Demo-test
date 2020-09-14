@@ -86,12 +86,7 @@ namespace AnyThinkAds.Api
 
         public IATRewardedVideoAdClient GetATRewardedClient()
         {
-            Type anythinkSDKAPIClientFactory = Type.GetType(
-                "AnyThinkAds.ATAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = anythinkSDKAPIClientFactory.GetMethod(
-                "BuildRewardedVideoAdClient",
-                BindingFlags.Static | BindingFlags.Public);
-            return (IATRewardedVideoAdClient)method.Invoke(null, null);
+            return AnyThinkAds.ATAdsClientFactory.BuildRewardedVideoAdClient();
         }
 
     }

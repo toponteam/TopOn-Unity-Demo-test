@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MTGSDK/MTGBool.h>
 
-#define MTGSplashSDKVersion @"6.3.2"
+#define MTGSplashSDKVersion @"6.6.0"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Initialize a MTGSplashAD instance.
- @param placementId placementId String.
+ @param placementID placementId String.
  @param unitID unitID String.
  @param countdown time duration of the ad can be showed. Should be range of 2-10s.
  @param allowSkip Whether or not to allow user to skip ad when showing.
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Initialize a MTGSplashAD instance with more detailed info.
 
- @param placementId placementId String.
+ @param placementID placementId String.
  @param unitID unitID String.
  @param countdown time duration of the ad can be showed. Should be range of 2-10s.
  @param allowSkip whether or not to allow user to skip ad when showing.

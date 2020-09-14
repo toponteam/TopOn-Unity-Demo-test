@@ -57,12 +57,7 @@ namespace AnyThinkAds.Api
 
         public IATInterstitialAdClient GetATInterstitialAdClient()
         {
-            Type anythinkSDKAPIClientFactory = Type.GetType(
-                "AnyThinkAds.ATAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = anythinkSDKAPIClientFactory.GetMethod(
-                "BuildInterstitialAdClient",
-                BindingFlags.Static | BindingFlags.Public);
-            return (IATInterstitialAdClient)method.Invoke(null, null);
+            return AnyThinkAds.ATAdsClientFactory.BuildInterstitialAdClient();
         }
 	}
 }

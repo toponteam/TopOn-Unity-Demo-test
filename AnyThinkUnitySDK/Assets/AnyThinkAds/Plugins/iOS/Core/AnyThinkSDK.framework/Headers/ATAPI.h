@@ -49,6 +49,8 @@ extern NSInteger const ATADLoadingErrorCodePlacementAdDeliverySwitchOff;
 extern NSInteger const ATADLoadingErrorCodePreviousLoadNotFinished;
 extern NSInteger const ATADLoadingErrorCodeNoUnitGroupsFoundInPlacement;
 extern NSInteger const ATADLoadingErrorCodeUnitGroupsFilteredOut;
+extern NSInteger const ATADLoadingErrorCodeFailureTooFrequent;
+extern NSInteger const ATADLoadingErrorCodeLoadCapsExceeded;
 
 extern NSString *const ATSDKInitErrorDomain;
 extern NSInteger const ATSDKInitErrorCodeDataConsentNotSet;
@@ -82,6 +84,7 @@ extern NSString *const kNetworkNameSigmob;
 extern NSString *const kNetworkNameMyOffer;
 extern NSString *const kNetworkNameKS;
 extern NSString *const kNetworkNameOgury;
+extern NSString *const kNetworkNameGoogleAdManager;
 
 extern NSString *const kInmobiGDPRStringKey;
 extern NSString *const kInmobiConsentStringKey;
@@ -104,6 +107,7 @@ extern NSString *const kAdColonyGDPRConsentStringKey;
 extern NSString *const kYeahmobiGDPRConsentValueKey;
 extern NSString *const kYeahmobiGDPRConsentTypeKey;
 
+extern NSString *const kATCustomDataUserIDKey;//string
 extern NSString *const kATCustomDataAgeKey;//Integer
 extern NSString *const kATCustomDataGenderKey;//Integer
 extern NSString *const kATCustomDataNumberOfIAPKey;//Integer
@@ -224,6 +228,8 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
 @property(nonatomic) NSString *channel;
 @property(nonatomic) NSString *subchannel;
 @property(nonatomic) NSDictionary *customData;
+
+@property(nonatomic, readonly, class) NSDate *firstLaunchDate;
 -(void) setCustomData:(NSDictionary *)customData forPlacementID:(NSString*)placementID;
 -(NSDictionary*) customDataForPlacementID:(NSString*)placementID;
 -(NSString*)version;
