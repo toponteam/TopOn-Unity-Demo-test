@@ -10,6 +10,13 @@ using AnyThinkAds.ThirdParty.MiniJSON;
 
 namespace AnyThinkAds.Api
 {
+    public class ATNativeAdLoadingExtra
+    {
+        public static readonly string kATNativeAdLoadingExtraNativeAdSizeStruct = "native_ad_size_struct";
+        public static readonly string kATNativeAdLoadingExtraNativeAdSize = "native_ad_size";
+        public static readonly string kATNativeAdSizeUsesPixelFlagKey = "uses_pixel";
+    }
+
     public class ATNativeAd
     {
 
@@ -28,39 +35,45 @@ namespace AnyThinkAds.Api
             }
         }
 
-		public void setLocalExtra(string unitId, Dictionary<String,String> pairs){
-			client.setLocalExtra(unitId,Json.Serialize(pairs));
+		public void setLocalExtra(string placementId, Dictionary<String,String> pairs){
+			client.setLocalExtra(placementId,Json.Serialize(pairs));
 		}
-        public void loadNativeAd(string unitId, Dictionary<String,String> pairs){
-            client.loadNativeAd(unitId,Json.Serialize(pairs));
+        public void loadNativeAd(string placementId, Dictionary<String,object> pairs){
+            if (pairs != null && pairs.ContainsKey(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct))
+            {
+                ATSize size = (ATSize)(pairs[ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct]);
+                pairs.Add(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSize, size.width + "x" + size.height);
+                pairs.Add(ATNativeAdLoadingExtra.kATNativeAdSizeUsesPixelFlagKey, size.usesPixel);
+            }
+            client.loadNativeAd(placementId,Json.Serialize(pairs));
         }
 
-        public bool hasAdReady(string unitId){
-            return client.hasAdReady(unitId);
+        public bool hasAdReady(string placementId){
+            return client.hasAdReady(placementId);
         }
 
         public void setListener(ATNativeAdListener listener){
             client.setListener(listener);
         }
 
-        public void renderAdToScene(string unitId, ATNativeAdView anyThinkNativeAdView){
-            client.renderAdToScene(unitId, anyThinkNativeAdView);
+        public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView){
+            client.renderAdToScene(placementId, anyThinkNativeAdView);
         }
 
-        public void cleanAdView(string unitId, ATNativeAdView anyThinkNativeAdView){
-            client.cleanAdView(unitId, anyThinkNativeAdView);
+        public void cleanAdView(string placementId, ATNativeAdView anyThinkNativeAdView){
+            client.cleanAdView(placementId, anyThinkNativeAdView);
         }
 
-        public void onApplicationForces(string unitId, ATNativeAdView anyThinkNativeAdView){
-            client.onApplicationForces(unitId, anyThinkNativeAdView);
+        public void onApplicationForces(string placementId, ATNativeAdView anyThinkNativeAdView){
+            client.onApplicationForces(placementId, anyThinkNativeAdView);
         }
 
-        public void onApplicationPasue(string unitId, ATNativeAdView anyThinkNativeAdView){
-            client.onApplicationPasue(unitId, anyThinkNativeAdView);
+        public void onApplicationPasue(string placementId, ATNativeAdView anyThinkNativeAdView){
+            client.onApplicationPasue(placementId, anyThinkNativeAdView);
         }
 
-        public void cleanCache(string unitId){
-            client.cleanCache(unitId);
+        public void cleanCache(string placementId){
+            client.cleanCache(placementId);
         }
 
 

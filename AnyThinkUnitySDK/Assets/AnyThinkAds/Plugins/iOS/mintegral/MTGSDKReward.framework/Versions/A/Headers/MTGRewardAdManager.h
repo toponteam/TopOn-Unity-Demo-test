@@ -2,8 +2,6 @@
 //  MTGRewardAdManager.h
 //  MTGSDK
 //
-//  Created by yujinping on 16/4/12.
-//
 
 #import <Foundation/Foundation.h>
 #import "MTGRewardAd.h"

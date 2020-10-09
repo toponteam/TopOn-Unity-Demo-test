@@ -2,12 +2,15 @@
 //  MTGBiddingBannerRequestParameter.h
 //  MTGSDKBidding
 //
-//  Created by lee on 2019/10/9.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import "MTGBiddingRequestParameter.h"
-#import <MTGSDK/MTGAdSize.h>
+#if __has_include(<MTGSDK/MTGSDK.h>)
+    #import <MTGSDK/MTGAdSize.h>
+#else
+    #import "MTGAdSize.h"
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 @interface MTGBiddingBannerRequestParameter : MTGBiddingRequestParameter

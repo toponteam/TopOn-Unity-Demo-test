@@ -10,17 +10,17 @@ namespace AnyThinkAds.Common
 	{
 		/***
 		 * 请求广告  
-		 * @param unitId  广告位id
+		 * @param placementId  广告位id
 		 * @parm mapJson 各平台的私有属性 一般可以不调用
 		 */
-		void loadAd(string unitId, string mapJson);
+		void loadAd(string placementId, string mapJson);
 		
 		/***
 		 * 判断是否有广告存在
 		 * 可以在显示广告之前调用
-		 * @param unitId  广告位id
+		 * @param placementId  广告位id
 		 */
-		bool adReady(string unitId);
+		bool adReady(string placementId);
 		/***
 		 * 
 		 * 设置监听回调接口
@@ -31,15 +31,15 @@ namespace AnyThinkAds.Common
         /***
 		 * 
 		 * 展示广告,
-		 * @param unitId 
+		 * @param placementId 
 		 * @param rect 
 		 */
-        void showAd(string unitId, ATRect rect, Dictionary<string, string> pairs);
+        void showAd(string placementId, ATRect rect, Dictionary<string, string> pairs);
         /***
 		 * 
 		 * 移除广告
-		 * @param unitId 
+		 * @param placementId 
 		 */
-        void removeAd(string unitId);
+        void removeAd(string placementId);
 	}
 }

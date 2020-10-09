@@ -9,34 +9,34 @@ namespace AnyThinkAds.Api
 		/***
 		 * 广告请求成功
 		 */
-        void onAdLoad(string unitId);
+        void onAdLoad(string placementId);
 		/***
 		 * 广告请求失败
 		 */ 
-        void onAdLoadFail(string unitId, string code, string message);
+        void onAdLoadFail(string placementId, string code, string message);
 		/***
 		 * 广告展示
 		 */ 
-        void onAdImpress(string unitId, ATCallbackInfo callbackInfo);
+        void onAdImpress(string placementId, ATCallbackInfo callbackInfo);
 		/**
 		 * 广告点击
 		 */ 
-        void onAdClick(string unitId, ATCallbackInfo callbackInfo);
+        void onAdClick(string placementId, ATCallbackInfo callbackInfo);
 		/**
 		 * 广告自动刷新
 		 */
-        void onAdAutoRefresh(string unitId, ATCallbackInfo callbackInfo);
+        void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo);
         /**
         *广告自动刷新失败
         */
-        void onAdAutoRefreshFail(string unitId, string code, string message);
+        void onAdAutoRefreshFail(string placementId, string code, string message);
         /**
         *广告关闭；某些厂商不支持
         */
-        void onAdClose(string unitId);
+        void onAdClose(string placementId);
         /**
         *广告关闭；某些厂商不支持
         */
-        void onAdCloseButtonTapped(string unitId, ATCallbackInfo callbackInfo);
+        void onAdCloseButtonTapped(string placementId, ATCallbackInfo callbackInfo);
     }
 }

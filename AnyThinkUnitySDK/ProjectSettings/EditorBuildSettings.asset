@@ -7,20 +7,20 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/demoMainScenes.unity
-    guid: a7e56e93ec9d642529da1ceb7014fd3f
+    guid: c957e6ce0028a4151a1a36b0e66d689a
   - enabled: 1
     path: Assets/Scenes/bannerMainScenes.unity
-    guid: 460bfee0d0b2041c28f8ef5038c9b710
+    guid: afdd4058d810e41eba5dbef2e9d32024
   - enabled: 1
     path: Assets/Scenes/interstitialMainScenes.unity
-    guid: 19649a9ac6abf4d5999b163246391073
-  - enabled: 1
-    path: Assets/Scenes/NativeBannerScene.unity
-    guid: 80f0336b676ac4b15a3ce364687b5d15
+    guid: 0052eb61e314044baaab7bb630024bc2
   - enabled: 1
     path: Assets/Scenes/nativeMainScenes.unity
-    guid: a4c971c1972574b2ba6a37f9cbd39903
+    guid: d15fd6939144e43a88b52bc3723e12ef
   - enabled: 1
     path: Assets/Scenes/videoMainScenes.unity
-    guid: acd5622937cc64ad3a615b300c7b892f
+    guid: 202fc78bc74aa4f138e85f36c50323fb
+  - enabled: 1
+    path: Assets/Scenes/NativeBannerScene.unity
+    guid: 3b67321ef801e449ba5b2917441617cc
   m_configObjects: {}

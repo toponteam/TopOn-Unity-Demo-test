@@ -7,8 +7,8 @@ namespace AnyThinkAds.Common
 {
     public interface IATSDKAPIClient
     {
-        void initSDK(string appId, string appkey);
-        void initSDK(string appId, string appkey, ATSDKInitListener listener);
+        void initSDK(string appId, string appKey);
+        void initSDK(string appId, string appKey, ATSDKInitListener listener);
         void getUserLocation(ATGetUserLocationListener listener);
         void setGDPRLevel(int level);
         void showGDPRAuth();

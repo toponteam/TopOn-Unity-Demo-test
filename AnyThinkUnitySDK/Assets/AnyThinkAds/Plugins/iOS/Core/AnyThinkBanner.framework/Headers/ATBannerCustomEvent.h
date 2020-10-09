@@ -27,8 +27,8 @@
 @property(nonatomic, weak) ATBannerView *bannerView;
 @property(nonatomic, readonly) NSString *unitID;
 @property(nonatomic, readonly) CGSize size;
-@property(nonatomic, strong) NSString *admobBannerWidth;//For admob
-@property(nonatomic, strong) NSString *admobAdaptive;//For admob
+@property(nonatomic, strong) NSValue *admobAdSizeValue;//For admob
+@property(nonatomic, assign) NSInteger admobAdSizeFlags;//For admob
 @property(nonatomic) NSDictionary *loadingParameters;//For nend
 @property(nonatomic) BOOL adjustAdSize;//For nend
 @property(nonatomic, assign) NSInteger priorityIndex;

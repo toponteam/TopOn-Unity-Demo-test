@@ -2,7 +2,6 @@
 //  MTGNativeAdvancedAd.h
 //  MTGSDK
 //
-//  Created by CharkZhang on 2020/4/17.
 //  Copyright © 2020 Mintegral. All rights reserved.
 //
 
@@ -11,7 +10,7 @@
 #import "MTGNativeAdvancedAdDelegate.h"
 
 
-#define MTGNativeAdvancedSDKVersion @"6.6.0"
+#define MTGNativeAdvancedSDKVersion @"6.6.1"
 
 
 NS_ASSUME_NONNULL_BEGIN

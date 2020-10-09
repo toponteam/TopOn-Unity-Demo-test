@@ -63,50 +63,50 @@ public class interstitialScenes : MonoBehaviour {
 
     class InterstitalCallback : ATInterstitialAdListener
     {
-        public void onInterstitialAdClick(string unitId, ATCallbackInfo callbackInfo)
+        public void onInterstitialAdClick(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdClick :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onInterstitialAdClick :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onInterstitialAdClose(string unitId, ATCallbackInfo callbackInfo)
+        public void onInterstitialAdClose(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdClose :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onInterstitialAdClose :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onInterstitialAdEndPlayingVideo(string unitId, ATCallbackInfo callbackInfo)
+        public void onInterstitialAdEndPlayingVideo(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdEndPlayingVideo :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onInterstitialAdEndPlayingVideo :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onInterstitialAdFailedToPlayVideo(string unitId, string code, string message)
+        public void onInterstitialAdFailedToPlayVideo(string placementId, string code, string message)
         {
-            Debug.Log("Developer callback onInterstitialAdFailedToPlayVideo :" + unitId + "--code:" + code + "--msg:" + message);
+            Debug.Log("Developer callback onInterstitialAdFailedToPlayVideo :" + placementId + "--code:" + code + "--msg:" + message);
         }
 
-        public void onInterstitialAdLoad(string unitId)
+        public void onInterstitialAdLoad(string placementId)
         {
-            Debug.Log("Developer callback onInterstitialAdLoad :" + unitId);
+            Debug.Log("Developer callback onInterstitialAdLoad :" + placementId);
         }
 
-        public void onInterstitialAdLoadFail(string unitId, string code, string message)
+        public void onInterstitialAdLoadFail(string placementId, string code, string message)
         {
-            Debug.Log("Developer callback onInterstitialAdLoadFail :" + unitId + "--code:" + code + "--msg:" + message);
+            Debug.Log("Developer callback onInterstitialAdLoadFail :" + placementId + "--code:" + code + "--msg:" + message);
         }
 
-        public void onInterstitialAdShow(string unitId, ATCallbackInfo callbackInfo)
+        public void onInterstitialAdShow(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdShow :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onInterstitialAdShow :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onInterstitialAdStartPlayingVideo(string unitId, ATCallbackInfo callbackInfo)
+        public void onInterstitialAdStartPlayingVideo(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onInterstitialAdStartPlayingVideo :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onInterstitialAdStartPlayingVideo :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
 
         }
 
-        public void onInterstitialAdFailedToShow(string unitId)
+        public void onInterstitialAdFailedToShow(string placementId)
         {
-            Debug.Log("Developer callback onInterstitialAdFailedToShow :" + unitId);
+            Debug.Log("Developer callback onInterstitialAdFailedToShow :" + placementId);
 
         }
     }

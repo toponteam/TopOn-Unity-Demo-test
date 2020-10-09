@@ -54,38 +54,38 @@ public class NativeBannerScene : MonoBehaviour, ATNativeBannerAdListener {
 		Debug.Log("Developer NativeBannerScene::adReady:" + (ATNativeBannerAd.Instance.adReady(mPlacementId_native_all) ? "yes" : "no"));
 	}
 
-	public void onAdLoaded(string unitId) {
-        Debug.Log("Developer onAdLoaded------:" + unitId);
+	public void onAdLoaded(string placementId) {
+        Debug.Log("Developer onAdLoaded------:" + placementId);
            
     } 
 
-	public void onAdLoadFail(string unitId, string code, string message) {
-        Debug.Log("Developer onAdLoadFail------:" + unitId + ", " + code + ", " + message);
+	public void onAdLoadFail(string placementId, string code, string message) {
+        Debug.Log("Developer onAdLoadFail------:" + placementId + ", " + code + ", " + message);
            
     } 
 	
-    public void onAdImpressed(string unitId, ATCallbackInfo callbackInfo) {
-        Debug.Log("Developer onAdImpressed------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+    public void onAdImpressed(string placementId, ATCallbackInfo callbackInfo) {
+        Debug.Log("Developer onAdImpressed------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
            
     } 
 	
-    public void onAdClicked(string unitId, ATCallbackInfo callbackInfo) {
-        Debug.Log("Developer onAdClicked------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+    public void onAdClicked(string placementId, ATCallbackInfo callbackInfo) {
+        Debug.Log("Developer onAdClicked------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
            
     } 
 	 
-    public void onAdAutoRefresh(string unitId, ATCallbackInfo callbackInfo) {
-        Debug.Log("Developer onAdAutoRefresh------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+    public void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo) {
+        Debug.Log("Developer onAdAutoRefresh------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
            
     } 
 	
-	public void onAdAutoRefreshFailure(string unitId, string code, string message) {
-        Debug.Log("Developer onAdAutoRefreshFailure------:" + unitId);
+	public void onAdAutoRefreshFailure(string placementId, string code, string message) {
+        Debug.Log("Developer onAdAutoRefreshFailure------:" + placementId);
            
     } 
 	
-    public void onAdCloseButtonClicked(string unitId) {
-        Debug.Log("Developer onAdCloseButtonClicked------:" + unitId);
+    public void onAdCloseButtonClicked(string placementId) {
+        Debug.Log("Developer onAdCloseButtonClicked------:" + placementId);
            
     } 
 }

@@ -2,7 +2,6 @@
 //  MTGMediaView.h
 //  MTGSDK
 //
-//  Created by 陈俊杰 on 2017/5/25.
 //  Copyright © 2017年 Mintegral. All rights reserved.
 //
 

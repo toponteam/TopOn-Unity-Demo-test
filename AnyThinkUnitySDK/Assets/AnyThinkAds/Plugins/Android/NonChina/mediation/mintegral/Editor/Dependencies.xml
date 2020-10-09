@@ -1,19 +1,22 @@
 <dependencies>
     <androidPackages>
-        <androidPackage spec="com.mintegral.msdk:videojs:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:mtgjscommon:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:playercommon:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:reward:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:videocommon:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:common:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:interstitialvideo:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:mtgnative:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:nativeex:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:interstitial:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:mtgnativeadvanced:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:mtgbanner:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:interactiveads:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:mtgsplash:14.4.41"/>
-        <androidPackage spec="com.mintegral.msdk:mtgbid:14.4.41"/>
+        <repositories>
+            <repository>https://dl.bintray.com/mintegral-official/Mintegral_ad_SDK_Android</repository>
+        </repositories>
+        <androidPackage spec="com.mintegral.msdk:videojs:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:mtgjscommon:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:playercommon:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:reward:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:videocommon:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:common:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:interstitialvideo:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:mtgnative:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:nativeex:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:interstitial:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:mtgnativeadvanced:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:mtgbanner:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:interactiveads:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:mtgsplash:14.4.61"/>
+        <androidPackage spec="com.mintegral.msdk:mtgbid:14.4.61"/>
     </androidPackages>
 </dependencies>

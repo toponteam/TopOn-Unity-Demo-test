@@ -2,7 +2,6 @@
 //  MTGNativeAdvancedAdDelegate.h
 //  MTGSDK
 //
-//  Created by CharkZhang on 2020/4/17.
 //  Copyright © 2020 Mintegral. All rights reserved.
 //
 

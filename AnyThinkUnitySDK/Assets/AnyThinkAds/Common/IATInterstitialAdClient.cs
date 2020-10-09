@@ -9,10 +9,10 @@ namespace AnyThinkAds.Common
     {
 		/***
 		 * 请求广告  
-		 * @param unitId  广告位id
+		 * @param placementId  广告位id
 		 * @parm mapJson 各平台的私有属性 一般可以不调用
 		 */
-        void loadInterstitialAd(string unitId, string mapJson);
+        void loadInterstitialAd(string placementId, string mapJson);
 		/***
 		 * 
 		 * 设置监听回调接口
@@ -24,14 +24,14 @@ namespace AnyThinkAds.Common
 		 * 是否存在可以展示的广告
 		 * @param unityid
 		 */
-        bool hasInterstitialAdReady(string unitId);
+        bool hasInterstitialAdReady(string placementId);
         /***
 		 * 显示广告
 		 */
-        void showInterstitialAd(string unitId, string mapJson);
+        void showInterstitialAd(string placementId, string mapJson);
 		/***
 		 * 清理缓存
 		 */ 
-        void cleanCache(string unitId);
+        void cleanCache(string placementId);
     }
 }

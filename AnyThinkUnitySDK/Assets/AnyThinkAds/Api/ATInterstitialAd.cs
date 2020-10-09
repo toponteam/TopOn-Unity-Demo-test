@@ -27,10 +27,10 @@ namespace AnyThinkAds.Api
 			}
 		}
 
-		public void loadInterstitialAd(string unitId, Dictionary<string,string> pairs)
+		public void loadInterstitialAd(string placementId, Dictionary<string,string> pairs)
         {
             
-            client.loadInterstitialAd(unitId, Json.Serialize(pairs));
+            client.loadInterstitialAd(placementId, Json.Serialize(pairs));
 
         }
 
@@ -39,20 +39,20 @@ namespace AnyThinkAds.Api
             client.setListener(listener);
         }
 
-        public bool hasInterstitialAdReady(string unitId)
+        public bool hasInterstitialAdReady(string placementId)
         {
-            return client.hasInterstitialAdReady(unitId);
+            return client.hasInterstitialAdReady(placementId);
 
         }
 
-        public void showInterstitialAd(string unitId)
+        public void showInterstitialAd(string placementId)
         {
-            client.showInterstitialAd(unitId, Json.Serialize(new Dictionary<string, string>()));
+            client.showInterstitialAd(placementId, Json.Serialize(new Dictionary<string, string>()));
         }
 
-        public void showInterstitialAd(string unitId, Dictionary<string, string> pairs)
+        public void showInterstitialAd(string placementId, Dictionary<string, string> pairs)
         {
-            client.showInterstitialAd(unitId, Json.Serialize(pairs));
+            client.showInterstitialAd(placementId, Json.Serialize(pairs));
         }
 
         public IATInterstitialAdClient GetATInterstitialAdClient()

@@ -8,7 +8,7 @@ namespace AnyThinkAds.iOS {
 	public class ATInterstitialAdClient : IATInterstitialAdClient {
 		private  ATInterstitialAdListener anyThinkListener;
 
-		public void addsetting(string unitId,string json){
+		public void addsetting(string placementId,string json){
 			//todo...
 		}
 
@@ -17,25 +17,25 @@ namespace AnyThinkAds.iOS {
 	        anyThinkListener = listener;
 	    }
 
-	    public void loadInterstitialAd(string unitId, string mapJson) {
+	    public void loadInterstitialAd(string placementId, string mapJson) {
 			Debug.Log("Unity: ATInterstitialAdClient::loadInterstitialAd()");
-            ATInterstitialAdWrapper.setClientForPlacementID(unitId, this);
-			ATInterstitialAdWrapper.loadInterstitialAd(unitId, mapJson);
+            ATInterstitialAdWrapper.setClientForPlacementID(placementId, this);
+			ATInterstitialAdWrapper.loadInterstitialAd(placementId, mapJson);
 		}
 
-		public bool hasInterstitialAdReady(string unitId) {
+		public bool hasInterstitialAdReady(string placementId) {
 			Debug.Log("Unity: ATInterstitialAdClient::hasInterstitialAdReady()");
-			return ATInterstitialAdWrapper.hasInterstitialAdReady(unitId);
+			return ATInterstitialAdWrapper.hasInterstitialAdReady(placementId);
 		}
 
-		public void showInterstitialAd(string unitId, string mapJson) {
+		public void showInterstitialAd(string placementId, string mapJson) {
 			Debug.Log("Unity: ATInterstitialAdClient::showInterstitialAd()");
-			ATInterstitialAdWrapper.showInterstitialAd(unitId, mapJson);
+			ATInterstitialAdWrapper.showInterstitialAd(placementId, mapJson);
 		}
 
-		public void cleanCache(string unitId) {
+		public void cleanCache(string placementId) {
 			Debug.Log("Unity: ATInterstitialAdClient::cleanCache()");
-			ATInterstitialAdWrapper.clearCache(unitId);
+			ATInterstitialAdWrapper.clearCache(placementId);
 		}
 
 		//Callbacks

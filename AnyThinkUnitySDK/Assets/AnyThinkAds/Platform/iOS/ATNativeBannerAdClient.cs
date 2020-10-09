@@ -10,17 +10,17 @@ namespace AnyThinkAds.iOS
     public class ATNativeBannerAdClient : IATNativeBannerAdClient
     {
     	private ATNativeBannerAdListener listener;
-    	public void loadAd(string unitId, string mapJson) {
+    	public void loadAd(string placementId, string mapJson) {
     		Debug.Log("ATNativeBannerAdClient::loadAd()");
-    		ATNativeBannerAdWrapper.setClientForPlacementID(unitId, this);
+    		ATNativeBannerAdWrapper.setClientForPlacementID(placementId, this);
     		Debug.Log("ATNativeBannerAdClient::loadAd(), after set client");
-    		ATNativeBannerAdWrapper.loadAd(unitId, mapJson);
+    		ATNativeBannerAdWrapper.loadAd(placementId, mapJson);
     		Debug.Log("ATNativeBannerAdClient::loadAd(), after invoke load ad");
     	}
     	
-		public bool adReady(string unitId) {
+		public bool adReady(string placementId) {
 			Debug.Log("ATNativeBannerAdClient::adReady()");
-			return ATNativeBannerAdWrapper.adReady(unitId);
+			return ATNativeBannerAdWrapper.adReady(placementId);
 		}
 
         public void setListener(ATNativeBannerAdListener listener) {
@@ -28,50 +28,50 @@ namespace AnyThinkAds.iOS
 			this.listener = listener;
         }
 
-        public void showAd(string unitId, ATRect rect, Dictionary<string, string> pairs) {
+        public void showAd(string placementId, ATRect rect, Dictionary<string, string> pairs) {
 			Debug.Log("ATNativeBannerAdClient::showAd()");
-			ATNativeBannerAdWrapper.showAd(unitId, rect, pairs);
+			ATNativeBannerAdWrapper.showAd(placementId, rect, pairs);
         }
 
-        public void removeAd(string unitId) {
+        public void removeAd(string placementId) {
 			Debug.Log("ATNativeBannerAdClient::removeAd()");
-			ATNativeBannerAdWrapper.removeAd(unitId);
+			ATNativeBannerAdWrapper.removeAd(placementId);
         }
 
         //Listener method(s)
-        public void onAdLoaded(string unitId) {
+        public void onAdLoaded(string placementId) {
         	Debug.Log("ATNativeBannerAdClient::onAdLoaded()");
-        	if(listener != null) listener.onAdLoaded(unitId);
+        	if(listener != null) listener.onAdLoaded(placementId);
         }
         
-        public void onAdLoadFail(string unitId, string code, string message) {
+        public void onAdLoadFail(string placementId, string code, string message) {
         	Debug.Log("ATNativeBannerAdClient::onAdLoadFail()");
-        	if(listener != null) listener.onAdLoadFail(unitId, code, message);
+        	if(listener != null) listener.onAdLoadFail(placementId, code, message);
         }
         
-        public void onAdImpressed(string unitId, string callbackJson) {
+        public void onAdImpressed(string placementId, string callbackJson) {
         	Debug.Log("ATNativeBannerAdClient::onAdImpressed()");
-            if(listener != null) listener.onAdImpressed(unitId, new ATCallbackInfo(callbackJson));
+            if(listener != null) listener.onAdImpressed(placementId, new ATCallbackInfo(callbackJson));
         }
         
-        public void onAdClicked(string unitId, string callbackJson) {
+        public void onAdClicked(string placementId, string callbackJson) {
         	Debug.Log("ATNativeBannerAdClient::onAdClicked()");
-            if(listener != null) listener.onAdClicked(unitId, new ATCallbackInfo(callbackJson));
+            if(listener != null) listener.onAdClicked(placementId, new ATCallbackInfo(callbackJson));
         }
         
-        public void onAdAutoRefresh(string unitId, string callbackJson) {
+        public void onAdAutoRefresh(string placementId, string callbackJson) {
         	Debug.Log("ATNativeBannerAdClient::onAdAutoRefresh()");
-            if(listener != null) listener.onAdAutoRefresh(unitId, new ATCallbackInfo(callbackJson));
+            if(listener != null) listener.onAdAutoRefresh(placementId, new ATCallbackInfo(callbackJson));
         }
         
-		public void onAdAutoRefreshFailure(string unitId, string code, string message) {
+		public void onAdAutoRefreshFailure(string placementId, string code, string message) {
         	Debug.Log("ATNativeBannerAdClient::onAdAutoRefreshFailure()");
-        	if(listener != null) listener.onAdAutoRefreshFailure(unitId, code, message);
+        	if(listener != null) listener.onAdAutoRefreshFailure(placementId, code, message);
         }
 
-        public void onAdCloseButtonClicked(string unitId) {
+        public void onAdCloseButtonClicked(string placementId) {
         	Debug.Log("ATNativeBannerAdClient::onAdCloseButtonClicked()");
-        	if(listener != null) listener.onAdCloseButtonClicked(unitId);
+        	if(listener != null) listener.onAdCloseButtonClicked(placementId);
         }
     }
 }

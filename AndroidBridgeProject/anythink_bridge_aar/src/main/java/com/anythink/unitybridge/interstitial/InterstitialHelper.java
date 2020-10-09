@@ -10,8 +10,8 @@ import com.anythink.interstitial.api.ATInterstitial;
 import com.anythink.interstitial.api.ATInterstitialListener;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
-import com.anythink.unitybridge.imgutil.Const;
-import com.anythink.unitybridge.imgutil.TaskManager;
+import com.anythink.unitybridge.utils.Const;
+import com.anythink.unitybridge.utils.TaskManager;
 
 import org.json.JSONObject;
 
@@ -59,7 +59,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdLoaded(mUnitId);
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdLoaded(mUnitId);
+                            }
                         }
                     }
                 });
@@ -72,7 +74,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdLoadFail(mUnitId, adError.getCode(), adError.printStackTrace());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdLoadFail(mUnitId, adError.getCode(), adError.printStackTrace());
+                            }
                         }
                     }
                 });
@@ -85,7 +89,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdClicked(mUnitId, adInfo.toString());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdClicked(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -98,7 +104,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdShow(mUnitId, adInfo.toString());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdShow(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -111,7 +119,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdClose(mUnitId, adInfo.toString());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdClose(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -124,7 +134,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdVideoStart(mUnitId, adInfo.toString());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdVideoStart(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -137,7 +149,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdVideoEnd(mUnitId, adInfo.toString());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdVideoEnd(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -150,7 +164,9 @@ public class InterstitialHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onInterstitialAdVideoError(mUnitId, adError.getCode(), adError.printStackTrace());
+                             synchronized (InterstitialHelper.this) {
+                                mListener.onInterstitialAdVideoError(mUnitId, adError.getCode(), adError.printStackTrace());
+                            }
                         }
                     }
                 });
@@ -192,9 +208,16 @@ public class InterstitialHelper {
                     mInterstitialAd.load();
                 } else {
                     Log.e(TAG, "loadInterstitialAd error  ..you must call initInterstitial first " + this);
-                    if (mListener != null) {
-                        mListener.onInterstitialAdLoadFail(mUnitId, "-1", "you must call initInterstitial first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                 synchronized (InterstitialHelper.this) {
+                                    mListener.onInterstitialAdLoadFail(mUnitId, "-1", "you must call initInterstitial first ..");
+                                }
+                            }
+                        }
+                    });
                 }
 
             }
@@ -226,9 +249,16 @@ public class InterstitialHelper {
                     mInterstitialAd.show(mActivity, scenario);
                 } else {
                     Log.e(TAG, "showInterstitial error  ..you must call initInterstitial first " + this);
-                    if (mListener != null) {
-                        mListener.onInterstitialAdLoadFail(mUnitId, "-1", "you must call initInterstitial first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                 synchronized (InterstitialHelper.this) {
+                                    mListener.onInterstitialAdLoadFail(mUnitId, "-1", "you must call initInterstitial first ..");
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });

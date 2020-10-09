@@ -9,19 +9,19 @@ using AnyThinkAds.ThirdParty.MiniJSON;
 namespace AnyThinkAds.iOS {
 	public class ATNativeAdClient : IATNativeAdClient {
 		private ATNativeAdListener mlistener;
-		public void loadNativeAd(string unitId, string mapJson) {
+		public void loadNativeAd(string placementId, string mapJson) {
             Debug.Log("Unity:ATNativeAdClient::loadNativeAd()");
-            ATNativeAdWrapper.setClientForPlacementID(unitId, this);
-            ATNativeAdWrapper.loadNativeAd(unitId, mapJson);
+            ATNativeAdWrapper.setClientForPlacementID(placementId, this);
+            ATNativeAdWrapper.loadNativeAd(placementId, mapJson);
         }
 
-		public void setLocalExtra (string unitId,string localExtra){
+		public void setLocalExtra (string placementId,string localExtra){
 			
 		}
 
-        public bool hasAdReady(string unitId) {
+        public bool hasAdReady(string placementId) {
             Debug.Log("Unity:ATNativeAdClient::hasAdReady()");
-			return ATNativeAdWrapper.isNativeAdReady(unitId);
+			return ATNativeAdWrapper.isNativeAdReady(placementId);
         }
 
         public void setListener(ATNativeAdListener listener) {
@@ -29,69 +29,69 @@ namespace AnyThinkAds.iOS {
             mlistener = listener;
         }
 
-		public void renderAdToScene(string unitId, ATNativeAdView anyThinkNativeAdView) {	
+		public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView) {	
             Debug.Log("Unity:ATNativeAdClient::renderAdToScene()");
-            ATNativeAdWrapper.showNativeAd(unitId, anyThinkNativeAdView.toJSON());
+            ATNativeAdWrapper.showNativeAd(placementId, anyThinkNativeAdView.toJSON());
         }
 
-        public void cleanAdView(string unitId, ATNativeAdView anyThinkNativeAdView) {
+        public void cleanAdView(string placementId, ATNativeAdView anyThinkNativeAdView) {
 			Debug.Log("Unity:ATNativeAdClient::cleanAdView()");
-            ATNativeAdWrapper.removeNativeAdView(unitId);
+            ATNativeAdWrapper.removeNativeAdView(placementId);
         }
 
-        public void onApplicationForces(string unitId, ATNativeAdView anyThinkNativeAdView) {
+        public void onApplicationForces(string placementId, ATNativeAdView anyThinkNativeAdView) {
 			Debug.Log("Unity:ATNativeAdClient::onApplicationForces()");
         }
 
-        public void onApplicationPasue(string unitId, ATNativeAdView anyThinkNativeAdView) {
+        public void onApplicationPasue(string placementId, ATNativeAdView anyThinkNativeAdView) {
 			Debug.Log("Unity:ATNativeAdClient::onApplicationPasue()");
         }
 
-        public void cleanCache(string unitId) {
+        public void cleanCache(string placementId) {
 			Debug.Log("Unity:ATNativeAdClient::cleanCache()");
             ATNativeAdWrapper.clearCache();
         }
 
         //Callbacks
-        public void onAdImpressed(string unitId, string callbackJson) {
+        public void onAdImpressed(string placementId, string callbackJson) {
             Debug.Log("Unity:ATNativeAdClient::onAdImpressed...unity3d.");
-            if(mlistener != null) mlistener.onAdImpressed(unitId, new ATCallbackInfo(callbackJson));
+            if(mlistener != null) mlistener.onAdImpressed(placementId, new ATCallbackInfo(callbackJson));
         }
 
-        public void onAdClicked(string unitId, string callbackJson) {
+        public void onAdClicked(string placementId, string callbackJson) {
             Debug.Log("Unity:ATNativeAdClient::onAdClicked...unity3d.");
-            if (mlistener != null) mlistener.onAdClicked(unitId, new ATCallbackInfo(callbackJson));
+            if (mlistener != null) mlistener.onAdClicked(placementId, new ATCallbackInfo(callbackJson));
         }
 
-        public void onAdCloseButtonClicked(string unitId, string callbackJson)
+        public void onAdCloseButtonClicked(string placementId, string callbackJson)
         {
             Debug.Log("Unity:ATNativeAdClient::onAdCloseButtonClicked...unity3d.");
-            if (mlistener != null) mlistener.onAdCloseButtonClicked(unitId, new ATCallbackInfo(callbackJson));
+            if (mlistener != null) mlistener.onAdCloseButtonClicked(placementId, new ATCallbackInfo(callbackJson));
         }
 
-        public void onAdVideoStart(string unitId) {
+        public void onAdVideoStart(string placementId) {
             Debug.Log("Unity:ATNativeAdClient::onAdVideoStart...unity3d.");
-            if (mlistener != null) mlistener.onAdVideoStart(unitId);
+            if (mlistener != null) mlistener.onAdVideoStart(placementId);
         }
 
-        public void onAdVideoEnd(string unitId) {
+        public void onAdVideoEnd(string placementId) {
             Debug.Log("Unity:ATNativeAdClient::onAdVideoEnd...unity3d.");
-            if (mlistener != null) mlistener.onAdVideoEnd(unitId);
+            if (mlistener != null) mlistener.onAdVideoEnd(placementId);
         }
 
-        public void onAdVideoProgress(string unitId,int progress) {
+        public void onAdVideoProgress(string placementId,int progress) {
             Debug.Log("Unity:ATNativeAdClient::onAdVideoProgress...progress[" + progress + "]");
-            if (mlistener != null) mlistener.onAdVideoProgress(unitId, progress);
+            if (mlistener != null) mlistener.onAdVideoProgress(placementId, progress);
         }
 
-        public void onNativeAdLoaded(string unitId) {
+        public void onNativeAdLoaded(string placementId) {
             Debug.Log("Unity:ATNativeAdClient::onNativeAdLoaded...unity3d.");
-            if (mlistener != null) mlistener.onAdLoaded(unitId);
+            if (mlistener != null) mlistener.onAdLoaded(placementId);
         }
 
-        public void onNativeAdLoadFail(string unitId,string code, string msg) {
+        public void onNativeAdLoadFail(string placementId,string code, string msg) {
             Debug.Log("Unity:ATNativeAdClient::onNativeAdLoadFail...unity3d. code:" + code + " msg:" + msg);
-            if (mlistener != null) mlistener.onAdLoadFail(unitId, code, msg);
+            if (mlistener != null) mlistener.onAdLoadFail(placementId, code, msg);
         }
 	}
 }

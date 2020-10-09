@@ -56,11 +56,11 @@ public class bannerScenes : MonoBehaviour {
             bannerSize = new ATSize(960, 150, true);
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveWidth, bannerSize.width);
-            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientation, ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientationCurrent);
+            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientation, ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientationPortrait);
         #elif UNITY_IOS || UNITY_IPHONE
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveWidth, bannerSize.width);
-            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientation, ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientationCurrent);
+            jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientation, ATBannerAdLoadingExtra.kATBannerAdLoadingExtraInlineAdaptiveOrientationPortrait);
         
         #endif
         ATBannerAd.Instance.loadBannerAd(mPlacementId_native_all, jsonmap);
@@ -92,44 +92,44 @@ public class bannerScenes : MonoBehaviour {
 
     class BannerCallback : ATBannerAdListener
     {
-        public void onAdAutoRefresh(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdAutoRefresh :" +  unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onAdAutoRefresh :" +  placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onAdAutoRefreshFail(string unitId, string code, string message)
+        public void onAdAutoRefreshFail(string placementId, string code, string message)
         {
-            Debug.Log("Developer callback onAdAutoRefreshFail : "+ unitId + "--code:" + code + "--msg:" + message);
+            Debug.Log("Developer callback onAdAutoRefreshFail : "+ placementId + "--code:" + code + "--msg:" + message);
         }
 
-        public void onAdClick(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdClick(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdClick :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onAdClick :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onAdClose(string unitId)
+        public void onAdClose(string placementId)
         {
-            Debug.Log("Developer callback onAdClose :" + unitId);
+            Debug.Log("Developer callback onAdClose :" + placementId);
         }
 
-        public void onAdCloseButtonTapped(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdCloseButtonTapped(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdCloseButtonTapped :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onAdCloseButtonTapped :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onAdImpress(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdImpress(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer callback onAdImpress :" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer callback onAdImpress :" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onAdLoad(string unitId)
+        public void onAdLoad(string placementId)
         {
-            Debug.Log("Developer callback onAdLoad :" + unitId);
+            Debug.Log("Developer callback onAdLoad :" + placementId);
         }
 
-        public void onAdLoadFail(string unitId, string code, string message)
+        public void onAdLoadFail(string placementId, string code, string message)
         {
-            Debug.Log("Developer callback onAdLoadFail : : " + unitId + "--code:" + code + "--msg:" + message);
+            Debug.Log("Developer callback onAdLoadFail : : " + placementId + "--code:" + code + "--msg:" + message);
         }
     }
 

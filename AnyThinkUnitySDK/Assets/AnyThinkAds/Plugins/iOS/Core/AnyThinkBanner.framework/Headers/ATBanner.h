@@ -31,4 +31,5 @@
 @property(nonatomic, readonly) double price;
 @property(nonatomic, readonly, weak) ATWaterfall *finalWaterfall;
 @property(nonatomic, readonly) NSInteger autoReqType;
+@property(nonatomic) BOOL defaultPlayIfRequired;
 @end

@@ -31,6 +31,9 @@ static NSString *const kNativeAssetMainImage = @"main_image";
 static NSString *const kNativeAssetSponsorImage = @"sponsor_image";
 static NSString *const kNativeAssetMedia = @"media";
 
+static NSString *kATAdLoadingExtraNativeAdSizeKey = @"native_ad_size";
+static NSString *kATNativeAdSizeUsesPixelFlagKey = @"uses_pixel";
+
 NSDictionary* parseUnityProperties(NSDictionary *properties) {
     NSMutableDictionary *result = NSMutableDictionary.dictionary;
     CGFloat scale = [properties[@"usesPixel"] boolValue] ? [UIScreen mainScreen].nativeScale : 1.0f;
@@ -139,7 +142,18 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
 
 -(void) loadNativeAdWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char *))callback {
     [self setCallBack:callback forKey:placementID];
-    [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:@{kExtraInfoNativeAdTypeKey:@(ATGDTNativeAdTypeSelfRendering), kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388} customData:([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil delegate:self];
+    NSMutableDictionary *extra = [NSMutableDictionary dictionaryWithDictionary:@{kExtraInfoNativeAdTypeKey:@(ATGDTNativeAdTypeSelfRendering), kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388}];
+    if ([customDataJSONString isKindOfClass:[NSString class]] && [customDataJSONString length] > 0) {
+        NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"extraDict = %@", extraDict);
+        CGFloat scale = [extraDict[kATNativeAdSizeUsesPixelFlagKey] boolValue] ? [UIScreen mainScreen].nativeScale : 1.0f;
+        if ([extraDict[kATAdLoadingExtraNativeAdSizeKey] isKindOfClass:[NSString class]] && [[extraDict[kATAdLoadingExtraNativeAdSizeKey] componentsSeparatedByString:@"x"] count] == 2) {
+            NSArray<NSString*>* com = [extraDict[kATAdLoadingExtraNativeAdSizeKey] componentsSeparatedByString:@"x"];
+            extra[kExtraInfoNativeAdSizeKey] = [NSValue valueWithCGSize:CGSizeMake([com[0] doubleValue] / scale, [com[1] doubleValue] / scale)];
+        }
+    }
+    NSLog(@"extra = %@", extra);
+    [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:extra delegate:self];
 }
 
 -(BOOL) isNativeAdReadyForPlacementID:(NSString*)placementID {
@@ -180,8 +194,8 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
 //            adview.mediaView.frame = adview.mainImageView.frame;
             adview.mediaView.frame = CGRectFromString(parsedMetrics[kNativeAssetMainImage][kParsedPropertiesFrameKey]);
             [adview bringSubviewToFront:adview.mediaView];
-            adview.mainImageView.layer.borderColor = [UIColor redColor].CGColor;
-            adview.mainImageView.layer.borderWidth = 1.0f;
+//            adview.mainImageView.layer.borderColor = [UIColor redColor].CGColor;
+//            adview.mainImageView.layer.borderWidth = 1.0f;
             
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(2.0f, 2.0f, 30.0f, 16.0f)];
             label.font = [UIFont systemFontOfSize:15.0f];

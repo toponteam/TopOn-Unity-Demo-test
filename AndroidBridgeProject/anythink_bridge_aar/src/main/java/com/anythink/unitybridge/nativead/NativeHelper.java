@@ -16,8 +16,8 @@ import com.anythink.nativead.api.ATNativeNetworkListener;
 import com.anythink.nativead.api.NativeAd;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
-import com.anythink.unitybridge.imgutil.Const;
-import com.anythink.unitybridge.imgutil.TaskManager;
+import com.anythink.unitybridge.utils.Const;
+import com.anythink.unitybridge.utils.TaskManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,8 +57,8 @@ public class NativeHelper {
         mUnitId = "";
     }
 
-    public void initNative(String unitid, String loalMapJson) {
-        MsgTools.pirntMsg("initNative ..");
+    public void initNative(String unitid) {
+        MsgTools.pirntMsg("initNative .. ");
         mUnitId = unitid;
         mATNative = new ATNative(mActivity, unitid, new ATNativeNetworkListener() {
             @Override
@@ -68,7 +68,9 @@ public class NativeHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onNativeAdLoaded(mUnitId);
+                            synchronized (NativeHelper.this) {
+                                mListener.onNativeAdLoaded(mUnitId);
+                            }
                         }
                     }
                 });
@@ -81,54 +83,66 @@ public class NativeHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onNativeAdLoadFail(mUnitId, pAdError.getCode(), pAdError.printStackTrace());
+                            synchronized (NativeHelper.this) {
+                                mListener.onNativeAdLoadFail(mUnitId, pAdError.getCode(), pAdError.printStackTrace());
+                            }
                         }
                     }
                 });
             }
         });
 
-
-        Map<String, Object> map = new HashMap<>();
-        try {
-            JSONObject _jsonObject = new JSONObject(loalMapJson);
-            Iterator _iterator = _jsonObject.keys();
-            String key;
-            while (_iterator.hasNext()) {
-                key = (String) _iterator.next();
-                map.put(key, _jsonObject.get(key));
-            }
-            mATNative.setLocalExtra(map);
-            if (mATNativeAdView == null) {
-                mATNativeAdView = new ATNativeAdView(mActivity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (mATNativeAdView == null) {
+            mATNativeAdView = new ATNativeAdView(mActivity);
         }
-
 
         MsgTools.pirntMsg("initNative ..2");
     }
 
-
-    @Deprecated
-    public void loadNative(String loalMapJson) {
-        this.loadNative();
-    }
-
-    public void loadNative() {
-        MsgTools.pirntMsg("loadNative ..");
-
+    public void loadNative(final String localExtra) {
+        MsgTools.pirntMsg("loadNative .. localExtra: " + localExtra);
         UnityPluginUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mATNative == null) {
                     Log.e(TAG, "you must call initNative first ..");
-                    if (mListener != null) {
-                        mListener.onNativeAdLoadFail(mUnitId, "-1", "you must call initNative first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                synchronized (NativeHelper.this) {
+                                    mListener.onNativeAdLoadFail(mUnitId, "-1", "you must call initNative first ..");
+                                }
+                            }
+                        }
+                    });
                     return;
                 }
+
+                Map<String, Object> map = new HashMap<>();
+                try {
+                    JSONObject _jsonObject = new JSONObject(localExtra);
+                    Iterator _iterator = _jsonObject.keys();
+                    String key;
+                    while (_iterator.hasNext()) {
+                        key = (String) _iterator.next();
+                        map.put(key, _jsonObject.get(key));
+
+                        if (TextUtils.equals(Const.Native.native_ad_size, key)) {
+                            String native_ad_size = _jsonObject.optString(key);
+
+                            if (!TextUtils.isEmpty(native_ad_size)) {
+                                String[] sizes = native_ad_size.split("x");
+                                map.put("key_width", sizes[0]);
+                                map.put("key_height", sizes[1]);
+                            }
+                        }
+                    }
+                    mATNative.setLocalExtra(map);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 mATNative.makeAdRequest();
             }
         });
@@ -218,7 +232,9 @@ public class NativeHelper {
                                 @Override
                                 public void run() {
                                     if (mListener != null) {
-                                        mListener.onAdImpressed(mUnitId, adInfo.toString());
+                                        synchronized (NativeHelper.this) {
+                                            mListener.onAdImpressed(mUnitId, adInfo.toString());
+                                        }
                                     }
                                 }
                             });
@@ -230,7 +246,9 @@ public class NativeHelper {
                                 @Override
                                 public void run() {
                                     if (mListener != null) {
-                                        mListener.onAdClicked(mUnitId, adInfo.toString());
+                                        synchronized (NativeHelper.this) {
+                                            mListener.onAdClicked(mUnitId, adInfo.toString());
+                                        }
                                     }
                                 }
                             });
@@ -242,7 +260,9 @@ public class NativeHelper {
                                 @Override
                                 public void run() {
                                     if (mListener != null) {
-                                        mListener.onAdVideoStart(mUnitId);
+                                        synchronized (NativeHelper.this) {
+                                            mListener.onAdVideoStart(mUnitId);
+                                        }
                                     }
                                 }
                             });
@@ -254,7 +274,9 @@ public class NativeHelper {
                                 @Override
                                 public void run() {
                                     if (mListener != null) {
-                                        mListener.onAdVideoEnd(mUnitId);
+                                        synchronized (NativeHelper.this) {
+                                            mListener.onAdVideoEnd(mUnitId);
+                                        }
                                     }
                                 }
                             });
@@ -267,7 +289,9 @@ public class NativeHelper {
                                 @Override
                                 public void run() {
                                     if (mListener != null) {
-                                        mListener.onAdVideoProgress(mUnitId, progress);
+                                        synchronized (NativeHelper.this) {
+                                            mListener.onAdVideoProgress(mUnitId, progress);
+                                        }
                                     }
                                 }
                             });
@@ -282,7 +306,9 @@ public class NativeHelper {
                                 @Override
                                 public void run() {
                                     if (mListener != null) {
-                                        mListener.onAdCloseButtonClicked(mUnitId, atAdInfo.toString());
+                                        synchronized (NativeHelper.this) {
+                                            mListener.onAdCloseButtonClicked(mUnitId, atAdInfo.toString());
+                                        }
                                     }
                                 }
                             });
@@ -308,9 +334,16 @@ public class NativeHelper {
 
                     ViewInfo.addNativeAdView2Activity(mActivity, pViewInfo, mATNativeAdView);
                 } else {
-                    if (mListener != null) {
-                        mListener.onNativeAdLoadFail(mUnitId, "-1", "onNativeAdLoadFail");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                synchronized (NativeHelper.this) {
+                                    mListener.onNativeAdLoadFail(mUnitId, "-1", "onNativeAdLoadFail");
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });

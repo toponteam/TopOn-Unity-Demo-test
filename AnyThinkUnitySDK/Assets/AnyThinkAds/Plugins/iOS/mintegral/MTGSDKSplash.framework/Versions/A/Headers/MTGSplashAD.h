@@ -2,14 +2,17 @@
 //  MTGSplashAD.h
 //  MTGSDKSplash
 //
-//  Created by Harry on 2019/12/26.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <MTGSDK/MTGBool.h>
+#if __has_include(<MTGSDK/MTGSDK.h>)
+    #import <MTGSDK/MTGBool.h>
+#else
+    #import "MTGBool.h"
+#endif
 
-#define MTGSplashSDKVersion @"6.6.0"
+#define MTGSplashSDKVersion @"6.6.1"
 
 
 NS_ASSUME_NONNULL_BEGIN

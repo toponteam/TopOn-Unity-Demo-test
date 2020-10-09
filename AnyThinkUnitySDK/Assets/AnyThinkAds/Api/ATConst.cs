@@ -65,5 +65,7 @@ namespace AnyThinkAds.Api
         public const string USE_REWARDED_VIDEO_AS_INTERSTITIAL_YES = "1";
         public const string USE_REWARDED_VIDEO_AS_INTERSTITIAL_NO = "0";
 
+        public const string WIDTH = "Width";//value is string
+        public const string HEIGHT = "Height";//value is string
     }
 }

@@ -32,10 +32,10 @@ namespace AnyThinkAds.Api
 		/***
 		 * 
 		 */
-        public void loadVideoAd(string unitId, Dictionary<string,string> pairs)
+        public void loadVideoAd(string placementId, Dictionary<string,string> pairs)
         {
             
-            client.loadVideoAd(unitId, Json.Serialize(pairs));
+            client.loadVideoAd(placementId, Json.Serialize(pairs));
 
         }
 
@@ -44,44 +44,44 @@ namespace AnyThinkAds.Api
             client.setListener(listener);
         }
 
-		public void addsetting(string unitId,Dictionary<string,object> pairs){
-			client.addsetting (unitId,Json.Serialize(pairs));
+		public void addsetting(string placementId,Dictionary<string,object> pairs){
+			client.addsetting (placementId,Json.Serialize(pairs));
 		}
-        public bool hasAdReady(string unitId)
+        public bool hasAdReady(string placementId)
         {
-            return client.hasAdReady(unitId);
+            return client.hasAdReady(placementId);
 
         }
 
-        public void setUserData(string unitId, string userId, string customData)
+        public void setUserData(string placementId, string userId, string customData)
         {
-            client.setUserData(unitId, userId, customData);
+            client.setUserData(placementId, userId, customData);
 
         }
 
-        public void showAd(string unitId)
+        public void showAd(string placementId)
         {
-            client.showAd(unitId, Json.Serialize(new Dictionary<string, string>()));
+            client.showAd(placementId, Json.Serialize(new Dictionary<string, string>()));
         }
 
-        public void showAd(string unitId, Dictionary<string, string> pairs)
+        public void showAd(string placementId, Dictionary<string, string> pairs)
         {
-            client.showAd(unitId, Json.Serialize(pairs));
+            client.showAd(placementId, Json.Serialize(pairs));
         }
 
-        public void cleanAd(string unitId)
+        public void cleanAd(string placementId)
         {
-            client.cleanAd(unitId);
+            client.cleanAd(placementId);
         }
 
-        public void onApplicationForces(string unitId)
+        public void onApplicationForces(string placementId)
         {
-            client.onApplicationForces(unitId);
+            client.onApplicationForces(placementId);
         }
 
-        public void onApplicationPasue(string unitId)
+        public void onApplicationPasue(string placementId)
         {
-            client.onApplicationPasue(unitId);
+            client.onApplicationPasue(placementId);
         }
 
         public IATRewardedVideoAdClient GetATRewardedClient()

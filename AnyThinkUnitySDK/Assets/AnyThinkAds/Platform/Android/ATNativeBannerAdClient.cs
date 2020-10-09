@@ -13,11 +13,11 @@ namespace AnyThinkAds.Android
 
         }
 
-    	public void loadAd(string unitId, string mapJson) {
+    	public void loadAd(string placementId, string mapJson) {
 
     	}
     	
-		public bool adReady(string unitId) {
+		public bool adReady(string placementId) {
 			return false;
 		}
 
@@ -25,11 +25,11 @@ namespace AnyThinkAds.Android
 
         }
 
-        public void showAd(string unitId, ATRect rect, Dictionary<string, string> pairs) {
+        public void showAd(string placementId, ATRect rect, Dictionary<string, string> pairs) {
 
         }
 
-        public void removeAd(string unitId) {
+        public void removeAd(string placementId) {
 
         }
     }

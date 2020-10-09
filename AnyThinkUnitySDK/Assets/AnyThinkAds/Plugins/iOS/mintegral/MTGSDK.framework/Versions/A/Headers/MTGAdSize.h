@@ -2,7 +2,6 @@
 //  MTGAdSize.h
 //  MTGSDK
 //
-//  Created by lee on 2019/10/12.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 

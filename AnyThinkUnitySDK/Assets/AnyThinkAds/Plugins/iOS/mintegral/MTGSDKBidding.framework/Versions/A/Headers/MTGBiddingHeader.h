@@ -2,7 +2,6 @@
 //  MTGBiddingHeader.h
 //  MTGSDKBidding
 //
-//  Created by apple on 2019/4/16.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 

@@ -9,6 +9,8 @@
 #import "ATBannerAdWrapper.h"
 #import <AnyThinkBanner/AnyThinkBanner.h>
 #import "ATUnityUtilities.h"
+//5.6.6版本以上支持 admob 自适应banner （用到时再import该头文件）
+//#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @interface ATBannerAdWrapper()<ATBannerDelegate>
 @property(nonatomic, readonly) NSMutableDictionary<NSString*, ATBannerView*> *bannerViewStorage;
@@ -16,6 +18,9 @@
 @end
 
 static NSString *kATBannerSizeUsesPixelFlagKey = @"uses_pixel";
+static NSString *kATBannerAdLoadingExtraInlineAdaptiveWidthKey = @"inline_adaptive_width";
+static NSString *kATBannerAdLoadingExtraInlineAdaptiveOrientationKey = @"inline_adaptive_orientation";
+
 @implementation ATBannerAdWrapper
 +(instancetype)sharedInstance {
     static ATBannerAdWrapper *sharedInstance = nil;
@@ -50,12 +55,30 @@ static NSString *kATBannerSizeUsesPixelFlagKey = @"uses_pixel";
 
             extra[kATAdLoadingExtraBannerAdSizeKey] = [NSValue valueWithCGSize:CGSizeMake([com[0] doubleValue] / scale, [com[1] doubleValue] / scale)];
         }
-        if (extraDict[kATAdLoadingExtraAdmobBannerSizeKey] != nil) { extra[kATAdLoadingExtraAdmobBannerSizeKey] = extraDict[kATAdLoadingExtraAdmobBannerSizeKey]; }
-        if (extraDict[kATAdLoadingExtraAdmobAnchoredAdaptiveKey] != nil) { extra[kATAdLoadingExtraAdmobAnchoredAdaptiveKey] = extraDict[kATAdLoadingExtraAdmobAnchoredAdaptiveKey]; }
+        
+//        // admob 自适应banner，5.6.6版本以上支持
+//        if (extraDict[kATBannerAdLoadingExtraInlineAdaptiveWidthKey] != nil && extraDict[kATBannerAdLoadingExtraInlineAdaptiveOrientationKey] != nil) {
+//            //GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth 自适应
+//            //GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth 竖屏
+//            //GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth 横屏
+//            CGFloat admobBannerWidth = [extraDict[kATBannerAdLoadingExtraInlineAdaptiveWidthKey] doubleValue];
+//            GADAdSize admobSize;
+//            if ([extraDict[kATBannerAdLoadingExtraInlineAdaptiveOrientationKey] integerValue] == 1) {
+//                admobSize = GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(admobBannerWidth);
+//            } else if ([extraDict[kATBannerAdLoadingExtraInlineAdaptiveOrientationKey] integerValue] == 2) {
+//                admobSize = GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth(admobBannerWidth);
+//            } else {
+//                admobSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(admobBannerWidth);
+//            }
+//
+//            extra[kATAdLoadingExtraAdmobBannerSizeKey] = [NSValue valueWithCGSize:admobSize.size];
+//            extra[kATAdLoadingExtraAdmobAdSizeFlagsKey] = @(admobSize.flags);
+//        }
     }
     if (extra[kATAdLoadingExtraBannerAdSizeKey] == nil) {
         extra[kATAdLoadingExtraBannerAdSizeKey] = [NSValue valueWithCGSize:CGSizeMake(320.0f, 50.0f)];
     }
+    NSLog(@"extra = %@", extra);
     [[ATAdManager sharedManager] loadADWithPlacementID:placementID extra:extra delegate:self];
 }
 
@@ -88,8 +111,8 @@ UIEdgeInsets SafeAreaInsets_ATUnityBanner() {
             bannerView.frame = bannerCointainer.bounds;
             [bannerCointainer addSubview:bannerView];
             
-            bannerCointainer.layer.borderColor = [UIColor redColor].CGColor;
-            bannerCointainer.layer.borderWidth = .5f;
+//            bannerCointainer.layer.borderColor = [UIColor redColor].CGColor;
+//            bannerCointainer.layer.borderWidth = .5f;
             [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:bannerCointainer];
             self->_bannerViewStorage[placementID] = bannerCointainer;
         }

@@ -2,7 +2,6 @@
 //  MTGErrorCodeConstant.h
 //  MTGSDK
 //
-//  Created by CharkZhang on 2017/11/7.
 //  Copyright © 2017年 Mintegral. All rights reserved.
 //
 

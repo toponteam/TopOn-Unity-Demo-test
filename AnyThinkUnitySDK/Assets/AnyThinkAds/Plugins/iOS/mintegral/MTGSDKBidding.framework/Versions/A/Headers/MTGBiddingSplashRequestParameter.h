@@ -2,13 +2,16 @@
 //  MTGBiddingSplashRequestParameter.h
 //  MTGSDKBidding
 //
-//  Created by Harry on 2020/1/15.
 //  Copyright © 2020 Mintegral. All rights reserved.
 //
 
 #import "MTGBiddingRequestParameter.h"
-#import <MTGSDK/MTGBool.h>
 
+#if __has_include(<MTGSDK/MTGSDK.h>)
+    #import <MTGSDK/MTGBool.h>
+#else
+    #import "MTGBool.h"
+#endif
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGBiddingSplashRequestParameter : MTGBiddingRequestParameter

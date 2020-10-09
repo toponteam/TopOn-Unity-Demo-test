@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ATAd.h"
 #import "ATTracker.h"
+
+extern NSString *const kATSDKFailedToLoadSplashADMsg;
+extern NSString *const kATSDKFailedToLoadBannerADMsg;
+extern NSString *const kATSDKFailedToLoadInterstitialADMsg;
+extern NSString *const kATSDKFailedToLoadNativeADMsg;
+extern NSString *const kATSDKFailedToLoadRewardedVideoADMsg;
+extern NSString *const kATSDKSplashADTooLongToLoadPlacementSettingMsg;
 extern NSString *const kSDKImportIssueErrorReason;
 extern NSString *const kATAdAssetsAppIDKey;
 @interface ATAdCustomEvent : NSObject

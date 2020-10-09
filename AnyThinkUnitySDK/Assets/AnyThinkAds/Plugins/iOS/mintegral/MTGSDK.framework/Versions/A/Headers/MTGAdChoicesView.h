@@ -2,7 +2,6 @@
 //  MTGAdChoicesView.h
 //  MTGSDK
 //
-//  Created by Harry on 2018/12/18.
 //  Copyright © 2018 Mintegral. All rights reserved.
 //
 

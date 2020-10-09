@@ -47,7 +47,7 @@ public class nativeScenes : MonoBehaviour {
     static ATNativeCallbackListener callbackListener;
 
 	public void loadNative() {
-        Debug.Log ("Developer load native, unit id = " + mPlacementId_native_all);
+        Debug.Log ("Developer load native, placementId = " + mPlacementId_native_all);
    
 
         if(callbackListener == null) {
@@ -55,31 +55,21 @@ public class nativeScenes : MonoBehaviour {
             ATNativeAd.Instance.setListener(callbackListener);
         }
 
-		Dictionary<string,string> gdtlocal = new Dictionary<string,string>();
-		gdtlocal.Add ("gdtadtype","3");
-		gdtlocal.Add ("gdtad_width","-1");
-		gdtlocal.Add ("gdtad_height","-1");
-
-		gdtlocal.Add ("tt_image_width","900");
-		gdtlocal.Add ("tt_image_height","600");
-
-        gdtlocal.Add ("mintegral_auto_render_native_width","900");
-        gdtlocal.Add ("mintegral_auto_render_native_height","600");
-
-        ATNativeAd.Instance.setLocalExtra(mPlacementId_native_all,gdtlocal);
-
-		Dictionary<string,string> jsonmap = new Dictionary<string,string>();
-		jsonmap.Add("age", "22");
-		jsonmap.Add("sex", "lady");
-		jsonmap.Add("native", "0");
-
+        //new in v5.6.6
+        Dictionary<string, object> jsonmap = new Dictionary<string, object>();
+        ATSize nativeSize = new ATSize(320, 250, false);
+        #if UNITY_ANDROID
+            nativeSize = new ATSize(960, 150);
+            jsonmap.Add(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct, nativeSize);
+        #elif UNITY_IOS || UNITY_IPHONE
+            jsonmap.Add(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct, nativeSize);
+        
+        #endif
         ATNativeAd.Instance.loadNativeAd(mPlacementId_native_all, jsonmap);
 
+    }
 
-
-	}
-
-	public int ColorToInt (Color c)
+    public int ColorToInt (Color c)
 	{
 		int retVal = 0;
 		retVal |= Mathf.RoundToInt(c.r * 255f) << 24;
@@ -189,39 +179,39 @@ public class nativeScenes : MonoBehaviour {
     class ATNativeCallbackListener : ATNativeAdListener
     {
 
-        public void onAdLoaded(string unitId)
+        public void onAdLoaded(string placementId)
         {
-            Debug.Log("Developer onAdLoaded------:" + unitId);
+            Debug.Log("Developer onAdLoaded------:" + placementId);
            
         }
-        public void onAdLoadFail(string unitId, string code, string message)
+        public void onAdLoadFail(string placementId, string code, string message)
         {
-            Debug.Log("Developer onAdLoadFail------:" + unitId + "--code:" + code + "--msg:" + message);
+            Debug.Log("Developer onAdLoadFail------:" + placementId + "--code:" + code + "--msg:" + message);
         }
-        public void onAdImpressed(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdImpressed(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer onAdImpressed------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer onAdImpressed------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
-        public void onAdClicked(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdClicked(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer onAdClicked------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer onAdClicked------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
-        public void onAdVideoStart(string unitId)
+        public void onAdVideoStart(string placementId)
         {
-            Debug.Log("Developer onAdVideoStart------:" + unitId);
+            Debug.Log("Developer onAdVideoStart------:" + placementId);
         }
-        public void onAdVideoEnd(string unitId)
+        public void onAdVideoEnd(string placementId)
         {
-            Debug.Log("Developer onAdVideoEnd------:" + unitId);
+            Debug.Log("Developer onAdVideoEnd------:" + placementId);
         }
-        public void onAdVideoProgress(string unitId, int progress)
+        public void onAdVideoProgress(string placementId, int progress)
         {
-            Debug.Log("Developer onAdVideoProgress------:" + unitId);
+            Debug.Log("Developer onAdVideoProgress------:" + placementId);
         }
 
-        public void onAdCloseButtonClicked(string unitId, ATCallbackInfo callbackInfo)
+        public void onAdCloseButtonClicked(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("Developer onAdCloseButtonClicked------:" + unitId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+            Debug.Log("Developer onAdCloseButtonClicked------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
     }
 		

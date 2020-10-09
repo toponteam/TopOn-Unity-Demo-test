@@ -2,15 +2,13 @@
 //  MTGInterstitialAdManager.h
 //  MTGSDK
 //
-//  Created by CharkZhang on 2016/11/8.
-//
 
 
 
-#define MTGInterstitialSDKVersion @"6.6.0"
+#define MTGInterstitialSDKVersion @"6.6.1"
 
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 
 typedef NS_ENUM(NSInteger, MTGInterstitialAdCategory) {

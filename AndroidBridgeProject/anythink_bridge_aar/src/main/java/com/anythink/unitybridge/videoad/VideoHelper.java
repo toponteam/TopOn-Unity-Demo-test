@@ -35,8 +35,8 @@ import com.anythink.rewardvideo.api.ATRewardVideoAd;
 import com.anythink.rewardvideo.api.ATRewardVideoListener;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
-import com.anythink.unitybridge.imgutil.Const;
-import com.anythink.unitybridge.imgutil.TaskManager;
+import com.anythink.unitybridge.utils.Const;
+import com.anythink.unitybridge.utils.TaskManager;
 
 import org.json.JSONObject;
 
@@ -145,7 +145,9 @@ public class VideoHelper {
                     public void run() {
                         isReady = true;
                         if (mListener != null) {
-                            mListener.onRewardedVideoAdLoaded(mUnitId);
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdLoaded(mUnitId);
+                            }
                         }
                     }
                 });
@@ -158,8 +160,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            MsgTools.pirntMsg("onRewardedVideoAdFailed callback");
-                            mListener.onRewardedVideoAdFailed(mUnitId, pAdError.getCode(), pAdError.printStackTrace());
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdFailed(mUnitId, pAdError.getCode(), pAdError.printStackTrace());
+                            }
                         } else {
                             MsgTools.pirntMsg("onRewardedVideoAdFailed callnoback>>" + pAdError.printStackTrace());
                         }
@@ -174,7 +177,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onRewardedVideoAdPlayStart(mUnitId, adInfo.toString());
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdPlayStart(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -187,7 +192,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onRewardedVideoAdPlayEnd(mUnitId, adInfo.toString());
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdPlayEnd(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -200,7 +207,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onRewardedVideoAdPlayFailed(mUnitId, pAdError.getCode(), pAdError.printStackTrace());
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdPlayFailed(mUnitId, pAdError.getCode(), pAdError.printStackTrace());
+                            }
                         }
                     }
                 });
@@ -214,7 +223,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onRewardedVideoAdClosed(mUnitId, isReward, adInfo.toString());
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdClosed(mUnitId, isReward, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -227,7 +238,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onRewardedVideoAdPlayClicked(mUnitId, adInfo.toString());
+                            synchronized (VideoHelper.this) {
+                                mListener.onRewardedVideoAdPlayClicked(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -241,7 +254,9 @@ public class VideoHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onReward(mUnitId, adInfo.toString());
+                            synchronized (VideoHelper.this) {
+                                mListener.onReward(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -256,9 +271,16 @@ public class VideoHelper {
             mRewardVideoAd.setUserData(userid, customData);
         } else {
             MsgTools.pirntMsg("setUserDate error  ..you must call initVideo first " + this);
-            if (mListener != null) {
-                mListener.onRewardedVideoAdFailed(mUnitId, "-1", "you must call initVideo first ..");
-            }
+            TaskManager.getInstance().run_proxy(new Runnable() {
+                @Override
+                public void run() {
+                    if (mListener != null) {
+                        synchronized (VideoHelper.this) {
+                            mListener.onRewardedVideoAdFailed(mUnitId, "-1", "you must call initVideo first ..");
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -457,9 +479,16 @@ public class VideoHelper {
                     mRewardVideoAd.load();
                 } else {
                     MsgTools.pirntMsg("fillVideo error  ..you must call initVideo first " + this);
-                    if (mListener != null) {
-                        mListener.onRewardedVideoAdFailed(mUnitId, "-1", "you must call initVideo first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                synchronized (VideoHelper.this) {
+                                    mListener.onRewardedVideoAdFailed(mUnitId, "-1", "you must call initVideo first ..");
+                                }
+                            }
+                        }
+                    });
                 }
 
             }
@@ -493,9 +522,16 @@ public class VideoHelper {
                     mRewardVideoAd.show(mActivity, scenario);
                 } else {
                     MsgTools.pirntMsg("showVideo error  ..you must call initVideo first " + this);
-                    if (mListener != null) {
-                        mListener.onRewardedVideoAdFailed(mUnitId, "-1", "you must call initVideo first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                synchronized (VideoHelper.this) {
+                                    mListener.onRewardedVideoAdFailed(mUnitId, "-1", "you must call initVideo first ..");
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });

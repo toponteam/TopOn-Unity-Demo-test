@@ -2,7 +2,6 @@
 //  MTGNativeAdManager.h
 //  MTGSDK
 //
-//  Created by ym on 2019/4/26.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 

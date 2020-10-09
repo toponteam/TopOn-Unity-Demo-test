@@ -14,8 +14,8 @@ import com.anythink.core.api.ATAdInfo;
 import com.anythink.core.api.AdError;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.UnityPluginUtils;
-import com.anythink.unitybridge.imgutil.Const;
-import com.anythink.unitybridge.imgutil.TaskManager;
+import com.anythink.unitybridge.utils.Const;
+import com.anythink.unitybridge.utils.TaskManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +65,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerLoaded(mUnitId);
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerLoaded(mUnitId);
+                            }
                         }
                     }
                 });
@@ -79,7 +81,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerFailed(mUnitId, adError.getCode(), adError.printStackTrace());
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerFailed(mUnitId, adError.getCode(), adError.printStackTrace());
+                            }
                         }
                     }
                 });
@@ -92,7 +96,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerClicked(mUnitId, adInfo.toString());
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerClicked(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -105,7 +111,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerShow(mUnitId, adInfo.toString());
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerShow(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -118,7 +126,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerClose(mUnitId, adInfo.toString());
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerClose(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -131,7 +141,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerAutoRefreshed(mUnitId, adInfo.toString());
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerAutoRefreshed(mUnitId, adInfo.toString());
+                            }
                         }
                     }
                 });
@@ -144,7 +156,9 @@ public class BannerHelper {
                     @Override
                     public void run() {
                         if (mListener != null) {
-                            mListener.onBannerAutoRefreshFail(mUnitId, adError.getCode(), adError.printStackTrace());
+                            synchronized (BannerHelper.this) {
+                                mListener.onBannerAutoRefreshFail(mUnitId, adError.getCode(), adError.printStackTrace());
+                            }
                         }
                     }
                 });
@@ -198,9 +212,16 @@ public class BannerHelper {
                     mBannerView.loadAd();
                 } else {
                     MsgTools.pirntMsg("loadBannerAd error  ..you must call initBanner first " + this);
-                    if (mListener != null) {
-                        mListener.onBannerFailed(mUnitId, "-1", "you must call initBanner first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                synchronized (BannerHelper.this) {
+                                    mListener.onBannerFailed(mUnitId, "-1", "you must call initBanner first ..");
+                                }
+                            }
+                        }
+                    });
                 }
 
             }
@@ -215,9 +236,16 @@ public class BannerHelper {
                     mBannerView.loadAd();
                 } else {
                     MsgTools.pirntMsg("loadBannerAd error  ..you must call initBanner first " + this);
-                    if (mListener != null) {
-                        mListener.onBannerFailed(mUnitId, "-1", "you must call initBanner first ..");
-                    }
+                    TaskManager.getInstance().run_proxy(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                synchronized (BannerHelper.this) {
+                                    mListener.onBannerFailed(mUnitId, "-1", "you must call initBanner first ..");
+                                }
+                            }
+                        }
+                    });
                 }
 
             }

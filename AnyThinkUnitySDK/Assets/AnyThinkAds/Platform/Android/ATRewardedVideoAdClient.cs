@@ -20,23 +20,23 @@ namespace AnyThinkAds.Android
         }
 
 
-        public void loadVideoAd(string unitId, string mapJson)
+        public void loadVideoAd(string placementId, string mapJson)
         {
 
             //如果不存在则直接创建对应广告位的helper
-            if(!videoHelperMap.ContainsKey(unitId))
+            if(!videoHelperMap.ContainsKey(placementId))
             {
                 AndroidJavaObject videoHelper = new AndroidJavaObject(
                     "com.anythink.unitybridge.videoad.VideoHelper", this);
-                videoHelper.Call("initVideo", unitId);
-                videoHelperMap.Add(unitId, videoHelper);
+                videoHelper.Call("initVideo", placementId);
+                videoHelperMap.Add(placementId, videoHelper);
                 Debug.Log("ATRewardedVideoAdClient : no exit helper ,create helper ");
             }
 
             try
             {
                 Debug.Log("ATRewardedVideoAdClient : loadVideoAd ");
-                videoHelperMap[unitId].Call("fillVideo", mapJson);
+                videoHelperMap[placementId].Call("fillVideo", mapJson);
             }
             catch (System.Exception e)
             {
@@ -52,13 +52,13 @@ namespace AnyThinkAds.Android
             anyThinkListener = listener;
         }
 
-        public bool hasAdReady(string unitId)
+        public bool hasAdReady(string placementId)
         {
 			bool isready = false;
 			Debug.Log ("ATRewardedVideoAdClient : hasAdReady....");
 			try{
-                if (videoHelperMap.ContainsKey(unitId)) {
-                    isready = videoHelperMap[unitId].Call<bool> ("isAdReady");
+                if (videoHelperMap.ContainsKey(placementId)) {
+                    isready = videoHelperMap[placementId].Call<bool> ("isAdReady");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -67,13 +67,13 @@ namespace AnyThinkAds.Android
 			return isready; 
         }
 
-		public void setUserData(string unitId, string userId, string customData)
+		public void setUserData(string placementId, string userId, string customData)
         {
 			Debug.Log("ATRewardedVideoAdClient : setUserData  " );
 
 			try{
-                if (videoHelperMap.ContainsKey(unitId)) {
-                    this.videoHelperMap[unitId].Call ("setUserData",userId,customData);
+                if (videoHelperMap.ContainsKey(placementId)) {
+                    this.videoHelperMap[placementId].Call ("setUserData",userId,customData);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -81,13 +81,13 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void showAd(string unitId, string scenario)
+        public void showAd(string placementId, string scenario)
         {
 			Debug.Log("ATRewardedVideoAdClient : showAd " );
 
 			try{
-                if (videoHelperMap.ContainsKey(unitId)) {
-                    this.videoHelperMap[unitId].Call ("showVideo", scenario);
+                if (videoHelperMap.ContainsKey(placementId)) {
+                    this.videoHelperMap[placementId].Call ("showVideo", scenario);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -96,12 +96,12 @@ namespace AnyThinkAds.Android
 			}
         }
 
-		public void addsetting (string unitId,string json){
+		public void addsetting (string placementId,string json){
 			Debug.Log("ATRewardedVideoAdClient : addsetting" );
 
 			try{
-				if (videoHelperMap.ContainsKey(unitId)) {
-					this.videoHelperMap[unitId].Call ("addsetting",json);
+				if (videoHelperMap.ContainsKey(placementId)) {
+					this.videoHelperMap[placementId].Call ("addsetting",json);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -109,14 +109,14 @@ namespace AnyThinkAds.Android
 			}
 		}
 
-        public void cleanAd(string unitId)
+        public void cleanAd(string placementId)
         {
 			
 			Debug.Log("ATRewardedVideoAdClient : clean" );
 
 			try{
-                if (videoHelperMap.ContainsKey(unitId)) {
-                    this.videoHelperMap[unitId].Call ("clean");
+                if (videoHelperMap.ContainsKey(placementId)) {
+                    this.videoHelperMap[placementId].Call ("clean");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -124,12 +124,12 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void onApplicationForces(string unitId)
+        public void onApplicationForces(string placementId)
         {
 			Debug.Log ("onApplicationForces.... ");
 			try{
-				if (videoHelperMap.ContainsKey(unitId)) {
-					this.videoHelperMap[unitId].Call ("onResume");
+				if (videoHelperMap.ContainsKey(placementId)) {
+					this.videoHelperMap[placementId].Call ("onResume");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -137,12 +137,12 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void onApplicationPasue(string unitId)
+        public void onApplicationPasue(string placementId)
         {
 			Debug.Log ("onApplicationPasue.... ");
 			try{
-				if (videoHelperMap.ContainsKey(unitId)) {
-					this.videoHelperMap[unitId].Call ("onPause");
+				if (videoHelperMap.ContainsKey(placementId)) {
+					this.videoHelperMap[placementId].Call ("onPause");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -151,79 +151,79 @@ namespace AnyThinkAds.Android
         }
 
         //广告加载成功
-        public void onRewardedVideoAdLoaded(string unitId)
+        public void onRewardedVideoAdLoaded(string placementId)
         {
             Debug.Log("onRewardedVideoAdLoaded...unity3d.");
             if(anyThinkListener != null){
-                anyThinkListener.onRewardedVideoAdLoaded(unitId);
+                anyThinkListener.onRewardedVideoAdLoaded(placementId);
             }
         }
 
         //广告加载失败
-        public void onRewardedVideoAdFailed(string unitId,string code, string error)
+        public void onRewardedVideoAdFailed(string placementId,string code, string error)
         {
             Debug.Log("onRewardedVideoAdFailed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdLoadFail(unitId, code, error);
+                anyThinkListener.onRewardedVideoAdLoadFail(placementId, code, error);
             }
         }
 
         //开始播放
-        public void onRewardedVideoAdPlayStart(string unitId, string callbackJson)
+        public void onRewardedVideoAdPlayStart(string placementId, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdPlayStart...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayStart(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onRewardedVideoAdPlayStart(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //结束播放
-        public void onRewardedVideoAdPlayEnd(string unitId, string callbackJson)
+        public void onRewardedVideoAdPlayEnd(string placementId, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdPlayEnd...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayEnd(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onRewardedVideoAdPlayEnd(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //播放失败
-        public void onRewardedVideoAdPlayFailed(string unitId,string code, string error)
+        public void onRewardedVideoAdPlayFailed(string placementId,string code, string error)
         {
             Debug.Log("onRewardedVideoAdPlayFailed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayFail(unitId, code, error);
+                anyThinkListener.onRewardedVideoAdPlayFail(placementId, code, error);
             }
         }
         //广告关闭
-        public void onRewardedVideoAdClosed(string unitId,bool isRewarded, string callbackJson)
+        public void onRewardedVideoAdClosed(string placementId,bool isRewarded, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdClosed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayClosed(unitId,isRewarded, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onRewardedVideoAdPlayClosed(placementId,isRewarded, new ATCallbackInfo(callbackJson));
             }
         }
         //广告点击
-        public void onRewardedVideoAdPlayClicked(string unitId, string callbackJson)
+        public void onRewardedVideoAdPlayClicked(string placementId, string callbackJson)
         {
             Debug.Log("onRewardedVideoAdPlayClicked...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onRewardedVideoAdPlayClicked(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onRewardedVideoAdPlayClicked(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //广告激励下发
-        public void onReward(string unitId, string callbackJson)
+        public void onReward(string placementId, string callbackJson)
         {
             Debug.Log("onReward...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onReward(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onReward(placementId, new ATCallbackInfo(callbackJson));
             }
         }
        

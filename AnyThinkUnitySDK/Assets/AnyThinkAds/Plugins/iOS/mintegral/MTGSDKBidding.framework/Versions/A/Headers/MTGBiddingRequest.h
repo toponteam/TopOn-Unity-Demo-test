@@ -2,12 +2,11 @@
 //  MTGBiddingRequest.h
 //  MTGSDKBidding
 //
-//  Created by apple on 2019/4/19.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <MTGSDK/MTGSDK.h>
+
 #import "MTGBiddingHeader.h"
 #import "MTGBiddingResponse.h"
 #import "MTGBiddingRequestParameter.h"

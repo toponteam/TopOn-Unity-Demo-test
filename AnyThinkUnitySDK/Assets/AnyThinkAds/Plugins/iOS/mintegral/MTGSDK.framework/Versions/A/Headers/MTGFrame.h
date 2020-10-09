@@ -2,8 +2,6 @@
 //  MTGFrame.h
 //  MTGSDK
 //
-//  Created by Jomy on 16/1/28.
-//
 
 #import <Foundation/Foundation.h>
 #import "MTGCampaign.h"

@@ -2,23 +2,19 @@
 //  MTGSDK.h
 //  MTGSDK
 //
-//  Created by Jomy on 15/9/28.
-//
 
 
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <MTGSDK/MTGNativeAdManager.h>
-#import <MTGSDK/MTGBidNativeAdManager.h>
-#import <MTGSDK/MTGCampaign.h>
-#import <MTGSDK/MTGTemplate.h>
-#import <MTGSDK/MTGFrame.h>
-#import <MTGSDK/MTGMediaView.h>
-#import <MTGSDK/MTGUserInfo.h>
+#import "MTGNativeAdManager.h"
+#import "MTGBidNativeAdManager.h"
+#import "MTGCampaign.h"
+#import "MTGTemplate.h"
+#import "MTGFrame.h"
+#import "MTGMediaView.h"
+#import "MTGUserInfo.h"
 
-
-#define MTGSDKVersion @"6.6.0"
+#define MTGSDKVersion @"6.6.1"
 
 
 

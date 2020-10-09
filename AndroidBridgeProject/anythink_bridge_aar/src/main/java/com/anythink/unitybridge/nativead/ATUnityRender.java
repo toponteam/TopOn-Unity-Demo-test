@@ -2,7 +2,6 @@ package com.anythink.unitybridge.nativead;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -10,18 +9,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anythink.nativead.api.ATNativeAdRenderer;
+import com.anythink.nativead.api.ATNativeImageView;
 import com.anythink.nativead.unitgroup.api.CustomNativeAd;
-import com.anythink.network.admob.AdmobATConst;
-import com.anythink.network.applovin.ApplovinATConst;
-import com.anythink.network.nend.NendATConst;
 import com.anythink.unitybridge.MsgTools;
-import com.anythink.unitybridge.imgutil.CommonBitmapUtil;
-import com.anythink.unitybridge.imgutil.CommonImageLoader;
-import com.anythink.unitybridge.imgutil.CommonImageLoaderListener;
+import com.anythink.unitybridge.utils.CommonUtil;
 
 
 /**
@@ -57,9 +51,6 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
         TextView titleView = new TextView(mActivity);
         TextView descView = new TextView(mActivity);
         TextView ctaView = new TextView(mActivity);
-
-
-        final ImageView logoView = new ImageView(mActivity);
 
         final View mediaView = ad.getAdMediaView(mFrameLayout, view.getWidth());
         if (mediaView != null && ad.isNativeExpress()) { // 个性化模板View
@@ -148,23 +139,9 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
 
 
             if (ad.getAdIconView() == null) {
-                final ImageView iconView = new ImageView(mActivity);
+                final ATNativeImageView iconView = new ATNativeImageView(mActivity);
                 iconArea.addView(iconView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-                CommonImageLoader.getInstance(mActivity).load(ad.getIconImageUrl(), new CommonImageLoaderListener() {
-                    @Override
-                    public void onSuccessLoad(Bitmap bitmap, String key) {
-                        if (bitmap != null) {
-                            if (iconView != null) {
-                                iconView.setImageBitmap(bitmap);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailedLoad(String description, String key) {
-                        MsgTools.pirntMsg("load icon img failed");
-                    }
-                });
+                iconView.setImage(ad.getIconImageUrl());
             } else {
                 iconArea.addView(ad.getAdIconView(), new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
             }
@@ -173,31 +150,13 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             ViewInfo.add2ParentView(mFrameLayout, iconArea, mViewInfo.IconView, -1);
         }
 
-
         if (mViewInfo.adLogoView != null) {
-            // 加载图片
-
-            CommonImageLoader.getInstance(mActivity).load(ad.getAdChoiceIconUrl(), new CommonImageLoaderListener() {
-                @Override
-                public void onSuccessLoad(Bitmap bitmap, String key) {
-                    if (bitmap != null) {
-                        if (logoView != null) {
-                            logoView.setImageBitmap(bitmap);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailedLoad(String description, String key) {
-                    MsgTools.pirntMsg("load logo img failed");
-                }
-            });
-
-
+            final ATNativeImageView logoView = new ATNativeImageView(mActivity);
             ViewInfo.add2ParentView(mFrameLayout, logoView, mViewInfo.adLogoView, -1);
+            logoView.setImage(ad.getAdChoiceIconUrl());
         }
 
-        if (mNetworkType != ApplovinATConst.NETWORK_FIRM_ID && mediaView != null) {
+        if (mNetworkType != 5 && mediaView != null) {
 //            mediaView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
             MsgTools.pirntMsg("mediaView ---> 视屏播放 " + ad.getVideoUrl());
             if (mViewInfo.imgMainView != null) {
@@ -206,36 +165,22 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
         } else {
             //加载大图
             MsgTools.pirntMsg("mediaView ---> 大图播放");
-            final ImageView mainImageView = new ImageView(mActivity);
-            CommonImageLoader.getInstance(mActivity).load(ad.getMainImageUrl(), new CommonImageLoaderListener() {
-                @Override
-                public void onSuccessLoad(Bitmap bitmap, String key) {
-                    if (bitmap != null) {
-                        if (mainImageView != null) {
-                            mainImageView.setImageBitmap(bitmap);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailedLoad(String description, String key) {
-                    MsgTools.pirntMsg("load main img failed");
-                }
-            });
             if (mViewInfo.imgMainView != null) {
+                final ATNativeImageView mainImageView = new ATNativeImageView(mActivity);
                 ViewInfo.add2ParentView(mFrameLayout, mainImageView, mViewInfo.imgMainView, -1);
+                mainImageView.setImage(ad.getMainImageUrl());
             }
         }
 
 
-        if (!TextUtils.isEmpty(ad.getAdFrom()) && mNetworkType == NendATConst.NETWORK_FIRM_ID) {
+        if (!TextUtils.isEmpty(ad.getAdFrom()) && mNetworkType == 23) {
             FrameLayout.LayoutParams adFromParam = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-            adFromParam.leftMargin = CommonBitmapUtil.dip2px(mActivity, 3);
-            adFromParam.bottomMargin = CommonBitmapUtil.dip2px(mActivity, 3);
+            adFromParam.leftMargin = CommonUtil.dip2px(mActivity, 3);
+            adFromParam.bottomMargin = CommonUtil.dip2px(mActivity, 3);
             adFromParam.gravity = Gravity.BOTTOM;
             TextView adFromTextView = new TextView(mActivity);
             adFromTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 6);
-            adFromTextView.setPadding(CommonBitmapUtil.dip2px(mActivity, 5), CommonBitmapUtil.dip2px(mActivity, 2), CommonBitmapUtil.dip2px(mActivity, 5), CommonBitmapUtil.dip2px(mActivity, 2));
+            adFromTextView.setPadding(CommonUtil.dip2px(mActivity, 5), CommonUtil.dip2px(mActivity, 2), CommonUtil.dip2px(mActivity, 5), CommonUtil.dip2px(mActivity, 2));
             adFromTextView.setBackgroundColor(0xff888888);
             adFromTextView.setTextColor(0xffffffff);
             adFromTextView.setText(ad.getAdFrom());
@@ -243,18 +188,18 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             mFrameLayout.addView(adFromTextView, adFromParam);
         }
 
-        if (mNetworkType == AdmobATConst.NETWORK_FIRM_ID) {
+        if (mNetworkType == 2) {
             MsgTools.pirntMsg("start to add admob ad textview ");
             TextView adLogoView = new TextView(mActivity);
             adLogoView.setTextColor(Color.WHITE);
             adLogoView.setText("AD");
             adLogoView.setTextSize(11);
-            adLogoView.setPadding(CommonBitmapUtil.dip2px(mActivity, 3), 0, CommonBitmapUtil.dip2px(mActivity, 3), 0);
+            adLogoView.setPadding(CommonUtil.dip2px(mActivity, 3), 0, CommonUtil.dip2px(mActivity, 3), 0);
             adLogoView.setBackgroundColor(Color.parseColor("#66000000"));
             if (mFrameLayout != null) {
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.leftMargin = CommonBitmapUtil.dip2px(mActivity, 3);
-                layoutParams.topMargin = CommonBitmapUtil.dip2px(mActivity, 3);
+                layoutParams.leftMargin = CommonUtil.dip2px(mActivity, 3);
+                layoutParams.topMargin = CommonUtil.dip2px(mActivity, 3);
                 mFrameLayout.addView(adLogoView, layoutParams);
 
                 MsgTools.pirntMsg("add admob ad textview 2 activity");

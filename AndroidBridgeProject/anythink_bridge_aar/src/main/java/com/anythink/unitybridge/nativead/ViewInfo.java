@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 
 import com.anythink.nativead.api.ATNativeAdView;
 import com.anythink.unitybridge.MsgTools;
-import com.anythink.unitybridge.imgutil.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;

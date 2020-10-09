@@ -45,11 +45,11 @@ namespace AnyThinkAds.Api
 		/**
 		API
 		*/
-		public void loadBannerAd(string unitId, Dictionary<string,object> pairs)
+		public void loadBannerAd(string placementId, Dictionary<string,object> pairs)
 		{   
             if (pairs != null && pairs.ContainsKey(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize))
             {
-                client.loadBannerAd(unitId, Json.Serialize(pairs));
+                client.loadBannerAd(placementId, Json.Serialize(pairs));
             }
             else if (pairs != null && pairs.ContainsKey(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct))
             {
@@ -58,11 +58,11 @@ namespace AnyThinkAds.Api
                 pairs.Add(ATBannerAdLoadingExtra.kATBannerAdSizeUsesPixelFlagKey, size.usesPixel);
 
                 //Dictionary<string, object> newPaires = new Dictionary<string, object> { { ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize, size.width + "x" + size.height }, { ATBannerAdLoadingExtra.kATBannerAdSizeUsesPixelFlagKey, size.usesPixel } };
-                client.loadBannerAd(unitId, Json.Serialize(pairs));
+                client.loadBannerAd(placementId, Json.Serialize(pairs));
             }
             else
             {
-                client.loadBannerAd(unitId, Json.Serialize(pairs));
+                client.loadBannerAd(placementId, Json.Serialize(pairs));
             }
 			
 		}
@@ -72,29 +72,29 @@ namespace AnyThinkAds.Api
             client.setListener(listener);
         }
 
-        public void showBannerAd(string unitId, ATRect rect)
+        public void showBannerAd(string placementId, ATRect rect)
         {
-            client.showBannerAd(unitId, rect);
+            client.showBannerAd(placementId, rect);
         }
 
-        public void showBannerAd(string unitId, string position)
+        public void showBannerAd(string placementId, string position)
         {
-            client.showBannerAd(unitId, position);
+            client.showBannerAd(placementId, position);
         }
 
-        public void showBannerAd(string unitId)
+        public void showBannerAd(string placementId)
         {
-            client.showBannerAd(unitId);
+            client.showBannerAd(placementId);
         }
 
-        public void hideBannerAd(string unitId)
+        public void hideBannerAd(string placementId)
         {
-            client.hideBannerAd(unitId);
+            client.hideBannerAd(placementId);
         }
 
-        public void cleanBannerAd(string unitId)
+        public void cleanBannerAd(string placementId)
         {
-            client.cleanBannerAd(unitId);
+            client.cleanBannerAd(placementId);
         }
 
         public IATBannerAdClient GetATBannerAdClient()

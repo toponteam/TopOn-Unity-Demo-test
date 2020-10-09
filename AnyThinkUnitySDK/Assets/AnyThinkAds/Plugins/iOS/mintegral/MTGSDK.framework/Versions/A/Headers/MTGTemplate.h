@@ -2,8 +2,6 @@
 //  MTGTemplate.h
 //  MTGSDK
 //
-//  Created by Jomy on 16/2/3.
-//
 
 #import <Foundation/Foundation.h>
 #import "MTGCampaign.h"

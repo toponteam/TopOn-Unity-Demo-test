@@ -17,29 +17,29 @@ namespace AnyThinkAds.Android
 
         }
 
-
-		public void setLocalExtra (string unitId,string localExtra){
-			if (!nativeAdHelperMap.ContainsKey (unitId)) {
+		//Deprecated in v5.6.6
+		public void setLocalExtra (string placementId,string localExtra){
+			if (!nativeAdHelperMap.ContainsKey (placementId)) {
 				AndroidJavaObject nativeHelper = new AndroidJavaObject (
                     "com.anythink.unitybridge.nativead.NativeHelper", this);
-				nativeHelper.Call ("initNative", unitId, localExtra);
-				nativeAdHelperMap.Add (unitId, nativeHelper);
+				nativeHelper.Call ("initNative", placementId, localExtra);
+				nativeAdHelperMap.Add (placementId, nativeHelper);
 
 			}
 		}
 
-        public void loadNativeAd(string unitId, string mapJson)
+        public void loadNativeAd(string placementId, string mapJson)
         {
 			Debug.Log ("loadNativeAd....jsonmap:"+mapJson);
-            if(!nativeAdHelperMap.ContainsKey(unitId)){
+            if(!nativeAdHelperMap.ContainsKey(placementId)){
                 AndroidJavaObject nativeHelper = new AndroidJavaObject(
                     "com.anythink.unitybridge.nativead.NativeHelper", this);
-                nativeHelper.Call("initNative", unitId, "{}");
-                nativeAdHelperMap.Add(unitId, nativeHelper);
+                nativeHelper.Call("initNative", placementId);
+                nativeAdHelperMap.Add(placementId, nativeHelper);
             }
 			try{
-                if (nativeAdHelperMap.ContainsKey(unitId)) {
-                    nativeAdHelperMap[unitId].Call ("loadNative",mapJson);
+                if (nativeAdHelperMap.ContainsKey(placementId)) {
+                    nativeAdHelperMap[placementId].Call ("loadNative",mapJson);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -48,13 +48,13 @@ namespace AnyThinkAds.Android
         }
 
 
-        public bool hasAdReady(string unitId)
+        public bool hasAdReady(string placementId)
         {
 			bool isready = false;
 			Debug.Log ("hasAdReady....");
 			try{
-                if (nativeAdHelperMap.ContainsKey(unitId)) {
-                    isready = nativeAdHelperMap[unitId].Call<bool> ("isAdReady");
+                if (nativeAdHelperMap.ContainsKey(placementId)) {
+                    isready = nativeAdHelperMap[placementId].Call<bool> ("isAdReady");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -68,14 +68,14 @@ namespace AnyThinkAds.Android
             mlistener = listener;
         }
 
-		public void renderAdToScene(string unitId, ATNativeAdView anyThinkNativeAdView)
+		public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView)
         {	
 			string showconfig = anyThinkNativeAdView.toJSON ();
             //暂未实现 show
 			Debug.Log ("renderAdToScene....showconfig >>>:"+showconfig);
 			try{
-                if (nativeAdHelperMap.ContainsKey(unitId)) {
-                    nativeAdHelperMap[unitId].Call ("show",showconfig);
+                if (nativeAdHelperMap.ContainsKey(placementId)) {
+                    nativeAdHelperMap[placementId].Call ("show",showconfig);
 				}
 			}catch(System.Exception e){
 				Debug.Log ("ATNativeAdClient :  error."+e.Message);
@@ -83,14 +83,14 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void cleanAdView(string unitId, ATNativeAdView anyThinkNativeAdView)
+        public void cleanAdView(string placementId, ATNativeAdView anyThinkNativeAdView)
         {
            //
 			Debug.Log ("cleanAdView.... ");
 			try{
 
-				if (nativeAdHelperMap.ContainsKey(unitId)) {
-					nativeAdHelperMap[unitId].Call ("cleanView");
+				if (nativeAdHelperMap.ContainsKey(placementId)) {
+					nativeAdHelperMap[placementId].Call ("cleanView");
 				}
 
 			}catch(System.Exception e){
@@ -99,15 +99,15 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void onApplicationForces(string unitId, ATNativeAdView anyThinkNativeAdView)
+        public void onApplicationForces(string placementId, ATNativeAdView anyThinkNativeAdView)
         {
 
 
 			Debug.Log ("onApplicationForces.... ");
 			try{
 
-				if (nativeAdHelperMap.ContainsKey(unitId)) {
-					nativeAdHelperMap[unitId].Call ("onResume");
+				if (nativeAdHelperMap.ContainsKey(placementId)) {
+					nativeAdHelperMap[placementId].Call ("onResume");
 				}
 
 			}catch(System.Exception e){
@@ -117,15 +117,15 @@ namespace AnyThinkAds.Android
         }
 
 
-        public void onApplicationPasue(string unitId, ATNativeAdView anyThinkNativeAdView)
+        public void onApplicationPasue(string placementId, ATNativeAdView anyThinkNativeAdView)
         {
 
 			Debug.Log ("onApplicationPasue.... ");
 			try{
 				
 
-				if (nativeAdHelperMap.ContainsKey(unitId)) {
-					nativeAdHelperMap[unitId].Call ("onPause");
+				if (nativeAdHelperMap.ContainsKey(placementId)) {
+					nativeAdHelperMap[placementId].Call ("onPause");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -133,12 +133,12 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void cleanCache(string unitId)
+        public void cleanCache(string placementId)
         {
 			Debug.Log ("cleanCache....");
 			try{
-                if (nativeAdHelperMap.ContainsKey(unitId)) {
-                    nativeAdHelperMap[unitId].Call ("clean");
+                if (nativeAdHelperMap.ContainsKey(placementId)) {
+                    nativeAdHelperMap[placementId].Call ("clean");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -151,11 +151,11 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdImpressed(string unitId, string callbackJson)
+        public void onAdImpressed(string placementId, string callbackJson)
         {
             Debug.Log("onAdImpressed...unity3d.");
             if(mlistener != null){
-                mlistener.onAdImpressed(unitId, new ATCallbackInfo(callbackJson));
+                mlistener.onAdImpressed(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -164,12 +164,12 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdClicked(string unitId, string callbackJson)
+        public void onAdClicked(string placementId, string callbackJson)
         {
             Debug.Log("onAdClicked...unity3d.");
             if (mlistener != null)
             {
-                mlistener.onAdClicked(unitId, new ATCallbackInfo(callbackJson));
+                mlistener.onAdClicked(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -178,12 +178,12 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdVideoStart(string unitId)
+        public void onAdVideoStart(string placementId)
         {
             Debug.Log("onAdVideoStart...unity3d.");
             if (mlistener != null)
             {
-                mlistener.onAdVideoStart(unitId);
+                mlistener.onAdVideoStart(placementId);
             }
         }
 
@@ -192,12 +192,12 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdVideoEnd(string unitId)
+        public void onAdVideoEnd(string placementId)
         {
             Debug.Log("onAdVideoEnd...unity3d.");
             if (mlistener != null)
             {
-                mlistener.onAdVideoEnd(unitId);
+                mlistener.onAdVideoEnd(placementId);
             }
         }
 
@@ -206,12 +206,12 @@ namespace AnyThinkAds.Android
      *
      * @param view
      */
-        public void onAdVideoProgress(string unitId,int progress)
+        public void onAdVideoProgress(string placementId,int progress)
         {
             Debug.Log("onAdVideoProgress...progress[" + progress + "]");
             if (mlistener != null)
             {
-                mlistener.onAdVideoProgress(unitId, progress);
+                mlistener.onAdVideoProgress(placementId, progress);
             }
         }
 
@@ -220,12 +220,12 @@ namespace AnyThinkAds.Android
    *
    * @param view
    */
-        public void onAdCloseButtonClicked(string unitId, string callbackJson)
+        public void onAdCloseButtonClicked(string placementId, string callbackJson)
         {
             Debug.Log("onAdCloseButtonClicked...unity3d");
             if (mlistener != null)
             {
-                mlistener.onAdCloseButtonClicked(unitId, new ATCallbackInfo(callbackJson));
+                mlistener.onAdCloseButtonClicked(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
@@ -233,12 +233,12 @@ namespace AnyThinkAds.Android
         /**
      * 广告加载成功
      */
-        public void onNativeAdLoaded(string unitId)
+        public void onNativeAdLoaded(string placementId)
         {
             Debug.Log("onNativeAdLoaded...unity3d.");
             if (mlistener != null)
             {
-                mlistener.onAdLoaded(unitId);
+                mlistener.onAdLoaded(placementId);
             }
 
         }
@@ -246,12 +246,12 @@ namespace AnyThinkAds.Android
         /**
      * 广告加载失败
      */
-        public void onNativeAdLoadFail(string unitId,string code, string msg)
+        public void onNativeAdLoadFail(string placementId,string code, string msg)
         {
             Debug.Log("onNativeAdLoadFail...unity3d. code:" + code + " msg:" + msg);
             if (mlistener != null)
             {
-                mlistener.onAdLoadFail(unitId, code, msg);
+                mlistener.onAdLoadFail(placementId, code, msg);
             }
         }
 

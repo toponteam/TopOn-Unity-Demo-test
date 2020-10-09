@@ -14,12 +14,14 @@ extern NSString *const kNativeADAssetsMainTextKey;
 extern NSString *const kNativeADAssetsMainTitleKey;
 extern NSString *const kNativeADAssetsMainImageKey;
 extern NSString *const kNativeADAssetsIconImageKey;
+extern NSString *const kNativeADAssetsLogoImageKey;
 extern NSString *const kNativeADAssetsCTATextKey;
 extern NSString *const kNativeADAssetsRatingKey;
 extern NSString *const kNativeADAssetsContainsVideoFlag;
 extern NSString *const kNativeADAssetsUnitIDKey;
 extern NSString *const kNativeADAssetsIconURLKey;
 extern NSString *const kNativeADAssetsImageURLKey;
+extern NSString *const kNativeADAssetsLogoURLKey;
 extern NSString *const kNativeADAssetsSponsoredImageKey;
 
 extern NSString *const kAdAssetsCustomObjectKey;

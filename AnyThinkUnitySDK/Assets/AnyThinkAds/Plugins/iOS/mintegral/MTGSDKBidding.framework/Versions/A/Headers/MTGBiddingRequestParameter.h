@@ -2,7 +2,6 @@
 //  MTGBiddingRequestParameter.h
 //  MTGSDKBidding
 //
-//  Created by Lee on 2019/9/30.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 

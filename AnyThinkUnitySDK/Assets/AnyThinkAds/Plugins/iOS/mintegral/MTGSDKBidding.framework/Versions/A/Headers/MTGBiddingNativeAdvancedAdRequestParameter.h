@@ -2,7 +2,6 @@
 //  MTGBiddingNativeAdvancedAdRequestParameter.h
 //  MTGSDKBidding
 //
-//  Created by lee on 2020/4/30.
 //  Copyright © 2020 Mintegral. All rights reserved.
 //
 

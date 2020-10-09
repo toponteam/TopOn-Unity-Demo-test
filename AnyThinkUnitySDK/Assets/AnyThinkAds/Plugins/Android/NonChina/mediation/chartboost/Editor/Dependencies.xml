@@ -1,0 +1,10 @@
+<dependencies>
+    <androidPackages>
+        <repositories>
+            <repository>https://chartboostmobile.bintray.com/Chartboost</repository>
+        </repositories>
+        <androidPackage spec="com.chartboost:chartboost-sdk:8.1.0"/>
+        <androidPackage spec="com.google.android.gms:play-services-ads-identifier:17.0.0"/>
+        <androidPackage spec="com.google.android.gms:play-services-base:17.0.0"/>
+    </androidPackages>
+</dependencies>

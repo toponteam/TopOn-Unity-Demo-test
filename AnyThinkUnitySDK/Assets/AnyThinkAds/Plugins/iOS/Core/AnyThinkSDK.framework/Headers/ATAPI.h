@@ -30,6 +30,9 @@ extern NSString *const kATADDelegateExtraPlacementRewardNumberKey;
 
 extern NSString *const ATADShowingErrorDomain;
 
+extern NSString *const ATSDKAdLoadingErrorMsg;
+extern NSString *const ATSDKAdLoadFailedErrorMsg;
+
 extern NSString *const ATADLoadingErrorDomain;
 extern NSInteger const ATADLoadingErrorCodePlacementStrategyInvalidResponse;
 extern NSInteger const ATADLoadingErrorCdoePlacementStragetyNetworkError;

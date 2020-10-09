@@ -2,7 +2,6 @@
 //  MTGInterstitialVideoAdManager.h
 //  MTGSDK
 //
-//  Created by CharkZhang on 2018/4/10.
 //  Copyright © 2018年 Mintegral. All rights reserved.
 //
 

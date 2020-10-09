@@ -2,7 +2,6 @@
 //  MTGUserInfo.h
 //  MTGSDK
 //
-//  Created by 陈俊杰 on 2017/11/23.
 //  Copyright © 2017年 Mintegral. All rights reserved.
 //
 

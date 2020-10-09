@@ -20,23 +20,23 @@ namespace AnyThinkAds.Android
         }
 
 
-        public void loadInterstitialAd(string unitId, string mapJson)
+        public void loadInterstitialAd(string placementId, string mapJson)
         {
 
             //如果不存在则直接创建对应广告位的helper
-            if(!interstitialHelperMap.ContainsKey(unitId))
+            if(!interstitialHelperMap.ContainsKey(placementId))
             {
                 AndroidJavaObject videoHelper = new AndroidJavaObject(
                     "com.anythink.unitybridge.interstitial.InterstitialHelper", this);
-                videoHelper.Call("initInterstitial", unitId);
-                interstitialHelperMap.Add(unitId, videoHelper);
+                videoHelper.Call("initInterstitial", placementId);
+                interstitialHelperMap.Add(placementId, videoHelper);
                 Debug.Log("ATInterstitialAdClient : no exit helper ,create helper ");
             }
 
             try
             {
                 Debug.Log("ATInterstitialAdClient : loadInterstitialAd ");
-                interstitialHelperMap[unitId].Call("loadInterstitialAd", mapJson);
+                interstitialHelperMap[placementId].Call("loadInterstitialAd", mapJson);
             }
             catch (System.Exception e)
             {
@@ -52,13 +52,13 @@ namespace AnyThinkAds.Android
             anyThinkListener = listener;
         }
 
-        public bool hasInterstitialAdReady(string unitId)
+        public bool hasInterstitialAdReady(string placementId)
         {
 			bool isready = false;
 			Debug.Log ("ATInterstitialAdClient : hasAdReady....");
 			try{
-                if (interstitialHelperMap.ContainsKey(unitId)) {
-                    isready = interstitialHelperMap[unitId].Call<bool> ("isAdReady");
+                if (interstitialHelperMap.ContainsKey(placementId)) {
+                    isready = interstitialHelperMap[placementId].Call<bool> ("isAdReady");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -68,13 +68,13 @@ namespace AnyThinkAds.Android
         }
 
 
-        public void showInterstitialAd(string unitId, string jsonmap)
+        public void showInterstitialAd(string placementId, string jsonmap)
         {
 			Debug.Log("ATInterstitialAdClient : showAd " );
 
 			try{
-                if (interstitialHelperMap.ContainsKey(unitId)) {
-                    this.interstitialHelperMap[unitId].Call ("showInterstitialAd", jsonmap);
+                if (interstitialHelperMap.ContainsKey(placementId)) {
+                    this.interstitialHelperMap[placementId].Call ("showInterstitialAd", jsonmap);
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -84,14 +84,14 @@ namespace AnyThinkAds.Android
         }
 
 
-        public void cleanCache(string unitId)
+        public void cleanCache(string placementId)
         {
 			
 			Debug.Log("ATInterstitialAdClient : clean" );
 
 			try{
-                if (interstitialHelperMap.ContainsKey(unitId)) {
-                    this.interstitialHelperMap[unitId].Call ("clean");
+                if (interstitialHelperMap.ContainsKey(placementId)) {
+                    this.interstitialHelperMap[placementId].Call ("clean");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -99,12 +99,12 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void onApplicationForces(string unitId)
+        public void onApplicationForces(string placementId)
         {
 			Debug.Log ("onApplicationForces.... ");
 			try{
-				if (interstitialHelperMap.ContainsKey(unitId)) {
-					this.interstitialHelperMap[unitId].Call ("onResume");
+				if (interstitialHelperMap.ContainsKey(placementId)) {
+					this.interstitialHelperMap[placementId].Call ("onResume");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -112,12 +112,12 @@ namespace AnyThinkAds.Android
 			}
         }
 
-        public void onApplicationPasue(string unitId)
+        public void onApplicationPasue(string placementId)
         {
 			Debug.Log ("onApplicationPasue.... ");
 			try{
-				if (interstitialHelperMap.ContainsKey(unitId)) {
-					this.interstitialHelperMap[unitId].Call ("onPause");
+				if (interstitialHelperMap.ContainsKey(placementId)) {
+					this.interstitialHelperMap[placementId].Call ("onPause");
 				}
 			}catch(System.Exception e){
 				System.Console.WriteLine("Exception caught: {0}", e);
@@ -126,77 +126,77 @@ namespace AnyThinkAds.Android
         }
 
         //广告加载成功
-        public void onInterstitialAdLoaded(string unitId)
+        public void onInterstitialAdLoaded(string placementId)
         {
             Debug.Log("onInterstitialAdLoaded...unity3d.");
             if(anyThinkListener != null){
-                anyThinkListener.onInterstitialAdLoad(unitId);
+                anyThinkListener.onInterstitialAdLoad(placementId);
             }
         }
 
         //广告加载失败
-        public void onInterstitialAdLoadFail(string unitId,string code, string error)
+        public void onInterstitialAdLoadFail(string placementId,string code, string error)
         {
             Debug.Log("onInterstitialAdFailed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdLoadFail(unitId, code, error);
+                anyThinkListener.onInterstitialAdLoadFail(placementId, code, error);
             }
         }
 
         //开始播放
-        public void onInterstitialAdVideoStart(string unitId, string callbackJson)
+        public void onInterstitialAdVideoStart(string placementId, string callbackJson)
         {
             Debug.Log("onInterstitialAdPlayStart...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdStartPlayingVideo(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onInterstitialAdStartPlayingVideo(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //结束播放
-        public void onInterstitialAdVideoEnd(string unitId, string callbackJson)
+        public void onInterstitialAdVideoEnd(string placementId, string callbackJson)
         {
             Debug.Log("onInterstitialAdPlayEnd...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdEndPlayingVideo(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onInterstitialAdEndPlayingVideo(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
         //播放失败
-        public void onInterstitialAdVideoError(string unitId,string code, string error)
+        public void onInterstitialAdVideoError(string placementId,string code, string error)
         {
             Debug.Log("onInterstitialAdPlayFailed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdFailedToPlayVideo(unitId, code, error);
+                anyThinkListener.onInterstitialAdFailedToPlayVideo(placementId, code, error);
             }
         }
         //广告关闭
-        public void onInterstitialAdClose(string unitId, string callbackJson)
+        public void onInterstitialAdClose(string placementId, string callbackJson)
         {
             Debug.Log("onInterstitialAdClosed...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdClose(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onInterstitialAdClose(placementId, new ATCallbackInfo(callbackJson));
             }
         }
         //广告点击
-        public void onInterstitialAdClicked(string unitId, string callbackJson)
+        public void onInterstitialAdClicked(string placementId, string callbackJson)
         {
             Debug.Log("onInterstitialAdClicked...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdClick(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onInterstitialAdClick(placementId, new ATCallbackInfo(callbackJson));
             }
         }
 
-        public void onInterstitialAdShow(string unitId, string callbackJson){
+        public void onInterstitialAdShow(string placementId, string callbackJson){
             Debug.Log("onInterstitialAdShow...unity3d.");
             if (anyThinkListener != null)
             {
-                anyThinkListener.onInterstitialAdShow(unitId, new ATCallbackInfo(callbackJson));
+                anyThinkListener.onInterstitialAdShow(placementId, new ATCallbackInfo(callbackJson));
             }
         }
        

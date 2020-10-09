@@ -124,7 +124,7 @@ public class vidoeScenes : MonoBehaviour {
 	public void loadVideo(){
         if(callbackListener == null){
             callbackListener = new ATCallbackListener();
-            Debug.Log("Developer init video....unitid:" + mPlacementId_rewardvideo_all);
+            Debug.Log("Developer init video....placementId:" + mPlacementId_rewardvideo_all);
             ATRewardedVideo.Instance.setListener(callbackListener);
             ATRewardedVideo.Instance.addsetting(mPlacementId_rewardvideo_all, addsetting());
         }
@@ -183,35 +183,36 @@ public class vidoeScenes : MonoBehaviour {
 
     class ATCallbackListener : ATRewardedVideoListener {
         
-        public void onRewardedVideoAdLoaded(string unitId){
+        public void onRewardedVideoAdLoaded(string placementId)
+        {
             Debug.Log("Developer onRewardedVideoAdLoaded------");
         }
 
-        public void onRewardedVideoAdLoadFail(string unitId, string code, string message){
+        public void onRewardedVideoAdLoadFail(string placementId, string code, string message){
             Debug.Log("Developer onRewardedVideoAdLoadFail------:code" + code + "--message:" + message);
         }
 
-        public void onRewardedVideoAdPlayStart(string unitId, ATCallbackInfo callbackInfo){
+        public void onRewardedVideoAdPlayStart(string placementId, ATCallbackInfo callbackInfo){
             Debug.Log("Developer onRewardedVideoAdPlayStart------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onRewardedVideoAdPlayEnd(string unitId, ATCallbackInfo callbackInfo){
+        public void onRewardedVideoAdPlayEnd(string placementId, ATCallbackInfo callbackInfo){
             Debug.Log("Developer onRewardedVideoAdPlayEnd------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onRewardedVideoAdPlayFail(string unitId, string code, string message){
+        public void onRewardedVideoAdPlayFail(string placementId, string code, string message){
             Debug.Log("Developer onRewardedVideoAdPlayFail------code:" + code + "---message:" + message);
         }
 
-        public void onRewardedVideoAdPlayClosed(string unitId, bool isReward, ATCallbackInfo callbackInfo){
+        public void onRewardedVideoAdPlayClosed(string placementId, bool isReward, ATCallbackInfo callbackInfo){
             Debug.Log("Developer onRewardedVideoAdPlayClosed------isReward:" + isReward + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onRewardedVideoAdPlayClicked(string unitId, ATCallbackInfo callbackInfo){
+        public void onRewardedVideoAdPlayClicked(string placementId, ATCallbackInfo callbackInfo){
             Debug.Log("Developer onRewardVideoAdPlayClicked------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
 
-        public void onReward(string unitId, ATCallbackInfo callbackInfo){
+        public void onReward(string placementId, ATCallbackInfo callbackInfo){
             Debug.Log("Developer onReward------" + "->" + Json.Serialize(callbackInfo.toDictionary()));
         }
     }

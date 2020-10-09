@@ -2,7 +2,6 @@
 //  MTGBidRewardAdManager.h
 //  MTGSDKReward
 //
-//  Created by Harry on 2019/4/10.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 

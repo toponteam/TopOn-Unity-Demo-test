@@ -40,14 +40,14 @@ namespace AnyThinkAds.Api
 			}
 		}
 
-		public void loadAd(string unitId, Dictionary<String, String> pairs) {
-			Debug.Log("ATNativeBannerAd::loadAd(" + unitId + ")");
-			client.loadAd(unitId, Json.Serialize(pairs));
+		public void loadAd(string placementId, Dictionary<String, String> pairs) {
+			Debug.Log("ATNativeBannerAd::loadAd(" + placementId + ")");
+			client.loadAd(placementId, Json.Serialize(pairs));
 		}
 
-		public bool adReady(string unitId) {
-            Debug.Log("ATNativeBannerAd::adReady(" + unitId + ")");
-			return client.adReady(unitId);
+		public bool adReady(string placementId) {
+            Debug.Log("ATNativeBannerAd::adReady(" + placementId + ")");
+			return client.adReady(placementId);
 		}
 
 		public void setListener(ATNativeBannerAdListener listener) {
@@ -55,14 +55,14 @@ namespace AnyThinkAds.Api
 			client.setListener(listener);
 		}
 
-		public void showAd(string unitId, ATRect rect, Dictionary<string, string> pairs) {
+		public void showAd(string placementId, ATRect rect, Dictionary<string, string> pairs) {
             Debug.Log("ATNativeBannerAd::showAd");
-			client.showAd(unitId, rect, pairs);
+			client.showAd(placementId, rect, pairs);
 		}
 
-		public void removeAd(string unitId) {
+		public void removeAd(string placementId) {
             Debug.Log("ATNativeBannerAd::removeAd");
-			client.removeAd(unitId);
+			client.removeAd(placementId);
 		}
 
 		public IATNativeBannerAdClient GetATNativeBannerAdClient()

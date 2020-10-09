@@ -2,7 +2,6 @@
 //  MTGBool.h
 //  MTGSDK
 //
-//  Created by lee on 2019/7/18.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 

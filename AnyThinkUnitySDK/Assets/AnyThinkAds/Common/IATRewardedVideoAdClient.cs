@@ -10,10 +10,10 @@ namespace AnyThinkAds.Common
     {
 		/**
 		 * 请求视屏广告
-		 * @param unitId 广告位id
+		 * @param placementId 广告位id
 		 * @parm mapJson 平台私有参数 一般不些
 		 */
-        void loadVideoAd(string unitId, string mapJson);
+        void loadVideoAd(string placementId, string mapJson);
 		/**
 		 * @param listener 监听回调
 		 */ 
@@ -23,35 +23,35 @@ namespace AnyThinkAds.Common
 		 * @param unityid
 		 * 
 		 */ 
-        bool hasAdReady(string unitId);
+        bool hasAdReady(string placementId);
 		/***
 		 * 设置用户id
-		 * @param unitid 
+		 * @param placementId 
 		 * @param userid 用户id
 		 * @param customData  其他数据
 		 */ 
-        void setUserData(string unitId,string userId, string customData);
+        void setUserData(string placementId,string userId, string customData);
 		/***
 		 * 显示广告
 		 */
-        void showAd(string unitId, string mapJson);
+        void showAd(string placementId, string mapJson);
 		/***
 		 * 
 		 */
-        void cleanAd(string unitId);
+        void cleanAd(string placementId);
 		/**
 		 * 显示屏幕
 		 */
-        void onApplicationForces(string unitId);
+        void onApplicationForces(string placementId);
 		/***
 		 * 暂停屏幕
 		 */ 
-        void onApplicationPasue(string unitId);
+        void onApplicationPasue(string placementId);
 		/**
 		 * 设置各种平台的私有信息
 		 * 如:gdrp等信息
 		 * 参数可以参考demo
 		 */ 
-		void addsetting (string unitId,string json);
+		void addsetting (string placementId,string json);
     }
 }

@@ -1,0 +1,9 @@
+<dependencies>
+    <androidPackages>
+        <repositories>
+            <repository>https://adcolony.bintray.com/AdColony</repository>
+        </repositories>
+        <androidPackage spec="com.adcolony:sdk:4.2.2"/>
+        <androidPackage spec="com.google.android.gms:play-services-ads-identifier:17.0.0"/>
+    </androidPackages>
+</dependencies>
