@@ -24,12 +24,18 @@ namespace AnyThinkAds.Common
 		 * 
 		 */ 
         bool hasAdReady(string placementId);
-		/***
+        /**
+		 * 获取广告状态信息（是否正在加载、是否存在可以展示广告、广告缓存详细信息）
+		 * @param unityid
+		 * 
+		 */
+        string checkAdStatus(string placementId);
+        /***
 		 * 设置用户id
 		 * @param placementId 
 		 * @param userid 用户id
 		 * @param customData  其他数据
-		 */ 
+		 */
         void setUserData(string placementId,string userId, string customData);
 		/***
 		 * 显示广告

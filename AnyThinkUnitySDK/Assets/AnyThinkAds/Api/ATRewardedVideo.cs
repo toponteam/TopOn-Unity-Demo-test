@@ -53,6 +53,12 @@ namespace AnyThinkAds.Api
 
         }
 
+        public string checkAdStatus(string placementId)
+        {
+            return client.checkAdStatus(placementId);
+
+        }
+
         public void setUserData(string placementId, string userId, string customData)
         {
             client.setUserData(placementId, userId, customData);

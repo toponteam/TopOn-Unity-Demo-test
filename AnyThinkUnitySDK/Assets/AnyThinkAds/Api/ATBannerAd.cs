@@ -17,11 +17,19 @@ namespace AnyThinkAds.Api
         public static readonly string kATBannerAdShowingPisitionTop = "top";
         public static readonly string kATBannerAdShowingPisitionBottom = "bottom";
 
+        //Deprecated in v5.7.3
         public static readonly string kATBannerAdLoadingExtraInlineAdaptiveWidth = "inline_adaptive_width";
         public static readonly string kATBannerAdLoadingExtraInlineAdaptiveOrientation = "inline_adaptive_orientation";
         public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationCurrent = 0;
         public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationPortrait = 1;
         public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationLandscape = 2;
+        //Deprecated in v5.7.3
+
+        public static readonly string kATBannerAdLoadingExtraAdaptiveWidth = "adaptive_width";
+        public static readonly string kATBannerAdLoadingExtraAdaptiveOrientation = "adaptive_orientation";
+        public static readonly int kATBannerAdLoadingExtraAdaptiveOrientationCurrent = 0;
+        public static readonly int kATBannerAdLoadingExtraAdaptiveOrientationPortrait = 1;
+        public static readonly int kATBannerAdLoadingExtraAdaptiveOrientationLandscape = 2;
 
     }
     public class ATBannerAd 

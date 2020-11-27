@@ -13,7 +13,7 @@ extern NSString *const kATUnityUtilitiesRewardedVideoImpressionNotification;
 extern NSString *const kATUnityUtilitiesRewardedVideoCloseNotification;
 extern NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey;
 @interface ATUnityUtilities : NSObject
-
++(BOOL)isEmpty:(id)object;
 @end
 
 @interface NSDictionary (KAKit)

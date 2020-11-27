@@ -1,6 +1,0 @@
-framework module AnyThinkMintegralSplashAdapter {
-  umbrella header "AnyThinkMintegralSplashAdapter.h"
-
-  export *
-  module * { export * }
-}

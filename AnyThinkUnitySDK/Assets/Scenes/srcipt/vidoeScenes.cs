@@ -154,8 +154,10 @@ public class vidoeScenes : MonoBehaviour {
 		// Debug.Log ("Developer isReady ?....");
         bool b = ATRewardedVideo.Instance.hasAdReady(mPlacementId_rewardvideo_all);
 		Debug.Log("Developer isReady video...." + b);
-      
-	}
+
+        string adStatus = ATRewardedVideo.Instance.checkAdStatus(mPlacementId_rewardvideo_all);
+        Debug.Log("Developer checkAdStatus video...." + adStatus);
+    }
 
 	public void cleanad(){
 		Debug.Log ("Developer cleanad ....");

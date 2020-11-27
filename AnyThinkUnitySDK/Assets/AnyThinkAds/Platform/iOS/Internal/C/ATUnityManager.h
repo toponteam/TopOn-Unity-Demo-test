@@ -10,4 +10,6 @@
 #import "ATUnityWrapper.h"
 
 @interface ATUnityManager : NSObject<ATUnityWrapper>
++(instancetype)sharedInstance;
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*))callback;
 @end

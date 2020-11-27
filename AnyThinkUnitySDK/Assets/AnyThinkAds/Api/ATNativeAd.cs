@@ -35,9 +35,7 @@ namespace AnyThinkAds.Api
             }
         }
 
-		public void setLocalExtra(string placementId, Dictionary<String,String> pairs){
-			client.setLocalExtra(placementId,Json.Serialize(pairs));
-		}
+
         public void loadNativeAd(string placementId, Dictionary<String,object> pairs){
             if (pairs != null && pairs.ContainsKey(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct))
             {

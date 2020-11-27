@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.text.TextUtils;
 
 import com.anythink.core.api.ATAdInfo;
+import com.anythink.core.api.ATAdStatusInfo;
 import com.anythink.core.api.AdError;
 import com.anythink.network.adcolony.AdColonyATConst;
 import com.anythink.network.adcolony.AdColonyRewardedVideoSetting;
@@ -40,7 +41,9 @@ import com.anythink.unitybridge.utils.TaskManager;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 
 /**
@@ -456,9 +459,14 @@ public class VideoHelper {
                 String userId = "";
                 String userExtraData = "";
 
+                Map<String, Object> localExtra = new HashMap<>();
+
                 try {
                     if (!TextUtils.isEmpty(jsonMap)) {
                         JSONObject jsonObject = new JSONObject(jsonMap);
+
+                        Const.fillMapFromJsonObject(localExtra, jsonObject);
+
                         if (jsonObject.has("UserId")) {
                             userId = jsonObject.optString("UserId");
                         }
@@ -472,10 +480,16 @@ public class VideoHelper {
                 }
 
                 if (mRewardVideoAd != null) {
-                    if (!TextUtils.isEmpty(userExtraData) || !TextUtils.isEmpty(userExtraData)) {
+
+                    if (!TextUtils.isEmpty(userId) || !TextUtils.isEmpty(userExtraData)) {
+
+                        localExtra.put("user_id", userId);
+                        localExtra.put("user_custom_data", userExtraData);
+
                         MsgTools.pirntMsg("fillVideo userId:" + userId + "-- userExtraData:" + userExtraData + "   " + this);
-                        mRewardVideoAd.setUserData(userId, userExtraData);
                     }
+
+                    mRewardVideoAd.setLocalExtra(localExtra);
                     mRewardVideoAd.load();
                 } else {
                     MsgTools.pirntMsg("fillVideo error  ..you must call initVideo first " + this);
@@ -589,4 +603,26 @@ public class VideoHelper {
             mRewardVideoAd.onResume();
         }
     }
+
+    public String checkAdStatus() {
+        if (mRewardVideoAd != null) {
+            ATAdStatusInfo atAdStatusInfo = mRewardVideoAd.checkAdStatus();
+            boolean loading = atAdStatusInfo.isLoading();
+            boolean ready = atAdStatusInfo.isReady();
+            ATAdInfo atTopAdInfo = atAdStatusInfo.getATTopAdInfo();
+
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("isLoading", loading);
+                jsonObject.put("isReady", ready);
+                jsonObject.put("adInfo", atTopAdInfo);
+
+                return jsonObject.toString();
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
+
 }

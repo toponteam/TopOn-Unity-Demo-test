@@ -23,5 +23,6 @@ namespace AnyThinkAds.Common
         void setLogDebug(bool isDebug);
         int getGDPRLevel();
         bool isEUTraffic();
+        void deniedUploadDeviceInfo(string deniedInfo);
     }
 }

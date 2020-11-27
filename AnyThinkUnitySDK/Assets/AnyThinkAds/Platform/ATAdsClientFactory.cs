@@ -124,6 +124,7 @@ namespace AnyThinkAds
         public void setLogDebug(bool isDebug){ }
         public int getGDPRLevel(){ return ATSDKAPI.PERSONALIZED; }
         public bool isEUTraffic() { return false; }
+        public void deniedUploadDeviceInfo(string deniedInfo) { }
     }
 
     class UnityBannerClient:IATBannerAdClient
@@ -169,8 +170,10 @@ namespace AnyThinkAds
        }
 
        public bool hasInterstitialAdReady(string unitId) { return false; }
-        
-       public void showInterstitialAd(string unitId, string mapJson){}
+
+        public string checkAdStatus(string unitId) { return ""; }
+
+        public void showInterstitialAd(string unitId, string mapJson){}
         
        public void cleanCache(string unitId){}
     }
@@ -240,6 +243,8 @@ namespace AnyThinkAds
        }
 
         public bool hasAdReady(string unitId) { return false; }
+
+        public string checkAdStatus(string unitId) { return ""; }
 
         public void setUserData(string unitId, string userId, string customData){}
 

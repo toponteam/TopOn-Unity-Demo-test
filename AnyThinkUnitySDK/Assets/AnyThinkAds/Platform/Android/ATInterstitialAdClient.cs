@@ -67,6 +67,25 @@ namespace AnyThinkAds.Android
 			return isready; 
         }
 
+        public string checkAdStatus(string placementId)
+        {
+            string adStatusJsonString = "";
+            Debug.Log("ATInterstitialAdClient : checkAdStatus....");
+            try
+            {
+                if (interstitialHelperMap.ContainsKey(placementId))
+                {
+                    adStatusJsonString = interstitialHelperMap[placementId].Call<string>("checkAdStatus");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATInterstitialAdClient :  error." + e.Message);
+            }
+
+            return adStatusJsonString;
+        }
 
         public void showInterstitialAd(string placementId, string jsonmap)
         {

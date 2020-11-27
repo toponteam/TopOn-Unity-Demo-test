@@ -67,7 +67,27 @@ namespace AnyThinkAds.Android
 			return isready; 
         }
 
-		public void setUserData(string placementId, string userId, string customData)
+        public string checkAdStatus(string placementId)
+        {
+            string adStatusJsonString = "";
+            Debug.Log("ATRewardedVideoAdClient : checkAdStatus....");
+            try
+            {
+                if (videoHelperMap.ContainsKey(placementId))
+                {
+                    adStatusJsonString = videoHelperMap[placementId].Call<string>("checkAdStatus");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATRewardedVideoAdClient :  error." + e.Message);
+            }
+
+            return adStatusJsonString;
+        }
+
+        public void setUserData(string placementId, string userId, string customData)
         {
 			Debug.Log("ATRewardedVideoAdClient : setUserData  " );
 

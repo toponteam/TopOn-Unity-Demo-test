@@ -10,5 +10,6 @@
 #import "ATUnityWrapper.h"
 @interface ATBaseUnityWrapper : NSObject<ATUnityWrapper>
 -(NSString*)scriptWrapperClass;
+-(id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*, const char*))callback;
 -(void) invokeCallback:(NSString*)callback placementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra;
 @end

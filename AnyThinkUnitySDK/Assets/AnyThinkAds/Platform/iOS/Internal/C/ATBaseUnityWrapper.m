@@ -57,6 +57,10 @@
     return @"";
 }
 
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*, const char*))callback {
+    return nil;
+}
+
 -(void) invokeCallback:(NSString*)callback placementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra {
     if ([self callbackForKey:placementID] != NULL) {
         if ([callback isKindOfClass:[NSString class]] && [callback length] > 0) {

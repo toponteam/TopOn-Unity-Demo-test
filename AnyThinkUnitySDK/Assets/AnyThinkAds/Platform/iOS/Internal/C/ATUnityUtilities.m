@@ -14,7 +14,9 @@ NSString *const kATUnityUtilitiesRewardedVideoCloseNotification = @"kATUnityUtil
 NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey = @"Scenario";
 
 @implementation ATUnityUtilities
-
++(BOOL)isEmpty:(id)object {
+    return (object == nil || [object isKindOfClass:[NSNull class]] || ([object respondsToSelector:@selector(length)] && [(NSData *)object length] == 0) || ([object respondsToSelector:@selector(count)] && [(NSArray *)object count] == 0));
+}
 @end
 @implementation NSDictionary (KAKit)
 -(NSString*) jsonString {

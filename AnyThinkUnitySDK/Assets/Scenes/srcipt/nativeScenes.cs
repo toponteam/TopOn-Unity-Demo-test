@@ -59,7 +59,7 @@ public class nativeScenes : MonoBehaviour {
         Dictionary<string, object> jsonmap = new Dictionary<string, object>();
         ATSize nativeSize = new ATSize(320, 250, false);
         #if UNITY_ANDROID
-            nativeSize = new ATSize(960, 150);
+            nativeSize = new ATSize(960, 600);
             jsonmap.Add(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct, nativeSize);
         #elif UNITY_IOS || UNITY_IPHONE
             jsonmap.Add(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct, nativeSize);

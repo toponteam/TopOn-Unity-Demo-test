@@ -17,17 +17,6 @@ namespace AnyThinkAds.Android
 
         }
 
-		//Deprecated in v5.6.6
-		public void setLocalExtra (string placementId,string localExtra){
-			if (!nativeAdHelperMap.ContainsKey (placementId)) {
-				AndroidJavaObject nativeHelper = new AndroidJavaObject (
-                    "com.anythink.unitybridge.nativead.NativeHelper", this);
-				nativeHelper.Call ("initNative", placementId, localExtra);
-				nativeAdHelperMap.Add (placementId, nativeHelper);
-
-			}
-		}
-
         public void loadNativeAd(string placementId, string mapJson)
         {
 			Debug.Log ("loadNativeAd....jsonmap:"+mapJson);

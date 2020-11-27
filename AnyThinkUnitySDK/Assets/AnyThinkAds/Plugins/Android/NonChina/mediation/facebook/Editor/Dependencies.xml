@@ -1,6 +1,6 @@
 <dependencies>
     <androidPackages>
-        <androidPackage spec="com.facebook.android:audience-network-sdk:5.11.0"/>
+        <androidPackage spec="com.facebook.android:audience-network-sdk:6.2.0"/>
         <androidPackage spec="androidx.recyclerview:recyclerview:1.0.0"/>
     </androidPackages>
 </dependencies>

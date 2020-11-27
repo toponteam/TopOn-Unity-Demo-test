@@ -50,6 +50,11 @@ namespace AnyThinkAds.iOS {
 			Debug.Log("Unity: ATRewardedVideoAdClient::onApplicationPasue()");
 	    }
 
+	    public string checkAdStatus(string placementId) {
+	    	Debug.Log("Unity: ATRewardedVideoAdClient::checkAdStatus()");
+	    	return ATRewardedVideoWrapper.checkAdStatus(placementId);
+	    }
+
 		//Callbacks
 	    public void onRewardedVideoAdLoaded(string placementId) {
 	        Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdLoaded()");

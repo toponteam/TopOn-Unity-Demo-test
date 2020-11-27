@@ -39,3 +39,11 @@ dependencies {
 
 
 }
+
+
+task copyTask(type: Copy) {
+    from 'build/outputs/aar/anythink_bridge.aar'
+    into '../../AnyThinkUnitySDK/Assets/AnyThinkAds/Plugins/Android/'
+}
+
+assemble.finalizedBy(copyTask)

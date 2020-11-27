@@ -27,6 +27,39 @@ namespace AnyThinkAds.Api
         public static readonly int NONPERSONALIZED = 1;
         public static readonly int UNKNOWN = 2;
 
+        //for android and ios
+        public static readonly string OS_VERSION_NAME = "os_vn";
+        public static readonly string OS_VERSION_CODE = "os_vc";
+        public static readonly string APP_PACKAGE_NAME = "package_name";
+        public static readonly string APP_VERSION_NAME = "app_vn";
+        public static readonly string APP_VERSION_CODE = "app_vc";
+
+        public static readonly string BRAND = "brand";
+        public static readonly string MODEL = "model";
+        public static readonly string DEVICE_SCREEN_SIZE = "screen";
+        public static readonly string MNC = "mnc";
+        public static readonly string MCC = "mcc";
+
+        public static readonly string LANGUAGE = "language";
+        public static readonly string TIMEZONE = "timezone";
+        public static readonly string USER_AGENT = "ua";
+        public static readonly string ORIENTATION = "orient";
+        public static readonly string NETWORK_TYPE = "network_type";
+
+        //for android
+        public static readonly string INSTALLER = "it_src";
+        public static readonly string ANDROID_ID = "android_id";
+        public static readonly string GAID = "gaid";
+        public static readonly string MAC = "mac";
+        public static readonly string IMEI = "imei";
+        public static readonly string OAID = "oaid";
+
+        //for ios
+        public static readonly string IDFA = "idfa";
+        public static readonly string IDFV = "idfv";
+
+
+
         private static readonly IATSDKAPIClient client = GetATSDKAPIClient();
 
         public static void initSDK(string appId, string appKey)
@@ -105,6 +138,21 @@ namespace AnyThinkAds.Api
 		public static void addNetworkGDPRInfo(int networkType, Dictionary<string,object> dictionary)
         {
             client.addNetworkGDPRInfo(networkType, Json.Serialize(dictionary));
+        }
+
+        public static void deniedUploadDeviceInfo(string[] deniedInfo)
+        {
+            if (deniedInfo != null && deniedInfo.Length > 0)
+            {
+            	string deniedString = string.Join(",", deniedInfo);
+                client.deniedUploadDeviceInfo(deniedString);
+                Debug.Log("deniedUploadDeviceInfo, deniedInfo === " + deniedString);
+            }
+            else
+            {
+                Debug.Log("deniedUploadDeviceInfo, deniedInfo = null");
+            }
+            
         }
 
         private static IATSDKAPIClient GetATSDKAPIClient(){

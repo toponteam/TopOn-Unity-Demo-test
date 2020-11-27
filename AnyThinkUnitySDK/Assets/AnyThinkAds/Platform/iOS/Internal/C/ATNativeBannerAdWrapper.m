@@ -59,6 +59,37 @@ static NSString *const kATSharedCallbackKey = @"placement_id_placement_holder";
     return @"ATNativeBannerAdWrapper";
 }
 
+
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*, const char*))callback {
+    NSString *selector = dict[@"selector"];
+    NSArray<NSString*>* arguments = dict[@"arguments"];
+    NSString *firstObject = @"";
+    NSString *secondObject = @"";
+    NSString *lastObject = @"";
+    if (![ATUnityUtilities isEmpty:arguments]) {
+        for (int i = 0; i < arguments.count; i++) {
+            if (i == 0) { firstObject = arguments[i]; }
+            else if (i == 1) { secondObject = arguments[i]; }
+            else { lastObject = arguments[i]; }
+        }
+    }
+    
+    if ([selector isEqualToString:@"loadNativeBannerAdWithPlacementID:customDataJSONString:callback:"]) {
+        [self loadNativeBannerAdWithPlacementID:firstObject customDataJSONString:secondObject callback:callback];
+    } else if ([selector isEqualToString:@"isNativeBannerAdReadyForPlacementID:"]) {
+        return [NSNumber numberWithBool:[self isNativeBannerAdReadyForPlacementID:firstObject]];
+    } else if ([selector isEqualToString:@"showNativeBannerAdWithPlacementID:rect:extra:"]) {
+        [self showNativeBannerAdWithPlacementID:firstObject rect:secondObject extra:lastObject];
+    } else if ([selector isEqualToString:@"removeNativeBannerAdWithPlacementID:"]) {
+        [self removeNativeBannerAdWithPlacementID:firstObject];
+    } else if ([selector isEqualToString:@"showNativeBannerAdWithPlacementID:"]) {
+        [self showNativeBannerAdWithPlacementID:firstObject];
+    } else if ([selector isEqualToString:@"hideNativeBannerAdWithPlacementID:"]) {
+        [self hideNativeBannerAdWithPlacementID:firstObject];
+    }
+    return nil;
+}
+
 -(void) noop {
     
 }

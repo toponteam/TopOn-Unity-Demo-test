@@ -24,6 +24,34 @@ NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
     return sharedInstance;
 }
 
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*, const char*))callback {
+    NSString *selector = dict[@"selector"];
+    NSArray<NSString*>* arguments = dict[@"arguments"];
+    NSString *firstObject = @"";
+    NSString *lastObject = @"";
+    if (![ATUnityUtilities isEmpty:arguments]) {
+        for (int i = 0; i < arguments.count; i++) {
+            if (i == 0) { firstObject = arguments[i]; }
+            else { lastObject = arguments[i]; }
+        }
+    }
+    
+    if ([selector isEqualToString:@"loadRewardedVideoWithPlacementID:customDataJSONString:callback:"]) {
+        [self loadRewardedVideoWithPlacementID:firstObject customDataJSONString:lastObject callback:callback];
+    } else if ([selector isEqualToString:@"rewardedVideoReadyForPlacementID:"]) {
+        return [NSNumber numberWithBool:[self rewardedVideoReadyForPlacementID:firstObject]];
+    } else if ([selector isEqualToString:@"showRewardedVideoWithPlacementID:extraJsonString:"]) {
+        [self showRewardedVideoWithPlacementID:firstObject extraJsonString:lastObject];
+    } else if ([selector isEqualToString:@"checkAdStatus:"]) {
+        return [self checkAdStatus:firstObject];
+    } else if ([selector isEqualToString:@"clearCache"]) {
+        [self clearCache];
+    } else if ([selector isEqualToString:@"setExtra:"]) {
+        [self setExtra:firstObject];
+    }
+    return nil;
+}
+
 -(void) loadRewardedVideoWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char*))callback {
     [self setCallBack:callback forKey:placementID];
     NSMutableDictionary *extra = [NSMutableDictionary dictionary];
@@ -42,8 +70,20 @@ NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
     return [[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:placementID];
 }
 
+-(NSString*) checkAdStatus:(NSString *)placementID {
+    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkRewardedVideoLoadStatusForPlacementID:placementID];
+    NSMutableDictionary *statusDict = [NSMutableDictionary dictionary];
+    statusDict[@"isLoading"] = @(checkLoadModel.isLoading);
+    statusDict[@"isReady"] = @(checkLoadModel.isReady);
+    statusDict[@"adInfo"] = checkLoadModel.adOfferInfo;
+    NSLog(@"ATRewardedVideoWrapper::statusDict = %@", statusDict);
+    return statusDict.jsonString;
+}
+
 -(void) showRewardedVideoWithPlacementID:(NSString*)placementID extraJsonString:(NSString*)extraJsonString {
     NSDictionary *extraDict = ([extraJsonString isKindOfClass:[NSString class]] && [extraJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[extraJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil;
+    NSLog(@"ATRewardedVideoWrapper::showRewardedVideoWithPlacementID = %@ extraJsonString = %@", placementID,extraJsonString);
+    NSLog(@"ATRewardedVideoWrapper::extraDict = %@", extraDict);
     [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:placementID scene:extraDict[kATUnityUtilitiesAdShowingExtraScenarioKey] inViewController:[UIApplication sharedApplication].delegate.window.rootViewController delegate:self];
 }
 

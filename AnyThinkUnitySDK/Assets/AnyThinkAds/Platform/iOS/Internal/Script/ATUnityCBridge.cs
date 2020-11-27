@@ -15,6 +15,9 @@ public class ATUnityCBridge {
 
     [DllImport("__Internal")]
     extern static int get_message_for_unity(string msg, CCallBack callback);
+
+    [DllImport("__Internal")]
+    extern static string get_string_message_for_unity(string msg, CCallBack callback);
     #endif
 
     [MonoPInvokeCallback(typeof(CCallBack))]
@@ -49,6 +52,19 @@ public class ATUnityCBridge {
         return get_message_for_unity(Json.Serialize(msgDict), null);
         #else
         return 0;
+        #endif
+    }
+
+    static public string GetStringMessageFromC(string className, string selector, object[] arguments) {
+        Debug.Log("Unity: ATUnityCBridge::GetStringMessageFromC()");
+        Dictionary<string, object> msgDict = new Dictionary<string, object>();
+        msgDict.Add("class", className);
+        msgDict.Add("selector", selector);
+        msgDict.Add("arguments", arguments);
+        #if UNITY_IOS || UNITY_IPHONE
+        return get_string_message_for_unity(Json.Serialize(msgDict), null);
+        #else 
+        return "";
         #endif
     }
 

@@ -54,6 +54,15 @@ public class interstitialScenes : MonoBehaviour {
         ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
     }
 
+    public void isReady()
+    {
+        bool b = ATInterstitialAd.Instance.hasInterstitialAdReady(mPlacementId_interstitial_all);
+        Debug.Log("Developer isReady interstitial...." + b);
+
+        string adStatus = ATInterstitialAd.Instance.checkAdStatus(mPlacementId_interstitial_all);
+        Debug.Log("Developer checkAdStatus interstitial...." + adStatus);
+    }
+
     public void showInterstitialAd() {
         Dictionary<string, string> jsonmap = new Dictionary<string, string>();
         jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);

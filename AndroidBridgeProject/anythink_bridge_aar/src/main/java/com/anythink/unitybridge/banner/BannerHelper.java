@@ -55,7 +55,7 @@ public class BannerHelper {
         mUnitId = unitId;
 
         mBannerView = new ATBannerView(mActivity);
-        mBannerView.setUnitId(mUnitId);
+        mBannerView.setPlacementId(mUnitId);
         MsgTools.pirntMsg("initBanner 2>>> " + this);
         mBannerView.setBannerAdListener(new ATBannerListener() {
             @Override
@@ -197,6 +197,21 @@ public class BannerHelper {
                                     }
 
                                 }
+                            }
+
+                            if (jsonObject.has("inline_adaptive_width")) {
+                                String adaptive_width = jsonObject.getString("inline_adaptive_width");
+                                MsgTools.pirntMsg("inline_adaptive_width----> " + adaptive_width);
+                                jsonObject.put("adaptive_width", adaptive_width);
+                            }
+                            if (jsonObject.has("inline_adaptive_orientation")) {
+                                int adaptive_orientation = jsonObject.getInt("inline_adaptive_orientation");
+                                MsgTools.pirntMsg("inline_adaptive_orientation----> " + adaptive_orientation);
+                                jsonObject.put("adaptive_orientation", adaptive_orientation);
+                            }
+
+                            if (!jsonObject.has("adaptive_type")) {
+                                jsonObject.put("adaptive_type", 0);
                             }
 
                             Map<String, Object> localExtra = new HashMap<>();

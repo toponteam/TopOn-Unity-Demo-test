@@ -250,5 +250,22 @@ namespace AnyThinkAds.Android
             }
             return false;
         }
+
+        public void deniedUploadDeviceInfo(string deniedInfoString)
+        {
+            Debug.Log("deniedUploadDeviceInfo....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("deniedUploadDeviceInfo", deniedInfoString);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
     }
 }

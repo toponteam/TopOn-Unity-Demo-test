@@ -54,10 +54,6 @@ namespace AnyThinkAds.Common
 		 * 清理缓存
 		 */ 
         void cleanCache(string placementId);
-		/**
-		 * 设置本地参数
-		 */
-		void setLocalExtra(string placementId,string mapJson);
 
     }
 }

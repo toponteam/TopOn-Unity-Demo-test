@@ -140,6 +140,32 @@ NSDictionary* parseUnityMetrics(NSDictionary* metrics) {
     return self;
 }
 
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*, const char*))callback {
+    NSString *selector = dict[@"selector"];
+    NSArray<NSString*>* arguments = dict[@"arguments"];
+    NSString *firstObject = @"";
+    NSString *lastObject = @"";
+    if (![ATUnityUtilities isEmpty:arguments]) {
+        for (int i = 0; i < arguments.count; i++) {
+            if (i == 0) { firstObject = arguments[i]; }
+            else { lastObject = arguments[i]; }
+        }
+    }
+    
+    if ([selector isEqualToString:@"loadNativeAdWithPlacementID:customDataJSONString:callback:"]) {
+        [self loadNativeAdWithPlacementID:firstObject customDataJSONString:lastObject callback:callback];
+    } else if ([selector isEqualToString:@"isNativeAdReadyForPlacementID:"]) {
+        return [NSNumber numberWithBool:[self isNativeAdReadyForPlacementID:firstObject]];
+    } else if ([selector isEqualToString:@"showNativeAdWithPlacementID:metricsJSONString:"]) {
+        [self showNativeAdWithPlacementID:firstObject metricsJSONString:lastObject];
+    } else if ([selector isEqualToString:@"removeNativeAdViewWithPlacementID:"]) {
+        [self removeNativeAdViewWithPlacementID:firstObject];
+    } else if ([selector isEqualToString:@"clearCache"]) {
+        [self clearCache];
+    }
+    return nil;
+}
+
 -(void) loadNativeAdWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char *))callback {
     [self setCallBack:callback forKey:placementID];
     NSMutableDictionary *extra = [NSMutableDictionary dictionaryWithDictionary:@{kExtraInfoNativeAdTypeKey:@(ATGDTNativeAdTypeSelfRendering), kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388}];

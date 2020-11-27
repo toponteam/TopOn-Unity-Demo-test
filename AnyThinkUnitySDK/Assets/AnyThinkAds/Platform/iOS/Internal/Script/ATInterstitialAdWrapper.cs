@@ -69,6 +69,11 @@ public class ATInterstitialAdWrapper:ATAdWrapper {
     	ATUnityCBridge.SendMessageToC(CMessaageReceiverClass, "clearCache", null);
     }
 
+    static public string checkAdStatus(string placementID) {
+        Debug.Log("Unity: ATInterstitialAdWrapper::checkAdStatus(" + placementID + ")");
+        return ATUnityCBridge.GetStringMessageFromC(CMessaageReceiverClass, "checkAdStatus:", new object[]{placementID});
+    }
+
     //Callbacks
     static private void OnInterstitialAdLoaded(string placementID) {
     	Debug.Log("Unity: ATInterstitialAdWrapper::OnInterstitialAdLoaded()");

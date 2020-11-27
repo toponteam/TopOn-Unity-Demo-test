@@ -108,5 +108,10 @@ namespace AnyThinkAds.iOS {
         {
             return ATManager.isEUTraffic();
         }
+
+        public void deniedUploadDeviceInfo(string deniedInfo)
+        {
+            ATManager.deniedUploadDeviceInfo(deniedInfo);
+        }
 	}
 }

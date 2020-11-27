@@ -11,8 +11,11 @@
 #import "ATUnityUtilities.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
-
-NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *arguments, void(*callback)(const char*, const char *));
+#import "ATBannerAdWrapper.h"
+#import "ATNativeAdWrapper.h"
+#import "ATNativeBannerAdWrapper.h"
+#import "ATInterstitialAdWrapper.h"
+#import "ATRewardedVideoWrapper.h"
 
 /*
  *class:
@@ -22,16 +25,10 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
 bool message_from_unity(const char *msg, void(*callback)(const char*, const char *)) {
     NSString *msgStr = [NSString stringWithUTF8String:msg];
     NSDictionary *msgDict = [NSJSONSerialization JSONObjectWithData:[msgStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-    
     Class class = NSClassFromString(msgDict[@"class"]);
-    SEL sel = NSSelectorFromString(msgDict[@"selector"]);
-    NSArray<NSString*>* arguments = msgDict[@"arguments"];
-    
-    NSInvocation *invocation = build_invocation(class, sel, arguments, callback);
-    [invocation invoke];
+
     bool ret = false;
-    
-    if (strcmp(@encode(void), invocation.methodSignature.methodReturnType)) [invocation getReturnValue:&ret]; //Handle return value
+    ret = [[[class sharedInstance] selWrapperClassWithDict:msgDict callback:callback != NULL ? callback : nil] boolValue];
     
     return ret;
 }
@@ -41,27 +38,29 @@ int get_message_for_unity(const char *msg, void(*callback)(const char*, const ch
     NSDictionary *msgDict = [NSJSONSerialization JSONObjectWithData:[msgStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
     
     Class class = NSClassFromString(msgDict[@"class"]);
-    SEL sel = NSSelectorFromString(msgDict[@"selector"]);
-    NSArray<NSString*>* arguments = msgDict[@"arguments"];
     
-    NSInvocation *invocation = build_invocation(class, sel, arguments, callback);
-    [invocation invoke];
     int ret = 0;
-    
-    if (strcmp(@encode(void), invocation.methodSignature.methodReturnType)) [invocation getReturnValue:&ret]; //Handle return value
+    ret = [[[class sharedInstance] selWrapperClassWithDict:msgDict callback:callback != NULL ? callback : nil] intValue];
     
     return ret;
 }
 
-NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *arguments, void(*callback)(const char*, const char *)) {
-    NSMethodSignature *signature = [class instanceMethodSignatureForSelector:sel];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-    invocation.target = [class sharedInstance];
-    invocation.selector = sel;
-    if ([arguments isKindOfClass:[NSArray class]]) [arguments enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) { [invocation setArgument:&obj atIndex:idx + 2]; }];
-    if (callback != NULL) [invocation setArgument:&callback atIndex:signature.numberOfArguments - 1];//callback
+char * get_string_message_for_unity(const char *msg, void(*callback)(const char*, const char *)) {
+    NSString *msgStr = [NSString stringWithUTF8String:msg];
+    NSDictionary *msgDict = [NSJSONSerialization JSONObjectWithData:[msgStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+
+    Class class = NSClassFromString(msgDict[@"class"]);
     
-    return invocation;
+    NSString *ret = @"";
+    ret = [[class sharedInstance] selWrapperClassWithDict:msgDict callback:callback != NULL ? callback : nil];
+    
+    if ([ret UTF8String] == NULL)
+        return NULL;
+
+    char* res = (char*)malloc(strlen([ret UTF8String]) + 1);
+    strcpy(res, [ret UTF8String]);
+
+    return res;
 }
 
 @interface ATUnityManager()
@@ -85,6 +84,56 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
     return self;
 }
 
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*))callback {
+    NSString *selector = dict[@"selector"];
+    NSArray<NSString*>* arguments = dict[@"arguments"];
+    NSString *firstObject = @"";
+    NSString *lastObject = @"";
+    if (![ATUnityUtilities isEmpty:arguments]) {
+        for (int i = 0; i < arguments.count; i++) {
+            if (i == 0) { firstObject = arguments[i]; }
+            else { lastObject = arguments[i]; }
+        }
+    }
+    
+    if ([selector isEqualToString:@"startSDKWithAppID:appKey:"]) {
+        return [NSNumber numberWithBool:[self startSDKWithAppID:firstObject appKey:lastObject]];
+    } else if ([selector isEqualToString:@"subjectToGDPR"]) {
+        return [NSNumber numberWithBool:[self subjectToGDPR]];
+    } else if ([selector isEqualToString:@"presentDataConsentDialog"]) {
+        [self presentDataConsentDialog];
+    } else if ([selector isEqualToString:@"getUserLocation:"]) {
+        [self getUserLocation:callback];
+    } else if ([selector isEqualToString:@"setPurchaseFlag"]) {
+        [self setPurchaseFlag];
+    } else if ([selector isEqualToString:@"clearPurchaseFlag"]) {
+        [self clearPurchaseFlag];
+    } else if ([selector isEqualToString:@"purchaseFlag"]) {
+        return [NSNumber numberWithBool:[self purchaseFlag]];
+    } else if ([selector isEqualToString:@"setChannel:"]) {
+        [self setChannel:firstObject];
+    } else if ([selector isEqualToString:@"setSubChannel:"]) {
+        [self setSubChannel:firstObject];
+    } else if ([selector isEqualToString:@"setCustomData:"]) {
+        [self setCustomData:firstObject];
+    } else if ([selector isEqualToString:@"setCustomData:forPlacementID:"]) {
+        [self setCustomData:firstObject forPlacementID:lastObject];
+    } else if ([selector isEqualToString:@"setDebugLog:"]) {
+        [self setDebugLog:firstObject];
+    } else if ([selector isEqualToString:@"getDataConsent"]) {
+        return [NSNumber numberWithInt:[self getDataConsent]];
+    } else if ([selector isEqualToString:@"setDataConsent:"]) {
+        [self setDataConsent:[NSNumber numberWithInt:firstObject.intValue]];
+    } else if ([selector isEqualToString:@"inDataProtectionArea"]) {
+        return [NSNumber numberWithBool:[self inDataProtectionArea]];
+    } else if ([selector isEqualToString:@"deniedUploadDeviceInfo:"]) {
+        [self deniedUploadDeviceInfo:firstObject];
+    } else if ([selector isEqualToString:@"setDataConsent:network:"]) {
+        [self setDataConsent:firstObject network:[NSNumber numberWithInt:lastObject.intValue]];
+    }
+    return nil;
+}
+
 -(BOOL) startSDKWithAppID:(NSString*)appID appKey:(NSString*)appKey {
     [ATAPI setLogEnabled:YES];
 //    if ([self subjectToGDPR]) {
@@ -92,7 +141,6 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
 //    }
     if ([[ATAPI sharedInstance] inDataProtectionArea])
     {
-        
         ATDataConsentSet status = [ATAPI sharedInstance].dataConsentSet;
         if (status == ATDataConsentSetUnknown){
             [self presentDataConsentDialog];
@@ -101,6 +149,7 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
 
     return [[ATAPI sharedInstance] startWithAppID:appID appKey:appKey error:nil];
 }
+
 - (BOOL) subjectToGDPR {
     return [@[@"AT", @"BE", @"BG", @"HR", @"CY", @"CZ", @"DK", @"EE", @"FI", @"FR", @"DE", @"GR", @"HU", @"IS", @"IE", @"IT", @"LV", @"LI", @"LT", @"LU", @"MT", @"NL", @"NO", @"PL", @"PT", @"RO", @"SK", @"SI", @"ES", @"SE", @"GB", @"UK"] containsObject:[[CTTelephonyNetworkInfo new].subscriberCellularProvider.isoCountryCode length] > 0 ? [[CTTelephonyNetworkInfo new].subscriberCellularProvider.isoCountryCode uppercaseString] : @""];
 }
@@ -126,7 +175,7 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
 }
 
 -(BOOL) purchaseFlag {
-    
+    return NO;
 }
 
 -(void) setChannel:(NSString*)channel {
@@ -167,6 +216,11 @@ NSInvocation* build_invocation(Class class, SEL sel, NSArray<NSString*> *argumen
     return [[ATAPI sharedInstance] inDataProtectionArea];
 }
 
+-(void) deniedUploadDeviceInfo:(NSString *)deniedInfo {
+    NSArray *deniedInfoArray = [deniedInfo componentsSeparatedByString:@","];
+    NSLog(@"deniedUploadDeviceInfo = %@", deniedInfoArray);
+    [[ATAPI sharedInstance] setDeniedUploadInfoArray:deniedInfoArray];
+}
 
 /*
  *

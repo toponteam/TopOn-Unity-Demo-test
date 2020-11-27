@@ -72,6 +72,11 @@ public class ATRewardedVideoWrapper:ATAdWrapper {
     	ATUnityCBridge.SendMessageToC(CMessageReceiverClass, "clearCache", null);
     }
 
+    static public string checkAdStatus(string placementID) {
+        Debug.Log("Unity: ATRewardedVideoWrapper::checkAdStatus(" + placementID + ")");
+        return ATUnityCBridge.GetStringMessageFromC(CMessageReceiverClass, "checkAdStatus:", new object[]{placementID});
+    }
+
     //Callbacks
     static public void OnRewardedVideoLoaded(string placementID) {
     	Debug.Log("Unity: ATRewardedVideoWrapper::OnRewardedVideoLoaded()");

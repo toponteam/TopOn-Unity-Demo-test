@@ -25,6 +25,12 @@ namespace AnyThinkAds.Common
 		 * @param unityid
 		 */
         bool hasInterstitialAdReady(string placementId);
+        /**
+        * 获取广告状态信息（是否正在加载、是否存在可以展示广告、广告缓存详细信息）
+        * @param unityid
+        * 
+        */
+        string checkAdStatus(string placementId);
         /***
 		 * 显示广告
 		 */

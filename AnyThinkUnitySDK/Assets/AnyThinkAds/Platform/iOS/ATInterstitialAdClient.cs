@@ -38,6 +38,11 @@ namespace AnyThinkAds.iOS {
 			ATInterstitialAdWrapper.clearCache(placementId);
 		}
 
+		public string checkAdStatus(string placementId) {
+			Debug.Log("Unity: ATInterstitialAdClient::checkAdStatus()");
+			return ATInterstitialAdWrapper.checkAdStatus(placementId);
+		}
+
 		//Callbacks
 	    public void OnInterstitialAdLoaded(string placementID) {
 	    	Debug.Log("Unity: ATInterstitialAdClient::OnInterstitialAdLoaded()");

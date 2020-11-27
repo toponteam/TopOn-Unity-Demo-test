@@ -79,4 +79,9 @@ public class ATManager {
     {
         ATUnityCBridge.SendMessageToC("ATUnityManager", "setDebugLog:", new object[] { isDebug ? "true" : "false" });
     }
+
+    public static void deniedUploadDeviceInfo(string deniedInfo)
+    {
+        ATUnityCBridge.SendMessageToC("ATUnityManager", "deniedUploadDeviceInfo:", new object[] {deniedInfo});
+    }
 }

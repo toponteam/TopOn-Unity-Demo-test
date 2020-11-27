@@ -29,9 +29,7 @@ namespace AnyThinkAds.Api
 
 		public void loadInterstitialAd(string placementId, Dictionary<string,string> pairs)
         {
-            
             client.loadInterstitialAd(placementId, Json.Serialize(pairs));
-
         }
 
 		public void setListener(ATInterstitialAdListener listener)
@@ -42,7 +40,11 @@ namespace AnyThinkAds.Api
         public bool hasInterstitialAdReady(string placementId)
         {
             return client.hasInterstitialAdReady(placementId);
+        }
 
+        public string checkAdStatus(string placementId)
+        {
+            return client.checkAdStatus(placementId);
         }
 
         public void showInterstitialAd(string placementId)

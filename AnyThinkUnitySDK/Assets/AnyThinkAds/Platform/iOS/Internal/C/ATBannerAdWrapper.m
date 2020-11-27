@@ -43,6 +43,34 @@ static NSString *kATBannerAdLoadingExtraInlineAdaptiveOrientationKey = @"inline_
     return @"ATBannerAdWrapper";
 }
 
+- (id)selWrapperClassWithDict:(NSDictionary *)dict callback:(void(*)(const char*, const char*))callback {
+    NSString *selector = dict[@"selector"];
+    NSArray<NSString*>* arguments = dict[@"arguments"];
+    NSString *firstObject = @"";
+    NSString *lastObject = @"";
+    if (![ATUnityUtilities isEmpty:arguments]) {
+        for (int i = 0; i < arguments.count; i++) {
+            if (i == 0) { firstObject = arguments[i]; }
+            else { lastObject = arguments[i]; }
+        }
+    }
+    
+    if ([selector isEqualToString:@"loadBannerAdWithPlacementID:customDataJSONString:callback:"]) {
+        [self loadBannerAdWithPlacementID:firstObject customDataJSONString:lastObject callback:callback];
+    } else if ([selector isEqualToString:@"showBannerAdWithPlacementID:rect:"]) {
+        [self showBannerAdWithPlacementID:firstObject rect:lastObject];
+    } else if ([selector isEqualToString:@"removeBannerAdWithPlacementID:"]) {
+        [self removeBannerAdWithPlacementID:firstObject];
+    } else if ([selector isEqualToString:@"showBannerAdWithPlacementID:"]) {
+        [self showBannerAdWithPlacementID:firstObject];
+    } else if ([selector isEqualToString:@"hideBannerAdWithPlacementID:"]) {
+        [self hideBannerAdWithPlacementID:firstObject];
+    } else if ([selector isEqualToString:@"clearCache"]) {
+        [self clearCache];
+    }
+    return nil;
+}
+
 -(void) loadBannerAdWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char*))callback {
     [self setCallBack:callback forKey:placementID];
     NSMutableDictionary *extra = [NSMutableDictionary dictionary];
