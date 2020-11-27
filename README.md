@@ -1,13 +1,25 @@
-# TopOn Unity
+# TopOn-Unity-Demo for Unity
 
-<h3>TopOn Unity SDK的集成指引</h3>
+TopOn is an ad mediation platform that helps global app developers manage ad networks conveniently and maximize revenue lightly. Especially in China, TopOn becomes the Top #1 mediation platform. Until now, We have cooperated with around 400 companies. We have supported rich local advertising platform resources and lots of global ad platforms. 
 
-<a href="https://docs.toponad.com/#/zh-cn/unity/unity_doc/unity_access_doc" target="_blank">Topon Unity SDK的集成文档（中文版）</a>
 
-<a href="https://docs.toponad.com/#/en-us/android/android_doc/android_access_doc" target="_blank">TopOn-Unity3D-Integration (English)</a>
+## Communication
+Official website ： https://www.toponad.com/
 
-TopOn Unity SDK下载地址：
+Business Cooperation : business@toponad.com
 
-<a href="https://docs.toponad.com/#/zh-cn/unity/download/package" target="_blank">TopOn Unity SDK(中文）</a>
+Market Cooperation : leon@toponad.com
 
-<a href="https://docs.toponad.com/#/en-us/unity/download/package" target="_blank">TopOn Unity  SDK(English）</a>
+Technical Support : support@toponad.com
+
+QQ & wechat 188108875(Harry)
+
+
+
+## Integration instructions
+This project only contains TopOn SDK source code. If you need to test a third-party advertising platform, please download from the following URL
+
+https://docs.toponad.com/#/en-us/unity/unity_doc/unity_access_doc
+## LICENSE
+
+See the [LICENSE](LICENSE) file.
