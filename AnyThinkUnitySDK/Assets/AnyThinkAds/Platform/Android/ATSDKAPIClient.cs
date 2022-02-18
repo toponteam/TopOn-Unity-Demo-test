@@ -170,31 +170,17 @@ namespace AnyThinkAds.Android
             }
         }
 
-
-
-        public void setPurchaseFlag() {
-        
-        }
-
-        public void clearPurchaseFlag() {
-
-        }
-
-        public bool purchaseFlag() {
-            return false;
-        }
-
         public void addNetworkGDPRInfo(int networkType, string mapJson)
         {
-			Debug.Log ("addNetworkGDPRInfo...." + networkType + "mapjson:"+mapJson);
-			try{
-				if (this.sdkInitHelper != null) {
-					this.sdkInitHelper.Call ("addNetworkGDPRInfo",networkType,mapJson);
-				}
-			}catch(System.Exception e){
-				System.Console.WriteLine("Exception caught: {0}", e);
-				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
-			}
+//			Debug.Log ("addNetworkGDPRInfo...." + networkType + "mapjson:"+mapJson);
+//			try{
+//				if (this.sdkInitHelper != null) {
+//					this.sdkInitHelper.Call ("addNetworkGDPRInfo",networkType,mapJson);
+//				}
+//			}catch(System.Exception e){
+//				System.Console.WriteLine("Exception caught: {0}", e);
+//				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
+//			}
 
         }
 
@@ -267,5 +253,109 @@ namespace AnyThinkAds.Android
                 Debug.Log("ATSDKAPIClient :  error." + e.Message);
             }
         }
+
+        public void setExcludeBundleIdArray(string bundleIds)
+        {
+            Debug.Log("setExcludeBundleIdArray....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("setExcludeBundleIdArray", bundleIds);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
+        public void setExcludeAdSourceIdArrayForPlacementID(string placementID, string adsourceIds)
+        {
+            Debug.Log("setExcludeAdSourceIdArrayForPlacementID....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("setExcludeAdSourceIdArrayForPlacementID", placementID, adsourceIds);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
+        public void setSDKArea(int area)
+        {
+            Debug.Log("setSDKArea....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("setSDKArea", area);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
+        public void getArea(ATGetAreaListener listener)
+        {
+            Debug.Log("getArea....");
+            ATAreaListener areaListener = new ATAreaListener(listener);
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("getArea", areaListener);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
+        public void setWXStatus(bool install)
+        {
+            Debug.Log("setWXStatus....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("setWXStatus", install);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
+        public void setLocation(double longitude, double latitude)
+        {
+            Debug.Log("setLocation....");
+            try
+            {
+                if (this.sdkInitHelper != null)
+                {
+                    this.sdkInitHelper.Call("setLocation", longitude, latitude);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
+        }
+
     }
 }

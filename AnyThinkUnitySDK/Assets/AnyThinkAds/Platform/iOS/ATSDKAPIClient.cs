@@ -5,10 +5,13 @@ using AnyThinkAds.Common;
 using AnyThinkAds.Api;
 using AOT;
 using System;
+using AnyThinkAds.ThirdParty.LitJson;
 
 namespace AnyThinkAds.iOS {
 	public class ATSDKAPIClient : IATSDKAPIClient {
         static private ATGetUserLocationListener locationListener;
+        static private ATGetAreaListener areaListener;
+
         public ATSDKAPIClient () {
             Debug.Log("Unity:ATSDKAPIClient::ATSDKAPIClient()");
 		}
@@ -37,6 +40,30 @@ namespace AnyThinkAds.iOS {
        static public int DidGetUserLocation(string location)
         {
             if (locationListener != null) { locationListener.didGetUserLocation(Int32.Parse(location)); }
+            return 0;
+        }
+
+        [MonoPInvokeCallback(typeof(Func<string, int>))]
+        static public int GetAreaInfo(string msg)
+        {
+            Debug.Log("Unity:ATSDKAPIClient::GetAreaInfo(" + msg + ")");
+            if (areaListener != null) 
+            { 
+                JsonData msgJsonData = JsonMapper.ToObject(msg);
+                IDictionary idic = (System.Collections.IDictionary)msgJsonData;
+
+                if (idic.Contains("areaCode")) {
+                    string areaCode = (string)msgJsonData["areaCode"];
+                    Debug.Log("Unity:ATSDKAPIClient::GetAreaInfo::areaCode(" + areaCode + ")");
+                    areaListener.onArea(areaCode);
+                }
+                
+                if (idic.Contains("errorMsg")) { 
+                    string errorMsg = (string)msgJsonData["errorMsg"];
+                    Debug.Log("Unity:ATSDKAPIClient::GetAreaInfo::errorMsg(" + errorMsg + ")");
+                    areaListener.onError(errorMsg);
+                }
+            }
             return 0;
         }
 
@@ -112,6 +139,43 @@ namespace AnyThinkAds.iOS {
         public void deniedUploadDeviceInfo(string deniedInfo)
         {
             ATManager.deniedUploadDeviceInfo(deniedInfo);
+        }
+
+        public void setExcludeBundleIdArray(string bundleIds)
+        {
+            Debug.Log("Unity:ATSDKAPIClient::setExcludeBundleIdArray()");
+            ATManager.setExcludeBundleIdArray(bundleIds);
+        }
+
+        public void setExcludeAdSourceIdArrayForPlacementID(string placementID, string adSourceIds) 
+        {
+            Debug.Log("Unity:ATSDKAPIClient::setExcludeAdSourceIdArrayForPlacementID()");
+            ATManager.setExcludeAdSourceIdArrayForPlacementID(placementID, adSourceIds);
+        }
+        
+        public void setSDKArea(int area)
+        {
+            Debug.Log("Unity:ATSDKAPIClient::setSDKArea()");
+            ATManager.setSDKArea(area);
+        }
+        
+        public void getArea(ATGetAreaListener listener)
+        {
+            Debug.Log("Unity:ATSDKAPIClient::getArea()");
+            ATSDKAPIClient.areaListener = listener;
+            ATManager.getArea(GetAreaInfo);
+        }
+        
+        public void setWXStatus(bool install)
+        {
+            Debug.Log("Unity:ATSDKAPIClient::setWXStatus()");
+            ATManager.setWXStatus(install);
+        }
+        
+        public void setLocation(double longitude, double latitude)
+        {
+            Debug.Log("Unity:ATSDKAPIClient::setLocation()");
+            ATManager.setLocation(longitude, latitude);
         }
 	}
 }

@@ -104,6 +104,23 @@ namespace AnyThinkAds
             return new UnitySDKAPIClient();
         }
 
+        public static IATDownloadClient BuildDownloadClient()
+        {
+            Debug.Log("BuildDownloadClient");
+            #if UNITY_EDITOR
+                Debug.Log("Unity Editor");
+                        // Testing UNITY_EDITOR first because the editor also responds to the currently
+                        // selected platform.
+
+            #elif UNITY_ANDROID
+                return new AnyThinkAds.Android.ATDownloadClient();
+               
+            #else
+
+            #endif
+                return new UnityDownloadClient();
+        }
+
     }
 
     class UnitySDKAPIClient:IATSDKAPIClient
@@ -114,9 +131,6 @@ namespace AnyThinkAds
         public void setGDPRLevel(int level){ }
         public void showGDPRAuth(){ }
         public void addNetworkGDPRInfo(int networkType, string mapJson){ }
-        public void setPurchaseFlag(){ }
-        public bool purchaseFlag(){ return false; }
-        public void clearPurchaseFlag(){ }
         public void setChannel(string channel){ }
         public void setSubChannel(string subchannel){ }
         public void initCustomMap(string cutomMap){ }
@@ -125,6 +139,13 @@ namespace AnyThinkAds
         public int getGDPRLevel(){ return ATSDKAPI.PERSONALIZED; }
         public bool isEUTraffic() { return false; }
         public void deniedUploadDeviceInfo(string deniedInfo) { }
+        public void setExcludeBundleIdArray(string bundleIds) { }
+        public void setExcludeAdSourceIdArrayForPlacementID(string placementID, string adsourceIds) { }
+        public void setSDKArea(int area) { }
+        public void getArea(ATGetAreaListener listener) { }
+        public void setWXStatus(bool install) { }
+        public void setLocation(double longitude, double latitude) { }
+
     }
 
     class UnityBannerClient:IATBannerAdClient
@@ -141,11 +162,17 @@ namespace AnyThinkAds
        {
             this.listener = listener;
        }
+
+       public string checkAdStatus(string unitId) { return ""; }
        
        public void showBannerAd(string unitId, string position){ }
+
+       public void showBannerAd(string unitId, string position, string mapJson){ }
        
        public void showBannerAd(string unitId, ATRect rect){ }
-    
+
+       public void showBannerAd(string unitId, ATRect rect, string mapJson){ }
+
        public  void cleanBannerAd(string unitId){ }
       
        public void hideBannerAd(string unitId){ }
@@ -153,7 +180,9 @@ namespace AnyThinkAds
        public void showBannerAd(string unitId){ }
       
        public void cleanCache(string unitId){}
-   }
+
+        public string getValidAdCaches(string unitId) { return ""; }
+    }
 
     class UnityInterstitialClient : IATInterstitialAdClient
     {
@@ -175,7 +204,29 @@ namespace AnyThinkAds
 
         public void showInterstitialAd(string unitId, string mapJson){}
         
-       public void cleanCache(string unitId){}
+        public void cleanCache(string unitId){}
+
+        public string getValidAdCaches(string unitId) { return ""; }
+
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID){}
+
+        
+		public void addAutoLoadAdPlacementID(string[] placementIDList) {}
+
+        public void removeAutoLoadAdPlacementID(string placementId){}
+
+		public bool autoLoadInterstitialAdReadyForPlacementID(string placementId){return false;}
+
+		public string getAutoValidAdCaches(string placementId){return "";}
+        public string checkAutoAdStatus(string unitId) { return ""; }
+
+
+        public void setAutoLocalExtra(string placementId, string mapJson){}
+
+        public void entryAutoAdScenarioWithPlacementID(string placementId, string scenarioID){}
+
+		public void showAutoAd(string placementId, string mapJson){}
+
     }
 
     class UnityNativeAdClient : IATNativeAdClient
@@ -189,13 +240,22 @@ namespace AnyThinkAds
        }
 
        public bool hasAdReady(string unitId) { return false; }
-        
-       public void setListener(ATNativeAdListener listener){
+
+       public string checkAdStatus(string unitId) { return ""; }
+
+       public string getValidAdCaches(string unitId) { return ""; }
+
+       public void entryScenarioWithPlacementID(string placementId, string scenarioID){}
+
+
+        public void setListener(ATNativeAdListener listener){
             this.listener = listener;
        }
         
        public void renderAdToScene(string unitId, ATNativeAdView anyThinkNativeAdView){}
-                   
+
+       public void renderAdToScene(string unitId, ATNativeAdView anyThinkNativeAdView, string mapJson){}
+
        public void cleanAdView(string unitId, ATNativeAdView anyThinkNativeAdView){}
        
        public void onApplicationForces(string unitId, ATNativeAdView anyThinkNativeAdView){}
@@ -246,16 +306,39 @@ namespace AnyThinkAds
 
         public string checkAdStatus(string unitId) { return ""; }
 
-        public void setUserData(string unitId, string userId, string customData){}
+        public string getValidAdCaches(string unitId) { return ""; }
+
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID){}
 
         public void showAd(string unitId, string mapJson){}
 
-        public void cleanAd(string unitId){}
+		public void addAutoLoadAdPlacementID(string[] placementIDList) {}
 
-        public void onApplicationForces(string unitId){}
+        public void removeAutoLoadAdPlacementID(string placementId){}
 
-        public void onApplicationPasue(string unitId){}
+		public bool autoLoadRewardedVideoReadyForPlacementID(string placementId){return false;}
 
-        public void addsetting(string unitId, string json){}
+		public string getAutoValidAdCaches(string placementId){return "";}
+        
+        public string checkAutoAdStatus(string unitId) { return ""; }
+
+        public void setAutoLocalExtra(string placementId, string mapJson){}
+
+        public void entryAutoAdScenarioWithPlacementID(string placementId, string scenarioID){}
+
+		public void showAutoAd(string placementId, string mapJson){}
+
+
+
+
+    }
+
+
+    class UnityDownloadClient : IATDownloadClient
+    {
+        public void setListener(ATDownloadAdListener listener)
+        {
+            Debug.Log("Must run on Android platform");
+        }
     }
 }

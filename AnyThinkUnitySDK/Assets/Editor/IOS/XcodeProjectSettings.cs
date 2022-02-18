@@ -21,10 +21,13 @@ public static class MyBuildPostprocess
                 PBXProject pbxProject = new PBXProject();
                 pbxProject.ReadFromFile(projectPath);
 
-                //unity 2019版使用
+                //unity 2019.4.x以上使用
+                string target = pbxProject.GetUnityFrameworkTargetGuid();
+                //Unity 2019.4.x以下使用
                 // string target = pbxProject.GetUnityMainTargetGuid();
                 //unity 2018，2017版可使用
-                string target = pbxProject.TargetGuidByName("Unity-iPhone");
+                // string target = pbxProject.TargetGuidByName("Unity-iPhone");
+
 
                 pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
                 pbxProject.SetBuildProperty(target, "GCC_ENABLE_OBJC_EXCEPTIONS", "YES");
@@ -39,6 +42,7 @@ public static class MyBuildPostprocess
                 pbxProject.AddFrameworkToProject(target, "VideoToolbox.framework", false);
                 pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
                 pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-fobjc-arc");
+                pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-l\"c++abi\"");
                 
                 // 加了还是错误，需要删除之后，clean项目之后，重新手动添加。所以不加这个配置
                 // pbxProject.AddBuildProperty(target,"RUNPATH_SEARCH_PATHS","@executable_path/Frameworks");
@@ -46,6 +50,11 @@ public static class MyBuildPostprocess
                 pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libxml2.tbd", "Libraries/libxml2.tbd", PBXSourceTree.Sdk));
                 pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libresolv.9.tbd", "Libraries/libresolv.9.tbd", PBXSourceTree.Sdk));
                 pbxProject.AddFileToBuild(target, pbxProject.AddFile("usr/lib/libbz2.1.0.tbd", "Libraries/libbz2.1.0.tbd", PBXSourceTree.Sdk));
+
+                // 获取主 target
+                string mainTarget = pbxProject.GetUnityMainTargetGuid();
+                pbxProject.AddFileToBuild(mainTarget, pbxProject.AddFile("Frameworks/AnyThinkAds/Plugins/iOS/Core/AnyThinkSDK.bundle", "Frameworks/AnyThinkAds/Plugins/iOS/Core/AnyThinkSDK.bundle", PBXSourceTree.Sdk));
+                pbxProject.AddFileToBuild(mainTarget, pbxProject.AddFile("Frameworks/AnyThinkAds/Plugins/iOS/pangle/BUAdSDK.bundle", "Frameworks/AnyThinkAds/Plugins/iOS/pangle/BUAdSDK.bundle", PBXSourceTree.Sdk));
 
 
 

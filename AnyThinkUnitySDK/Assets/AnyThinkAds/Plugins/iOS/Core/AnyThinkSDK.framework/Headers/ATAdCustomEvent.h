@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ATAd.h"
 #import "ATTracker.h"
+#import "ATBidInfo.h"
 
 extern NSString *const kATSDKFailedToLoadSplashADMsg;
 extern NSString *const kATSDKFailedToLoadBannerADMsg;
@@ -16,7 +17,7 @@ extern NSString *const kATSDKFailedToLoadInterstitialADMsg;
 extern NSString *const kATSDKFailedToLoadNativeADMsg;
 extern NSString *const kATSDKFailedToLoadRewardedVideoADMsg;
 extern NSString *const kATSDKSplashADTooLongToLoadPlacementSettingMsg;
-extern NSString *const kSDKImportIssueErrorReason;
+extern NSString *const kATSDKImportIssueErrorReason;
 extern NSString *const kATAdAssetsAppIDKey;
 @interface ATAdCustomEvent : NSObject
 +(NSDictionary*)customInfoWithUnitGroupModel:(ATUnitGroupModel*)unitGroupModel extra:(NSDictionary*)extra;
@@ -24,8 +25,12 @@ extern NSString *const kATAdAssetsAppIDKey;
 -(void) handleAssets:(NSDictionary*)assets;
 -(void) handleLoadingFailure:(NSError*)error;
 -(void) handleClose;
+-(void) handleShow;
+-(void) handleShowFailed;
+
 -(void) trackShow;
 -(void) trackClick;
+
 -(ATNativeADSourceType) adSourceType;
 @property(nonatomic, weak) id<ATAd> ad;
 @property(nonatomic) NSNumber *sdkTime;
@@ -48,5 +53,6 @@ extern NSString *const kATAdAssetsAppIDKey;
 +(NSInteger) calculateAdPriority:(id<ATAd>)ad;
 
 @property (nonatomic, assign) NSString *networkUnitId;
+@property (nonatomic) NSDictionary *networkCustomInfo;
 
 @end

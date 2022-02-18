@@ -17,17 +17,18 @@ import com.anythink.nativead.unitgroup.api.CustomNativeAd;
 import com.anythink.unitybridge.MsgTools;
 import com.anythink.unitybridge.utils.CommonUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Copyright (C) 2018 {XX} Science and Technology Co., Ltd.
- *
- * @version V{XX_XX}
- */
+
 public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
 
     Activity mActivity;
     ViewInfo mViewInfo;
     FrameLayout mFrameLayout;
+    View mDislikeView;
+
+    List<View> mClickViews = new ArrayList<>();
 
     public ATUnityRender(Activity pActivity, ViewInfo pViewInfo) {
         mActivity = pActivity;
@@ -54,18 +55,22 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
 
         final View mediaView = ad.getAdMediaView(mFrameLayout, view.getWidth());
         if (mediaView != null && ad.isNativeExpress()) { // 个性化模板View
+
+            if (mDislikeView != null) {
+                mDislikeView.setVisibility(View.GONE);
+            }
+
             if (mViewInfo.imgMainView != null && mViewInfo.rootView != null) {
                 mViewInfo.imgMainView.mX = 0;
                 mViewInfo.imgMainView.mY = 0;
                 mViewInfo.imgMainView.mWidth = mViewInfo.rootView.mWidth;
                 mViewInfo.imgMainView.mHeight = mViewInfo.rootView.mHeight;
 
-                MsgTools.pirntMsg("ExpressNative, NetworkType ----> " + mNetworkType);
+                MsgTools.printMsg("ExpressNative, NetworkType ----> " + mNetworkType);
                 ViewInfo.add2ParentView(mFrameLayout, mediaView, mViewInfo.imgMainView, -1);
                 return;
             }
         }
-
 
         if (mViewInfo.titleView != null) {
 
@@ -76,7 +81,7 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             if (mViewInfo.titleView.textSize > 0) {
                 titleView.setTextSize(mViewInfo.titleView.textSize);
             }
-            MsgTools.pirntMsg("title---->" + ad.getTitle());
+            MsgTools.printMsg("title---->" + ad.getTitle());
             titleView.setText(ad.getTitle());
 
             titleView.setSingleLine();
@@ -107,7 +112,7 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             ctaView.setMaxEms(15);
             ctaView.setEllipsize(TextUtils.TruncateAt.END);
 
-            MsgTools.pirntMsg("cat---->" + ad.getCallToActionText());
+            MsgTools.printMsg("cat---->" + ad.getCallToActionText());
             ctaView.setText(ad.getCallToActionText());
             ViewInfo.add2ParentView(mFrameLayout, ctaView, mViewInfo.ctaView, -1);
         }
@@ -122,7 +127,7 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             if (mViewInfo.descView.textSize > 0) {
                 descView.setTextSize(mViewInfo.descView.textSize);
             }
-            MsgTools.pirntMsg("desc---->" + ad.getDescriptionText());
+            MsgTools.printMsg("desc---->" + ad.getDescriptionText());
             descView.setText(ad.getDescriptionText());
 
 
@@ -133,13 +138,14 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             ViewInfo.add2ParentView(mFrameLayout, descView, mViewInfo.descView, -1);
         }
 
+        ATNativeImageView iconView = null;
         if (mViewInfo.IconView != null) {
 
             FrameLayout iconArea = new FrameLayout(mActivity);
 
 
             if (ad.getAdIconView() == null) {
-                final ATNativeImageView iconView = new ATNativeImageView(mActivity);
+                iconView = new ATNativeImageView(mActivity);
                 iconArea.addView(iconView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
                 iconView.setImage(ad.getIconImageUrl());
             } else {
@@ -150,21 +156,22 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
             ViewInfo.add2ParentView(mFrameLayout, iconArea, mViewInfo.IconView, -1);
         }
 
+        ATNativeImageView logoView = null;
         if (mViewInfo.adLogoView != null) {
-            final ATNativeImageView logoView = new ATNativeImageView(mActivity);
+            logoView = new ATNativeImageView(mActivity);
             ViewInfo.add2ParentView(mFrameLayout, logoView, mViewInfo.adLogoView, -1);
             logoView.setImage(ad.getAdChoiceIconUrl());
         }
 
         if (mNetworkType != 5 && mediaView != null) {
 //            mediaView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            MsgTools.pirntMsg("mediaView ---> 视屏播放 " + ad.getVideoUrl());
+            MsgTools.printMsg("mediaView ---> 视屏播放 " + ad.getVideoUrl());
             if (mViewInfo.imgMainView != null) {
                 ViewInfo.add2ParentView(mFrameLayout, mediaView, mViewInfo.imgMainView, -1);
             }
         } else {
             //加载大图
-            MsgTools.pirntMsg("mediaView ---> 大图播放");
+            MsgTools.printMsg("mediaView ---> 大图播放");
             if (mViewInfo.imgMainView != null) {
                 final ATNativeImageView mainImageView = new ATNativeImageView(mActivity);
                 ViewInfo.add2ParentView(mFrameLayout, mainImageView, mViewInfo.imgMainView, -1);
@@ -189,7 +196,7 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
         }
 
         if (mNetworkType == 2) {
-            MsgTools.pirntMsg("start to add admob ad textview ");
+            MsgTools.printMsg("start to add admob ad textview ");
             TextView adLogoView = new TextView(mActivity);
             adLogoView.setTextColor(Color.WHITE);
             adLogoView.setText("AD");
@@ -202,9 +209,81 @@ public class ATUnityRender implements ATNativeAdRenderer<CustomNativeAd> {
                 layoutParams.topMargin = CommonUtil.dip2px(mActivity, 3);
                 mFrameLayout.addView(adLogoView, layoutParams);
 
-                MsgTools.pirntMsg("add admob ad textview 2 activity");
+                MsgTools.printMsg("add admob ad textview 2 activity");
+            }
+        }
+
+        //click
+        List<View> customClickViews = new ArrayList<>();
+
+        if (mViewInfo.rootView != null) {
+            dealWithClick(view, mViewInfo.rootView.isCustomClick, mClickViews, customClickViews, "root");
+        }
+        if (mViewInfo.titleView != null) {
+            dealWithClick(titleView, mViewInfo.titleView.isCustomClick, mClickViews, customClickViews, "title");
+        }
+        if (mViewInfo.descView != null) {
+            dealWithClick(descView, mViewInfo.descView.isCustomClick, mClickViews, customClickViews, "desc");
+        }
+        if (mViewInfo.IconView != null) {
+            dealWithClick(iconView, mViewInfo.IconView.isCustomClick, mClickViews, customClickViews, "icon");
+        }
+        if (mViewInfo.adLogoView != null) {
+            dealWithClick(logoView, mViewInfo.adLogoView.isCustomClick, mClickViews, customClickViews, "adLogo");
+        }
+        if (mViewInfo.ctaView != null) {
+            dealWithClick(ctaView, mViewInfo.ctaView.isCustomClick, mClickViews, customClickViews, "cta");
+        }
+
+
+        //dislike
+
+        if (mDislikeView != null) {
+            MsgTools.printMsg("bind dislike ----> " + mNetworkType);
+
+            mDislikeView.setVisibility(View.VISIBLE);
+
+            CustomNativeAd.ExtraInfo.Builder builder = new CustomNativeAd.ExtraInfo.Builder();
+            builder.setCloseView(mDislikeView);
+
+            if (customClickViews.size() > 0) {
+                builder.setCustomViewList(customClickViews);
+            }
+
+            ad.setExtraInfo(builder.build());
+        } else {
+            if (customClickViews.size() > 0) {
+                CustomNativeAd.ExtraInfo.Builder builder = new CustomNativeAd.ExtraInfo.Builder()
+                        .setCustomViewList(customClickViews);
+
+                ad.setExtraInfo(builder.build());
             }
         }
 
     }
+
+
+    public void setDislikeView(View dislikeView) {
+        this.mDislikeView = dislikeView;
+    }
+
+    private void dealWithClick(View view, boolean isCustomClick, List<View> clickViews, List<View> customClickViews, String name) {
+        if (mNetworkType == 8 || mNetworkType == 22) {
+            if (isCustomClick) {
+                if (view != null) {
+                    MsgTools.printMsg("add customClick ----> " + name);
+                    customClickViews.add(view);
+                }
+                return;
+            }
+        }
+        MsgTools.printMsg("add click ----> " + name);
+        clickViews.add(view);
+    }
+
+
+    public List<View> getClickViews() {
+        return mClickViews;
+    }
+
 }

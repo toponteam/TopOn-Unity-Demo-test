@@ -5,7 +5,7 @@ using System.Reflection;
 using System;
 
 using AnyThinkAds.Common;
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 
 
 namespace AnyThinkAds.Api
@@ -42,7 +42,7 @@ namespace AnyThinkAds.Api
 
 		public void loadAd(string placementId, Dictionary<String, String> pairs) {
 			Debug.Log("ATNativeBannerAd::loadAd(" + placementId + ")");
-			client.loadAd(placementId, Json.Serialize(pairs));
+			client.loadAd(placementId, JsonMapper.ToJson(pairs));
 		}
 
 		public bool adReady(string placementId) {

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><dependencies>
+    <iosPods>
+        <iosPod name="MaioSDK" version="1.5.8" />
+    </iosPods>
+</dependencies>

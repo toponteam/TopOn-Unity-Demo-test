@@ -5,11 +5,18 @@ using System.Reflection;
 using System;
 
 using AnyThinkAds.Common;
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 
 namespace AnyThinkAds.Api
 {
-	public class ATInterstitialAd
+    public class ATInterstitialAdLoadingExtra
+    {
+        public static readonly string kATInterstitialAdLoadingExtraInterstitialAdSize = "interstitial_ad_size";
+        public static readonly string kATInterstitialAdLoadingExtraInterstitialAdSizeStruct = "interstitial_ad_size_struct";
+        public static readonly string kATInterstitialAdSizeUsesPixelFlagKey = "uses_pixel";
+    }
+
+    public class ATInterstitialAd
 	{
 		private static readonly ATInterstitialAd instance = new ATInterstitialAd();
 		private IATInterstitialAdClient client;
@@ -27,11 +34,21 @@ namespace AnyThinkAds.Api
 			}
 		}
 
-		public void loadInterstitialAd(string placementId, Dictionary<string,string> pairs)
+		public void loadInterstitialAd(string placementId, Dictionary<string,object> pairs)
         {
-            client.loadInterstitialAd(placementId, Json.Serialize(pairs));
-        }
+            if (pairs != null && pairs.ContainsKey(ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSizeStruct))
+            {
+                ATSize size = (ATSize)(pairs[ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSizeStruct]);
+                pairs.Add(ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSize, size.width + "x" + size.height);
+                pairs.Add(ATInterstitialAdLoadingExtra.kATInterstitialAdSizeUsesPixelFlagKey, size.usesPixel);
 
+                client.loadInterstitialAd(placementId, JsonMapper.ToJson(pairs));
+            } else
+            {
+                client.loadInterstitialAd(placementId, JsonMapper.ToJson(pairs));
+            }
+        }
+        
 		public void setListener(ATInterstitialAdListener listener)
         {
             client.setListener(listener);
@@ -41,25 +58,36 @@ namespace AnyThinkAds.Api
         {
             return client.hasInterstitialAdReady(placementId);
         }
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID)
+        {
+            client.entryScenarioWithPlacementID(placementId,scenarioID);
+        }
+        
 
         public string checkAdStatus(string placementId)
         {
             return client.checkAdStatus(placementId);
         }
 
+        public string getValidAdCaches(string placementId)
+        {
+            return client.getValidAdCaches(placementId);
+        }
+
         public void showInterstitialAd(string placementId)
         {
-            client.showInterstitialAd(placementId, Json.Serialize(new Dictionary<string, string>()));
+            client.showInterstitialAd(placementId, JsonMapper.ToJson(new Dictionary<string, string>()));
         }
 
         public void showInterstitialAd(string placementId, Dictionary<string, string> pairs)
         {
-            client.showInterstitialAd(placementId, Json.Serialize(pairs));
+            client.showInterstitialAd(placementId, JsonMapper.ToJson(pairs));
         }
 
         public IATInterstitialAdClient GetATInterstitialAdClient()
         {
             return AnyThinkAds.ATAdsClientFactory.BuildInterstitialAdClient();
         }
+
 	}
 }

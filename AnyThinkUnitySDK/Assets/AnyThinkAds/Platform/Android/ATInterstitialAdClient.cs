@@ -4,6 +4,7 @@ using UnityEngine;
 
 using AnyThinkAds.Common;
 using AnyThinkAds.Api;
+using AnyThinkAds.ThirdParty.LitJson;
 namespace AnyThinkAds.Android
 {
     public class ATInterstitialAdClient : AndroidJavaProxy,IATInterstitialAdClient
@@ -14,9 +15,11 @@ namespace AnyThinkAds.Android
 		//private  AndroidJavaObject videoHelper;
         private  ATInterstitialAdListener anyThinkListener;
 
+        private AndroidJavaObject interstitialAutoAdHelper;
+
         public ATInterstitialAdClient() : base("com.anythink.unitybridge.interstitial.InterstitialListener")
         {
-            
+            interstitialAutoAdHelper = new AndroidJavaObject("com.anythink.unitybridge.interstitial.InterstitialAutoAdHelper", this);
         }
 
 
@@ -85,6 +88,45 @@ namespace AnyThinkAds.Android
             }
 
             return adStatusJsonString;
+        }
+        
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID){
+            Debug.Log("ATInterstitialAdClient : entryScenarioWithPlacementID....");
+            try
+            {
+                if (interstitialHelperMap.ContainsKey(placementId))
+                {
+                    interstitialHelperMap[placementId].Call("entryAdScenario", scenarioID);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATInterstitialAdClient entryScenarioWithPlacementID:  error." + e.Message);
+            }
+
+
+        }
+
+
+        public string getValidAdCaches(string placementId)
+        {
+            string validAdCachesString = "";
+            Debug.Log("ATNativeAdClient : getValidAdCaches....");
+            try
+            {
+                if (interstitialHelperMap.ContainsKey(placementId))
+                {
+                    validAdCachesString = interstitialHelperMap[placementId].Call<string>("getValidAdCaches");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATNativeAdClient :  error." + e.Message);
+            }
+
+            return validAdCachesString;
         }
 
         public void showInterstitialAd(string placementId, string jsonmap)
@@ -217,6 +259,180 @@ namespace AnyThinkAds.Android
             {
                 anyThinkListener.onInterstitialAdShow(placementId, new ATCallbackInfo(callbackJson));
             }
+        }
+
+        // Adsource Listener
+        public void onAdSourceBiddingAttempt(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceBiddingAttempt...unity3d." + placementId + "," + callbackJson);
+            if (anyThinkListener != null)
+            {
+                anyThinkListener.startBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceBiddingFilled(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceBiddingFilled...unity3d." + placementId + "," + callbackJson);
+            if (anyThinkListener != null)
+            {
+                anyThinkListener.finishBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceBiddingFail(string placementId, string callbackJson, string code, string error)
+        {
+            Debug.Log("onAdSourceBiddingFail...unity3d." + placementId + "," + code + "," + error + "," + callbackJson);
+            if (anyThinkListener != null)
+            {
+                anyThinkListener.failBiddingADSource(placementId, new ATCallbackInfo(callbackJson), code, error);
+            }
+        }
+
+        public void onAdSourceAttemp(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceAttemp...unity3d." + placementId + "," + callbackJson);
+            if (anyThinkListener != null)
+            {
+                anyThinkListener.startLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceLoadFilled(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceLoadFilled...unity3d." + placementId + "," + callbackJson);
+            if (anyThinkListener != null)
+            {
+                anyThinkListener.finishLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceLoadFail(string placementId, string callbackJson, string code, string error)
+        {
+            Debug.Log("onAdSourceLoadFail...unity3d." + placementId + "," + code + "," + error + "," + callbackJson);
+            if (anyThinkListener != null)
+            {
+                anyThinkListener.failToLoadADSource(placementId, new ATCallbackInfo(callbackJson), code, error);
+            }
+        }
+
+        // Auto
+        public void addAutoLoadAdPlacementID(string[] placementIDList){
+            Debug.Log("Unity: ATInterstitialAdClient:addAutoLoadAdPlacementID()" + JsonMapper.ToJson(placementIDList));
+            try
+            {
+                interstitialAutoAdHelper.Call("addPlacementIds", JsonMapper.ToJson(placementIDList));
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("Unity: ATInterstitialAdClient addAutoLoadAdPlacementID:  error." + e.Message);
+            }
+        }
+
+		public void removeAutoLoadAdPlacementID(string placementId) 
+		{
+            Debug.Log("Unity: ATInterstitialAdClient:removeAutoLoadAdPlacementID()");
+            try
+            {
+                interstitialAutoAdHelper.Call("removePlacementIds", placementId);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("Unity: ATInterstitialAdClient removeAutoLoadAdPlacementID:  error." + e.Message);
+            }
+        }
+
+		public bool autoLoadInterstitialAdReadyForPlacementID(string placementId) 
+		{
+			Debug.Log("Unity: ATInterstitialAdClient:autoLoadInterstitialAdReadyForPlacementID()");
+            bool isready = false;
+            try
+            {
+                isready = interstitialAutoAdHelper.Call<bool>("isAdReady", placementId);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATInterstitialAdClient:autoLoadInterstitialAdReadyForPlacementID( :  error." + e.Message);
+            }
+            return isready;
+        }
+		public string getAutoValidAdCaches(string placementId)
+		{
+			Debug.Log("Unity: ATInterstitialAdClient:getAutoValidAdCaches()");
+            string adStatusJsonString = "";
+            try
+            {
+                adStatusJsonString = interstitialAutoAdHelper.Call<string>("getValidAdCaches", placementId);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATInterstitialAdClient:getAutoValidAdCaches() :  error." + e.Message);
+            }
+
+            return adStatusJsonString;
+        }
+
+        public void setAutoLocalExtra(string placementId, string mapJson)
+        {
+            Debug.Log("Unity: ATInterstitialAdClient:setAutoLocalExtra()");
+            try
+            {
+                interstitialAutoAdHelper.Call("setAdExtraData", placementId, mapJson);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATInterstitialAdClient:setAutoLocalExtra() :  error." + e.Message);
+            }
+        }
+
+        public void entryAutoAdScenarioWithPlacementID(string placementId, string scenarioID) 
+		{
+			Debug.Log("Unity: ATInterstitialAdClient:entryAutoAdScenarioWithPlacementID()");
+            try
+            {
+                interstitialAutoAdHelper.Call("entryAdScenario", placementId, scenarioID);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATInterstitialAdClient:entryAutoAdScenarioWithPlacementID() :  error." + e.Message);
+            }
+        }
+
+		public void showAutoAd(string placementId, string mapJson) 
+		{
+	    	Debug.Log("Unity: ATInterstitialAdClient::showAutoAd()");
+            try
+            {
+                interstitialAutoAdHelper.Call("show", placementId, mapJson);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("Unity: ATInterstitialAdClient:showAutoAd() :  error." + e.Message);
+            }
+        }
+        
+        public string checkAutoAdStatus(string placementId)
+        {
+            Debug.Log("Unity: ATInterstitialAdClient:checkAutoAdStatus() : checkAutoAdStatus....");
+            string adStatusJsonString = "";
+            try
+            {
+                adStatusJsonString = interstitialAutoAdHelper.Call<string>("checkAdStatus", placementId);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("Unity: ATInterstitialAdClient:checkAutoAdStatus() :  error." + e.Message);
+            }
+
+            return adStatusJsonString;
         }
        
     }

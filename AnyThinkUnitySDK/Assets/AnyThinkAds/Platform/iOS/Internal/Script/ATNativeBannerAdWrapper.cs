@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using AOT;
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 using AnyThinkAds.iOS;
 using AnyThinkAds.Api;
 
@@ -11,27 +11,38 @@ public class ATNativeBannerAdWrapper : ATAdWrapper {
 	static private Dictionary<string, ATNativeBannerAdClient> clients;
     static private string CMessageReceiverClass = "ATNativeBannerAdWrapper";
 
-    static public void InvokeCallback(string callback, Dictionary<string, object> msgDict) {
+    static public new void InvokeCallback(JsonData jsonData) {
         Debug.Log("Unity: ATNativeBannerAdWrapper::InvokeCallback()");
-        Dictionary<string, object> extra = new Dictionary<string, object>();
-        if (msgDict.ContainsKey("extra")) { extra = msgDict["extra"] as Dictionary<string, object>; }
+        string extraJson = "";
+        string callback = (string)jsonData["callback"];
+        Dictionary<string, object> msgDict = JsonMapper.ToObject<Dictionary<string, object>>(jsonData["msg"].ToJson());
+        JsonData msgJsonData = jsonData["msg"];
+        IDictionary idic = (System.Collections.IDictionary)msgJsonData;
+
+        if (idic.Contains("extra")) { 
+            JsonData extraJsonDate = msgJsonData["extra"];
+            if (extraJsonDate != null) {
+                extraJson = msgJsonData["extra"].ToJson();
+            }
+        }
+        
         if (callback.Equals("OnNativeBannerAdLoaded")) {
     		OnNativeBannerAdLoaded((string)msgDict["placement_id"]);
     	} else if (callback.Equals("OnNativeBannerAdLoadingFailure")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
-            Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
+            Dictionary<string, object> errorMsg = JsonMapper.ToObject<Dictionary<string, object>>(msgJsonData["error"].ToJson());
     		if (errorMsg.ContainsKey("code")) { errorDict.Add("code", errorMsg["code"]); }
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnNativeBannerAdLoadingFailure((string)msgDict["placement_id"], errorDict);
     	} else if (callback.Equals("OnNaitveBannerAdShow")) {
-    		OnNaitveBannerAdShow((string)msgDict["placement_id"], Json.Serialize(extra));
+    		OnNaitveBannerAdShow((string)msgDict["placement_id"], extraJson);
     	} else if (callback.Equals("OnNativeBannerAdClick")) {
-    		OnNativeBannerAdClick((string)msgDict["placement_id"], Json.Serialize(extra));
+    		OnNativeBannerAdClick((string)msgDict["placement_id"], extraJson);
     	} else if (callback.Equals("OnNativeBannerAdAutorefresh")) {
-    		OnNativeBannerAdAutorefresh((string)msgDict["placement_id"], Json.Serialize(extra));
+    		OnNativeBannerAdAutorefresh((string)msgDict["placement_id"], extraJson);
     	} else if (callback.Equals("OnNativeBannerAdAutorefreshFailed")) {
     		Dictionary<string, object> errorDict = new Dictionary<string, object>();
-            Dictionary<string, object> errorMsg = msgDict["error"] as Dictionary<string, object>;
+            Dictionary<string, object> errorMsg = JsonMapper.ToObject<Dictionary<string, object>>(msgJsonData["error"].ToJson());
     		if (errorMsg.ContainsKey("code")) { errorDict.Add("code", errorMsg["code"]); }
             if (errorMsg.ContainsKey("reason")) { errorDict.Add("message", errorMsg["reason"]); }
     		OnNativeBannerAdAutorefreshFailed((string)msgDict["placement_id"], errorDict);
@@ -74,7 +85,7 @@ public class ATNativeBannerAdWrapper : ATAdWrapper {
     static public void showAd(string placementID, ATRect rect, Dictionary<string, string> pairs) {
 		Debug.Log("ATNativeBannerAdWrapper::showAd()");
 		Dictionary<string, object> rectDict = new Dictionary<string, object>{ {"x", rect.x},  {"y", rect.y}, {"width", rect.width}, {"height", rect.height} };
-    	ATUnityCBridge.SendMessageToC(CMessageReceiverClass, "showNativeBannerAdWithPlacementID:rect:extra:", new object[]{placementID, Json.Serialize(rectDict), Json.Serialize(pairs != null ? pairs : new Dictionary<string, string>())}, false);
+    	ATUnityCBridge.SendMessageToC(CMessageReceiverClass, "showNativeBannerAdWithPlacementID:rect:extra:", new object[]{placementID, JsonMapper.ToJson(rectDict), JsonMapper.ToJson(pairs != null ? pairs : new Dictionary<string, string>())}, false);
     }
 
     static public void removeAd(string placementID) {

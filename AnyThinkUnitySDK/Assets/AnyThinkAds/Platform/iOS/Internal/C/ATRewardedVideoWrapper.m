@@ -48,10 +48,34 @@ NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
         [self clearCache];
     } else if ([selector isEqualToString:@"setExtra:"]) {
         [self setExtra:firstObject];
+    } else if ([selector isEqualToString:@"getValidAdCaches:"]) {
+        return [self getValidAdCaches:firstObject];
+    }else if ([selector isEqualToString:@"entryScenarioWithPlacementID:scenarioID:"]) {
+        [self entryScenarioWithPlacementID:firstObject scenarioID:lastObject];
     }
+    // auto
+    else if ([selector isEqualToString:@"addAutoLoadAdPlacementID:callback:"]){
+        [self addAutoLoadAdPlacementID:firstObject callback:callback];
+    }else if ([selector isEqualToString:@"removeAutoLoadAdPlacementID:"]){
+        [self removeAutoLoadAdPlacementID:firstObject];
+    }else if ([selector isEqualToString:@"autoLoadRewardedVideoReadyForPlacementID:"]){
+        return [NSNumber numberWithBool:[self autoLoadRewardedVideoReadyForPlacementID:firstObject]];
+    }else if ([selector isEqualToString:@"getAutoValidAdCaches:"]){
+        return [self getAutoValidAdCaches:firstObject];
+    }else if ([selector isEqualToString:@"setAutoLocalExtra:customDataJSONString:"]){
+        [self setAutoLocalExtra:firstObject customDataJSONString:lastObject];
+    }else if ([selector isEqualToString:@"entryAutoAdScenarioWithPlacementID:scenarioID:"]){
+        [self entryAutoAdScenarioWithPlacementID:firstObject scenarioID:lastObject];
+    }else if ([selector isEqualToString:@"showAutoRewardedVideoWithPlacementID:extraJsonString:"]){
+        [self showAutoRewardedVideoWithPlacementID:firstObject extraJsonString:lastObject];
+    }else if ([selector isEqualToString:@"checkAutoAdStatus:"]) {
+        return [self checkAutoAdStatus:firstObject];
+    }
+    
+    
     return nil;
 }
-
+#pragma mark - normal
 -(void) loadRewardedVideoWithPlacementID:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString callback:(void(*)(const char*, const char*))callback {
     [self setCallBack:callback forKey:placementID];
     NSMutableDictionary *extra = [NSMutableDictionary dictionary];
@@ -80,6 +104,12 @@ NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
     return statusDict.jsonString;
 }
 
+-(NSString*) getValidAdCaches:(NSString *)placementID {
+    NSArray *array = [[ATAdManager sharedManager] getRewardedVideoValidAdsForPlacementID:placementID];
+    NSLog(@"ATNativeAdWrapper::array = %@", array);
+    return array.jsonString;
+}
+
 -(void) showRewardedVideoWithPlacementID:(NSString*)placementID extraJsonString:(NSString*)extraJsonString {
     NSDictionary *extraDict = ([extraJsonString isKindOfClass:[NSString class]] && [extraJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[extraJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil;
     NSLog(@"ATRewardedVideoWrapper::showRewardedVideoWithPlacementID = %@ extraJsonString = %@", placementID,extraJsonString);
@@ -98,11 +128,142 @@ NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
     }
 }
 
+- (void)entryScenarioWithPlacementID:(NSString *)placementID scenarioID:(NSString *)scenarioID{
+    
+    [[ATAdManager sharedManager] entryRewardedVideoScenarioWithPlacementID:placementID scene:scenarioID];
+}
+
 -(NSString*) scriptWrapperClass {
     return @"ATRewardedVideoWrapper";
 }
 
+#pragma mark - auto
+-(void) addAutoLoadAdPlacementID:(NSString*)placementID callback:(void(*)(const char*, const char*))callback {
+    
+    if (placementID == nil) {
+        return;
+    }
+    
+    [ATRewardedVideoAutoAdManager sharedInstance].delegate = self;
+    
+    
+    NSArray *placementIDArray = [self jsonStrToArray:placementID];
+    
+    [placementIDArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self setCallBack:callback forKey:obj];
+        NSLog(@" addAutoLoadAdPlacementID--%@",placementID);
+    }];
+    [[ATRewardedVideoAutoAdManager sharedInstance] addAutoLoadAdPlacementIDArray:placementIDArray];
+    
+}
+
+-(void) removeAutoLoadAdPlacementID:(NSString*)placementID{
+    NSLog(@" removeAutoLoadAdPlacementID--%@",placementID);
+    
+    if (placementID == nil) {
+           return;
+    }
+    
+    NSArray *placementIDArray = [self jsonStrToArray:placementID];
+    
+    [[ATRewardedVideoAutoAdManager sharedInstance] removeAutoLoadAdPlacementIDArray:placementIDArray];
+}
+
+-(BOOL) autoLoadRewardedVideoReadyForPlacementID:(NSString*)placementID {
+    NSLog(@"Unity: autoLoadRewardedVideoReadyForPlacementID--%@--%d",placementID,[[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:placementID]);
+    return [[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:placementID];
+}
+
+-(NSString*) getAutoValidAdCaches:(NSString *)placementID{
+    NSArray *array = [[ATRewardedVideoAutoAdManager sharedInstance] checkValidAdCachesWithPlacementID:placementID];
+    NSLog(@"Unity: getAutoValidAdCaches::array = %@", array);
+    return array.jsonString;
+}
+
+-(NSString*) checkAutoAdStatus:(NSString *)placementID {
+    ATCheckLoadModel *checkLoadModel = [[ATRewardedVideoAutoAdManager sharedInstance] checkRewardedVideoLoadStatusForPlacementID:placementID];
+    NSMutableDictionary *statusDict = [NSMutableDictionary dictionary];
+    statusDict[@"isLoading"] = @(checkLoadModel.isLoading);
+    statusDict[@"isReady"] = @(checkLoadModel.isReady);
+    statusDict[@"adInfo"] = checkLoadModel.adOfferInfo;
+    NSLog(@"ATRewardedVideoWrapper::checkAutoAdStatus statusDict = %@", statusDict);
+    return statusDict.jsonString;
+    
+}
+
+-(void) setAutoLocalExtra:(NSString*)placementID customDataJSONString:(NSString*)customDataJSONString{
+    NSLog(@"Unity: setAutoLocalExtra::placementID = %@ customDataJSONString: %@", placementID,customDataJSONString);
+
+    
+    
+    if ([customDataJSONString isKindOfClass:[NSString class]]) {
+        
+        NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[customDataJSONString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        
+        NSMutableDictionary *extra = [NSMutableDictionary dictionary];
+
+        
+        if ([extraDict isKindOfClass:[NSDictionary class]]) {
+            
+            if (extraDict[kLoadExtraUserIDKey] != nil) {
+                extra[kATAdLoadingExtraUserIDKey] = extraDict[kLoadExtraUserIDKey];
+            }
+            if (extraDict[kLoadExtraMediaExtraKey] != nil) { extra[kATAdLoadingExtraMediaExtraKey] = extraDict[kLoadExtraMediaExtraKey];
+            }
+            
+        };
+        
+        
+        
+        [[ATRewardedVideoAutoAdManager sharedInstance] setLocalExtra:extra placementID:placementID];
+    }
+}
+
+-(void) entryAutoAdScenarioWithPlacementID:(NSString*)placementID scenarioID:(NSString*)scenarioID{
+    NSLog(@"Unity: getAutoValidAdCaches::array = %@ scenarioID:%@", placementID,scenarioID);
+
+    [[ATRewardedVideoAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:placementID scenarioID:scenarioID];
+}
+
+-(void) showAutoRewardedVideoWithPlacementID:(NSString*)placementID extraJsonString:(NSString*)extraJsonString {
+    
+    NSDictionary *extraDict = ([extraJsonString isKindOfClass:[NSString class]] && [extraJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil) ? [NSJSONSerialization JSONObjectWithData:[extraJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil] : nil;
+    
+    NSLog(@"ATRewardedVideoWrapper::showAutoRewardedVideoWithPlacementID = %@ extraJsonString = %@", placementID,extraJsonString);
+    
+    NSLog(@"ATRewardedVideoWrapper::extraDict = %@", extraDict);
+    
+    [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:placementID scene:extraDict[kATUnityUtilitiesAdShowingExtraScenarioKey] inViewController:[UIApplication sharedApplication].delegate.window.rootViewController delegate:self];
+}
+
 #pragma mark - delegate
+// ad
+- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    [self invokeCallback:@"startLoadingADSource" placementID:placementID error:nil extra:extra];
+}
+
+- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    [self invokeCallback:@"finishLoadingADSource" placementID:placementID error:nil extra:extra];
+}
+
+- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+    [self invokeCallback:@"failToLoadADSource" placementID:placementID error:error extra:extra];
+}
+
+// bidding
+- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    [self invokeCallback:@"startBiddingADSource" placementID:placementID error:nil extra:extra];
+}
+
+- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    [self invokeCallback:@"finishBiddingADSource" placementID:placementID error:nil extra:extra];
+}
+
+- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+    [self invokeCallback:@"failBiddingADSource" placementID:placementID error:error extra:extra];
+}
+
+
 -(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
     [self invokeCallback:@"OnRewardedVideoLoaded" placementID:placementID error:nil extra:nil];
 }
@@ -138,4 +299,28 @@ NSString *const kLoadExtraMediaExtraKey = @"UserExtraData";
 -(void) rewardedVideoDidRewardSuccessForPlacemenID:(NSString*)placementID extra:(NSDictionary*)extra {
     [self invokeCallback:@"OnRewardedVideoReward" placementID:placementID error:nil extra:extra];
 }
+
+//again
+// rewarded video again
+-(void) rewardedVideoAgainDidStartPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+    [self invokeCallback:@"OnRewardedVideoAdAgainPlayStart" placementID:placementID error:nil extra:extra];
+}
+
+-(void) rewardedVideoAgainDidEndPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+    [self invokeCallback:@"OnRewardedVideoAdAgainPlayEnd" placementID:placementID error:nil extra:extra];
+}
+
+-(void) rewardedVideoAgainDidFailToPlayForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra {
+    error = error != nil ? error : [NSError errorWithDomain:@"com.anythink.Unity3DPackage" code:100001 userInfo:@{NSLocalizedDescriptionKey:@"AT has failed to play video", NSLocalizedFailureReasonErrorKey:@"AT has failed to play video"}];
+    [self invokeCallback:@"OnRewardedVideoAdAgainPlayFailed" placementID:placementID error:error extra:extra];
+}
+
+-(void) rewardedVideoAgainDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+    [self invokeCallback:@"OnRewardedVideoAdAgainPlayClicked" placementID:placementID error:nil extra:extra];
+}
+
+-(void) rewardedVideoAgainDidRewardSuccessForPlacemenID:(NSString*)placementID extra:(NSDictionary*)extra {
+    [self invokeCallback:@"OnAgainReward" placementID:placementID error:nil extra:extra];
+}
+
 @end

@@ -7,19 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <AnyThinkSDK/AnyThinkSDK.h>
-#import "ATAdManager+Native.h"
-#import "ATNativeADView.h"
-#import "ATNativeADConfiguration.h"
-#import "ATNativeAd.h"
-#import "ATNativeRendering.h"
-#import "ATNativeADDelegate.h"
-#import "ATNativeSplashWrapper.h"
-#import "ATNativeBannerWrapper.h"
-#import "ATNativeADCustomEvent.h"
-#import "ATNativeRenderer.h"
-#import "ATNativeADView+Internal.h"
-#import "ATNativeADCache.h"
+#import <AnyThinkNative/ATAdManager+Native.h>
+#import <AnyThinkNative/ATNativeADView.h>
+#import <AnyThinkNative/ATNativeADConfiguration.h>
+#import <AnyThinkNative/ATNativeAd.h>
+#import <AnyThinkNative/ATNativeRendering.h>
+#import <AnyThinkNative/ATNativeADDelegate.h>
+#import <AnyThinkNative/ATNativeSplashWrapper.h>
+#import <AnyThinkNative/ATNativeBannerWrapper.h>
+#import <AnyThinkNative/ATNativeADCustomEvent.h>
+#import <AnyThinkNative/ATNativeRenderer.h>
+#import <AnyThinkNative/ATNativeADView+Internal.h>
+#import <AnyThinkNative/ATNativeADCache.h>
+#import <AnyThinkNative/ATNativeAdOffer.h>
+
 
 //! Project version number for AnyThinkNative.
 FOUNDATION_EXPORT double AnyThinkNativeVersionNumber;

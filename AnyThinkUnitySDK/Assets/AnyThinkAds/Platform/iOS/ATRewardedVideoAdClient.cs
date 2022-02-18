@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AnyThinkAds.Common;
 using AnyThinkAds.Api;
+using AnyThinkAds.ThirdParty.LitJson;
 
 namespace AnyThinkAds.iOS {
 	public class ATRewardedVideoAdClient : IATRewardedVideoAdClient {
@@ -55,8 +56,118 @@ namespace AnyThinkAds.iOS {
 	    	return ATRewardedVideoWrapper.checkAdStatus(placementId);
 	    }
 
+		public void entryScenarioWithPlacementID(string placementId, string scenarioID){
+            Debug.Log("Unity: ATRewardedVideoAdClient::entryScenarioWithPlacementID()");
+			ATRewardedVideoWrapper.entryScenarioWithPlacementID(placementId,scenarioID);
+		}
+
+		public string getValidAdCaches(string placementId)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient::getValidAdCaches()");
+			return ATRewardedVideoWrapper.getValidAdCaches(placementId);
+		}
+
+        // Auto
+		public void addAutoLoadAdPlacementID(string[] placementIDList)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient:addAutoLoadAdPlacementID()");
+
+	     	if (placementIDList != null && placementIDList.Length > 0)
+            {
+				foreach (string placementID in placementIDList)
+        		{
+					ATRewardedVideoWrapper.setClientForPlacementID(placementID, this);
+				}
+
+                string placementIDListString = JsonMapper.ToJson(placementIDList);
+				ATRewardedVideoWrapper.addAutoLoadAdPlacementID(placementIDListString);
+                Debug.Log("addAutoLoadAdPlacementID, placementIDList === " + placementIDListString);
+            }
+            else
+            {
+                Debug.Log("addAutoLoadAdPlacementID, placementIDList = null");
+            } 			
+		}
+
+		public void removeAutoLoadAdPlacementID(string placementId) 
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient:removeAutoLoadAdPlacementID()");
+			ATRewardedVideoWrapper.removeAutoLoadAdPlacementID(placementId);
+		}
+
+		public bool autoLoadRewardedVideoReadyForPlacementID(string placementId) 
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient:autoLoadRewardedVideoReadyForPlacementID()");
+			return ATRewardedVideoWrapper.autoLoadRewardedVideoReadyForPlacementID(placementId);
+		}
+		public string getAutoValidAdCaches(string placementId)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient:getAutoValidAdCaches()");
+			return ATRewardedVideoWrapper.getAutoValidAdCaches(placementId);
+		}
+		public string checkAutoAdStatus(string placementId) {
+	    	Debug.Log("Unity: ATRewardedVideoAdClient::checkAutoAdStatus()");
+	    	return ATRewardedVideoWrapper.checkAutoAdStatus(placementId);
+	    }
+
+		public void setAutoLocalExtra(string placementId, string mapJson) 
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient:setAutoLocalExtra()");
+			ATRewardedVideoWrapper.setAutoLocalExtra(placementId, mapJson);
+		}
+		public void entryAutoAdScenarioWithPlacementID(string placementId, string scenarioID) 
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient:entryAutoAdScenarioWithPlacementID()");
+			ATRewardedVideoWrapper.entryAutoAdScenarioWithPlacementID(placementId, scenarioID);
+		}
+		public void showAutoAd(string placementId, string mapJson) 
+		{
+	    	Debug.Log("Unity: ATRewardedVideoAdClient::showAutoAd()");
+	    	ATRewardedVideoWrapper.showAutoRewardedVideo(placementId, mapJson);
+	    }
+
+		//auto callbacks
+	    public void startLoadingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATRewardedVideoAdClient::startLoadingADSource()");
+            if (anyThinkListener != null) anyThinkListener.startLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }
+	    public void finishLoadingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATRewardedVideoAdClient::finishLoadingADSource()");
+            if (anyThinkListener != null) anyThinkListener.finishLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }	
+	    public void failToLoadADSource(string placementId, string callbackJson,string code, string error) 
+		{
+	        Debug.Log("Unity: ATRewardedVideoAdClient::failToLoadADSource()");
+	        if (anyThinkListener != null) anyThinkListener.failToLoadADSource(placementId,new ATCallbackInfo(callbackJson), code, error);
+	    }
+		public void startBiddingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATRewardedVideoAdClient::startBiddingADSource()");
+            if (anyThinkListener != null) anyThinkListener.startBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }
+	    public void finishBiddingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATRewardedVideoAdClient::finishBiddingADSource()");
+            if (anyThinkListener != null) anyThinkListener.finishBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }	
+	    public void failBiddingADSource(string placementId, string callbackJson,string code, string error) 
+		{
+	        Debug.Log("Unity: ATRewardedVideoAdClient::failBiddingADSource()");
+	        if (anyThinkListener != null) anyThinkListener.failBiddingADSource(placementId,new ATCallbackInfo(callbackJson), code, error);
+	    }
+
+
+
+
+
+
+
+		
+
 		//Callbacks
-	    public void onRewardedVideoAdLoaded(string placementId) {
+		public void onRewardedVideoAdLoaded(string placementId) {
 	        Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdLoaded()");
 	        if(anyThinkListener != null) anyThinkListener.onRewardedVideoAdLoaded(placementId);
 	    }
@@ -95,5 +206,55 @@ namespace AnyThinkAds.iOS {
             Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoReward()");
             if (anyThinkListener != null) anyThinkListener.onReward(placementId, new ATCallbackInfo(callbackJson));
         }
+
+		//--------again callback-------
+		public void onRewardedVideoAdAgainPlayStart(string placementId, string callbackJson)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdAgainPlayStart()");
+			if (anyThinkListener != null && anyThinkListener is ATRewardedVideoExListener)
+			{
+				((ATRewardedVideoExListener)anyThinkListener).onRewardedVideoAdAgainPlayStart(placementId, new ATCallbackInfo(callbackJson));
+			}
+		}
+
+		public void onRewardedVideoAdAgainPlayEnd(string placementId, string callbackJson)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdAgainPlayEnd()");
+			if (anyThinkListener != null && anyThinkListener is ATRewardedVideoExListener)
+			{
+				((ATRewardedVideoExListener)anyThinkListener).onRewardedVideoAdAgainPlayEnd(placementId, new ATCallbackInfo(callbackJson));
+			}
+		}
+
+
+		public void onRewardedVideoAdAgainPlayFailed(string placementId, string code, string error)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdAgainPlayFailed()");
+			if (anyThinkListener != null && anyThinkListener is ATRewardedVideoExListener)
+			{
+				((ATRewardedVideoExListener)anyThinkListener).onRewardedVideoAdAgainPlayFail(placementId, code, error);
+			}
+		}
+
+
+		public void onRewardedVideoAdAgainPlayClicked(string placementId, string callbackJson)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient::onRewardedVideoAdAgainPlayClicked()");
+			if (anyThinkListener != null && anyThinkListener is ATRewardedVideoExListener)
+			{
+				((ATRewardedVideoExListener)anyThinkListener).onRewardedVideoAdAgainPlayClicked(placementId, new ATCallbackInfo(callbackJson));
+			}
+		}
+
+
+		public void onAgainReward(string placementId, string callbackJson)
+		{
+			Debug.Log("Unity: ATRewardedVideoAdClient::onAgainReward()");
+			if (anyThinkListener != null && anyThinkListener is ATRewardedVideoExListener)
+			{
+				((ATRewardedVideoExListener)anyThinkListener).onAgainReward(placementId, new ATCallbackInfo(callbackJson));
+			}
+		}
+
 	}
 }

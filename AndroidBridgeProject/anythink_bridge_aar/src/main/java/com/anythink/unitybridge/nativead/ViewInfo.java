@@ -16,13 +16,7 @@ import com.anythink.unitybridge.MsgTools;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Copyright (C) 2018 {XX} Science and Technology Co., Ltd.
- *
- * @version V{XX_XX}
- * @Author ：Created by zhoushubin on 2018/8/7.
- * @Email: zhoushubin@salmonads.com
- */
+
 public class ViewInfo {
     protected class INFO {
         protected int mX = 0;
@@ -32,6 +26,7 @@ public class ViewInfo {
         protected String bgcolor = "";
         protected int textSize = 0;
         protected String textcolor = "";
+        protected boolean isCustomClick = false;
 
         protected String name;
 
@@ -47,7 +42,7 @@ public class ViewInfo {
             return;
         }
 
-        if (childView == null || pViewInfo.mWidth < 0 || pViewInfo.mHeight < 0) {
+        if (childView == null || pViewInfo.mWidth < 0 || (pViewInfo.mHeight < 0 && pViewInfo.mHeight != ViewGroup.LayoutParams.WRAP_CONTENT)) {
             Log.e("add2activity--[" + pViewInfo.name + "]", " config error ,show error !");
             return;
         }
@@ -95,10 +90,10 @@ public class ViewInfo {
 //    }
 
 
-    public static void addNativeAdView2Activity(final Activity pActivity, final ViewInfo pViewInfo, final ATNativeAdView mATNativeAdView) {
+    public static void addNativeAdView2Activity(final Activity pActivity, final ViewInfo pViewInfo, final ATNativeAdView mATNativeAdView, final int parentGravity) {
 
         if (pActivity == null || mATNativeAdView == null) {
-            MsgTools.pirntMsg("pActivity or native ad view is null");
+            MsgTools.printMsg("pActivity or native ad view is null");
             return;
         }
 
@@ -118,18 +113,23 @@ public class ViewInfo {
 
                 if(pViewInfo.rootView != null){
                     FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(pViewInfo.rootView.mWidth, pViewInfo.rootView.mHeight);
-                    layoutParams.leftMargin = pViewInfo.rootView.mX;
-                    layoutParams.topMargin = pViewInfo.rootView.mY;
+
+                    if (parentGravity != -1) {
+                        layoutParams.gravity = parentGravity;
+                    } else {
+                        layoutParams.leftMargin = pViewInfo.rootView.mX;
+                        layoutParams.topMargin = pViewInfo.rootView.mY;
+                    }
 
                     if(!TextUtils.isEmpty(pViewInfo.rootView.bgcolor)){
                         mATNativeAdView.setBackgroundColor(Color.parseColor(pViewInfo.rootView.bgcolor));
                     }
 
-                    MsgTools.pirntMsg("Add native view to content start....");
+                    MsgTools.printMsg("Add native view to content start....");
                     pActivity.addContentView(mATNativeAdView, layoutParams);
-                    MsgTools.pirntMsg("Add native view to content end....");
+                    MsgTools.printMsg("Add native view to content end....");
                 } else {
-                    MsgTools.pirntMsg("pViewInfo.rootView is null");
+                    MsgTools.printMsg("pViewInfo.rootView is null");
                 }
 
 
@@ -138,7 +138,7 @@ public class ViewInfo {
     }
 
 
-    public INFO rootView, imgMainView, IconView, titleView, descView, adLogoView, ctaView, click;
+    public INFO rootView, imgMainView, IconView, titleView, descView, adLogoView, ctaView, dislikeView;
 
 
     public static ViewInfo createDefualtView(Activity pActivity) {
@@ -216,6 +216,15 @@ public class ViewInfo {
         _viewInfo.ctaView.mY = _viewInfo.rootView.mX + 0;
         _viewInfo.ctaView.name = "cta_def";
 
+        _viewInfo.dislikeView.textSize = 12;
+        _viewInfo.dislikeView.textcolor = "0X000000";
+        _viewInfo.dislikeView.bgcolor = "0X000000";
+        _viewInfo.dislikeView.mWidth = 25;
+        _viewInfo.dislikeView.mHeight = 25;
+        _viewInfo.dislikeView.mX = _viewInfo.rootView.mX + 0;
+        _viewInfo.dislikeView.mY = _viewInfo.rootView.mX + 0;
+        _viewInfo.dislikeView.name = "dislike_def";
+
         return _viewInfo;
     }
 
@@ -243,6 +252,9 @@ public class ViewInfo {
         }
         if (_jsonObject.has("textSize")) {
             _info.textSize = _jsonObject.getInt("textSize");
+        }
+        if (_jsonObject.has("isCustomClick")) {
+            _info.isCustomClick = _jsonObject.getBoolean("isCustomClick");
         }
 
         _info.name = name;

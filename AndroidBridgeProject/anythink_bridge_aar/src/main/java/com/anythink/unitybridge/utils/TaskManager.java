@@ -11,13 +11,11 @@ public class TaskManager {
 
     private static TaskManager sSelf = null;
 
-    //各种池子
     private ExecutorService mSinglePool = null;
 
     private ThreadPoolExecutor mAPKDownPool = null;
 
     protected TaskManager() {
-        //初始化各种池子
         mSinglePool = Executors.newSingleThreadExecutor();
     }
 
@@ -58,9 +56,6 @@ public class TaskManager {
         }
     }
 
-    /**
-     * 释放资源
-     */
     public void release() {
         mSinglePool.shutdown();
         mAPKDownPool.shutdown();

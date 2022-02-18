@@ -27,6 +27,11 @@ extern NSString *const kATADDelegateExtraScenarioRewardNameKey;
 extern NSString *const kATADDelegateExtraScenarioRewardNumberKey;
 extern NSString *const kATADDelegateExtraPlacementRewardNameKey;
 extern NSString *const kATADDelegateExtraPlacementRewardNumberKey;
+extern NSString *const kATADDelegateExtraExtInfoKey;
+extern NSString *const kATADDelegateExtraOfferIDKey;
+extern NSString *const kATADDelegateExtraCreativeIDKey;
+extern NSString *const kATADDelegateExtraIsDeeplinkKey;
+extern NSString *const kATADDelegateExtraRVUserCustomData;
 
 extern NSString *const ATADShowingErrorDomain;
 
@@ -54,6 +59,7 @@ extern NSInteger const ATADLoadingErrorCodeNoUnitGroupsFoundInPlacement;
 extern NSInteger const ATADLoadingErrorCodeUnitGroupsFilteredOut;
 extern NSInteger const ATADLoadingErrorCodeFailureTooFrequent;
 extern NSInteger const ATADLoadingErrorCodeLoadCapsExceeded;
+extern NSInteger const ATADLoadingErrorCodeUnitGroupsExpired;
 
 extern NSInteger const ATADLoadingADXFailedCode;
 
@@ -61,59 +67,66 @@ extern NSString *const ATSDKInitErrorDomain;
 extern NSInteger const ATSDKInitErrorCodeDataConsentNotSet;
 extern NSInteger const ATSDKInitErrorCodeDataConsentForbidden;
 
-extern NSString *const kNetworkNameFyber;
-extern NSString *const kNetworkNameStartApp;
-extern NSString *const kNetworkNameFacebook;
-extern NSString *const kNetworkNameInmobi;
-extern NSString *const kNetworkNameAdmob;
-extern NSString *const kNetworkNameFlurry;
-extern NSString *const kNetworkNameMintegral;
-extern NSString *const kNetworkNameApplovin;
-extern NSString *const kNetworkNameGDT;
-extern NSString *const kNetworkNameMopub;
-extern NSString *const kNetworkNameTapjoy;
-extern NSString *const kNetworkNameChartboost;
-extern NSString *const kNetworkNameIronSource;
-extern NSString *const kNetworkNameVungle;
-extern NSString *const kNetworkNameAdColony;
-extern NSString *const kNetworkNameUnityAds;
-extern NSString *const kNetworkNameTT;
-extern NSString *const kNetworkNameOneway;
-extern NSString *const kNetworkNameAppnext;
-extern NSString *const kNetworkNameYeahmobi;
-extern NSString *const kNetworkNameBaidu;
-extern NSString *const kNetworkNameMobPower;
-extern NSString *const kNetworkNameNend;
-extern NSString *const kNetworkNameMaio;
-extern NSString *const kNetworkNameSigmob;
-extern NSString *const kNetworkNameMyOffer;
-extern NSString *const kNetworkNameKS;
-extern NSString *const kNetworkNameOgury;
-extern NSString *const kNetworkNameGoogleAdManager;
-extern NSString *const kNetworkNameADX;
-extern NSString *const kNetworkNameHelium;
+extern NSString *const kATNetworkNameFyber;
+extern NSString *const kATNetworkNameStartApp;
+extern NSString *const kATNetworkNameFacebook;
+extern NSString *const kATNetworkNameInmobi;
+extern NSString *const kATNetworkNameAdmob;
+extern NSString *const kATNetworkNameFlurry;
+extern NSString *const kATNetworkNameMintegral;
+extern NSString *const kATNetworkNameApplovin;
+extern NSString *const kATNetworkNameGDT;
+extern NSString *const kATNetworkNameMopub;
+extern NSString *const kATNetworkNameTapjoy;
+extern NSString *const kATNetworkNameChartboost;
+extern NSString *const kATNetworkNameIronSource;
+extern NSString *const kATNetworkNameVungle;
+extern NSString *const kATNetworkNameAdColony;
+extern NSString *const kATNetworkNameUnityAds;
+extern NSString *const kATNetworkNameTT;
+extern NSString *const kATNetworkNamePangle;
+extern NSString *const kATNetworkNameOneway;
+extern NSString *const kATNetworkNameAppnext;
+extern NSString *const kATNetworkNameYeahmobi;
+extern NSString *const kATNetworkNameBaidu;
+extern NSString *const kATNetworkNameMobPower;
+extern NSString *const kATNetworkNameNend;
+extern NSString *const kATNetworkNameMaio;
+extern NSString *const kATNetworkNameSigmob;
+extern NSString *const kATNetworkNameMyOffer;
+extern NSString *const kATNetworkNameKS;
+extern NSString *const kATNetworkNameOgury;
+extern NSString *const kATNetworkNameGoogleAdManager;
+extern NSString *const kATNetworkNameADX;
+extern NSString *const kATNetworkNameHelium;
+extern NSString *const kATNetworkNameMintegralOnlineApi;
+extern NSString *const kATNetworkNameGDTOnlineApi;
+extern NSString *const kATNetworkNameKidoz;
+extern NSString *const kATNetworkNameMyTarget;
+extern NSString *const kATNetworkNameMobrain;
+extern NSString *const kATNetworkNameMax;
+extern NSString *const kATNetworkNameklevin;
 
+extern NSString *const kATInmobiGDPRStringKey;
+extern NSString *const kATInmobiConsentStringKey;
 
-extern NSString *const kInmobiGDPRStringKey;
-extern NSString *const kInmobiConsentStringKey;
+extern NSString *const kATAdmobConsentStatusKey;
+extern NSString *const kATAdmobUnderAgeKey;
 
-extern NSString *const kAdmobConsentStatusKey;
-extern NSString *const kAdmobUnderAgeKey;
+extern NSString *const kATApplovinConscentStatusKey;
+extern NSString *const kATApplovinUnderAgeKey;
 
-extern NSString *const kApplovinConscentStatusKey;
-extern NSString *const kApplovinUnderAgeKey;
+extern NSString *const kATTapjoyConsentValueKey;
+extern NSString *const kATTapjoyGDPRSubjectionKey;
 
-extern NSString *const kTapjoyConsentValueKey;
-extern NSString *const kTapjoyGDPRSubjectionKey;
+extern NSString *const kATFlurryConsentGDPRScopeFlagKey;
+extern NSString *const kATFlurryConsentConsentStringKey;
 
-extern NSString *const kFlurryConsentGDPRScopeFlagKey;
-extern NSString *const kFlurryConsentConsentStringKey;
+extern NSString *const kATAdColonyGDPRConsiderationFlagKey;
+extern NSString *const kATAdColonyGDPRConsentStringKey;
 
-extern NSString *const kAdColonyGDPRConsiderationFlagKey;
-extern NSString *const kAdColonyGDPRConsentStringKey;
-
-extern NSString *const kYeahmobiGDPRConsentValueKey;
-extern NSString *const kYeahmobiGDPRConsentTypeKey;
+extern NSString *const kATYeahmobiGDPRConsentValueKey;
+extern NSString *const kATYeahmobiGDPRConsentTypeKey;
 
 extern NSString *const kATCustomDataUserIDKey;//string
 extern NSString *const kATCustomDataAgeKey;//Integer
@@ -143,6 +156,9 @@ extern NSString *const kATDeviceDataInfoOrientKey;
 extern NSString *const kATDeviceDataInfoIDFAKey;
 extern NSString *const kATDeviceDataInfoIDFVKey;
 
+extern NSString *const kATAdLoadingExtraBUAdLoadTypeKey;
+
+
 typedef NS_ENUM(NSInteger, ATUserLocation) {
     ATUserLocationUnknown = 0,
     ATUserLocationInEU = 1,
@@ -156,6 +172,27 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
     ATDataConsentSetNonpersonalized = 2
 };
 
+typedef NS_ENUM(NSUInteger, ATNetworkTerritory) {
+    ATNetworkTerritory_CN = 1,
+    ATNetworkTerritory_NO_CN,
+};
+
+typedef NS_ENUM(NSUInteger, ATAreaCode) {
+    ATAreaCodeGlobal = 1,
+    ATAreaCodeChinese_mainland,
+};
+
+typedef NS_ENUM(NSInteger, ATBUAdLoadType) {
+    ATBUAdLoadTypeUnknown                    = -1,//Unknown
+    ATBUAdLoadTypePreload                    = 1,//Preload resources
+    ATBUAdLoadTypeLoad                       = 3,//Load resources in real time
+};
+
+typedef NS_ENUM(NSInteger, ATPersonalizedAdState) {
+    ATPersonalizedAdStateType = 1,
+    ATNonpersonalizedAdStateType = 2
+};
+
 @interface ATAPI : NSObject
 
 +(NSDictionary<NSNumber*, NSString*>*)networkNameMap;
@@ -164,6 +201,23 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
 +(instancetype)sharedInstance;
 +(BOOL) getMPisInit;
 +(void) setMPisInit:(BOOL)MPisInit;
+
++ (void)testModeInfo;
+
+-(void) setLocationLongitude:(double)longitude dimension:(double)dimension;
+
+-(void) setWXStatus:(BOOL)isInstallWX;
+
++ (void) setInitializationType:(int)type;
+
+/*
+ only for adx，onlineApi，MyOffer  banner&splash adLogo，NO by default
+ */
++(void) setAdLogoVisible:(BOOL)adLogoVisible;
+/*
+ only for pangle，Territory_CN by default
+ */
++ (void)setNetworkTerritory:(ATNetworkTerritory)territory;
 /**
  * Inspect the error parameter to see what's the matter.
  */
@@ -180,6 +234,12 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
 -(BOOL)inDataProtectionArea;
 
 -(void) getUserLocationWithCallback:(void(^)(ATUserLocation location))callback;
+
+- (void) getAreaSuccess:(void(^)(NSString *areaCodeStr))success
+                failure: (void(^)(NSError *error))failure;
+
+- (void) setUserDataArea:(ATAreaCode)areaCode;
+
 
 -(NSString*)psID;
     
@@ -199,12 +259,12 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  * Set network consent info individually; according to the network specifications, types for the info you should provide for the networks should be as follows:
  * Mintegral: dictionary, in which you can either set @YES/@NO for key @0 to allow/prevent all three types of data collection(example, @{@0:@YES}), or you can set @YES/@NO each for @1, @2, @3 keys respectively(example, @{@1:@YES, @2:@NO, @3:@YES});for more detailed infomation, please refer to its official website.
  * Inmobi: A dictionary containing the follow keys and values:
-    1) An string, @"0" means user not being in GDPR area, @"1" otherwise, with key kInmobiGDPRStringKey
-    2) An string, @"true" means user having granted consent, @"false" otherwise with key kInmobiConsentStringKey
+    1) An string, @"0" means user not being in GDPR area, @"1" otherwise, with key kATInmobiGDPRStringKey
+    2) An string, @"true" means user having granted consent, @"false" otherwise with key kATInmobiConsentStringKey
  * Mopub: BOOL wrapped as an NSNumber
  * Admob: A dictionary containing the follow keys and values:
- *       1) An NSInteger wrapped as an NSNumber specifying the consent status(0=unknown, 1=non personalized or 2=personalized), under the key kAdmobConsentStatusKey
- *       2) A BOOL wrapped as an NSNumber indicating whether you as a developer are aware that the user is under the age of conscent, under the key kAdmobUnderAgeKey
+ *       1) An NSInteger wrapped as an NSNumber specifying the consent status(0=unknown, 1=non personalized or 2=personalized), under the key kATAdmobConsentStatusKey
+ *       2) A BOOL wrapped as an NSNumber indicating whether you as a developer are aware that the user is under the age of conscent, under the key kATAdmobUnderAgeKey
  * Applovin: A dictionary containing the following keys and values:
  *       1) A BOOL wrapped as an NSNumber indicating if user has provided consent for information sharing with AppLovin, under the key
  *       2) A BOOL wrapped as an NSNumber indicating if the user is age restricted
@@ -229,17 +289,17 @@ typedef NS_ENUM(NSInteger, ATDataConsentSet) {
  * UnityAds: A BOOL wrapped as an NSNumber.
 
  * Example: {
-            kNetworkNameMintegral:@{@1:@YES, @2:@YES, @3:@NO},
-            kNetworkNameInmobi:@YES,
-            kNetworkNameMopub:@NO,
-            kNetworkNameAdmob:@{kAdmobConsentStatusKey:@1, kAdmobUnderAgeKey:@NO},
-            kNetworkNameApplovin:@{kApplovinConscentStatusKey:@YES, kApplovinUnderAgeKey:@NO},
-            kNetworkNameTapjoy:@{kTapjoyConsentValueKey:@"0",kTapjoyGDPRSubjectionKey:@NO},
-            kNetworkNameChartboost:@NO,
-            kNetworkNameVungle:@1,
-            kNetworkNameIronSource:NO,
-            kNetworkNameAdColony:@{kAdColonyGDPRConsentStringKey:@"0",kAdColonyGDPRConsiderationFlagKey:@NO},
-            kNetworkNameUnityAds:@YES
+            kATNetworkNameMintegral:@{@1:@YES, @2:@YES, @3:@NO},
+            kATNetworkNameInmobi:@YES,
+            kATNetworkNameMopub:@NO,
+            kATNetworkNameAdmob:@{kATAdmobConsentStatusKey:@1, kATAdmobUnderAgeKey:@NO},
+            kATNetworkNameApplovin:@{kATApplovinConscentStatusKey:@YES, kATApplovinUnderAgeKey:@NO},
+            kATNetworkNameTapjoy:@{kATTapjoyConsentValueKey:@"0",kATTapjoyGDPRSubjectionKey:@NO},
+            kATNetworkNameChartboost:@NO,
+            kATNetworkNameVungle:@1,
+            kATNetworkNameIronSource:NO,
+            kATNetworkNameAdColony:@{kATAdColonyGDPRConsentStringKey:@"0",kATAdColonyGDPRConsiderationFlagKey:@NO},
+            kATNetworkNameUnityAds:@YES
  *          }
  */
 @property(nonatomic) NSDictionary *networkConsentInfo;
@@ -271,4 +331,18 @@ set denied Upload Info list for sdk to Control report
 -(void) setDeniedUploadInfoArray:(NSArray *)uploadInfoArray;
 -(NSArray*) deniedUploadInfoArray;
 -(BOOL) isContainsForDeniedUploadInfoArray:(NSString *)key;
+
+/*
+set header bidding test mode, only support incoming device idfa. setLogEnabled must be turned on before use
+*/
++(void) setHeaderBiddingTestModeWithDeviceID:(NSString *)idfa;
+
+/**
+ Set personalized recommendation state
+ @param state 1 is to close personalized recommendation, other values or not set to open
+ */
+-(void) setPersonalizedAdState:(ATPersonalizedAdState)state;
+-(ATPersonalizedAdState) getPersonalizedAdState;
 @end
+
+

@@ -5,7 +5,7 @@ using System.Reflection;
 using System;
 
 using AnyThinkAds.Common;
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 
 
 namespace AnyThinkAds.Api
@@ -34,9 +34,7 @@ namespace AnyThinkAds.Api
 		 */
         public void loadVideoAd(string placementId, Dictionary<string,string> pairs)
         {
-            
-            client.loadVideoAd(placementId, Json.Serialize(pairs));
-
+            client.loadVideoAd(placementId, JsonMapper.ToJson(pairs));
         }
 
 		public void setListener(ATRewardedVideoListener listener)
@@ -44,56 +42,42 @@ namespace AnyThinkAds.Api
             client.setListener(listener);
         }
 
-		public void addsetting(string placementId,Dictionary<string,object> pairs){
-			client.addsetting (placementId,Json.Serialize(pairs));
-		}
         public bool hasAdReady(string placementId)
         {
             return client.hasAdReady(placementId);
-
         }
 
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID)
+        {
+            client.entryScenarioWithPlacementID(placementId,scenarioID);
+        }
+        
         public string checkAdStatus(string placementId)
         {
             return client.checkAdStatus(placementId);
-
         }
 
-        public void setUserData(string placementId, string userId, string customData)
+        public string getValidAdCaches(string placementId)
         {
-            client.setUserData(placementId, userId, customData);
-
+            return client.getValidAdCaches(placementId);
         }
 
         public void showAd(string placementId)
         {
-            client.showAd(placementId, Json.Serialize(new Dictionary<string, string>()));
+            client.showAd(placementId, JsonMapper.ToJson(new Dictionary<string, string>()));
         }
 
         public void showAd(string placementId, Dictionary<string, string> pairs)
         {
-            client.showAd(placementId, Json.Serialize(pairs));
+            client.showAd(placementId, JsonMapper.ToJson(pairs));
         }
-
-        public void cleanAd(string placementId)
-        {
-            client.cleanAd(placementId);
-        }
-
-        public void onApplicationForces(string placementId)
-        {
-            client.onApplicationForces(placementId);
-        }
-
-        public void onApplicationPasue(string placementId)
-        {
-            client.onApplicationPasue(placementId);
-        }
-
+                
         public IATRewardedVideoAdClient GetATRewardedClient()
         {
             return AnyThinkAds.ATAdsClientFactory.BuildRewardedVideoAdClient();
         }
+
+
 
     }
 }

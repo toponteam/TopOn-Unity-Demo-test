@@ -23,6 +23,12 @@ typedef NS_ENUM(NSInteger, ATADShowType) {
     ATADShowTypeSerial = 1
 };
 
+typedef enum : NSUInteger {
+    ATLoadingApiUnknown,
+    ATLoadingApiTypeOld,
+    ATLoadingApiTypeNew,
+} ATLoadingApiType;
+
 typedef NS_ENUM(NSInteger, ATAdFormat) {
     ATAdFormatNative = 0,
     ATAdFormatRewardedVideo = 1,
@@ -30,8 +36,14 @@ typedef NS_ENUM(NSInteger, ATAdFormat) {
     ATAdFormatInterstitial = 3,
     ATAdFormatSplash = 4
 };
-extern NSString *const kPlacementModelCacheDateKey;
-extern NSString *const kPlacementModelCustomDataKey;
+
+typedef NS_ENUM(NSInteger, ATRevenueToPlatform) {
+    ATRevenueToPlatformAdjust = 1,
+    ATRevenueToPlatformAppsflyer = 2,
+    ATRevenueToPlatformTenjin
+};
+extern NSString *const kATPlacementModelCacheDateKey;
+extern NSString *const kATPlacementModelCustomDataKey;
 @interface ATPlacementModelExtra:ATModel
 @property(nonatomic, readonly) BOOL cachesPlacementSetting;
 @property(nonatomic, readonly) NSTimeInterval defaultAdSourceLoadingDelay;
@@ -40,6 +52,16 @@ extern NSString *const kPlacementModelCustomDataKey;
 @property(nonatomic, readonly) NSInteger countdown;
 @property(nonatomic, readonly) BOOL allowsSkip;
 @property(nonatomic, readonly) BOOL closeAfterCountdownElapsed;
+@end
+
+@interface ATPlatfromInfo : NSObject
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+@property(nonatomic) ATRevenueToPlatform platform;
+@property(nonatomic) NSInteger dataType;
+@property(nonatomic, copy) NSString *token;
+
 @end
 
 @interface ATPlacementModel : ATModel
@@ -78,14 +100,27 @@ extern NSString *const kPlacementModelCustomDataKey;
 @property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* unitGroups;
 @property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* headerBiddingUnitGroups;
 @property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* S2SHeaderBiddingUnitGroups;
+@property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* olApiUnitGroups;
+@property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* inhouseUnitGroups;
+@property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* bksUnitGroups;
+@property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* bottomListUnitGroups;
+@property(nonatomic, strong) NSArray <ATUnitGroupModel*>* directOfferHeaderBiddingUnitGroups;
+
+@property(nonatomic, readonly) NSTimeInterval bottomRreqts;     // bottomAd dalay request time
+
 @property(nonatomic, readonly) NSTimeInterval headerBiddingRequestTimeout;
 @property(nonatomic, readonly) NSTimeInterval headerBiddingRequestTolerateInterval;
 @property(nonatomic, readonly) NSString *S2SBidRequestAddress;
+@property(nonatomic, readonly) NSString *waterFallBidRequestAddress;
 
 @property(nonatomic, readonly) NSTimeInterval loadCapDuration;
 @property(nonatomic, readonly) NSInteger loadCap;
 
 @property(nonatomic, readonly) NSInteger expectedNumberOfOffers;
+
+
+@property(nonatomic, readonly) NSTimeInterval bidWaitTimeout;
+@property(nonatomic, readonly) NSTimeInterval reqWaitTimeout;
 
 @property(nonatomic, readonly) NSTimeInterval loadFailureInterval;
 @property(nonatomic, readonly) NSTimeInterval offerLoadingTimeout;
@@ -111,9 +146,61 @@ extern NSString *const kPlacementModelCustomDataKey;
 //extra
 @property(nonatomic, readonly) NSDictionary *callback;
 
+@property(nonatomic, readonly) NSInteger FBHBTimeOut;
+
 @property(nonatomic, readonly) NSDictionary* adxSettingDict;
 @property(nonatomic, readonly) NSArray<ATUnitGroupModel*>* adxUnitGroups;
 
+@property(nonatomic, readonly) NSDictionary* olApiSettingDict;
+
+@property(nonatomic, readonly) NSInteger waterfallCheckTime;
+
+@property(nonatomic, readonly) NSString *currency;
+@property(nonatomic, readonly) NSString *exchangeRate;
+
+@property(nonatomic, readonly) NSArray *bURLNotificationFirms;
+
+
+// v5.7.10
+@property(nonatomic, readonly) NSString *campaign;
 
 -(Class) adManagerClass;
+
+- (NSDictionary *)revenueToPlatforms;
+
+/**
+ In order to solve the problem of inconsistency in legal tender. If the current ecpm currency is USD, this method returns NO.
+ */
+//- (BOOL)needConvertPrice;
+
+/**
+ If the current legal currency of ecpm is not USD, this method will calculate the corresponding price according to the latest exchange rate.
+ */
+//- (NSString *)convertedPrice:(NSString *)price;
+
+//todo: just for in-house list. It's not a good solution.
+@property(nonatomic, copy) NSArray<ATUnitGroupModel*>* waterfallA;
+
+
+@property(nonatomic, copy) NSArray *directOfferUnitIDArray;
+
+
+// v5.7.56+
+@property(nonatomic, readonly) NSInteger encryptFlag;
+@property(nonatomic, readonly, copy) NSString *encryptPublicKey;
+
+/**
+ Maximum waiting time for s2s HB adSource to get buyeruid
+ */
+@property(nonatomic, readonly) NSInteger getBuyeruIdWaitTime;
+
+@property(nonatomic, readonly, copy) NSString *inhouseUrl;
+@property(nonatomic, readonly, copy) NSString *thirdInhouseUrl; // bks url of third plantforms
+
+@property(nonatomic, readonly) NSString *exchRateC2U;
+
+@property(nonatomic) ATLoadingApiType loadingApiType;
+
+@property(nonatomic, assign) BOOL isExistHBAdSource;
+
 @end

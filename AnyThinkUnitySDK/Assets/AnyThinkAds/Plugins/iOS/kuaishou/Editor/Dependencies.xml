@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><dependencies>
+    <iosPods>
+        <iosPod name="KSAdSDK" version="3.3.18.1" />
+        <iosPod name="SDWebImage" />
+    </iosPods>
+</dependencies>

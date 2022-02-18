@@ -30,34 +30,34 @@ namespace AnyThinkAds.Common
 		 * 
 		 */
         string checkAdStatus(string placementId);
-        /***
-		 * 设置用户id
-		 * @param placementId 
-		 * @param userid 用户id
-		 * @param customData  其他数据
-		 */
-        void setUserData(string placementId,string userId, string customData);
 		/***
 		 * 显示广告
 		 */
         void showAd(string placementId, string mapJson);
+
 		/***
-		 * 
+		 * 获取所有可用缓存广告
 		 */
-        void cleanAd(string placementId);
-		/**
-		 * 显示屏幕
-		 */
-        void onApplicationForces(string placementId);
-		/***
-		 * 暂停屏幕
-		 */ 
-        void onApplicationPasue(string placementId);
-		/**
-		 * 设置各种平台的私有信息
-		 * 如:gdrp等信息
-		 * 参数可以参考demo
-		 */ 
-		void addsetting (string placementId,string json);
-    }
+		string getValidAdCaches(string placementId);
+
+		void entryScenarioWithPlacementID(string placementId, string scenarioID);
+
+
+        string checkAutoAdStatus(string placementId);
+
+		void addAutoLoadAdPlacementID(string[] placementIDList);
+
+        void removeAutoLoadAdPlacementID(string placementId);
+
+		bool autoLoadRewardedVideoReadyForPlacementID(string placementId);
+
+		string getAutoValidAdCaches(string placementId);
+
+        void setAutoLocalExtra(string placementId, string mapJson);
+
+        void entryAutoAdScenarioWithPlacementID(string placementId, string scenarioID);
+
+		void showAutoAd(string placementId, string mapJson);
+
+	}
 }

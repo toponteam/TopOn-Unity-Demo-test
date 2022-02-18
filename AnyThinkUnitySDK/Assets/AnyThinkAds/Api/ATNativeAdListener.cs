@@ -39,5 +39,22 @@ namespace AnyThinkAds.Api
 		 */
         void onAdCloseButtonClicked(string placementId, ATCallbackInfo callbackInfo);
 
+
+		void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+
+		void finishLoadingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+
+		void failToLoadADSource(string placementId,ATCallbackInfo callbackInfo,string code, string message);
+
+		void startBiddingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void finishBiddingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void failBiddingADSource(string placementId,ATCallbackInfo callbackInfo,string code, string message);
+
+
+
     }
 }

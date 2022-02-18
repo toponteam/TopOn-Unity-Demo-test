@@ -1,0 +1,6 @@
+framework module AnyThinkKlevinAdapter {
+  umbrella header "AnyThinkKlevinAdapter.h"
+
+  export *
+  module * { export * }
+}

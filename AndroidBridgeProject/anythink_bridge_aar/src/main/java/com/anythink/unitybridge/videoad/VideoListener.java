@@ -1,27 +1,45 @@
 package com.anythink.unitybridge.videoad;
 
 
-/**
- * Copyright (C) 2018 {XX} Science and Technology Co., Ltd.
- *
- * @version V{XX_XX}
- * @Author ：Created by zhoushubin on 2018/8/3.
- * @Email: zhoushubin@salmonads.com
- */
 public interface VideoListener {
-    public void onRewardedVideoAdLoaded(String unitId); //广告加载成功
+    public void onRewardedVideoAdLoaded(String unitId);
 
-    public void onRewardedVideoAdFailed(String unitId, String code, String error);//广告加载失败
+    public void onRewardedVideoAdFailed(String unitId, String code, String error);
 
-    public void onRewardedVideoAdPlayStart(String unitId, String callbackJson);//开始播放
+    public void onRewardedVideoAdPlayStart(String unitId, String callbackJson);
 
-    public void onRewardedVideoAdPlayEnd(String unitId, String callbackJson);//结束播放
+    public void onRewardedVideoAdPlayEnd(String unitId, String callbackJson);
 
-    public void onRewardedVideoAdPlayFailed(String unitId, String code, String error);//播放失败
+    public void onRewardedVideoAdPlayFailed(String unitId, String code, String error);
 
-    public void onRewardedVideoAdClosed(String unitId, boolean isRewarded, String callbackJson);//广告关闭
+    public void onRewardedVideoAdClosed(String unitId, boolean isRewarded, String callbackJson);
 
-    public void onRewardedVideoAdPlayClicked(String unitId, String callbackJson);//广告点击
+    public void onRewardedVideoAdPlayClicked(String unitId, String callbackJson);
 
-    public void onReward(String unitId, String callbackJson);//广告激励
+    public void onReward(String unitId, String callbackJson);
+
+//    -----------------Again
+
+    public void onRewardedVideoAdAgainPlayStart(String unitId, String callbackJson);
+
+    public void onRewardedVideoAdAgainPlayEnd(String unitId, String callbackJson);
+
+    public void onRewardedVideoAdAgainPlayFailed(String unitId, String code, String error);
+
+    public void onRewardedVideoAdAgainPlayClicked(String unitId, String callbackJson);
+
+    public void onAgainReward(String unitId, String callbackJson);
+
+    //    -----------------AdSource listener
+    public void onAdSourceBiddingAttempt(String unitId, String callbackJson);
+
+    public void onAdSourceBiddingFilled(String unitId, String callbackJson);
+
+    public void onAdSourceBiddingFail(String unitId, String callbackJson, String code, String error);
+
+    public void onAdSourceAttemp(String unitId, String callbackJson);
+
+    public void onAdSourceLoadFilled(String unitId, String callbackJson);
+
+    public void onAdSourceLoadFail(String unitId, String callbackJson, String code, String error);
 }

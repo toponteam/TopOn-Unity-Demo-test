@@ -1,0 +1,46 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scenes/srcipt/interstitialScenes.cs">
+    <Files>
+      <File FileName="Assets/Scenes/srcipt/MainScenes.cs" Line="66" Column="1" />
+      <File FileName="Assets/Scenes/srcipt/interstitialScenes.cs" Line="51" Column="11" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AnyThinkUnitySDK" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True">
+              <Node name="Assets" expanded="True">
+                <Node name="AnyThinkAds" expanded="True" />
+                <Node name="Scenes" expanded="True">
+                  <Node name="srcipt" expanded="True">
+                    <Node name="interstitialScenes.cs" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+            <Node name="Assembly-CSharp-Editor" expanded="True">
+              <Node name="Assets" expanded="True">
+                <Node name="AnyThinkAds" expanded="True">
+                  <Node name="Plugins" expanded="True">
+                    <Node name="Android" expanded="True">
+                      <Node name="China" expanded="True">
+                        <Node name="Editor" expanded="True" />
+                        <Node name="mediation" expanded="True" />
+                      </Node>
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

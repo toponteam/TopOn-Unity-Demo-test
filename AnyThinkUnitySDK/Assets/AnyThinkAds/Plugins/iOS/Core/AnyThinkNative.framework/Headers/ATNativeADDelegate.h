@@ -12,7 +12,8 @@
 @class ATNativeADView;
 extern NSString *const kATNativeDelegateExtraNetworkIDKey;
 extern NSString *const kATNativeDelegateExtraAdSourceIDKey;
-extern NSString *const kATNativeDelegateExtraIsHeaderBidding;
+extern NSString *const kATNativeDelegateExtraIsHeaderBidding DEPRECATED_MSG_ATTRIBUTE("The kATNativeDelegateExtraIsHeaderBidding class will be obsolete, please use kATNativeDelegateExtraAdSourceIsHeaderBidding");
+extern NSString *const kATNativeDelegateExtraAdSourceIsHeaderBidding;
 extern NSString *const kATNativeDelegateExtraPrice;
 extern NSString *const kATNativeDelegateExtraPriority;
 @protocol ATNativeADDelegate<ATAdLoadingDelegate>
@@ -24,6 +25,9 @@ extern NSString *const kATNativeDelegateExtraPriority;
 -(void) didExitFullScreenVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) didLoadSuccessDrawWith:(NSArray*)views placementID:(NSString*)placementID extra:(NSDictionary *)extra;
+-(void) didDeepLinkOrJumpInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary*)extra result:(BOOL)success;
 
+// v5.7.47
+-(void) didCloseDetailInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra;
 @end
 #endif /* ATNativeADDelegate_h */

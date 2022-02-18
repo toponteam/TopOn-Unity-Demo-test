@@ -13,7 +13,8 @@
 
 extern NSString *const kATBannerDelegateExtraNetworkIDKey;
 extern NSString *const kATBannerDelegateExtraAdSourceIDKey;
-extern NSString *const kATBannerDelegateExtraIsHeaderBidding;
+extern NSString *const kATBannerDelegateExtraIsHeaderBidding DEPRECATED_MSG_ATTRIBUTE("The kATBannerDelegateExtraIsHeaderBidding class will be obsolete, please use kATBannerDelegateExtraAdSourceIsHeaderBidding");
+extern NSString *const kATBannerDelegateExtraAdSourceIsHeaderBidding;
 extern NSString *const kATBannerDelegateExtraPrice;
 extern NSString *const kATBannerDelegateExtraPriority;
 
@@ -24,6 +25,7 @@ extern NSString *const kATBannerDelegateExtraPriority;
 -(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra DEPRECATED_ATTRIBUTE;
 -(void) bannerView:(ATBannerView*)bannerView didAutoRefreshWithPlacement:(NSString*)placementID extra:(NSDictionary *)extra;
 -(void) bannerView:(ATBannerView*)bannerView didTapCloseButtonWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra;
+-(void)  bannerView:(ATBannerView*)bannerView didDeepLinkOrJumpForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra result:(BOOL)success;
 
 @end
 #endif /* ATBannerDelegate_h */

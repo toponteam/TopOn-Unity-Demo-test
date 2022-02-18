@@ -21,9 +21,14 @@ NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey = @"Scenario";
 @implementation NSDictionary (KAKit)
 -(NSString*) jsonString {
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
-                                                       options:(NSJSONWritingOptions)NSJSONWritingPrettyPrinted
-                                                         error:&error];
+    NSData *jsonData;
+    @try {
+        jsonData = [NSJSONSerialization dataWithJSONObject:self
+                                                           options:kNilOptions
+                                                             error:&error];
+    } @catch (NSException *exception) {
+        return @"{}";
+    } @finally {}
     
     if (!jsonData) {
         return @"{}";
@@ -35,6 +40,27 @@ NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey = @"Scenario";
 -(BOOL)containsObjectForKey:(id)key {
     return [self.allKeys containsObject:key];
 }
+@end
+
+@implementation NSArray (KAKit)
+-(NSString*) jsonString {
+    NSError *error;
+    NSData *jsonData;
+    @try {
+        jsonData = [NSJSONSerialization dataWithJSONObject:self
+                                                           options:kNilOptions
+                                                             error:&error];
+    } @catch (NSException *exception) {
+        return @"[]";
+    } @finally {}
+    
+    if (!jsonData) {
+        return @"[]";
+    } else {
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+}
+
 @end
 
 @implementation NSData(ATKit)

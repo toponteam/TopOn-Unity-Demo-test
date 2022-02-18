@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <AnyThinkSDK/AnyThinkSDK.h>
-#import "ATAdManager+Banner.h"
-#import "ATBannerDelegate.h"
-#import "ATBannerView.h"
-#import "ATBannerCustomEvent.h"
+#import <AnyThinkBanner/ATAdManager+Banner.h>
+#import <AnyThinkBanner/ATBannerDelegate.h>
+#import <AnyThinkBanner/ATBannerView.h>
+#import <AnyThinkBanner/ATBannerCustomEvent.h>
 
 //! Project version number for AnyThinkBanner.
 FOUNDATION_EXPORT double AnyThinkBannerVersionNumber;

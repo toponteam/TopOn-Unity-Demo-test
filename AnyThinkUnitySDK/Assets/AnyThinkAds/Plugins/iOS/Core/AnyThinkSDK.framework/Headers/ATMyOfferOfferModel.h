@@ -14,7 +14,6 @@
 
 @property(nonatomic, readwrite) ATScreenOrientation imageOrientation;
 @property(nonatomic, readwrite) ATScreenOrientation videoOrientation;
-//@property(nonatomic, readonly) NSString *deepLink;//Implemented in future version
 @property(nonatomic, readwrite) NSString *videoStartTKURL;
 @property(nonatomic, readwrite) NSString *video25TKURL;
 @property(nonatomic, readwrite) NSString *video50TKURL;
@@ -31,6 +30,14 @@
 
 //@property(nonatomic, readonly) NSInteger screenOrientation;
 @property(nonatomic, readwrite) ATClickMode performsAsynchronousRedirection;
+
+// v5.7.47
+@property(nonatomic, readwrite) ATMyOfferInterType interType;
+
+@property(nonatomic, readwrite) ATUserAgentType impressionUAType;
+@property(nonatomic, readwrite) ATUserAgentType clickUAType;
+
+@property (nonatomic, readwrite) ATMyOfferSetting *myOfferSetting;
 
 
 +(instancetype) mockOfferModel;

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using AnyThinkAds.Api;
 using UnityEngine.UI;
 
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 
 public class NativeBannerScene : MonoBehaviour, ATNativeBannerAdListener {
 
@@ -65,17 +65,17 @@ public class NativeBannerScene : MonoBehaviour, ATNativeBannerAdListener {
     } 
 	
     public void onAdImpressed(string placementId, ATCallbackInfo callbackInfo) {
-        Debug.Log("Developer onAdImpressed------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+        Debug.Log("Developer onAdImpressed------:" + placementId + "->" + JsonMapper.ToJson(callbackInfo.toDictionary()));
            
     } 
 	
     public void onAdClicked(string placementId, ATCallbackInfo callbackInfo) {
-        Debug.Log("Developer onAdClicked------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+        Debug.Log("Developer onAdClicked------:" + placementId + "->" + JsonMapper.ToJson(callbackInfo.toDictionary()));
            
     } 
 	 
     public void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo) {
-        Debug.Log("Developer onAdAutoRefresh------:" + placementId + "->" + Json.Serialize(callbackInfo.toDictionary()));
+        Debug.Log("Developer onAdAutoRefresh------:" + placementId + "->" + JsonMapper.ToJson(callbackInfo.toDictionary()));
            
     } 
 	

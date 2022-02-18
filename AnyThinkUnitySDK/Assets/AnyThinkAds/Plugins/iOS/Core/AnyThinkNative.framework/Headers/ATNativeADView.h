@@ -9,6 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "ATNativeAd.h"
 #import "ATNativeRendering.h"
+
+typedef NS_ENUM(NSInteger, ATNativeAdRenderType) {
+    ATNativeAdRenderSelfRender = 1,
+    ATNativeAdRenderExpress = 2
+};
+
+typedef NS_ENUM(NSInteger, ATNativeAdType) {
+    ATNativeAdTypeFeed = 1,
+    ATNativeAdTypePaster = 2
+};
+
+typedef NS_ENUM(NSInteger, ATPlayerStatus) {
+    ATPlayerStatusStartPlay,
+    ATPlayerStatusPause,
+    ATPlayerStatusFinish,
+    ATPlayerStatusResume,
+    ATPlayerStatusAbort
+};
 /**
  * Subclasses are expected to call super when overriding willMoveToSuperview: because it it within this method the base class kick off the rendering process.
  */
@@ -27,7 +45,7 @@
 -(void) makeConstraintsForSubviews;
 
 /**
- * During ad refreshing, the media view might be removed from it's superview and recreated and added; so the layout logic for media view might be called multiple times with diference media views. You're recommended to use frame-based technique here.
+ * During ad refreshing, the media view might be removed from it's superview and recreated and added; so the layout logic for media view might be called multiple times with different media views. You're recommended to use frame-based technique here.
  */
 -(void) layoutMediaView;
 
@@ -55,12 +73,52 @@
  * The native ad that is being shown.
  */
 @property(nonatomic, readonly) ATNativeAd *nativeAd;
+/**
+ * The networkFirm id of native ad.
+ */
+@property(nonatomic, readonly) NSInteger networkFirmID;
+
+/**
+ * The duration of the video ad playing, unit ms
+ */
+- (CGFloat)videoPlayTime;
+/**
+ * Video ad duration, unit ms
+ */
+- (CGFloat)videoDuration;
+/**
+ Play mute switch
+ @param flag whether to mute
+ */
+- (void)muteEnable:(BOOL)flag;
+/**
+ * The video ad play
+ */
+- (void)videoPlay;
+/**
+ * The video ad pause
+ */
+- (void)videoPause;
+/**
+ * The native ad type
+ */
+- (ATNativeAdType)getNativeAdType;
+/**
+ * The native ad render type
+ */
+- (ATNativeAdRenderType)getCurrentNativeAdRenderType;
+
+- (void)recordCustomPlayerStatus:(ATPlayerStatus)status currentTime:(NSTimeInterval)time;
+
 @end
 
 //Defined for TT native
 extern NSString const* kATExtraNativeImageSize228_150;
 extern NSString const* kATExtraNativeImageSize690_388;
 extern NSString *const kATExtraNativeImageSizeKey;
+extern NSString const* kATExtraNativeImageSize1280_720;
+extern NSString const* kATExtraNativeImageSize1200_628;
+extern NSString const* kATExtraNativeImageSize640_640;
 
 @interface ATNativeADView(DrawVideo)
 /*

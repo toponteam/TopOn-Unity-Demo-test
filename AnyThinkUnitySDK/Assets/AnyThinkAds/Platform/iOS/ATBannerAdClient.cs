@@ -23,15 +23,37 @@ namespace AnyThinkAds.iOS {
 			ATBannerAdWrapper.loadBannerAd(placementId, mapJson);
 	    }
 
-	    public void showBannerAd(string placementId, ATRect rect) {
+	    public string checkAdStatus(string placementId) {
+            Debug.Log("Unity: ATBannerAdClient::checkAdStatus()");
+            return ATBannerAdWrapper.checkAdStatus(placementId);
+        }
+
+		public string getValidAdCaches(string placementId)
+		{
+			Debug.Log("Unity: ATBannerAdClient::getValidAdCaches()");
+			return ATBannerAdWrapper.getValidAdCaches(placementId);
+		}
+
+		public void showBannerAd(string placementId, ATRect rect) {
 			Debug.Log("Unity: ATBannerAdClient::showBannerAd()");
 			ATBannerAdWrapper.showBannerAd(placementId, rect);
+	    }
+
+	    public void showBannerAd(string placementId, ATRect rect, string mapJson) {
+			Debug.Log("Unity: ATBannerAdClient::showBannerAd()");
+			ATBannerAdWrapper.showBannerAd(placementId, rect, mapJson);
 	    }
 
         public void showBannerAd(string placementId, string position)
         {
             Debug.Log("Unity: ATBannerAdClient::showBannerAd()");
             ATBannerAdWrapper.showBannerAd(placementId, position);
+        }
+
+        public void showBannerAd(string placementId, string position, string mapJson)
+        {
+            Debug.Log("Unity: ATBannerAdClient::showBannerAd()");
+            ATBannerAdWrapper.showBannerAd(placementId, position, mapJson);
         }
 
         public void cleanBannerAd(string placementId) {
@@ -93,5 +115,38 @@ namespace AnyThinkAds.iOS {
 			Debug.Log("Unity: ATBannerAdWrapper::OnBannerAdCloseButton()");
 	        if (anyThinkListener != null) anyThinkListener.onAdCloseButtonTapped(placementId, new ATCallbackInfo(callbackJson));
 	    }
+		//auto callbacks
+	    public void startLoadingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATBannerAdWrapper::startLoadingADSource()");
+            if (anyThinkListener != null) anyThinkListener.startLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }
+	    public void finishLoadingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATBannerAdWrapper::finishLoadingADSource()");
+            if (anyThinkListener != null) anyThinkListener.finishLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }	
+	    public void failToLoadADSource(string placementId,string callbackJson, string code, string error) 
+		{
+	        Debug.Log("Unity: ATBannerAdWrapper::failToLoadADSource()");
+	        if (anyThinkListener != null) anyThinkListener.failToLoadADSource(placementId, new ATCallbackInfo(callbackJson),code, error);
+	    }
+		public void startBiddingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATBannerAdWrapper::startBiddingADSource()");
+            if (anyThinkListener != null) anyThinkListener.startBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }
+	    public void finishBiddingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATBannerAdWrapper::finishBiddingADSource()");
+            if (anyThinkListener != null) anyThinkListener.finishBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }	
+	    public void failBiddingADSource(string placementId, string callbackJson,string code, string error) 
+		{
+	        Debug.Log("Unity: ATBannerAdWrapper::failBiddingADSource()");
+	        if (anyThinkListener != null) anyThinkListener.failBiddingADSource(placementId,new ATCallbackInfo(callbackJson), code, error);
+	    }
+
+
 	}
 }

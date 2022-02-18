@@ -1,8 +1,0 @@
-<dependencies>
-    <androidPackages>
-        <repositories>
-            <repository>https://developer.huawei.com/repo/</repository>
-        </repositories>
-        <androidPackage spec="com.huawei.hms:ads-lite:13.4.32.300"/>
-    </androidPackages>
-</dependencies>

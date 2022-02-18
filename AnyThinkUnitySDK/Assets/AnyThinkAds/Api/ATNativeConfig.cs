@@ -13,5 +13,6 @@ namespace AnyThinkAds.Api
         public ATNativeItemProperty descProperty;
         public ATNativeItemProperty adLogoProperty;
         public ATNativeItemProperty ctaButtonProperty;
+        public ATNativeItemProperty dislikeButtonProperty;
     }
 }

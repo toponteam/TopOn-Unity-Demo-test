@@ -51,9 +51,11 @@ namespace AnyThinkAds.Demo
 			Debug.Log ("manager init---->");
 		
 
-			if (sdkInitHelper == null) {
-				sdkInitHelper = new ATSDKAPIClient ();
-			}
+			#if UNITY_ANDROID && !UNITY_EDITOR
+				if (sdkInitHelper == null) {
+					sdkInitHelper = new ATSDKAPIClient ();
+				}
+			#endif
 		
 		}
 		public static ATNativeAdView anyThinkNativeAdView ;

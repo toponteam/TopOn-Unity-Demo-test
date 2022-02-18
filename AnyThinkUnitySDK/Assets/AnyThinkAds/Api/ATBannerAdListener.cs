@@ -38,5 +38,20 @@ namespace AnyThinkAds.Api
         *广告关闭；某些厂商不支持（注意：对于Android来说，所有回调方法均不在Unity的主线程）
         */
         void onAdCloseButtonTapped(string placementId, ATCallbackInfo callbackInfo);
+        
+
+		void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void finishLoadingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void failToLoadADSource(string placementId,ATCallbackInfo callbackInfo,string code, string message);
+
+		void startBiddingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void finishBiddingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void failBiddingADSource(string placementId,ATCallbackInfo callbackInfo,string code, string message);
+
+
     }
 }

@@ -24,6 +24,7 @@
 @property(nonatomic, readonly) NSDate *expireDate;
 @property(nonatomic, readonly) NSDate *cacheDate;
 @property(nonatomic, readonly) ATUnitGroupModel *unitGroup;
+@property(nonatomic) NSMutableArray<NSDictionary*> *unitGroupInfos;
 @property(nonatomic, readonly) NSString *unitID;
 /**
  * Third-party network native ad object.
@@ -35,6 +36,9 @@
 @property(nonatomic) BOOL defaultPlayIfRequired;
 @property(nonatomic) NSString *scene;
 @property(nonatomic, readonly) NSString *price;
+@property(nonatomic, readonly) NSString *bidId;
+@property(nonatomic, readonly) NSString *tpBidId;
 @property(nonatomic, readonly, weak) ATWaterfall *finalWaterfall;
 @property(nonatomic, readonly) NSInteger autoReqType;
+@property(nonatomic) BOOL adReportClicked;
 @end

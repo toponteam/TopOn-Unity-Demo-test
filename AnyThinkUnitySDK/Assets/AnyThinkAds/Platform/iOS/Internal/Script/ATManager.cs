@@ -84,4 +84,40 @@ public class ATManager {
     {
         ATUnityCBridge.SendMessageToC("ATUnityManager", "deniedUploadDeviceInfo:", new object[] {deniedInfo});
     }
+
+    public static void setExcludeBundleIdArray(string bundleIds)
+    {
+        Debug.Log("Unity:ATManager::setExcludeBundleIdArray()");
+        ATUnityCBridge.SendMessageToC("ATUnityManager", "setExcludeBundleIdArray:", new object[] {bundleIds});
+    }
+
+    public static void setExcludeAdSourceIdArrayForPlacementID(string placementID, string adSourceIds) 
+    {
+        Debug.Log("Unity:ATManager::setExcludeAdSourceIdArrayForPlacementID()");
+        ATUnityCBridge.SendMessageToC("ATUnityManager", "setExludePlacementid:unitIDArray:", new object[] {placementID, adSourceIds});
+    }
+    
+    public static void setSDKArea(int area)
+    {
+        Debug.Log("Unity:ATManager::setSDKArea()");
+        ATUnityCBridge.SendMessageToC("ATUnityManager", "setSDKArea:", new object[] {area});
+    }
+    
+    public static void getArea(Func<string, int> callback)
+    {
+        Debug.Log("Unity:ATManager::getArea()");
+        ATUnityCBridge.SendMessageToCWithCallBack("ATUnityManager", "getArea:", new object[] { }, callback);
+    }
+    
+    public static void setWXStatus(bool install)
+    {
+        Debug.Log("Unity:ATManager::setWXStatus()");
+    	ATUnityCBridge.SendMessageToC("ATUnityManager", "setWXStatus:", new object[] {install});
+    }
+    
+    public static void setLocation(double longitude, double latitude)
+    {
+        Debug.Log("Unity:ATManager::setLocation()");
+    	ATUnityCBridge.SendMessageToC("ATUnityManager", "setLocationLongitude:dimension:", new object[] {longitude, latitude});
+    }
 }

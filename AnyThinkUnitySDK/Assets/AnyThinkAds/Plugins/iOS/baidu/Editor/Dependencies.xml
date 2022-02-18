@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><dependencies>
+    <iosPods>
+        <iosPod name="BaiduMobAdSDK" version="4.843" />
+    </iosPods>
+</dependencies>

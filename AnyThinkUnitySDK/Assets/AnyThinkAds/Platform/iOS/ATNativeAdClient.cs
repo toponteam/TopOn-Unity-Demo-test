@@ -4,7 +4,7 @@ using UnityEngine;
 using AnyThinkAds.Common;
 using AnyThinkAds.Api;
 using AnyThinkAds.iOS;
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 
 namespace AnyThinkAds.iOS {
 	public class ATNativeAdClient : IATNativeAdClient {
@@ -24,6 +24,24 @@ namespace AnyThinkAds.iOS {
 			return ATNativeAdWrapper.isNativeAdReady(placementId);
         }
 
+        public string checkAdStatus(string placementId) {
+            Debug.Log("Unity: ATNativeAdClient::checkAdStatus()");
+            return ATNativeAdWrapper.checkAdStatus(placementId);
+        }
+
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID){
+
+            Debug.Log("Unity: ATNativeAdClient::entryScenarioWithPlacementID()");
+			ATNativeAdWrapper.entryScenarioWithPlacementID(placementId,scenarioID);
+		}
+
+
+        public string getValidAdCaches(string placementId)
+        {
+            Debug.Log("Unity: ATNativeAdClient::getValidAdCaches()");
+            return ATNativeAdWrapper.getValidAdCaches(placementId);
+        }
+
         public void setListener(ATNativeAdListener listener) {
             Debug.Log("Unity:ATNativeAdClient::setListener()");
             mlistener = listener;
@@ -32,6 +50,11 @@ namespace AnyThinkAds.iOS {
 		public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView) {	
             Debug.Log("Unity:ATNativeAdClient::renderAdToScene()");
             ATNativeAdWrapper.showNativeAd(placementId, anyThinkNativeAdView.toJSON());
+        }
+
+        public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView, string mapJson) {  
+            Debug.Log("Unity:ATNativeAdClient::renderAdToScene()");
+            ATNativeAdWrapper.showNativeAd(placementId, anyThinkNativeAdView.toJSON(), mapJson);
         }
 
         public void cleanAdView(string placementId, ATNativeAdView anyThinkNativeAdView) {
@@ -93,5 +116,39 @@ namespace AnyThinkAds.iOS {
             Debug.Log("Unity:ATNativeAdClient::onNativeAdLoadFail...unity3d. code:" + code + " msg:" + msg);
             if (mlistener != null) mlistener.onAdLoadFail(placementId, code, msg);
         }
+
+		//auto callbacks
+	    public void startLoadingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATNativeAdClient::startLoadingADSource()");
+            if (mlistener != null) mlistener.startLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }
+	    public void finishLoadingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATNativeAdClient::finishLoadingADSource()");
+            if (mlistener != null) mlistener.finishLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }	
+	    public void failToLoadADSource(string placementId,string callbackJson, string code, string error) 
+		{
+	        Debug.Log("Unity: ATNativeAdClient::failToLoadADSource()");
+	        if (mlistener != null) mlistener.failToLoadADSource(placementId, new ATCallbackInfo(callbackJson),code, error);
+	    }
+		public void startBiddingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATNativeAdClient::startBiddingADSource()");
+            if (mlistener != null) mlistener.startBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }
+	    public void finishBiddingADSource(string placementId, string callbackJson) 
+		{
+	        Debug.Log("Unity: ATNativeAdClient::finishBiddingADSource()");
+            if (mlistener != null) mlistener.finishBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+	    }	
+
+	    public void failBiddingADSource(string placementId,string callbackJson, string code, string error) 
+		{
+	        Debug.Log("Unity: ATNativeAdClient::failBiddingADSource()");
+	        if (mlistener != null) mlistener.failBiddingADSource(placementId,new ATCallbackInfo(callbackJson), code, error);
+	    }
+
 	}
 }

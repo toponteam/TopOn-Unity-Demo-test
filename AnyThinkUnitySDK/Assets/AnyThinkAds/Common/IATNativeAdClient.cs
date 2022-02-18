@@ -20,6 +20,12 @@ namespace AnyThinkAds.Common
 		 * @param placementId  广告位id
 		 */
         bool hasAdReady(string placementId);
+         /**
+         * 获取广告状态信息（是否正在加载、是否存在可以展示广告、广告缓存详细信息）
+         * @param unityid
+         *
+         */
+        string checkAdStatus(string placementId);
 		/***
 		 * 
 		 * 设置监听回调接口
@@ -32,8 +38,9 @@ namespace AnyThinkAds.Common
 		 * 展示广告,
 		 * @param placementId 
 		 * @param anyThinkNativeAdView  这里的属性是显示区域坐标等配置,需要自行设置
+         * @parm mapJson
 		 */
-        void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView);
+        void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView, string mapJson);
 
 		/***
 		 * 
@@ -55,5 +62,12 @@ namespace AnyThinkAds.Common
 		 */ 
         void cleanCache(string placementId);
 
-    }
+		/***
+		 * 获取所有可用缓存广告
+		 */
+		string getValidAdCaches(string placementId);
+
+		void entryScenarioWithPlacementID(string placementId, string scenarioID);
+
+	}
 }

@@ -51,20 +51,78 @@ namespace AnyThinkAds.Android
 			}
 			return isready;   
         }
+        
+        public void entryScenarioWithPlacementID(string placementId, string scenarioID){
+            Debug.Log("ATNativeAdClient : entryScenarioWithPlacementID....");
+            try
+            {
+                if (nativeAdHelperMap.ContainsKey(placementId))
+                {
+                    nativeAdHelperMap[placementId].Call("entryAdScenario", scenarioID);
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATNativeAdClient entryScenarioWithPlacementID:  error." + e.Message);
+            }
+
+
+        }
+
+        public string checkAdStatus(string placementId)
+        {
+            string adStatusJsonString = "";
+            Debug.Log("ATNativeAdClient : checkAdStatus....");
+            try
+            {
+                if (nativeAdHelperMap.ContainsKey(placementId))
+                {
+                    adStatusJsonString = nativeAdHelperMap[placementId].Call<string>("checkAdStatus");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATNativeAdClient :  error." + e.Message);
+            }
+
+            return adStatusJsonString;
+        }
+
+        public string getValidAdCaches(string placementId)
+        {
+            string validAdCachesString = "";
+            Debug.Log("ATNativeAdClient : getValidAdCaches....");
+            try
+            {
+                if (nativeAdHelperMap.ContainsKey(placementId))
+                {
+                    validAdCachesString = nativeAdHelperMap[placementId].Call<string>("getValidAdCaches");
+                }
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATNativeAdClient :  error." + e.Message);
+            }
+
+            return validAdCachesString;
+        }
 
         public void setListener(ATNativeAdListener listener)
         {
             mlistener = listener;
         }
 
-		public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView)
+		public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView, string mapJson)
         {	
 			string showconfig = anyThinkNativeAdView.toJSON ();
             //暂未实现 show
 			Debug.Log ("renderAdToScene....showconfig >>>:"+showconfig);
 			try{
                 if (nativeAdHelperMap.ContainsKey(placementId)) {
-                    nativeAdHelperMap[placementId].Call ("show",showconfig);
+                    nativeAdHelperMap[placementId].Call ("show",showconfig, mapJson);
 				}
 			}catch(System.Exception e){
 				Debug.Log ("ATNativeAdClient :  error."+e.Message);
@@ -241,6 +299,61 @@ namespace AnyThinkAds.Android
             if (mlistener != null)
             {
                 mlistener.onAdLoadFail(placementId, code, msg);
+            }
+        }
+
+        // Adsource Listener
+        public void onAdSourceBiddingAttempt(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceBiddingAttempt...unity3d." + placementId + "," + callbackJson);
+            if (mlistener != null)
+            {
+                mlistener.startBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceBiddingFilled(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceBiddingFilled...unity3d." + placementId + "," + callbackJson);
+            if (mlistener != null)
+            {
+                mlistener.finishBiddingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceBiddingFail(string placementId, string callbackJson, string code, string error)
+        {
+            Debug.Log("onAdSourceBiddingFail...unity3d." + placementId + "," + code + "," + error + "," + callbackJson);
+            if (mlistener != null)
+            {
+                mlistener.failBiddingADSource(placementId, new ATCallbackInfo(callbackJson), code, error);
+            }
+        }
+
+        public void onAdSourceAttemp(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceAttemp...unity3d." + placementId + "," + callbackJson);
+            if (mlistener != null)
+            {
+                mlistener.startLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceLoadFilled(string placementId, string callbackJson)
+        {
+            Debug.Log("onAdSourceLoadFilled...unity3d." + placementId + "," + callbackJson);
+            if (mlistener != null)
+            {
+                mlistener.finishLoadingADSource(placementId, new ATCallbackInfo(callbackJson));
+            }
+        }
+
+        public void onAdSourceLoadFail(string placementId, string callbackJson, string code, string error)
+        {
+            Debug.Log("onAdSourceLoadFail...unity3d." + placementId + "," + code + "," + error + "," + callbackJson);
+            if (mlistener != null)
+            {
+                mlistener.failToLoadADSource(placementId, new ATCallbackInfo(callbackJson), code, error);
             }
         }
 

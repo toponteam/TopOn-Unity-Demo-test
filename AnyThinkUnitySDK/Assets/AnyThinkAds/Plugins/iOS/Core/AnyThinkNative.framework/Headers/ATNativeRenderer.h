@@ -16,8 +16,12 @@
 //This method has been added specifically for Mopub; renderers of other networks don't implement it.
 +(id) retrieveRendererWithOffer:(ATNativeADCache*)offer;
 -(UIView*)retriveADView;
+- (void)recordCustomPlayerStatus:(ATPlayerStatus)status currentTime:(NSTimeInterval)time;
 -(instancetype) initWithConfiguraton:(ATNativeADConfiguration*)configuration adView:(ATNativeADView*)adView;
 -(__kindof UIView*)createMediaView;
 @property(nonatomic, weak) ATNativeADView *ADView;
 @property(nonatomic, readonly) ATNativeADConfiguration *configuration;
+
+// for override
+- (void)closeAct;
 @end

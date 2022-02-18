@@ -21,6 +21,10 @@ extern NSString *const kATUnityUtilitiesAdShowingExtraScenarioKey;
 -(BOOL)containsObjectForKey:(id)key;
 @end
 
+@interface NSArray (KAKit)
+-(NSString*) jsonString;
+@end
+
 @interface NSData(ATKit)
 +(instancetype) dataWithUTF8String:(const char*)string;
 @end

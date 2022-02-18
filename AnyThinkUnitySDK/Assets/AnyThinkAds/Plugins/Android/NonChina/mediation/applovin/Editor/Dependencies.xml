@@ -1,5 +1,0 @@
-<dependencies>
-    <androidPackages>
-        <androidPackage spec="com.applovin:applovin-sdk:9.14.4"/>
-    </androidPackages>
-</dependencies>

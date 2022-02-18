@@ -98,7 +98,7 @@ static NSString *const kATSharedCallbackKey = @"placement_id_placement_holder";
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([rect isKindOfClass:[NSString class]] && [rect dataUsingEncoding:NSUTF8StringEncoding] != nil) {
             NSDictionary *rectDict = [NSJSONSerialization JSONObjectWithData:[rect dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-            NSMutableDictionary *extra = [NSMutableDictionary dictionaryWithDictionary:@{kExtraInfoNativeAdTypeKey:@(ATGDTNativeAdTypeSelfRendering), kATNativeBannerAdShowingExtraAdSizeKey:[NSValue valueWithCGSize:CGSizeMake([rectDict[@"width"] doubleValue], [rectDict[@"height"] doubleValue])], kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388, kATNativeBannerAdShowingExtraBackgroundColorKey:[UIColor whiteColor]}];
+            NSMutableDictionary *extra = [NSMutableDictionary dictionaryWithDictionary:@{kATExtraInfoNativeAdTypeKey:@(ATGDTNativeAdTypeSelfRendering), kATNativeBannerAdShowingExtraAdSizeKey:[NSValue valueWithCGSize:CGSizeMake([rectDict[@"width"] doubleValue], [rectDict[@"height"] doubleValue])], kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388, kATNativeBannerAdShowingExtraBackgroundColorKey:[UIColor whiteColor]}];
             if ([extraStr isKindOfClass:[NSString class]] && [extraStr dataUsingEncoding:NSUTF8StringEncoding] != nil) {
                 NSDictionary *extraDict = [NSJSONSerialization JSONObjectWithData:[extraStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
                 if ([extraDict[kATNativeBannerAdShowingExtraBackgroundColorKey] isKindOfClass:[NSString class]]) {

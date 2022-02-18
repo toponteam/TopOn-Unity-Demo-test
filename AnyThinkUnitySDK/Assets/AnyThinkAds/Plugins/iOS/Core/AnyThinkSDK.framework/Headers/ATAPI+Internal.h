@@ -9,22 +9,25 @@
 #ifndef ATAPI_Internal_h
 #define ATAPI_Internal_h
 #import "ATAPI.h"
-extern NSString *const kNativeADAssetsAdvertiserKey;
-extern NSString *const kNativeADAssetsMainTextKey;
-extern NSString *const kNativeADAssetsMainTitleKey;
-extern NSString *const kNativeADAssetsMainImageKey;
-extern NSString *const kNativeADAssetsIconImageKey;
-extern NSString *const kNativeADAssetsLogoImageKey;
-extern NSString *const kNativeADAssetsCTATextKey;
-extern NSString *const kNativeADAssetsRatingKey;
-extern NSString *const kNativeADAssetsContainsVideoFlag;
-extern NSString *const kNativeADAssetsUnitIDKey;
-extern NSString *const kNativeADAssetsIconURLKey;
-extern NSString *const kNativeADAssetsImageURLKey;
-extern NSString *const kNativeADAssetsLogoURLKey;
-extern NSString *const kNativeADAssetsSponsoredImageKey;
-
-extern NSString *const kAdAssetsCustomObjectKey;
+extern NSString *const kATNativeADAssetsAdvertiserKey;
+extern NSString *const kATNativeADAssetsMainTextKey;
+extern NSString *const kATNativeADAssetsMainTitleKey;
+extern NSString *const kATNativeADAssetsMainImageKey;
+extern NSString *const kATNativeADAssetsIconImageKey;
+extern NSString *const kATNativeADAssetsLogoImageKey;
+extern NSString *const kATNativeADAssetsCTATextKey;
+extern NSString *const kATNativeADAssetsRatingKey;
+extern NSString *const kATNativeADAssetsContainsVideoFlag;
+extern NSString *const kATNativeADAssetsUnitIDKey;
+extern NSString *const kATNativeADAssetsIconURLKey;
+extern NSString *const kATNativeADAssetsImageURLKey;
+extern NSString *const kATNativeADAssetsLogoURLKey;
+extern NSString *const kATNativeADAssetsSponsoredImageKey;
+extern NSString *const kATNativeADAssetsVideoUrlKey;
+extern NSString *const kATAdAssetsCustomObjectKey;
+extern NSString *const kATNativeADAssetsMediaViewKey;
+extern NSString *const kATNativeADAssetsImageListKey;
+extern NSString *const kATNativeADAssetsVideoDurationKey;
 
 extern NSString *const kATADLoadingStartLoadNotification;
 extern NSString *const kATADLoadingOfferSuccessfullyLoadedNotification;
@@ -34,6 +37,11 @@ extern NSString *const kATADLoadingNotificationUserInfoPlacementKey;//Not used
 extern NSString *const kATADLoadingNotificationUserInfoUnitGroupKey;//Not used
 extern NSString *const kATADLoadingNotificationUserInfoErrorKey;
 extern NSString *const kATADLoadingNotificationUserInfoExtraKey;
+
+
+extern NSString *const kATADUserAreaKey;
+
+
 
 /**
  Adopters are expected to implement logic for network offers, for which storage mechanisms must be devise.
@@ -63,6 +71,10 @@ extern NSString *const kATADLoadingNotificationUserInfoExtraKey;
 
 @interface ATAPI(Internal)
 +(BOOL)logEnabled;
++(BOOL)adLogoVisible;
++(NSString *)hbTestModeDeviceID;
++(ATNetworkTerritory)networkTerritory;
++(BOOL)isOfm;
 -(void) setVersion:(NSString*)version forNetwork:(NSString*)network;
 -(NSDictionary*)networkVersions;
 -(NSString*)versionForNetworkFirmID:(NSInteger)networkFirmID;
@@ -70,7 +82,14 @@ extern NSString *const kATADLoadingNotificationUserInfoExtraKey;
 -(void) setInitFlagForNetwork:(NSString*)networkName;
 -(void) inspectInitFlagForNetwork:(NSString*)networkName usingBlock:(NSInteger(^)(NSInteger currentValue))block;
 -(void) setInitFlag:(NSInteger)flag forNetwork:(NSString*)networkName;
+-(BOOL) startWithAppID:(NSString*)appID appKey:(NSString*)appKey error:(NSError**)error isOfm:(BOOL) isOfm shouldUpdateOfm:(BOOL)shouldUpdateOfm completion:(void (^)(NSDictionary *, NSError *)) completion;
+-(void) applyAppSettingWithCompletion:(void (^)(NSDictionary * setting, NSError * error)) completion shouldUpdateOfm:(BOOL)shouldUpdateOfm;
+
 @property(nonatomic, readonly) NSString *userAgent;
+
+
+
+
 @end
 
 #endif /* ATAPI_Internal_h */

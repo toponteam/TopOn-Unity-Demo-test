@@ -63,6 +63,13 @@
  *
  */
 -(UIView*)mediaView;
+
+/**
+ * The button to close Ad for normal native ads.
+ *
+ */
+- (UIButton *)dislikeButton;
+
 @end
 
 #endif /* ATNativeRendering_h */

@@ -14,44 +14,48 @@
 #import "ATAdManager.h"
 #import "ATAd.h"
 //The value is (subclass of) UIViewController
-extern NSString *const kExtraInfoRootViewControllerKey;
-extern NSString *const kAdLoadingExtraRefreshFlagKey;//Defined in loader
-extern NSString *const kAdLoadingExtraAutoloadFlagKey;
-extern NSString *const kAdLoadingTrackingExtraStatusKey;
-extern NSString *const kAdLoadingTrackingExtraFlagKey;
-extern NSString *const kAdLoadingExtraDefaultLoadKey;
-extern NSString *const kAdLoadingExtraFilledByReadyFlagKey;
-extern NSString *const kAdLoadingExtraAutoLoadOnCloseFlagKey;
+extern NSString *const kATAdLoadingExtraRefreshFlagKey;//Defined in loader
+extern NSString *const kATAdLoadingExtraAutoloadFlagKey;
+extern NSString *const kATAdLoadingTrackingExtraStatusKey;
+extern NSString *const kATAdLoadingTrackingExtraFlagKey;
+extern NSString *const kATAdLoadingExtraDefaultLoadKey;
+extern NSString *const kATAdLoadingExtraFilledByReadyFlagKey;
+extern NSString *const kATAdLoadingExtraAutoLoadOnCloseFlagKey;
 
 /*
  Defined in Storage Utility
  */
-extern NSString *const kAdStorageExtraNotReadyReasonKey;
-extern NSString *const kAdStorageExtraNeedReloadFlagKey;
-extern NSString *const kAdStorageExtraPlacementIDKey;
-extern NSString *const kAdStorageExtraRequestIDKey;
-extern NSString *const kAdStorageExtraReadyFlagKey;
-extern NSString *const kAdStorageExtraCallerInfoKey;
-extern NSString *const kAdStorageExtraPSIDKey;
-extern NSString *const kAdStorageExtraSessionIDKey;
-extern NSString *const kAdStorageExtraHeaderBiddingInfo;
-extern NSString *const kAdStoreageExtraUnitGroupUnitID;
-extern NSString *const kAdStorageExtraNetworkFirmIDKey;
-extern NSString *const kAdStorageExtraNetworkSDKVersion;
-extern NSString *const kAdStorageExtraPriorityKey;
-extern NSString *const kAdStorageExtraUnitGroupInfosKey;
-extern NSString *const kAdStorageExtraUnitGroupInfoContentKey;
-extern NSString *const kAdStorageExtraUnitGroupInfoPriorityKey;
-extern NSString *const kAdStorageExtraUnitGroupInfoNetworkFirmIDKey;
-extern NSString *const kAdStorageExtraUnitGroupInfoUnitIDKey;
-extern NSString *const kAdStorageExtraUnitGroupInfoNetworkSDKVersionKey;
-extern NSString *const kAdStorageExtraUnitGroupInfoReadyFlagKey;
-extern NSString *const kAdStorageExtraFinalWaterfallKey;
+extern NSString *const kATAdStorageExtraNotReadyReasonKey;
+extern NSString *const kATAdStorageExtraNeedReloadFlagKey;
+extern NSString *const kATAdStorageExtraPlacementIDKey;
+extern NSString *const kATAdStorageExtraRequestIDKey;
+extern NSString *const kATAdStorageExtraReadyFlagKey;
+extern NSString *const kATAdStorageExtraCallerInfoKey;
+extern NSString *const kATAdStorageExtraPSIDKey;
+extern NSString *const kATAdStorageExtraSessionIDKey;
+extern NSString *const kATAdStorageExtraHeaderBiddingInfo;
+extern NSString *const kATAdStoreageExtraUnitGroupUnitID;
+extern NSString *const kATAdStorageExtraNetworkFirmIDKey;
+extern NSString *const kATAdStorageExtraNetworkSDKVersion;
+extern NSString *const kATAdStorageExtraPriorityKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfosKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfoContentKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfoPriorityKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfoNetworkFirmIDKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfoUnitIDKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfoNetworkSDKVersionKey;
+extern NSString *const kATAdStorageExtraUnitGroupInfoReadyFlagKey;
+extern NSString *const kATAdStorageExtraFinalWaterfallKey;
+extern NSString *const kATAdStorageExtraAdapterClassKey;
 
 typedef NS_ENUM(NSInteger, ATAdManagerReadyAPICaller) {
     ATAdManagerReadyAPICallerReady = 0,
     ATAdManagerReadyAPICallerShow = 1
 };
+
+
+@protocol ATBaiduTemplateRenderingAttributeDelegate;
+
 @interface ATAdManager(Internal)
 #pragma mark - for inner usage
 //TODO: Packing the following method in a category and hide it from the client code.
@@ -63,6 +67,8 @@ typedef NS_ENUM(NSInteger, ATAdManagerReadyAPICaller) {
 -(BOOL) psIDExpired;
 @property(nonatomic, readonly) dispatch_queue_t show_api_control_queue;
 @property(nonatomic, readonly) NSString *psID;
+
+@property(nonatomic, strong) id<ATBaiduTemplateRenderingAttributeDelegate> baiduTemplateRenderingAttributeValue;
 
 /**
  Contains all the placement ids the developer has configured for this app. This property is thread-safe.
@@ -86,13 +92,16 @@ typedef NS_ENUM(NSInteger, ATAdManagerReadyAPICaller) {
 /*
  Check if ad's ready for a placement, context is a storage specific block
  */
--(BOOL) adReadyForPlacementID:(NSString*)placementID scene:(NSString*)scene caller:(ATAdManagerReadyAPICaller)caller context:(BOOL(^)(NSDictionary *__autoreleasing *extra))context;
--(BOOL) adReadyForPlacementID:(NSString*)placementID caller:(ATAdManagerReadyAPICaller)caller context:(BOOL(^)(NSDictionary *__autoreleasing *extra))context;
+- (BOOL)adReadyForPlacementID:(NSString*)placementID scene:(NSString*)scene caller:(ATAdManagerReadyAPICaller)caller context:(BOOL(^)(NSDictionary *__autoreleasing *extra))context;
+- (BOOL)adReadyForPlacementID:(NSString*)placementID caller:(ATAdManagerReadyAPICaller)caller context:(BOOL(^)(NSDictionary *__autoreleasing *extra))context;
+- (BOOL)adReadyForPlacementID:(NSString*)placementID scene:(NSString*)scene caller:(ATAdManagerReadyAPICaller)caller sendTK:(BOOL)send context:(BOOL(^)(NSDictionary *__autoreleasing *extra))context;
 
 /*
  *For internal use only
  */
--(BOOL) adReadyForPlacementID:(NSString*)placementID;
+- (BOOL)adReadyForPlacementID:(NSString*)placementID;
+- (BOOL)adReadyForPlacementID:(NSString*)placementID sendTK:(BOOL)send;
+
 
 -(NSDictionary*)extraInfoForPlacementID:(NSString*)placementID requestID:(NSString*)requestID;
 -(void) setExtraInfo:(NSDictionary*)extraInfo forPlacementID:(NSString*)placementID requestID:(NSString*)requestID;
@@ -103,6 +112,27 @@ typedef NS_ENUM(NSInteger, ATAdManagerReadyAPICaller) {
 -(void) setAdBeingShownFlagForPlacementID:(NSString*)placementID;
 -(void) clearAdBeingShownFlagForPlacementID:(NSString*)placementID;
 -(BOOL) adBeingShownForPlacementID:(NSString*)placementID;
+
+#pragma mark - auto_refresh
+
+- (void)autoRefreshIsReadyPlacementID:(NSString *)placementID;
+
+- (BOOL)getFirstSplashLoadStatus:(NSString *)placementID;
+
+- (void)setFirstSplashLoadStatus:(NSString *)placementID status:(BOOL)status;
+
+- (BOOL)getFirstSplashTimeoutStatus:(NSString *)placementID;
+
+- (void)setFirstSplashTimeoutStatus:(NSString *)placementID status:(BOOL)status;
+
+
+#pragma mark - real time TK
+
++ (NSArray *)getRealTimeNetworkArray;
+
+#pragma mark - send_tracking
+- (void)sendEntryScenarioTrackingWithPlacementID:(NSString *)placementID scene:(NSString *)scene isLoading:(BOOL)isLoading isReady:(BOOL)isReady extraInfo: (NSDictionary *)extraInfo;
+
 @end
 
 @interface NSObject(DelegateBinding)

@@ -13,9 +13,6 @@ namespace AnyThinkAds.Common
         void setGDPRLevel(int level);
         void showGDPRAuth();
         void addNetworkGDPRInfo(int networkType, string mapJson);
-        void setPurchaseFlag();
-        bool purchaseFlag();
-        void clearPurchaseFlag();
         void setChannel(string channel);
         void setSubChannel(string subchannel);
         void initCustomMap(string cutomMap);
@@ -24,5 +21,12 @@ namespace AnyThinkAds.Common
         int getGDPRLevel();
         bool isEUTraffic();
         void deniedUploadDeviceInfo(string deniedInfo);
+
+        void setExcludeBundleIdArray(string bundleIds);
+        void setExcludeAdSourceIdArrayForPlacementID(string placementID, string adsourceIds);
+        void setSDKArea(int area);
+        void getArea(ATGetAreaListener listener);
+        void setWXStatus(bool install);
+        void setLocation(double longitude, double latitude);
     }
 }

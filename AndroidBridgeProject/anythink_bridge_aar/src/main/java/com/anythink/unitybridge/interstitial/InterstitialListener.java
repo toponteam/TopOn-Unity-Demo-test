@@ -1,13 +1,6 @@
 package com.anythink.unitybridge.interstitial;
 
 
-/**
- * Copyright (C) 2018 {XX} Science and Technology Co., Ltd.
- *
- * @version V{XX_XX}
- * @Author ：Created by zhoushubin on 2018/8/3.
- * @Email: zhoushubin@salmonads.com
- */
 public interface InterstitialListener {
 
     public void onInterstitialAdLoaded(String unitId);
@@ -25,4 +18,18 @@ public interface InterstitialListener {
     public void onInterstitialAdVideoEnd(String unitId, String callbackJson);
 
     public void onInterstitialAdVideoError(String unitId, String code, String msg);
+
+    //    -----------------AdSource listener
+    public void onAdSourceBiddingAttempt(String unitId, String callbackJson);
+
+    public void onAdSourceBiddingFilled(String unitId, String callbackJson);
+
+    public void onAdSourceBiddingFail(String unitId, String callbackJson, String code, String error);
+
+    public void onAdSourceAttemp(String unitId, String callbackJson);
+
+    public void onAdSourceLoadFilled(String unitId, String callbackJson);
+
+    public void onAdSourceLoadFail(String unitId, String callbackJson, String code, String error);
+
 }

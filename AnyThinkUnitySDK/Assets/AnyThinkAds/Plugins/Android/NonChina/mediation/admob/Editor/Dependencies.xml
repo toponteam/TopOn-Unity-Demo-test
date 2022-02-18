@@ -1,6 +1,0 @@
-<dependencies>
-    <androidPackages>
-        <androidPackage spec="com.google.android.gms:play-services-ads:19.5.0"/>
-        <androidPackage spec="com.google.android.ads.consent:consent-library:1.0.8"/>
-    </androidPackages>
-</dependencies>

@@ -1,8 +1,6 @@
 package com.anythink.unitybridge.utils;
 
-/**
- * Created by chenzhf on 2014/12/23.
- */
+
 public abstract class Worker implements Runnable  {
 
     public final static int TYPE_NORMAL = 1;
@@ -33,7 +31,6 @@ public abstract class Worker implements Runnable  {
             mWorkerStatus.onWorkStart(this);
         }
 
-        //这里，就是run()
         work();
 
         if(mWorkerStatus != null){
@@ -42,15 +39,6 @@ public abstract class Worker implements Runnable  {
 //        mRunning = false;
     }
 
-    /**
-     *  具体任务内容，在此方法中实现，相当于Runnable的run
-     *  建议在长时间的任务中（例如下载），增加中断判断，形如：
-     *  if(!mRunning){
-     *      return;
-     *  }
-     *  以便中途结束任务
-     *
-     */
     abstract public void work();
 
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using AnyThinkAds.Api;
+using AnyThinkAds.ThirdParty.LitJson;
+
 public class MainScenes : MonoBehaviour {
 
 	// Use this for initialization
@@ -90,6 +92,12 @@ public class MainScenes : MonoBehaviour {
         ATSDKAPI.getUserLocation(new GetLocationListener());
 
 
+        //Only for Android China SDK (Pangle)
+        #if UNITY_ANDROID
+            ATDownloadManager.Instance.setListener(new ATDownloadListener());
+        #endif
+
+
 #if UNITY_ANDROID
         ATSDKAPI.initSDK("a5aa1f9deda26d", "4f7b9ac17decb9babec83aac078742c7", new InitListener());
 #elif UNITY_IOS || UNITY_IPHONE
@@ -108,6 +116,52 @@ public class MainScenes : MonoBehaviour {
 
 
 	}
-		
+
+
+    //Only for Android China SDK (Pangle)
+    class ATDownloadListener : ATDownloadAdListener
+    {
+        public void onDownloadFail(string placementId, ATCallbackInfo callbackInfo, long totalBytes, long currBytes, string fileName, string appName)
+        {
+            Debug.Log("Developer onDownloadFail------->" + JsonMapper.ToJson(callbackInfo.toDictionary())
+                + "\n, totalBytes: " + totalBytes + ", currBytes:" + currBytes
+                + "\n, fileName: " + fileName + ", appName: " + appName);
+        }
+
+        public void onDownloadFinish(string placementId, ATCallbackInfo callbackInfo, long totalBytes, string fileName, string appName)
+        {
+            Debug.Log("Developer onDownloadFinish------->" + JsonMapper.ToJson(callbackInfo.toDictionary())
+              + "\n, totalBytes: " + totalBytes
+              + "\n, fileName: " + fileName + ", appName: " + appName);
+        }
+
+        public void onDownloadPause(string placementId, ATCallbackInfo callbackInfo, long totalBytes, long currBytes, string fileName, string appName)
+        {
+            Debug.Log("Developer onDownloadPause------->" + JsonMapper.ToJson(callbackInfo.toDictionary())
+              + "\n, totalBytes: " + totalBytes + ", currBytes:" + currBytes
+              + "\n, fileName: " + fileName + ", appName: " + appName);
+        }
+
+        public void onDownloadStart(string placementId, ATCallbackInfo callbackInfo, long totalBytes, long currBytes, string fileName, string appName)
+        {
+            Debug.Log("Developer onDownloadStart------->" + JsonMapper.ToJson(callbackInfo.toDictionary())
+               + "\n, totalBytes: " + totalBytes + ", currBytes:" + currBytes
+               + "\n, fileName: " + fileName + ", appName: " + appName);
+        }
+
+        public void onDownloadUpdate(string placementId, ATCallbackInfo callbackInfo, long totalBytes, long currBytes, string fileName, string appName)
+        {
+            Debug.Log("Developer onDownloadUpdate------->" + JsonMapper.ToJson(callbackInfo.toDictionary())
+               + "\n, totalBytes: " + totalBytes + ", currBytes:" + currBytes
+               + "\n, fileName: " + fileName + ", appName: " + appName);
+        }
+
+        public void onInstalled(string placementId, ATCallbackInfo callbackInfo, string fileName, string appName)
+        {
+            Debug.Log("Developer onInstalled------->" + JsonMapper.ToJson(callbackInfo.toDictionary())
+              + "\n, fileName: " + fileName + ", appName: " + appName);
+        }
+    }
+
 }
  

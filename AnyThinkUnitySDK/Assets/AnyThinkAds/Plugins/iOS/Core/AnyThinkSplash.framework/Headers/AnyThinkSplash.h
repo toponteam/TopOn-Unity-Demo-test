@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <AnyThinkSDK/AnyThinkSDK.h>
-#import "ATAdManager+Splash.h"
-#import "ATSplashDelegate.h"
-#import "ATSplashCustomEvent.h"
+#import <AnyThinkSplash/ATAdManager+Splash.h>
+#import <AnyThinkSplash/ATSplashDelegate.h>
+#import <AnyThinkSplash/ATSplashCustomEvent.h>
+#import <AnyThinkSplash/ATSplashManager.h>
+#import <AnyThinkSplash/ATSplash.h>
+
 //! Project version number for AnyThinkSplash.
 FOUNDATION_EXPORT double AnyThinkSplashVersionNumber;
 

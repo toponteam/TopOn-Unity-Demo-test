@@ -56,5 +56,19 @@ namespace AnyThinkAds.Api
 		* @param message 错误信息
         */
         void onInterstitialAdFailedToPlayVideo(string placementId, string code, string message);
+		
+		void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void finishLoadingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void failToLoadADSource(string placementId,ATCallbackInfo callbackInfo,string code, string message);
+
+		void startBiddingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void finishBiddingADSource(string placementId, ATCallbackInfo callbackInfo);
+
+		void failBiddingADSource(string placementId,ATCallbackInfo callbackInfo,string code, string message);
+
+
     }
 }

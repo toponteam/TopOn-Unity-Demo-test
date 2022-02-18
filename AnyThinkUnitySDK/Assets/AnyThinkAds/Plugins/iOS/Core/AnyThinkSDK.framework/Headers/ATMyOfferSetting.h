@@ -8,16 +8,18 @@
 
 #import "ATOfferSetting.h"
 
+// v5.7.47
+typedef NS_ENUM(NSInteger, ATMyOfferInterType) {
+    ATMyOfferInterTypeFull = 1,
+    ATMyOfferInterTypeHalf
+};
+
 @interface ATMyOfferSetting : ATOfferSetting
 -(instancetype) initWithDictionary:(NSDictionary *)dictionary placementID:(NSString*)placementID;
 
 @property(nonatomic, readwrite) NSTimeInterval resourceCacheTime;
-//setting for banner
-@property(nonatomic, readwrite) NSString *bannerSize;
-@property(nonatomic, readwrite) BOOL showBannerCloseBtn;
-@property(nonatomic, readwrite) NSInteger splashCountDownTime;
-@property(nonatomic, readwrite) BOOL skipable;
-@property(nonatomic, readwrite) NSInteger splashOrientation;
+
+@property(nonatomic, readwrite) ATMyOfferInterType interType;
 
 +(instancetype) mockSetting;
 @end

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><dependencies>
+    <iosPods>
+        <iosPod name="mopub-ios-sdk" version="5.18.0" />
+    </iosPods>
+</dependencies>

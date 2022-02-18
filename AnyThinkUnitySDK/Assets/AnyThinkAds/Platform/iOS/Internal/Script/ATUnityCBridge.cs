@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AOT;
-using AnyThinkAds.ThirdParty.MiniJSON;
+using AnyThinkAds.ThirdParty.LitJson;
 using System;
 
 public class ATUnityCBridge {
@@ -23,18 +23,18 @@ public class ATUnityCBridge {
     [MonoPInvokeCallback(typeof(CCallBack))]
     static public void MessageFromC(string wrapperClass, string msg) {
         Debug.Log("Unity: ATUnityCBridge::MessageFromC(" + wrapperClass + "," + msg + ")");
-        Dictionary<string, object> msgDict = Json.Deserialize(msg) as Dictionary<string, object>;
+        JsonData jsonData = JsonMapper.ToObject(msg);
         if (wrapperClass.Equals("ATRewardedVideoWrapper")) {
             Debug.Log("Unity: ATUnityCBridge::MessageFromC(), hit rv");
-            ATRewardedVideoWrapper.InvokeCallback((string)msgDict["callback"], (Dictionary<string, object>)msgDict["msg"]);
+            ATRewardedVideoWrapper.InvokeCallback(jsonData);
         } else if (wrapperClass.Equals("ATNativeAdWrapper")) {
-            ATNativeAdWrapper.InvokeCallback((string)msgDict["callback"], (Dictionary<string, object>)msgDict["msg"]);
+            ATNativeAdWrapper.InvokeCallback(jsonData);
         } else if (wrapperClass.Equals("ATInterstitialAdWrapper")) {
-            ATInterstitialAdWrapper.InvokeCallback((string)msgDict["callback"], (Dictionary<string, object>)msgDict["msg"]);
+            ATInterstitialAdWrapper.InvokeCallback(jsonData);
         } else if (wrapperClass.Equals("ATBannerAdWrapper")) {
-            ATBannerAdWrapper.InvokeCallback((string)msgDict["callback"], (Dictionary<string, object>)msgDict["msg"]);
+            ATBannerAdWrapper.InvokeCallback(jsonData);
         } else if (wrapperClass.Equals("ATNativeBannerAdWrapper")) {
-            ATNativeBannerAdWrapper.InvokeCallback((string)msgDict["callback"], (Dictionary<string, object>)msgDict["msg"]);
+            ATNativeBannerAdWrapper.InvokeCallback(jsonData);
         }
     }
 
@@ -49,7 +49,7 @@ public class ATUnityCBridge {
         msgDict.Add("selector", selector);
         msgDict.Add("arguments", arguments);
         #if UNITY_IOS || UNITY_IPHONE
-        return get_message_for_unity(Json.Serialize(msgDict), null);
+        return get_message_for_unity(JsonMapper.ToJson(msgDict), null);
         #else
         return 0;
         #endif
@@ -62,7 +62,7 @@ public class ATUnityCBridge {
         msgDict.Add("selector", selector);
         msgDict.Add("arguments", arguments);
         #if UNITY_IOS || UNITY_IPHONE
-        return get_string_message_for_unity(Json.Serialize(msgDict), null);
+        return get_string_message_for_unity(JsonMapper.ToJson(msgDict), null);
         #else 
         return "";
         #endif
@@ -77,7 +77,7 @@ public class ATUnityCBridge {
         CCallBack callback = null;
         if (carryCallback) callback = MessageFromC;
         #if UNITY_IOS || UNITY_IPHONE
-        return message_from_unity(Json.Serialize(msgDict), callback);
+        return message_from_unity(JsonMapper.ToJson(msgDict), callback);
         #else
         return false;
         #endif
@@ -95,7 +95,7 @@ public class ATUnityCBridge {
         msgDict.Add("selector", selector);
         msgDict.Add("arguments", arguments);
 #if UNITY_IOS || UNITY_IPHONE
-        message_from_unity(Json.Serialize(msgDict), callback);
+        message_from_unity(JsonMapper.ToJson(msgDict), callback);
 #endif
     }
 }

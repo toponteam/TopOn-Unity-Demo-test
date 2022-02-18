@@ -1,1 +1,1 @@
-include  ':demoapplication',':anythink_bridge_aar'
+include  ':demoapplication',':anythink_bridge_aar',':ofm_bridge_aar'

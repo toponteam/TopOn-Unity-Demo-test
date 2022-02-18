@@ -64,8 +64,11 @@
 -(void) invokeCallback:(NSString*)callback placementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra {
     if ([self callbackForKey:placementID] != NULL) {
         if ([callback isKindOfClass:[NSString class]] && [callback length] > 0) {
+            
             NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithObject:callback forKey:@"callback"];
+            
             NSMutableDictionary *msgDict = [NSMutableDictionary dictionary];
+            
             if (extra != nil) {
                 if (extra[@"extra"] != nil) {
                     msgDict[@"extra"] = extra[@"extra"];
@@ -74,10 +77,17 @@
                     msgDict[@"extra"] = extra;
                 }
             }
+            
             paraDict[@"msg"] = msgDict;
-            if ([placementID isKindOfClass:[NSString class]] && [placementID length] > 0) msgDict[@"placement_id"] = placementID;
+            
+            if ([placementID isKindOfClass:[NSString class]] && [placementID length] > 0) {
+                msgDict[@"placement_id"] = placementID;
+            };
+            
             if ([error isKindOfClass:[NSError class]]) {
+                
                 NSMutableDictionary *errorDict = [NSMutableDictionary dictionaryWithObject:[NSString stringWithFormat:@"%ld", error.code] forKey:@"code"];
+                
                 if ([error.userInfo[NSLocalizedDescriptionKey] length] > 0) {
                     errorDict[@"desc"] = error.userInfo[NSLocalizedDescriptionKey];
                 } else {
@@ -90,8 +100,32 @@
                 }
                 msgDict[@"error"] = errorDict;
             }
+            
             [self callbackForKey:placementID]([self scriptWrapperClass].UTF8String, paraDict.jsonString.UTF8String);
         }
     }
 }
+
+- (NSArray *)jsonStrToArray:(NSString *)jsonString{
+   
+    
+    NSError *error;
+    NSArray *array = [NSArray array];
+    
+    @try {
+        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+
+        array = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:&error];
+        if(error){
+            return [NSArray array];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"jsonStrToArray --- exception:%@",exception);
+    } @finally {}
+
+    return array;
+}
+
 @end

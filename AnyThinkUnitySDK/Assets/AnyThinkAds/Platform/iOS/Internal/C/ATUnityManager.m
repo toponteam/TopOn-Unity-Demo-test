@@ -130,23 +130,24 @@ char * get_string_message_for_unity(const char *msg, void(*callback)(const char*
         [self deniedUploadDeviceInfo:firstObject];
     } else if ([selector isEqualToString:@"setDataConsent:network:"]) {
         [self setDataConsent:firstObject network:[NSNumber numberWithInt:lastObject.intValue]];
+    } else if ([selector isEqualToString:@"setExcludeBundleIdArray:"]) {
+        [self setExcludeBundleIdArray:firstObject];
+    } else if ([selector isEqualToString:@"setExludePlacementid:unitIDArray:"]) {
+        [self setExludePlacementid:firstObject unitIDArray:lastObject];
+    } else if ([selector isEqualToString:@"setSDKArea:"]) {
+        [self setSDKArea:[NSNumber numberWithInt:firstObject.intValue]];
+    } else if ([selector isEqualToString:@"getArea:"]) {
+        [self getArea:callback];
+    } else if ([selector isEqualToString:@"setWXStatus:"]) {
+        [self setWXStatus:firstObject];
+    } else if ([selector isEqualToString:@"setLocationLongitude:dimension:"]) {
+        [self setLocationLongitude:[NSNumber numberWithDouble:firstObject.doubleValue] dimension:[NSNumber numberWithDouble:lastObject.doubleValue]];
     }
     return nil;
 }
 
 -(BOOL) startSDKWithAppID:(NSString*)appID appKey:(NSString*)appKey {
     [ATAPI setLogEnabled:YES];
-//    if ([self subjectToGDPR]) {
-//        [self presentDataConsentDialog];
-//    }
-    if ([[ATAPI sharedInstance] inDataProtectionArea])
-    {
-        ATDataConsentSet status = [ATAPI sharedInstance].dataConsentSet;
-        if (status == ATDataConsentSetUnknown){
-            [self presentDataConsentDialog];
-        }
-    }
-
     return [[ATAPI sharedInstance] startWithAppID:appID appKey:appKey error:nil];
 }
 
@@ -217,9 +218,11 @@ char * get_string_message_for_unity(const char *msg, void(*callback)(const char*
 }
 
 -(void) deniedUploadDeviceInfo:(NSString *)deniedInfo {
-    NSArray *deniedInfoArray = [deniedInfo componentsSeparatedByString:@","];
-    NSLog(@"deniedUploadDeviceInfo = %@", deniedInfoArray);
-    [[ATAPI sharedInstance] setDeniedUploadInfoArray:deniedInfoArray];
+    NSLog(@"ATUnityManager::deniedUploadDeviceInfo = %@", deniedInfo);
+    if (![ATUnityUtilities isEmpty:deniedInfo]) {
+        NSArray *deniedInfoArray = [NSJSONSerialization JSONObjectWithData:[deniedInfo dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        [[ATAPI sharedInstance] setDeniedUploadInfoArray:deniedInfoArray];
+    }
 }
 
 /*
@@ -227,7 +230,7 @@ char * get_string_message_for_unity(const char *msg, void(*callback)(const char*
  */
 -(void) setDataConsent:(NSString*)consentJsonString network:(NSNumber*)network {
     NSLog(@"constenJsonString = %@, network = %@", consentJsonString, network);
-    NSDictionary *networks = @{@1:kNetworkNameFacebook, @2:kNetworkNameAdmob, @3:kNetworkNameInmobi, @4:kNetworkNameFlurry, @5:kNetworkNameApplovin, @6:kNetworkNameMintegral, @7:kNetworkNameMopub, @8:kNetworkNameGDT, @9:kNetworkNameChartboost, @10:kNetworkNameTapjoy, @11:kNetworkNameIronSource, @12:kNetworkNameUnityAds, @13:kNetworkNameVungle, @14:kNetworkNameAdColony, @17:kNetworkNameOneway, @18:kNetworkNameMobPower, @20:kNetworkNameYeahmobi, @21:kNetworkNameAppnext, @22:kNetworkNameBaidu};
+    NSDictionary *networks = @{@1:kATNetworkNameFacebook, @2:kATNetworkNameAdmob, @3:kATNetworkNameInmobi, @4:kATNetworkNameFlurry, @5:kATNetworkNameApplovin, @6:kATNetworkNameMintegral, @7:kATNetworkNameMopub, @8:kATNetworkNameGDT, @9:kATNetworkNameChartboost, @10:kATNetworkNameTapjoy, @11:kATNetworkNameIronSource, @12:kATNetworkNameUnityAds, @13:kATNetworkNameVungle, @14:kATNetworkNameAdColony, @1:kATNetworkNameOneway, @18:kATNetworkNameMobPower, @20:kATNetworkNameYeahmobi, @21:kATNetworkNameAppnext, @22:kATNetworkNameBaidu};
     if ([networks containsObjectForKey:network]) {
         if (([consentJsonString isKindOfClass:[NSString class]] && [consentJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil)) {
             NSDictionary *consentDict = [NSJSONSerialization JSONObjectWithData:[consentJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
@@ -236,17 +239,68 @@ char * get_string_message_for_unity(const char *msg, void(*callback)(const char*
             [_consentInfo removeObjectForKey:networks[network]];
         }
         NSLog(@"consentInfo = %@", _consentInfo);
-        if ([_consentInfo[kNetworkNameMintegral] isKindOfClass:[NSDictionary class]]) {
+        if ([_consentInfo[kATNetworkNameMintegral] isKindOfClass:[NSDictionary class]]) {
             NSMutableDictionary<NSNumber*, NSNumber*>* mintegralInfo = [NSMutableDictionary<NSNumber*, NSNumber*> dictionary];
-            [_consentInfo[kNetworkNameMintegral] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [_consentInfo[kATNetworkNameMintegral] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 if ([key respondsToSelector:@selector(integerValue)] && [obj respondsToSelector:@selector(integerValue)]) mintegralInfo[@([key integerValue])] = @([obj integerValue]);
             }];
-            NSLog(@"consentInfo = %@, %@", [((NSDictionary*)_consentInfo[kNetworkNameMintegral]).allKeys[0] class], [((NSDictionary*)_consentInfo[kNetworkNameMintegral]).allValues[0] class]);
-            _consentInfo[kNetworkNameMintegral] = mintegralInfo;
-            NSLog(@"consentInfo = %@, %@", [((NSDictionary*)_consentInfo[kNetworkNameMintegral]).allKeys[0] class], [((NSDictionary*)_consentInfo[kNetworkNameMintegral]).allValues[0] class]);
+            NSLog(@"consentInfo = %@, %@", [((NSDictionary*)_consentInfo[kATNetworkNameMintegral]).allKeys[0] class], [((NSDictionary*)_consentInfo[kATNetworkNameMintegral]).allValues[0] class]);
+            _consentInfo[kATNetworkNameMintegral] = mintegralInfo;
+            NSLog(@"consentInfo = %@, %@", [((NSDictionary*)_consentInfo[kATNetworkNameMintegral]).allKeys[0] class], [((NSDictionary*)_consentInfo[kATNetworkNameMintegral]).allValues[0] class]);
         }
         [[ATAPI sharedInstance] setNetworkConsentInfo:_consentInfo];
     }
 }
+
+-(void) setExcludeBundleIdArray:(NSString*)bundleIds {
+    NSLog(@"ATUnityManager::setExcludeBundleIdArray = %@", bundleIds);
+    if (![ATUnityUtilities isEmpty:bundleIds]) {
+        NSArray *bundleIdArray = [NSJSONSerialization JSONObjectWithData:[bundleIds dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        [[ATAPI sharedInstance] setExludeAppleIdArray:bundleIdArray];
+    }
+}
+
+-(void) setExludePlacementid:(NSString*)placementID unitIDArray:(NSString*)adsourceIds {
+    NSLog(@"ATUnityManager::setExludePlacementid=%@  adsourceIds= %@",placementID ,adsourceIds);
+    if (![ATUnityUtilities isEmpty:adsourceIds]) {
+        NSArray *adsourceIdArray = [NSJSONSerialization JSONObjectWithData:[adsourceIds dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        [[ATAdManager sharedManager] setExludePlacementid:placementID
+                    unitIDArray:adsourceIdArray];
+    }
+}
+
+-(void) setSDKArea:(NSNumber*)area {
+    NSLog(@"ATUnityManager::setSDKArea=%@",area);
+    [[ATAPI sharedInstance] setUserDataArea:[area intValue] == 0 ? ATAreaCodeGlobal : ATAreaCodeChinese_mainland];
+}
+
+-(void) getArea:(void(*)(const char *))callback {
+    NSLog(@"ATUnityManager::getArea");
+    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+    [[ATAPI sharedInstance] getAreaSuccess:^(NSString *areaCodeStr) {
+        NSLog(@"ATUnityManager::getArea:Success:%@",areaCodeStr);
+        if (areaCodeStr != nil) {
+            resultDict[@"areaCode"] = areaCodeStr;
+            if (callback != NULL) { callback(resultDict.jsonString.UTF8String); }
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"ATUnityManager::getArea:failure:%@",error.domain);
+        if (error.domain != nil) {
+            resultDict[@"errorMsg"] = error.domain;
+            if (callback != NULL) { callback(resultDict.jsonString.UTF8String); }
+        }
+    }];
+}
+
+-(void) setWXStatus:(NSString *)statusStr {
+    NSLog(@"ATUnityManager::setWXStatus=%@",statusStr);
+    [[ATAPI sharedInstance] setWXStatus:[statusStr boolValue]];
+}
+
+-(void) setLocationLongitude:(NSNumber*)longitude dimension:(NSNumber*)latitude {
+    NSLog(@"ATUnityManager::setLocationLongitude=%@  dimension=%@",longitude,latitude);
+    [[ATAPI sharedInstance] setLocationLongitude:longitude.doubleValue dimension:latitude.doubleValue];
+}
+
 @end
 
