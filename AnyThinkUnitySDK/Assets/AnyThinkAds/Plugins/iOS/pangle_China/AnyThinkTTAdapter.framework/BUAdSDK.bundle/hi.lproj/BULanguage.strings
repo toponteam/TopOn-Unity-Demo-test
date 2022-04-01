@@ -30,6 +30,7 @@
 "GiveUpReward" = "रिवॉर्ड्स छोड़ें";
 "ContinueWatching" = "देखते रहें";
 "CanbeTurnedOffAfter" = "%d सेकंड के बाद छोड़  दें";
+"CanbeSkipAfter" = "%d सेकंड के बाद छोड़  दें";
 "Get" = "डाउनलोड करें";
 "View" = "देखें";
 "ContinuePlaying" = "देखना जारी रखें";

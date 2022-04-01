@@ -27,6 +27,18 @@ typedef NS_ENUM(NSInteger, ATPlayerStatus) {
     ATPlayerStatusResume,
     ATPlayerStatusAbort
 };
+
+
+typedef NS_ENUM(NSInteger, ATStartAppNativeAdImageSize) {
+    AT_SIZE_72X72      = 0,
+    AT_SIZE_100X100    = 1,
+    /// Default size
+    AT_SIZE_150X150    = 2,
+    AT_SIZE_340X340    = 3,
+    /// Not supported by secondaryImageSize, default will be used instead
+    AT_SIZE_1200X628   = 4,
+};
+
 /**
  * Subclasses are expected to call super when overriding willMoveToSuperview: because it it within this method the base class kick off the rendering process.
  */
@@ -119,6 +131,8 @@ extern NSString *const kATExtraNativeImageSizeKey;
 extern NSString const* kATExtraNativeImageSize1280_720;
 extern NSString const* kATExtraNativeImageSize1200_628;
 extern NSString const* kATExtraNativeImageSize640_640;
+extern NSString *const kATExtraStartAPPNativeMainImageSizeKey;
+extern NSString *const kATExtraNativeIconImageSizeKey;
 
 @interface ATNativeADView(DrawVideo)
 /*

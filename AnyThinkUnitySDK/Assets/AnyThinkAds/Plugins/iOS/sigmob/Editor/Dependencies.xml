@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><dependencies>
     <iosPods>
-        <iosPod name="SigmobAd-iOS" version="3.5.0" />
+        <iosPod name="SigmobAd-iOS" version="3.5.3" />
     </iosPods>
 </dependencies>

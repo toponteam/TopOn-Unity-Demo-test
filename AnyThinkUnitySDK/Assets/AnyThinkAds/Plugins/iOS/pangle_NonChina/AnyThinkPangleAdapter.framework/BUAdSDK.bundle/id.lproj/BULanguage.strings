@@ -30,6 +30,7 @@
 "GiveUpReward" = "Abaikan reward";
 "ContinueWatching" = "Lanjut menonton";
 "CanbeTurnedOffAfter" = "Lewati setelah %d  detik";
+"CanbeSkipAfter" = "Lewati setelah %d  detik";
 "Get" = "Unduh";
 "View" = "Lihat";
 "ContinuePlaying" = "Lanjut memutar";

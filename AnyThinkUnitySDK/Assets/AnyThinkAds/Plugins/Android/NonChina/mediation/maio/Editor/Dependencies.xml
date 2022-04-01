@@ -1,0 +1,9 @@
+<dependencies>
+    <androidPackages>
+        <repositories>
+            <repository>https://imobile-maio.github.io/maven</repository>
+        </repositories>
+        <androidPackage spec="com.maio:android-sdk:1.1.15@aar"/>
+        <androidPackage spec="com.google.android.gms:play-services-ads-identifier:17.0.0"/>
+    </androidPackages>
+</dependencies>

@@ -30,6 +30,7 @@
 "GiveUpReward" = "รางวัลการยอมแพ้";
 "ContinueWatching" = "ดูต่อ";
 "CanbeTurnedOffAfter" = "ข้ามหลังจาก  %d วิ";
+"CanbeSkipAfter" = "ข้ามหลังจาก  %d วิ";
 "Get" = "ดาวน์โหลด";
 "View" = "ดู";
 "ContinuePlaying" = "เล่นต่อ";

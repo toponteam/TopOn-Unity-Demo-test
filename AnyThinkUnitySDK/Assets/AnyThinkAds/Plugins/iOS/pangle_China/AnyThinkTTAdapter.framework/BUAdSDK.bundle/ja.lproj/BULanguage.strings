@@ -31,6 +31,7 @@
 "GiveUpReward" = "やらない";
 "ContinueWatching" = "視聴し続ける";
 "CanbeTurnedOffAfter" = "%ds後にスキップ";
+"CanbeSkipAfter" = "%ds後にスキップ";
 "Get" = "入手";
 "View" = "見る";
 "ContinuePlaying" = "つづける";

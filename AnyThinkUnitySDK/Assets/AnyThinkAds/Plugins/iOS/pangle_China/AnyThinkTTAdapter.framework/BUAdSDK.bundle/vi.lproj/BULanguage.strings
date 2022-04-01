@@ -30,6 +30,7 @@
 "GiveUpReward" = "Bỏ phần thưởng";
 "ContinueWatching" = "Tiếp tục xem";
 "CanbeTurnedOffAfter" = "Bỏ qua sau %d s";
+"CanbeSkipAfter" = "Bỏ qua sau %d s";
 "Get" = "Tải";
 "View" = "Xem";
 "ContinuePlaying" = "Tiếp tục chơi";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><dependencies>
     <iosPods>
-        <iosPod name="Google-Mobile-Ads-SDK" version="8.13.0" />
+        <iosPod name="Google-Mobile-Ads-SDK" version="9.0.0" />
     </iosPods>
 </dependencies>

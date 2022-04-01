@@ -1,0 +1,6 @@
+<dependencies>
+    <androidPackages>
+        <androidPackage spec="com.fyber:marketplace-sdk:8.1.2"/>
+        <androidPackage spec="com.google.android.gms:play-services-ads-identifier:17.0.0"/>
+    </androidPackages>
+</dependencies>

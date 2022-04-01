@@ -1,0 +1,6 @@
+<dependencies>
+    <androidPackages>
+        <androidPackage spec="com.adcolony:sdk:4.6.5"/>
+        <androidPackage spec="com.google.android.gms:play-services-ads-identifier:17.0.0"/>
+    </androidPackages>
+</dependencies>

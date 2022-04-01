@@ -1,0 +1,5 @@
+<dependencies>
+    <androidPackages>
+        <androidPackage spec="com.unity3d.ads:unity-ads:4.0.0"/>
+    </androidPackages>
+</dependencies>

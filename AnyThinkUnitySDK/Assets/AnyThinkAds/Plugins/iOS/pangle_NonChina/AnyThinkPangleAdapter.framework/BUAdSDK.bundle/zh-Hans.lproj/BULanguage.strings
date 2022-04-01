@@ -31,6 +31,7 @@
 "GiveUpReward" = "放弃奖励";
 "ContinueWatching" = "继续观看";
 "CanbeTurnedOffAfter" = "%ds后可关闭";
+"CanbeSkipAfter" = "%ds后可跳过";
 "Get" = "下载";
 "View" = "查看";
 "ContinuePlaying" = "继续试玩";

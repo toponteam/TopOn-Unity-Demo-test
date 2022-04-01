@@ -30,6 +30,7 @@
 "GiveUpReward" = "Renoncer aux  récompenses";
 "ContinueWatching" = "Continuer à  regarder";
 "CanbeTurnedOffAfter" = "Passer après  %d s";
+"CanbeSkipAfter" = "Passer après  %d s";
 "Get" = "Télécharger";
 "View" = "Voir";
 "ContinuePlaying" = "Poursuivre la  lecture";

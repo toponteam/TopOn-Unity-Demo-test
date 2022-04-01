@@ -30,6 +30,7 @@
 "GiveUpReward" = "Desistir das  premiações";
 "ContinueWatching" = "Continuar  assistindo";
 "CanbeTurnedOffAfter" = "Pular depois de  %ds";
+"CanbeSkipAfter" = "Pular depois de  %ds";
 "Get" = "Fazer download";
 "View" = "Visualizar";
 "ContinuePlaying" = "Continuar  executando";

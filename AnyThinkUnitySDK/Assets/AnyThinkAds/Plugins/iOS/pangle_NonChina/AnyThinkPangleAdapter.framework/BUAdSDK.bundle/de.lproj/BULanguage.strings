@@ -30,6 +30,7 @@
 "GiveUpReward" = "Auf Prämien  verzichten";
 "ContinueWatching" = "Weiter ansehen";
 "CanbeTurnedOffAfter" = "Nach %d s  überspringen";
+"CanbeSkipAfter" = "Nach %d s  überspringen";
 "Get" = "Herunterladen";
 "View" = "Ansehen";
 "ContinuePlaying" = "Weiter wiedergeben";

@@ -31,6 +31,7 @@
 "GiveUpReward" = "포상을 포기하다";
 "ContinueWatching" = "계속보기";
 "CanbeTurnedOffAfter" = "%ds후에 닫을 수 있다";
+"CanbeSkipAfter" = "%ds후에 닫을 수 있다";
 "Get" = "다운로드";
 "View" = "체크";
 "ContinuePlaying" = "계속하다";

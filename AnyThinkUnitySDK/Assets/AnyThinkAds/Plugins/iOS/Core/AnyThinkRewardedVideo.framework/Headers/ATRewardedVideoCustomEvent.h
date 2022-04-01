@@ -27,7 +27,7 @@
 
 -(instancetype) initWithInfo:(NSDictionary*)serverInfo localInfo:(NSDictionary *)localInfo;
 @property(nonatomic, weak) id<ATRewardedVideoDelegate> delegate;
-@property(nonatomic, weak) ATRewardedVideo *rewardedVideo;
+@property(nonatomic, strong) ATRewardedVideo *rewardedVideo;
 @property(nonatomic, readonly) NSString *unitID;
 @property(nonatomic) NSString *userID;
 @property(nonatomic, assign) NSInteger priorityIndex;

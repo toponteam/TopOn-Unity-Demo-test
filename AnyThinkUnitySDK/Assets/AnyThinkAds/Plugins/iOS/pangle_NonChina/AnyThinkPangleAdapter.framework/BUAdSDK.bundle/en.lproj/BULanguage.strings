@@ -31,6 +31,7 @@
 "GiveUpReward" = "Abandon";
 "ContinueWatching" = "Continue watching";
 "CanbeTurnedOffAfter" = "Skip after %ds";
+"CanbeSkipAfter" = "Skip after %ds";
 "Get" = "Get";
 "View" = "View";
 "ContinuePlaying" = "Keep on";

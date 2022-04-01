@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><dependencies>
     <iosPods>
-        <iosPod name="TapjoySDK" version="12.8.1" />
+        <iosPod name="TapjoySDK" version="12.9.0" />
     </iosPods>
 </dependencies>

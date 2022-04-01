@@ -27,7 +27,7 @@
 -(ATNativeADSourceType) adSourceType;
 -(instancetype) initWithInfo:(NSDictionary*)serverInfo localInfo:(NSDictionary*)localInfo ;
 @property(nonatomic, weak) id<ATInterstitialDelegate> delegate;
-@property(nonatomic, weak) ATInterstitial *interstitial;
+@property(nonatomic, strong) ATInterstitial *interstitial;
 @property(nonatomic, readonly) NSString *unitID;
 @property(nonatomic, assign) NSInteger priorityIndex;
 @end
